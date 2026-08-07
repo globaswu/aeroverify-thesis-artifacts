@@ -1,0 +1,119 @@
+function run_tests()
+%RUN_TESTS Validate data integrity, PoF anchoring, and reproduction outputs.
+
+root = artifact_repository_root();
+config = jsondecode(fileread(fullfile( ...
+    root, "config", "reproduction_config.json")));
+topologies = ["fcc", "bcc"];
+
+for topology = topologies
+    [evaluations, continuation, ~, expected] = ...
+        load_topology_data(topology);
+    assert(height(evaluations) == expected.expected_total_evaluations);
+    assert(nnz(evaluations.feasible) == expected.expected_total_feasible);
+    assert(nnz(evaluations.pareto_case071) == ...
+        expected.expected_total_pareto);
+    assert(height(continuation) == ...
+        expected.expected_continuation_evaluations);
+    assert(nnz(continuation.feasible) == ...
+        expected.expected_continuation_feasible);
+    assert(nnz(continuation.pareto_case071) == ...
+        expected.expected_continuation_pareto);
+    assert(nnz(continuation.selection_source == "primary") == ...
+        expected.expected_primary_selections);
+    assert(nnz(continuation.selection_source == "challenger") == ...
+        expected.expected_challenger_selections);
+    assert(nnz(continuation.fallback_used) == ...
+        expected.expected_fallback_selections);
+
+    assert(all(evaluations.feasible == (evaluations.constraint <= 0)));
+    recomputedPareto = observed_pareto_mask( ...
+        [evaluations.mass_kg, evaluations.compliance_Nm], ...
+        evaluations.feasible);
+    assert(isequal(recomputedPareto, evaluations.pareto_case071));
+    assert(all(evaluations.evaluation_period(1:51) == ...
+        "initial_training"));
+    assert(all(evaluations.evidence_role(1:51) == ...
+        "conditioning_only"));
+    assert(all(evaluations.evaluation_period(52:71) == ...
+        "revised_continuation"));
+    assert(all(evaluations.evidence_role(52:71) == ...
+        "revised_solver_assessment"));
+    assert(all(continuation.flutter_screen == ...
+        string(expected.flutter_screen)));
+
+    lowerBound = reshape(double(config.design_domain.lower_bound), 1, []);
+    upperBound = reshape(double(config.design_domain.upper_bound), 1, []);
+    X = [evaluations.a_m, evaluations.t1_over_a];
+    assert(all(X >= lowerBound, "all") && all(X <= upperBound, "all"));
+    XUnit = (X - lowerBound) ./ (upperBound - lowerBound);
+    [pofModel, fitDiagnostics] = ctsemo.fitClippedBinaryPof( ...
+        XUnit, evaluations.feasible, cTSEMOOptions());
+    anchorScore = ctsemo.predictClippedBinaryPof(pofModel, XUnit);
+    assert(max(abs(anchorScore - double(evaluations.feasible))) <= 1e-12);
+    assert(fitDiagnostics.interpolationWithinTolerance);
+
+    if topology == "bcc"
+        assert(nnz(~continuation.stress_ok) == 8);
+        assert(all(continuation.flutter_ok));
+        assert(all(continuation.feasibility_result( ...
+            ~continuation.feasible) == "fail_stress"));
+    else
+        assert(all(continuation.feasible));
+        assert(all(continuation.feasibility_result == "pass"));
+    end
+end
+
+temporaryOutput = makeTemporaryOutputDirectory();
+cleanup = onCleanup(@() removeTemporaryOutput(temporaryOutput));
+summary = reproduce_all(temporaryOutput);
+assert(height(summary) == 2);
+
+expectedOutputs = [ ...
+    "fcc/fcc_observed_pareto.png"; ...
+    "fcc/fcc_observed_pareto.pdf"; ...
+    "fcc/fcc_feasibility_score.png"; ...
+    "fcc/fcc_feasibility_score.pdf"; ...
+    "fcc/fcc_continuation_table.csv"; ...
+    "fcc/fcc_continuation_table.tex"; ...
+    "fcc/fcc_continuation_summary.csv"; ...
+    "bcc/bcc_observed_pareto.png"; ...
+    "bcc/bcc_observed_pareto.pdf"; ...
+    "bcc/bcc_feasibility_score.png"; ...
+    "bcc/bcc_feasibility_score.pdf"; ...
+    "bcc/bcc_continuation_table.csv"; ...
+    "bcc/bcc_continuation_table.tex"; ...
+    "bcc/bcc_continuation_summary.csv"; ...
+    "reproduction_summary.csv"];
+for relativePath = expectedOutputs(:)'
+    path = fullfile(temporaryOutput, relativePath);
+    assert(isfile(path), "Missing reproduced artifact: %s", path);
+    info = dir(path);
+    assert(info.bytes > 0, "Empty reproduced artifact: %s", path);
+end
+
+fprintf("All FCC/BCC package tests passed.\n");
+clear cleanup
+end
+
+function path = makeTemporaryOutputDirectory()
+[temporaryParent, temporaryName] = fileparts(tempname);
+path = fullfile(temporaryParent, ...
+    "aeroverify_thesis_artifacts_test_" + string(temporaryName));
+mkdir(path);
+end
+
+function removeTemporaryOutput(path)
+path = string(path);
+temporaryRoot = string(tempdir);
+[parent, name] = fileparts(path);
+if ~startsWith(lower(parent), lower(strip(temporaryRoot, "right", filesep))) || ...
+        ~startsWith(name, "aeroverify_thesis_artifacts_test_")
+    error("artifacts:TestCleanup:UnsafePath", ...
+        "Refusing to remove unexpected test directory: %s", path);
+end
+if isfolder(path)
+    rmdir(path, "s");
+end
+end
+

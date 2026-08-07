@@ -1,0 +1,31 @@
+# Reproduction outputs
+generated/
+test-output/
+
+# MATLAB editor/runtime files
+*.asv
+*.m~
+slprj/
+
+# Heavy or solver-native files are outside this repository's scope
+*.mat
+*.fig
+*.op2
+*.f06
+*.h5
+*.hdf5
+*.ntop
+*.xdb
+*.master
+*.dball
+checkpoints/
+
+# Generated figures and documents
+*.pdf
+*.png
+*.svg
+
+# Platform files
+.DS_Store
+Thumbs.db
+

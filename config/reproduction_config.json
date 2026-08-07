@@ -1,0 +1,42 @@
+{
+  "schema_version": 1,
+  "continuation_first_case": 52,
+  "final_case": 71,
+  "grid_points_per_axis": 401,
+  "design_domain": {
+    "lower_bound": [0.01, 0.05],
+    "upper_bound": [0.03, 0.40],
+    "labels": ["a [m]", "t1/a [-]"]
+  },
+  "objectives": {
+    "direction": "minimize",
+    "labels": ["Two-wing total mass [kg]", "Two-wing trim compliance [N m]"]
+  },
+  "constraint_convention": "constraint <= 0 is feasible",
+  "pof_interpretation": "clipped deterministic binary-label geometry score; not a calibrated posterior probability",
+  "initial_dataset_status": "improper_or_incorrect_solver_settings; conditioning_only",
+  "fcc": {
+    "expected_total_evaluations": 71,
+    "expected_total_feasible": 33,
+    "expected_total_pareto": 26,
+    "expected_continuation_evaluations": 20,
+    "expected_continuation_feasible": 20,
+    "expected_continuation_pareto": 20,
+    "expected_primary_selections": 13,
+    "expected_challenger_selections": 7,
+    "expected_fallback_selections": 0,
+    "flutter_screen": "historical_four_point_contemporaneous"
+  },
+  "bcc": {
+    "expected_total_evaluations": 71,
+    "expected_total_feasible": 27,
+    "expected_total_pareto": 17,
+    "expected_continuation_evaluations": 20,
+    "expected_continuation_feasible": 12,
+    "expected_continuation_pareto": 8,
+    "expected_primary_selections": 12,
+    "expected_challenger_selections": 8,
+    "expected_fallback_selections": 0,
+    "flutter_screen": "revised_strict_any_positive_damping"
+  }
+}

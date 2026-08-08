@@ -1,6 +1,6 @@
 {
     "schema_version":  1,
-    "scope":  "FCC and BCC cTSEMO thesis reproducibility artifacts",
+    "scope":  "FCC, BCC, and SC cTSEMO thesis reproducibility artifacts",
     "files":  [
                   {
                       "path":  ".gitignore",
@@ -40,9 +40,21 @@
                   },
                   {
                       "path":  "data/README.md",
-                      "size_bytes":  2513,
-                      "sha256":  "55a019933ca512e4e81709a105f20275143d94bc63c180851699736587c45af0",
+                      "size_bytes":  3474,
+                      "sha256":  "5d83876cc67e4912cad7328570080f7175097d08ccf65b96c2909a749ba36203",
                       "source":  "generated for the public reproducibility package"
+                  },
+                  {
+                      "path":  "data/sc/continuation_cases052_071.csv",
+                      "size_bytes":  3893,
+                      "sha256":  "9a383a17fa7d12abfdb54b855f70ed5b7c5f6a0963f0983660623a0af070b953",
+                      "source":  "aeroverify/artifacts/sc_continuation_latest_20260808/sc_continuation_summary.csv"
+                  },
+                  {
+                      "path":  "data/sc/evaluations_cases001_071.csv",
+                      "size_bytes":  9832,
+                      "sha256":  "0c863d9408d2985a61f28e6649239a95c0ee32a193e4843bb395f002ed8b5e03",
+                      "source":  "aeroverify/artifacts/sc_continuation_latest_20260808/sc_all_points.csv"
                   },
                   {
                       "path":  "LICENSE-CTSEMO.txt",
@@ -244,8 +256,8 @@
                   },
                   {
                       "path":  "README.md",
-                      "size_bytes":  5963,
-                      "sha256":  "d4e3aa01dc0a100fc245aabf09e355e7c1139c588feb8562a9354c202e080f87",
+                      "size_bytes":  7956,
+                      "sha256":  "d7c8c9581e178698bedc27f411d784d05f00c542a072e96f04516f73a59807e4",
                       "source":  "generated for the public reproducibility package"
                   },
                   {

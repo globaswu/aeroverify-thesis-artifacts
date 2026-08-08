@@ -1,9 +1,13 @@
-# FCC/BCC cTSEMO Thesis Reproducibility Artifacts
+# FCC/BCC/SC cTSEMO Thesis Reproducibility Artifacts
 
-This repository reproduces the finite-sample Pareto plots, final binary-label
-feasibility-score maps, and continuation tables used to analyze the FCC and
-BCC lattice optimization studies. It also preserves the shared cTSEMO
-acquisition and feasibility-field source used for the continuation runs.
+This repository packages the finalized evaluation and continuation data used
+to analyze the FCC, BCC, and SC lattice optimization studies. The included
+MATLAB workflow reproduces the finite-sample Pareto plots, final binary-label
+feasibility-score maps, and continuation tables for FCC and BCC. The completed
+SC continuation is supplied as normalized, manifest-verified CSV data.
+
+The shared cTSEMO acquisition and feasibility-field source used for the
+continuation runs is also preserved.
 
 Repository: <https://github.com/globaswu/aeroverify-thesis-artifacts>
 
@@ -27,6 +31,30 @@ Each topology contains 71 evaluated designs:
 
 Historical surrogate, acquisition, and feasibility figures from the first 51
 cases are intentionally excluded.
+
+## Completed SC continuation payload
+
+The SC payload contains the complete 71-case evaluation record and the
+finalized cases 52--71 continuation summary:
+
+- 32 of 71 evaluations are feasible, and 8 feasible evaluations belong to the
+  final finite-sample Pareto set.
+- 14 of the 20 continuation evaluations are feasible; all 8 points on the
+  final Pareto set are continuation evaluations.
+- The saved candidate sources comprise 12 primary and 8 challenger
+  selections. All 20 continuation rows have verified archive markers in the
+  finalized source table.
+
+The SC continuation used the revised 18-point MKAERO1 reduced-frequency setup
+and the strict classifier under which any detected positive damping value over
+the checked modes and speeds is a flutter failure. The finalized public CSVs
+do not retain per-case stress values, damping histories, acquisition scores,
+or fallback flags. Those fields are therefore not reconstructed or inferred
+in this package.
+
+The workspace-specific Python analysis script is not included because it
+depends on retained case MAT files and local simulation paths that are outside
+this lightweight public package.
 
 ## Problem definition
 
@@ -62,7 +90,7 @@ Run the following commands from the repository root:
 matlab -batch "addpath('matlab'); reproduce_all(fullfile(pwd,'generated'))"
 ```
 
-This creates:
+This creates the currently integrated FCC/BCC outputs:
 
 - `generated/fcc/fcc_observed_pareto.{png,pdf}`
 - `generated/fcc/fcc_feasibility_score.{png,pdf}`
@@ -73,6 +101,11 @@ This creates:
 - `generated/bcc/bcc_continuation_table.{csv,tex}`
 - `generated/bcc/bcc_continuation_summary.csv`
 - `generated/reproduction_summary.csv`
+
+The SC CSV payload is not yet integrated into `reproduce_all`; it can be
+audited directly under `data/sc`. This boundary preserves the existing
+FCC/BCC reproduction code while releasing the finalized SC evidence without
+adding unavailable scalar diagnostics.
 
 The feasibility maps use a 401 by 401 grid and the included
 `ctsemo.fitClippedBinaryPof` and `ctsemo.predictClippedBinaryPof` functions.
@@ -107,7 +140,10 @@ powershell -ExecutionPolicy Bypass -File .\tools\verify_manifest.ps1
 |   |-- fcc/
 |   |   |-- evaluations_cases001_071.csv
 |   |   `-- continuation_cases052_071.csv
-|   `-- bcc/
+|   |-- bcc/
+|   |   |-- evaluations_cases001_071.csv
+|   |   `-- continuation_cases052_071.csv
+|   `-- sc/
 |       |-- evaluations_cases001_071.csv
 |       `-- continuation_cases052_071.csv
 |-- matlab/
@@ -126,10 +162,11 @@ powershell -ExecutionPolicy Bypass -File .\tools\verify_manifest.ps1
 ## Dataset provenance
 
 The evaluation tables are sanitized, column-normalized exports of the retained
-71-case FCC and BCC final analysis tables. The continuation tables combine
-those objective and constraint values with scalar stress, flutter, and saved
-candidate-selection fields from the compact continuation records. Filesystem
-paths and bulky nested metadata were discarded. `manifest.json` records the
+71-case FCC, BCC, and SC final analysis tables. The FCC and BCC continuation
+tables combine objective and constraint values with retained scalar stress,
+flutter, and candidate-selection fields. The SC continuation table contains
+only fields present in its finalized public source summary. Filesystem paths
+and bulky nested metadata were discarded. `manifest.json` records the
 repository-relative internal source mapping and SHA-256 hash for every public
 payload file except the manifest itself.
 
@@ -138,7 +175,9 @@ with its historical four-point MKAERO1 setup and classifier. Positive stored
 damping values can therefore coexist with `flutter_ok = 1` in the FCC table.
 They must not be reinterpreted as passes under the later strict rule. The BCC
 continuation uses the revised rule in which any positive damping over the
-checked modes and speeds is a flutter failure.
+checked modes and speeds is a flutter failure. The SC continuation uses that
+strict rule with the revised 18-point MKAERO1 reduced-frequency setup; its
+public table records the screen identifier but not scalar damping values.
 
 ## Limitations
 

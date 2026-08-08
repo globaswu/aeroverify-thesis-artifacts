@@ -5,8 +5,9 @@ a local filesystem path, remote archive path, credential, or raw solver array.
 
 ## Evaluation tables
 
-`fcc/evaluations_cases001_071.csv` and
-`bcc/evaluations_cases001_071.csv` contain:
+`fcc/evaluations_cases001_071.csv`,
+`bcc/evaluations_cases001_071.csv`, and
+`sc/evaluations_cases001_071.csv` contain:
 
 | Column | Meaning |
 |---|---|
@@ -51,3 +52,21 @@ FCC and BCC `flutter_ok` values are not directly interchangeable. FCC used the
 historical four-point MKAERO1 setup and contemporaneous classifier. BCC used
 the revised strict rule that fails any detected positive damping value.
 
+## SC continuation table
+
+`sc/continuation_cases052_071.csv` contains the common design, objective,
+constraint, feasibility, Pareto-membership, and selection-source fields. It
+also contains:
+
+| Column | Meaning |
+|---|---|
+| `feasibility_result` | `pass` or the normalized failure reason retained by the finalized SC summary. |
+| `archive_verified` | Whether the finalized source summary recorded a verified archive marker. |
+| `flutter_screen` | Run-level identifier for the strict revised 18-point MKAERO1 screen. |
+
+The SC continuation used the strict classifier that fails a case when any
+positive damping value is detected over the checked modes and speeds. The two
+finalized SC source CSVs do not contain per-case stress values, damping values,
+trim flags, simulation flags, acquisition scores, or fallback flags. These
+columns are intentionally absent rather than populated from other files or
+inferred after the run.

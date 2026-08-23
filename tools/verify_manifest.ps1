@@ -9,6 +9,33 @@ if (-not (Test-Path -LiteralPath $manifestPath -PathType Leaf)) {
 }
 
 $manifest = Get-Content -LiteralPath $manifestPath -Raw | ConvertFrom-Json
+$textExtensions = @('.md', '.m', '.ps1', '.json', '.csv', '.txt', '.yml', '.cff')
+$utf8WithoutBom = [System.Text.UTF8Encoding]::new($false)
+
+function Get-PortableBytes {
+    param([System.IO.FileInfo]$File)
+    $isText = $textExtensions -contains $File.Extension.ToLowerInvariant() -or
+        $File.Name -in @('.gitignore', '.gitattributes')
+    if (-not $isText) {
+        return ,([System.IO.File]::ReadAllBytes($File.FullName))
+    }
+    $content = [System.IO.File]::ReadAllText($File.FullName)
+    $normalized = $content -replace "`r`n?", "`n"
+    return ,($utf8WithoutBom.GetBytes($normalized))
+}
+
+function Get-Sha256Hex {
+    param([byte[]]$Bytes)
+    $algorithm = [System.Security.Cryptography.SHA256]::Create()
+    try {
+        $hash = $algorithm.ComputeHash($Bytes)
+    }
+    finally {
+        $algorithm.Dispose()
+    }
+    return (($hash | ForEach-Object { $_.ToString('x2') }) -join '')
+}
+
 $listed = [System.Collections.Generic.HashSet[string]]::new(
     [System.StringComparer]::OrdinalIgnoreCase)
 $packagePrefix = $packageRoot.TrimEnd(
@@ -27,10 +54,11 @@ foreach ($entry in $manifest.files) {
         throw "Manifest file is missing: $relative"
     }
     $file = Get-Item -LiteralPath $candidate
-    if ([int64]$entry.size_bytes -ne $file.Length) {
+    [byte[]]$portableBytes = Get-PortableBytes -File $file
+    if ([int64]$entry.size_bytes -ne $portableBytes.LongLength) {
         throw "Size mismatch for $relative"
     }
-    $hash = (Get-FileHash -LiteralPath $candidate -Algorithm SHA256).Hash.ToLowerInvariant()
+    $hash = Get-Sha256Hex -Bytes $portableBytes
     if ($hash -ne ([string]$entry.sha256).ToLowerInvariant()) {
         throw "SHA-256 mismatch for $relative"
     }
@@ -66,7 +94,6 @@ if ($unlisted.Count -gt 0) {
     throw "Files absent from manifest: $($unlisted -join ', ')"
 }
 
-$textExtensions = @('.md', '.m', '.ps1', '.json', '.csv', '.txt', '.yml', '.cff')
 $drivePattern = '[A-Za-z]' + [char]58 + '\\'
 $uncIpPattern = '\\\\(?:\d{1,3}\.){3}\d{1,3}\\'
 $profilePattern = '(?i)Users\\[^\\]+\\|OneDrive\\Desktop|/home/[^/]+/'

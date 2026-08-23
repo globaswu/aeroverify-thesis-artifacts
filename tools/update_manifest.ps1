@@ -3,6 +3,32 @@ param()
 
 $ErrorActionPreference = 'Stop'
 $packageRoot = [System.IO.Path]::GetFullPath((Split-Path -Parent $PSScriptRoot))
+$textExtensions = @('.md', '.m', '.ps1', '.json', '.csv', '.txt', '.yml', '.cff')
+$utf8WithoutBom = [System.Text.UTF8Encoding]::new($false)
+
+function Get-PortableBytes {
+    param([System.IO.FileInfo]$File)
+    $isText = $textExtensions -contains $File.Extension.ToLowerInvariant() -or
+        $File.Name -in @('.gitignore', '.gitattributes')
+    if (-not $isText) {
+        return ,([System.IO.File]::ReadAllBytes($File.FullName))
+    }
+    $content = [System.IO.File]::ReadAllText($File.FullName)
+    $normalized = $content -replace "`r`n?", "`n"
+    return ,($utf8WithoutBom.GetBytes($normalized))
+}
+
+function Get-Sha256Hex {
+    param([byte[]]$Bytes)
+    $algorithm = [System.Security.Cryptography.SHA256]::Create()
+    try {
+        $hash = $algorithm.ComputeHash($Bytes)
+    }
+    finally {
+        $algorithm.Dispose()
+    }
+    return (($hash | ForEach-Object { $_.ToString('x2') }) -join '')
+}
 
 function Get-SourceDescription {
     param([string]$RelativePath)
@@ -32,23 +58,23 @@ foreach ($file in Get-ChildItem -LiteralPath $packageRoot -Recurse -File) {
             $relative.StartsWith('test-output/', [System.StringComparison]::OrdinalIgnoreCase)) {
         continue
     }
+    [byte[]]$portableBytes = Get-PortableBytes -File $file
     $entries.Add([ordered]@{
         path = $relative
-        size_bytes = [int64]$file.Length
-        sha256 = (Get-FileHash -LiteralPath $file.FullName -Algorithm SHA256).Hash.ToLowerInvariant()
+        size_bytes = [int64]$portableBytes.LongLength
+        sha256 = Get-Sha256Hex -Bytes $portableBytes
         source = Get-SourceDescription -RelativePath $relative
     })
 }
 
 $manifest = [ordered]@{
     schema_version = 2
-    release_tag = 'thesis-v1.0.0'
+    release_tag = 'thesis-v1.0.1'
     scope = 'curated solver-free thesis reproduction package'
     generated_utc = [DateTime]::UtcNow.ToString('yyyy-MM-ddTHH:mm:ssZ')
     files = @($entries | Sort-Object path)
 }
 $json = ($manifest | ConvertTo-Json -Depth 6) -replace "`r`n", "`n"
-$utf8WithoutBom = [System.Text.UTF8Encoding]::new($false)
 [System.IO.File]::WriteAllText(
     (Join-Path $packageRoot 'manifest.json'), $json + "`n", $utf8WithoutBom)
 Write-Output ("Manifest updated with {0} files." -f $entries.Count)

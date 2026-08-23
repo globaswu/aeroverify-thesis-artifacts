@@ -1,8 +1,8 @@
 {
     "schema_version":  2,
-    "release_tag":  "thesis-v1.0.0",
+    "release_tag":  "thesis-v1.0.1",
     "scope":  "curated solver-free thesis reproduction package",
-    "generated_utc":  "2026-08-23T22:20:14Z",
+    "generated_utc":  "2026-08-23T22:31:31Z",
     "files":  [
                   {
                       "path":  "matlab/reproduce_topology.m",
@@ -78,8 +78,8 @@
                   },
                   {
                       "path":  "matlab/artifact_repository_root.m",
-                      "size_bytes":  178,
-                      "sha256":  "1b9d904331f82532ddb9fb9f2a5a95235077520838ffa3bbd418b51da625ecf2",
+                      "size_bytes":  173,
+                      "sha256":  "6d0bc7a3f14c9069230f92d21c368ab1d6d249d6bf2c4a4425d5b7cfd3fde799",
                       "source":  "authored for the curated public release"
                   },
                   {
@@ -126,20 +126,20 @@
                   },
                   {
                       "path":  "matlab/plot_observed_pareto.m",
-                      "size_bytes":  3430,
-                      "sha256":  "73fcbf60498954484b885108b9be1dc1c1628cbd96aaca0aa8f379f66a97df8a",
+                      "size_bytes":  3353,
+                      "sha256":  "5fbc28c11218dae3d829a53e38d3999f6d15d63e8768317393c9b2d46c21a573",
                       "source":  "authored for the curated public release"
                   },
                   {
                       "path":  "matlab/observed_pareto_mask.m",
-                      "size_bytes":  871,
-                      "sha256":  "7eee13ac2e8fb5ddf0dcb63a412a8097db523237fd94ce03e44c08246c1a6d2a",
+                      "size_bytes":  844,
+                      "sha256":  "441774daff28c76c26e2b4e38cc8025c9b2ab475bcc27ab9cddf045c78a801f8",
                       "source":  "authored for the curated public release"
                   },
                   {
                       "path":  "matlab/plot_feasibility_score.m",
-                      "size_bytes":  4527,
-                      "sha256":  "b4846da3b006dc6797133c11e4240c4bfd1c628e30b1134d6e321d2e17c5504c",
+                      "size_bytes":  4423,
+                      "sha256":  "41e7d20925407e680fd84a1992f646f67e9c2e40dda97a302aa23df3e9c318ab",
                       "source":  "authored for the curated public release"
                   },
                   {
@@ -180,20 +180,20 @@
                   },
                   {
                       "path":  "tools/verify_links.ps1",
-                      "size_bytes":  1133,
-                      "sha256":  "c356e22b9196b57c32ea4799aa051c7d39f51597e1108509410c66078c500d82",
+                      "size_bytes":  1150,
+                      "sha256":  "5620f92a63eb9ce5dba3269b5637d1349b691d4e79c13c81be0f24057cb41c49",
                       "source":  "authored for the curated public release"
                   },
                   {
                       "path":  "tools/verify_manifest.ps1",
-                      "size_bytes":  4430,
-                      "sha256":  "f253e9b019105097fe2730ce653dbd7a9ad46f1e03d20275f2222de0dbea107b",
+                      "size_bytes":  5279,
+                      "sha256":  "ed3dfe3c972b6227a67ec2c2445f688cc6ff6fb2b52ae2f1e67e37a6abd7c054",
                       "source":  "authored for the curated public release"
                   },
                   {
                       "path":  "tools/update_manifest.ps1",
-                      "size_bytes":  2810,
-                      "sha256":  "25a3fbb900d117ab7610f096811db04a7db4a7c728cf65b87b13bdb46105f0a8",
+                      "size_bytes":  3678,
+                      "sha256":  "2d3941090597f085b50b189346e2d52d35456e3a1ee99b880adad4c121ae7e60",
                       "source":  "authored for the curated public release"
                   },
                   {
@@ -282,14 +282,14 @@
                   },
                   {
                       "path":  "data/bcc/continuation_cases052_071.csv",
-                      "size_bytes":  4846,
-                      "sha256":  "06f174286675d100dfe3ca306ccc0a6b6c5cc4fd33229b50439bb3f99e97ef2a",
+                      "size_bytes":  4825,
+                      "sha256":  "9afdf42acb2b0f918857364309617010055a9c3089b9520e00864d803f05253b",
                       "source":  "finalized BCC public export"
                   },
                   {
                       "path":  "data/bcc/evaluations_cases001_071.csv",
-                      "size_bytes":  8248,
-                      "sha256":  "a61815c45b7896b8ff5596f47c00f6f3f5be83c28f7185353a1b6e48ab245aa9",
+                      "size_bytes":  8176,
+                      "sha256":  "d4b7c6bd13b9e873ecc0ca81b4f321be82c3b8c0e2b2e10d3eafa6f1ac5c297c",
                       "source":  "finalized BCC public export"
                   },
                   {
@@ -312,38 +312,38 @@
                   },
                   {
                       "path":  "data/diagnostics/fcc_case067/old_vs_18_point_all20.csv",
-                      "size_bytes":  4187,
-                      "sha256":  "91cc0b7b4b52d8dda35c71e60bd7bca80016e45e8e1bf2198014c2b25651cd4a",
+                      "size_bytes":  4166,
+                      "sha256":  "48d741d9c3ad6c072c06559186719106277f7dcd246809135503a7d0c55958ea",
                       "source":  "aeroverify/artifacts/case067_sol145_mkaero_diagnostic_20260805"
                   },
                   {
                       "path":  "data/mesh_convergence/results_summary.csv",
-                      "size_bytes":  7969,
-                      "sha256":  "2a9df30d50dd9ec4a839c39bef4385343a39d450075565f401f1c0ae79ca9509",
+                      "size_bytes":  7951,
+                      "sha256":  "956454c27385976ba4ab4a4f2e80fb341eb65e9fb13358e53bb1eb463643b19a",
                       "source":  "aeroverify/artifacts/mesh_convergence path-free projection"
                   },
                   {
                       "path":  "data/mesh_convergence/study_plan.csv",
-                      "size_bytes":  1127,
-                      "sha256":  "69293cb89acacdb624c7207ed24b1fa67cb9ff6c07bf6727bb4db776ddae9894",
+                      "size_bytes":  1109,
+                      "sha256":  "3ee9e01b1c2e1770d0ac12775fac2549ae59d1ee884246bef966422b82632a5f",
                       "source":  "aeroverify/artifacts/mesh_convergence path-free projection"
                   },
                   {
                       "path":  "data/mesh_convergence/case64_positive_g_root19.csv",
-                      "size_bytes":  5445,
-                      "sha256":  "5cb403da916f6de29aafbe77a1eb8b8810ee54e8eb88e4f88c77be727fff9185",
+                      "size_bytes":  5370,
+                      "sha256":  "bf4edd1af81df160151efe8f7dce68adb32635d6e6aad13289b90ac64e8ee0c8",
                       "source":  "aeroverify/artifacts/mesh_convergence path-free projection"
                   },
                   {
                       "path":  "data/fcc/continuation_cases052_071.csv",
-                      "size_bytes":  4818,
-                      "sha256":  "04d8c1f657ebdf57f8ca675f69a347f9bdd32ca17fc45a4e0aeef0d24117181a",
+                      "size_bytes":  4797,
+                      "sha256":  "f407852c692c609139cb2b0c53e2dab8b5bbd5d18e7770cdbcb585bda7ca9c69",
                       "source":  "finalized FCC public export"
                   },
                   {
                       "path":  "data/fcc/evaluations_cases001_071.csv",
-                      "size_bytes":  8310,
-                      "sha256":  "81e568f7982b31ab07ba07a4f80f5f1c10d6686843ab1163211ac985867b371e",
+                      "size_bytes":  8238,
+                      "sha256":  "6fb599eb1ae36a25d04dfbd5c5b394e35c9c3f5d7e58d5852f455f0d05ad6484",
                       "source":  "finalized FCC public export"
                   },
                   {
@@ -355,13 +355,13 @@
                   {
                       "path":  "CITATION.cff",
                       "size_bytes":  765,
-                      "sha256":  "6688b4a41bcdec1190023f8cf335bc86c6ca6267be618d53e89b81b61fd9bc5b",
+                      "sha256":  "d477b2c216838238a68e807937fe1b14aa41cf080df4d38e0ae8752b47b9f6ed",
                       "source":  "authored for the curated public release"
                   },
                   {
                       "path":  "experiments.json",
                       "size_bytes":  3592,
-                      "sha256":  "1be61b13b69c07dd7a68ef5d06ccdcd321b56998f4a3573d9e6e79ede6dca359",
+                      "sha256":  "02b7c012dd020300a6eec74c0d88a145684d6210654044d20ef0513e01f42939",
                       "source":  "authored for the curated public release"
                   },
                   {
@@ -378,8 +378,8 @@
                   },
                   {
                       "path":  ".gitignore",
-                      "size_bytes":  395,
-                      "sha256":  "2809a78ef34aa2998b37486032a495e4fa640fed4053a023e44813aac2c2b348",
+                      "size_bytes":  370,
+                      "sha256":  "24395a6cb8e21e8bcf4038c7e952a60458dc184e05d78504b799a0566221c84e",
                       "source":  "authored for the curated public release"
                   },
                   {
@@ -391,7 +391,7 @@
                   {
                       "path":  "README.md",
                       "size_bytes":  5414,
-                      "sha256":  "32a457c01d2537bdbcb9eae7be5fde4bbdbbb56c706a0ca874b9e2e63da87fa9",
+                      "sha256":  "dff0e6e7674c2470ab01647a4238a3879220b8d1cd62c8d97d541712a94ddfa4",
                       "source":  "authored for the curated public release"
                   },
                   {
@@ -403,7 +403,7 @@
                   {
                       "path":  "QUICKSTART.md",
                       "size_bytes":  1772,
-                      "sha256":  "e1a0179b44fac88eeb8b5b284124eb20782e63fb6a3947e1f9f705333de28748",
+                      "sha256":  "a96c159da925d79211ee24319be6ca26df3b5c8ad47f0a81e0c48b415da74e40",
                       "source":  "authored for the curated public release"
                   },
                   {
@@ -421,7 +421,7 @@
                   {
                       "path":  "docs/FILE_CROSSWALK.md",
                       "size_bytes":  1613,
-                      "sha256":  "d25a6c65d2659632329ca84ef3a9137630efb7ef539fbc3cc2c425023dbbca57",
+                      "sha256":  "c5cf3daa12ae4e98207c930b46b88510eaf2d295bf72ee8bfcb2af50533636e6",
                       "source":  "authored for the curated public release"
                   },
                   {
@@ -438,8 +438,8 @@
                   },
                   {
                       "path":  "data/sc/evaluations_cases001_071.csv",
-                      "size_bytes":  9832,
-                      "sha256":  "0c863d9408d2985a61f28e6649239a95c0ee32a193e4843bb395f002ed8b5e03",
+                      "size_bytes":  9757,
+                      "sha256":  "2e055ef4777c370491375246c54049b7a6ff177ad23bd2c8f5ac1627a87ea641",
                       "source":  "finalized SC public export"
                   },
                   {
@@ -486,74 +486,74 @@
                   },
                   {
                       "path":  "data/sc/continuation_cases052_071.csv",
-                      "size_bytes":  3893,
-                      "sha256":  "9a383a17fa7d12abfdb54b855f70ed5b7c5f6a0963f0983660623a0af070b953",
+                      "size_bytes":  3869,
+                      "sha256":  "063f1af15e67c42a97a2a1326f9b2c5a95778eb31bf16fb832d86ab645e5d49a",
                       "source":  "finalized SC public export"
                   },
                   {
                       "path":  "data/multiinput/representative_designs.csv",
-                      "size_bytes":  1130,
-                      "sha256":  "657e65d6582f21e06d15ff1c76deccad29e4a5e344592fc7f6fc689e9ab1b3df",
+                      "size_bytes":  1124,
+                      "sha256":  "0f3aae00d52f4db730e7e71fd8d2a2e83f6c28f3a9d46616790a10b805a8fffe",
                       "source":  "aeroverify/artifacts/thesis_chapter6_cases001_100_meshprovenance_20260819"
                   },
                   {
                       "path":  "data/multiinput/summary.json",
-                      "size_bytes":  7474,
-                      "sha256":  "00442af5ed70e27567e72e15e9a194d663da985727ba13b5ea4275da50d57e2b",
+                      "size_bytes":  7157,
+                      "sha256":  "9a703a846e52462471e7e615420956115a3f8e52a1be6eaa426ea0a454b234e7",
                       "source":  "aeroverify/artifacts/thesis_chapter6_cases001_100_meshprovenance_20260819"
                   },
                   {
                       "path":  "data/multiinput/observed_pareto.csv",
-                      "size_bytes":  6204,
-                      "sha256":  "5cfadbbeb0c997f52dcf07b3a9121be4db683be68a3312adeed70d116e2b81e8",
+                      "size_bytes":  6165,
+                      "sha256":  "e07971ffbd797940f41c359f32a0ac8b844e42582a674c22253488b9b74fc38a",
                       "source":  "aeroverify/artifacts/thesis_chapter6_cases001_100_meshprovenance_20260819"
                   },
                   {
                       "path":  "data/multiinput/adaptive_hypervolume_stress.csv",
-                      "size_bytes":  3265,
-                      "sha256":  "5b49783a6ebe6b3c99cf02c215c8f6925eb89568c98bf465de16fbcd18fcbbe3",
+                      "size_bytes":  3194,
+                      "sha256":  "1b09a0df82c9cc2fa03ce910b4f11c8481f76a9448dfd4c7b416853a7f7249be",
                       "source":  "aeroverify/artifacts/thesis_chapter6_cases001_100_meshprovenance_20260819"
                   },
                   {
                       "path":  "data/multiinput/evaluations_cases001_100.csv",
-                      "size_bytes":  47967,
-                      "sha256":  "9dff06278f0278182e257a1b4b58db214f8872f38bff4d04957ca36c9f721d2b",
+                      "size_bytes":  47866,
+                      "sha256":  "78b8f59092eb50334b04b91d272d3cdd1b0dd56c76531bbb2a34c3d23344be87",
                       "source":  "finalized 100-case progress and mass tables joined on case index"
                   },
                   {
                       "path":  "data/planform/evaluations_cases001_050.csv",
-                      "size_bytes":  8194,
-                      "sha256":  "09f0078b1b8a1b4d103424f25d5c555a66511c159e9420aace7890e4819bf7b2",
+                      "size_bytes":  8143,
+                      "sha256":  "e95dfd350f80d3a5b6b7d12d7f310133c871eefb7c0da579a3d097dc0c90151f",
                       "source":  "aeroverify/artifacts/planform_continuation_final_20260815"
                   },
                   {
                       "path":  "data/representative_physics/mass_reconstruction_cases004_037_064_065_099.csv",
-                      "size_bytes":  1188,
-                      "sha256":  "5754498b9eb4524f08fc6fa6f2ab74b5e928273fb2d62197dd16957caf398dfd",
+                      "size_bytes":  1182,
+                      "sha256":  "3ba6534a19deb303e8e67a1075f5ef6f58c5c3bcad8bb87120dac9927f745499",
                       "source":  "aeroverify/artifacts/thesis_representative_physics"
                   },
                   {
                       "path":  "data/representative_physics/representative_physics_cases004_037_064_065_099.csv",
-                      "size_bytes":  2144,
-                      "sha256":  "f4fb809820f4b9b3b187360d11c20154df4c42d9ea619df138ded30a8a281b0f",
+                      "size_bytes":  2138,
+                      "sha256":  "37dd1c975b4bd2045ea7ca4c09b69275179c6ceab7b4efaba707906ccbec5eed",
                       "source":  "aeroverify/artifacts/thesis_representative_physics"
                   },
                   {
                       "path":  "data/representative_physics/mass_compliance_check_cases004_037_064_065_099.csv",
-                      "size_bytes":  1710,
-                      "sha256":  "467e26f7c852b213a009d684e51aa8e5672a58efa570e3a8c41e53f1910f65c3",
+                      "size_bytes":  1704,
+                      "sha256":  "af90e6674511e84e4eeaaf13304746e016da9873c3a75b5ea27841931ad5e901",
                       "source":  "aeroverify/artifacts/thesis_representative_physics"
                   },
                   {
                       "path":  "data/planform/summary.json",
-                      "size_bytes":  1826,
-                      "sha256":  "76763031db6cecb68cb8c8e1a9e8f22fdf586a92dded3afabbb368dffbd36722",
+                      "size_bytes":  1733,
+                      "sha256":  "932fa4261a80818803ccacb6e11a58e15eb00e39248ee97ad7835d4c8cdc9a13",
                       "source":  "aeroverify/artifacts/planform_continuation_final_20260815"
                   },
                   {
                       "path":  "data/representative_physics/exact_trim_cdi_cases001_150.csv",
-                      "size_bytes":  35710,
-                      "sha256":  "5d0d03bb5dac0509e6e8ad6ff45aa04425fdab8b41dcd37a9b7532078b0b2a93",
+                      "size_bytes":  35559,
+                      "sha256":  "1148c5cfd519d7a6c3e33964138842982ea72bdbf971b98d661ff9a074105153",
                       "source":  "aeroverify/artifacts/thesis_representative_physics"
                   }
               ]

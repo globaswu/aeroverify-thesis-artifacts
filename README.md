@@ -6,8 +6,8 @@ Lattice-Structured Wings*. It contains portable MATLAB code and frozen,
 path-free tables for checking the reported finite-sample results without
 uploading the 74 GB research workspace.
 
-- Stable release: [thesis-v1.0.0](https://github.com/globaswu/aeroverify-thesis-artifacts/releases/tag/thesis-v1.0.0)
-- Final thesis: [main.pdf](https://github.com/globaswu/aeroverify-thesis-artifacts/releases/download/thesis-v1.0.0/main.pdf)
+- Stable release: [thesis-v1.0.1](https://github.com/globaswu/aeroverify-thesis-artifacts/releases/tag/thesis-v1.0.1)
+- Final thesis: [main.pdf](https://github.com/globaswu/aeroverify-thesis-artifacts/releases/download/thesis-v1.0.1/main.pdf)
 - Start here: [QUICKSTART.md](QUICKSTART.md)
 - Thesis-to-file crosswalk: [docs/FILE_CROSSWALK.md](docs/FILE_CROSSWALK.md)
 - Machine-readable experiment register: [experiments.json](experiments.json)

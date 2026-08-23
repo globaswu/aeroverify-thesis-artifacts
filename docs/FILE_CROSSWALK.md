@@ -1,6 +1,6 @@
 # Thesis-to-repository file crosswalk
 
-All links below are frozen by the `thesis-v1.0.0` tag.
+All links below are frozen by the `thesis-v1.0.1` tag.
 
 | Thesis material | Public entry point | Public evidence |
 |---|---|---|

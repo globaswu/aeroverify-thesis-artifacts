@@ -1,0 +1,14 @@
+name: Verify release manifest
+
+on:
+  push:
+  pull_request:
+
+jobs:
+  manifest:
+    runs-on: windows-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Verify hashes, package scope, and path hygiene
+        shell: pwsh
+        run: ./tools/verify_manifest.ps1

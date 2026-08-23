@@ -1,7 +1,8 @@
 {
-  "schema_version": 1,
+  "schema_version": 2,
+  "release_scope": "solver-free reconstruction from frozen evaluated outputs",
   "continuation_first_case": 52,
-  "final_case": 71,
+  "final_topology_case": 71,
   "grid_points_per_axis": 401,
   "design_domain": {
     "lower_bound": [0.01, 0.05],
@@ -13,8 +14,8 @@
     "labels": ["Two-wing total mass [kg]", "Two-wing trim compliance [N m]"]
   },
   "constraint_convention": "constraint <= 0 is feasible",
-  "pof_interpretation": "clipped deterministic binary-label geometry score; not a calibrated posterior probability",
-  "initial_dataset_status": "improper_or_incorrect_solver_settings; conditioning_only",
+  "feasibility_score_interpretation": "clipped deterministic binary-label geometry score; not a calibrated posterior probability",
+  "initial_topology_dataset_status": "source settings do not match the final configuration; exact setting-level differences are unresolved; conditioning and descriptive use only",
   "fcc": {
     "expected_total_evaluations": 71,
     "expected_total_feasible": 33,
@@ -24,7 +25,6 @@
     "expected_continuation_pareto": 20,
     "expected_primary_selections": 13,
     "expected_challenger_selections": 7,
-    "expected_fallback_selections": 0,
     "flutter_screen": "historical_four_point_contemporaneous"
   },
   "bcc": {
@@ -36,7 +36,46 @@
     "expected_continuation_pareto": 8,
     "expected_primary_selections": 12,
     "expected_challenger_selections": 8,
-    "expected_fallback_selections": 0,
     "flutter_screen": "revised_strict_any_positive_damping"
+  },
+  "sc": {
+    "expected_total_evaluations": 71,
+    "expected_total_feasible": 32,
+    "expected_total_pareto": 8,
+    "expected_continuation_evaluations": 20,
+    "expected_continuation_feasible": 14,
+    "expected_continuation_pareto": 8,
+    "expected_primary_selections": 12,
+    "expected_challenger_selections": 8,
+    "flutter_screen": "revised_strict_18_point_mkaero1_any_positive_damping"
+  },
+  "planform": {
+    "expected_evaluations": 50,
+    "expected_feasible": 39,
+    "expected_pareto": 14,
+    "expected_continuation_evaluations": 10,
+    "expected_primary_selections": 8,
+    "expected_challenger_selections": 2
+  },
+  "multiinput": {
+    "expected_evaluations": 100,
+    "expected_feasible": 70,
+    "expected_pareto": 38,
+    "expected_initial_evaluations": 30,
+    "expected_adaptive_evaluations": 70
+  },
+  "mesh_convergence": {
+    "expected_rows": 17,
+    "reference_mesh_edge_length_m": 0.0018
+  },
+  "case067_flutter": {
+    "expected_points": 20,
+    "expected_rows_per_point": 37,
+    "point3_old_max_damping": 0.000022834729,
+    "point3_new_max_damping": -0.0000085449944
+  },
+  "representative_physics": {
+    "expected_exact_trim_rows": 150,
+    "expected_representative_cases": [4, 37, 64, 65, 99]
   }
 }

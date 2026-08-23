@@ -67,10 +67,10 @@ ylabel(axesHandle, "Two-wing trim compliance [N m]");
 title(axesHandle, sprintf("%s observed finite-sample Pareto set", ...
     upper(topology)), FontWeight="bold");
 subtitle(axesHandle, ...
-    "Cases 1-51 are inherited conditioning data; cases 52-71 are the revised-solver continuation");
+    "Cases 1-51 are inherited conditioning data; cases 52-71 are the reported continuation");
 legend(axesHandle, Location="best", Box="off");
 box(axesHandle, "on");
-set(axesHandle, FontName="Arial", FontSize=10);
+set(axesHandle, FontName="Times New Roman", FontSize=10);
 
 stem = topology + "_observed_pareto";
 outputPaths = struct( ...

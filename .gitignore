@@ -1,6 +1,7 @@
 # Reproduction outputs
 generated/
 test-output/
+tmp/
 
 # MATLAB editor/runtime files
 *.asv
@@ -19,6 +20,11 @@ slprj/
 *.master
 *.dball
 checkpoints/
+*.bdf
+*.dat
+*.pch
+*.f04
+*.log
 
 # Generated figures and documents
 *.pdf

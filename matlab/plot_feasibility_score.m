@@ -55,7 +55,7 @@ figureHandle = figure(Visible="off", Color="white", ...
 axesHandle = axes(figureHandle);
 hold(axesHandle, "on");
 contourf(axesHandle, gridPhysical1, gridPhysical2, scoreGrid, ...
-    linspace(0, 1, 26), LineStyle="none");
+    linspace(0, 1, 26), LineStyle="none", HandleVisibility="off");
 colormap(axesHandle, colorMap);
 clim(axesHandle, [0, 1]);
 colorbarHandle = colorbar(axesHandle);
@@ -95,7 +95,7 @@ title(axesHandle, sprintf("%s binary-label feasibility score", ...
 subtitle(axesHandle, ...
     "Square display of the complete two-input design domain");
 legend(axesHandle, Location="southoutside", NumColumns=2, Box="off");
-set(axesHandle, FontName="Arial", FontSize=10);
+set(axesHandle, FontName="Times New Roman", FontSize=10);
 
 stem = topology + "_feasibility_score";
 outputPaths = struct( ...

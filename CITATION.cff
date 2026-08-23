@@ -1,0 +1,21 @@
+cff-version: 1.2.0
+message: "If you use this package, cite the thesis and the tagged software release."
+title: "Aeroelastic Lattice-Wing Thesis Reproducibility Package"
+type: software
+authors:
+  - family-names: Wu
+    given-names: Sen
+version: 1.0.0
+date-released: 2026-08-24
+repository-code: "https://github.com/globaswu/aeroverify-thesis-artifacts"
+url: "https://github.com/globaswu/aeroverify-thesis-artifacts/releases/tag/thesis-v1.0.0"
+license: BSD-2-Clause
+abstract: >-
+  Curated MATLAB workflows and compact evaluated-output tables supporting the
+  doctoral thesis Aeroelastic Bayesian Optimization of Additively Manufactured
+  Multi-Layer Lattice-Structured Wings.
+keywords:
+  - aeroelasticity
+  - lattice wing
+  - Bayesian optimization
+  - reproducibility

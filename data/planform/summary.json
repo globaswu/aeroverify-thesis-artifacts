@@ -1,0 +1,94 @@
+{
+  "evaluations": 50,
+  "feasible": 39,
+  "infeasible": 11,
+  "finalParetoCases": [
+    9,
+    18,
+    20,
+    38,
+    40,
+    41,
+    42,
+    43,
+    44,
+    45,
+    46,
+    47,
+    48,
+    50
+  ],
+  "continuationEvaluations": 10,
+  "continuationFeasible": 10,
+  "continuationParetoCases": [
+    41,
+    42,
+    43,
+    44,
+    45,
+    46,
+    47,
+    48,
+    50
+  ],
+  "initialParetoCases": [
+    2,
+    9,
+    18,
+    20,
+    28,
+    31,
+    32,
+    35,
+    38,
+    40
+  ],
+  "initialParetoCasesRetainedAt50": [
+    9,
+    18,
+    20,
+    38,
+    40
+  ],
+  "selectionSources": {
+    "challenger": 2,
+    "primary": 8
+  },
+  "representativeCases": {
+    "minimumCompliance": 45,
+    "normalizedDistance": 47,
+    "minimumCDitrim": 20
+  },
+  "retrospectiveHypervolume": {
+    "normalization": "final 50-case feasible objective minima and maxima",
+    "reference": [
+      1.0,
+      1.0
+    ],
+    "after10": 0.4333619594695936,
+    "after40": 0.534970245080585,
+    "after50": 0.6585089125054264
+  },
+  "spearmanFeasible": {
+    "AR_CDitrim": -0.9987854251012147,
+    "AR_Ctrim": 0.7933198380566802,
+    "AR_maxScreeningStress": 0.5929149797570852,
+    "halfWingMass_Ctrim": -0.6048582995951417,
+    "AR_halfWingMass": -0.04412955465587045,
+    "taper_halfWingMass": -0.8117408906882592
+  },
+  "feasibleModeledHalfWingMassKg": {
+    "minimum": 20.40293968751578,
+    "maximum": 22.381926829366375,
+    "relativeSpreadPercent": 9.699519638640625
+  },
+  "feasibleLLTRequiredLiftCoefficient": {
+    "minimum": 0.44176657337357467,
+    "maximum": 0.4444951699627893
+  },
+  "pofReconstruction": {
+    "maximumAnchorError": 2.886579864025407e-15,
+    "rawGridMinimum": -0.5509213110332283,
+    "rawGridMaximum": 1.5270748641778769
+  }
+}

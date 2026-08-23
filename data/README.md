@@ -1,72 +1,58 @@
-# Data Dictionary
+# Public data dictionary
 
-All data are comma-separated UTF-8 text with one header row. No column contains
-a local filesystem path, remote archive path, credential, or raw solver array.
+All public tables are UTF-8 CSV files with one header row. They were exported
+through explicit schemas: no column contains a personal filesystem path,
+remote archive path, credential, raw solver array, or native commercial file.
 
-## Evaluation tables
+## Topology studies
 
-`fcc/evaluations_cases001_071.csv`,
-`bcc/evaluations_cases001_071.csv`, and
-`sc/evaluations_cases001_071.csv` contain:
+`fcc/`, `bcc/`, and `sc/` each contain the complete 71-row evaluated record and
+the cases 52-71 continuation table. Common fields are:
 
-| Column | Meaning |
+| Field | Meaning |
 |---|---|
-| `case_id` | Case index, contiguous from 1 through 71. |
+| `case_id` | Contiguous case index. |
 | `a_m` | Cell size [m]. |
-| `t1_over_a` | Thickness-to-cell-size ratio [-]. |
+| `t1_over_a` | Primary member-thickness ratio [-]. |
 | `mass_kg` | Two-wing total mass [kg]. |
 | `compliance_Nm` | Two-wing trim compliance [N m]. |
-| `constraint` | Stored aggregate constraint label; values at or below zero are feasible. |
-| `feasible` | Logical value derived from `constraint <= 0`. |
-| `pareto_case071` | Feasible finite-sample Pareto membership after case 71. |
-| `evaluation_period` | `initial_training` for cases 1--51 or `revised_continuation` for cases 52--71. |
-| `evidence_role` | Initial rows are `conditioning_only`; continuation rows are `revised_solver_assessment`. |
+| `constraint` | Stored aggregate label; values at or below zero are feasible. |
+| `feasible` | Authoritative stored feasibility label. |
+| `pareto_case071` | Observed feasible Pareto membership after case 71. |
+| `selection_source` | Saved primary or challenger source for continuation rows. |
 
-The initial rows were generated under improper or incorrect solver settings.
-Their objectives and labels are preserved as inherited training state, not as
-evidence of revised-solver performance.
+FCC/BCC continuation tables retain more scalar diagnostics than the finalized
+SC export. Missing SC stress, damping, acquisition, and fallback fields are not
+inferred. The three campaigns also retain different contemporaneous flutter
+rules; see each `flutter_screen` field.
 
-## Continuation tables
+## Planform
 
-`fcc/continuation_cases052_071.csv` and
-`bcc/continuation_cases052_071.csv` add:
+`planform/evaluations_cases001_050.csv` contains aspect ratio, taper ratio,
+trim induced-drag coefficient, trim compliance, feasibility, observed Pareto
+membership, selection source, half-wing mass, and component stress summaries.
 
-| Column | Meaning |
-|---|---|
-| `max_stress_MPa` | Stored governing stress metric [MPa]. |
-| `stress_limit_MPa` | Applied stress limit [MPa]. |
-| `stress_ok` | Stored stress-screen result. |
-| `max_flutter_damping` | Maximum stored SOL 145 damping value over checked modes and speeds. |
-| `flutter_ok` | Contemporaneous flutter-screen result. |
-| `trim_ok` | Stored trim-range result. |
-| `simulation_ok` | Stored simulation-completion result. |
-| `feasibility_result` | Compact reason string derived from failed component checks. |
-| `selection_source` | Saved candidate source: `primary` or `challenger`. |
-| `fallback_used` | Whether the explicit fallback selector was used. |
-| `selected_acquisition` | Acquisition score of the selected candidate. |
-| `primary_acquisition` | Maximum saved primary-pool acquisition score. |
-| `challenger_acquisition` | Maximum saved challenger-pool acquisition score. |
-| `flutter_screen` | Identifier for the contemporaneous flutter rule. |
+## Four-input campaign
 
-FCC and BCC `flutter_ok` values are not directly interchangeable. FCC used the
-historical four-point MKAERO1 setup and contemporaneous classifier. BCC used
-the revised strict rule that fails any detected positive damping value.
+`multiinput/evaluations_cases001_100.csv` joins the public design, objective,
+constraint, stress, flutter, acquisition, and mass fields by case index. The
+join is one-to-one for cases 1-100. The folder also contains the archived
+adaptive hypervolume/stress history, observed Pareto subset, representative
+designs, and final JSON summary.
 
-## SC continuation table
+## Mesh convergence and case-67 diagnostic
 
-`sc/continuation_cases052_071.csv` contains the common design, objective,
-constraint, feasibility, Pareto-membership, and selection-source fields. It
-also contains:
+`mesh_convergence/results_summary.csv` contains 17 compact solver-result rows.
+Its original local light-output path field was deliberately removed.
+`diagnostics/fcc_case067/old_vs_18_point_all20.csv` contains the 20-point
+four-versus-18-frequency comparison, with 37 velocity rows summarized per
+tracked point.
 
-| Column | Meaning |
-|---|---|
-| `feasibility_result` | `pass` or the normalized failure reason retained by the finalized SC summary. |
-| `archive_verified` | Whether the finalized source summary recorded a verified archive marker. |
-| `flutter_screen` | Run-level identifier for the strict revised 18-point MKAERO1 screen. |
+## Representative physics
 
-The SC continuation used the strict classifier that fails a case when any
-positive damping value is detected over the checked modes and speeds. The two
-finalized SC source CSVs do not contain per-case stress values, damping values,
-trim flags, simulation flags, acquisition scores, or fallback flags. These
-columns are intentionally absent rather than populated from other files or
-inferred after the run.
+The exact-trim file contains 50 planform plus 100 four-input rows. The other
+tables contain the five representative cases 4, 37, 64, 65, and 99 used for
+compact physical and mass-convention checks.
+
+Source folders, transformations, and limitations are recorded in
+`docs/DATA_PROVENANCE.md` and `experiments.json`.

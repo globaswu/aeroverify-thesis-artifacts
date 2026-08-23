@@ -12,8 +12,10 @@ function [score, components, status] = scoreCandidates( ...
 %   challenger pools before calling this function, so no source receives a
 %   hidden multiplier or privileged selection rule.
 %
-%   If a feasible front or positive HVI is absent, SCORE is zero and STATUS
-%   requests an explicit fallback. A hard design duplicate is always invalid.
+%   If a feasible front or positive HVI is absent, STATUS requests an explicit
+%   fallback. With a configured positive epsilon floor, SCORE can remain
+%   positive so that a caller can evaluate a frozen pointwise acquisition
+%   during continuous search. A hard design duplicate is always invalid.
 
     if nargin < 8 || isempty(options)
         options = struct();
@@ -76,7 +78,11 @@ function [score, components, status] = scoreCandidates( ...
         mfilename, "options.acquisition.epsilon");
 
     positiveHVI = hvi(hvi > minimumPositiveHVI & isfinite(hvi));
-    epsilon = 0;
+    % Apply the configured floor even when this particular evaluation batch
+    % contains no positive HVI. This makes a fixed epsilon a pointwise,
+    % population-independent acquisition definition for continuous search.
+    % STATUS still requests fallback when no positive-HVI reference exists.
+    epsilon = epsilonFloor;
     reason = hviInfo.reason;
     requiresFallback = hviInfo.requiresFallback;
     if ~isempty(positiveHVI)

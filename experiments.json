@@ -1,0 +1,63 @@
+{
+  "schema_version": 1,
+  "release_tag": "thesis-v1.0.0",
+  "thesis_title": "Aeroelastic Bayesian Optimization of Additively Manufactured Multi-Layer Lattice-Structured Wings",
+  "experiments": [
+    {
+      "id": "lattice-sizing-fcc-bcc-sc",
+      "thesis_refs": ["Chapter 5, Figures 5.1-5.17", "Appendix A"],
+      "reproduction_level": "solver-free post-processing",
+      "entrypoint": "matlab/reproduce_topology.m",
+      "inputs": ["data/fcc", "data/bcc", "data/sc", "config/reproduction_config.json"],
+      "expected_checks": {"fcc": [71, 33, 26], "bcc": [71, 27, 17], "sc": [71, 32, 8]},
+      "limitations": "Cases 1-51 have unresolved setting-level differences from the final configuration; physical reruns require licensed external assets."
+    },
+    {
+      "id": "fixed-area-planform",
+      "thesis_refs": ["Chapter 5, Figures 5.18-5.21"],
+      "reproduction_level": "solver-free post-processing",
+      "entrypoint": "matlab/reproduce_planform.m",
+      "inputs": ["data/planform/evaluations_cases001_050.csv", "data/planform/summary.json"],
+      "expected_checks": {"evaluations": 50, "feasible": 39, "observed_pareto": 14, "continuation_primary": 8, "continuation_challenger": 2},
+      "limitations": "The exact selection mechanism for cases 1-40 is not fully reconstructed."
+    },
+    {
+      "id": "four-input-aerostructural",
+      "thesis_refs": ["Chapter 6, Figures 6.1-6.12"],
+      "reproduction_level": "solver-free post-processing",
+      "entrypoint": "matlab/reproduce_multiinput.m",
+      "inputs": ["data/multiinput/evaluations_cases001_100.csv", "data/multiinput/adaptive_hypervolume_stress.csv", "data/multiinput/summary.json"],
+      "seed": 20260809,
+      "budget": {"corners": 16, "latin_hypercube": 14, "adaptive": 70},
+      "expected_checks": {"evaluations": 100, "feasible": 70, "observed_pareto": 38},
+      "limitations": "The final record spans two mesh epochs and includes the replacement evaluation for case 65."
+    },
+    {
+      "id": "structural-mesh-sensitivity",
+      "thesis_refs": ["Chapter 2, Table 2.2 and Figures 2.7-2.8"],
+      "reproduction_level": "saved-result reconstruction",
+      "entrypoint": "matlab/reproduce_mesh_convergence.m",
+      "inputs": ["data/mesh_convergence/results_summary.csv", "data/mesh_convergence/case64_positive_g_root19.csv"],
+      "expected_checks": {"summary_rows": 17},
+      "limitations": "New mesh evaluations require nTopology, MSC Nastran, and source-case inputs not redistributed here."
+    },
+    {
+      "id": "fcc-case067-mkaero1",
+      "thesis_refs": ["Chapter 5, Table 5.4 and Figures 5.6-5.8", "Appendix B"],
+      "reproduction_level": "saved-result reconstruction",
+      "entrypoint": "matlab/reproduce_case067_flutter.m",
+      "inputs": ["data/diagnostics/fcc_case067/old_vs_18_point_all20.csv"],
+      "expected_checks": {"tracked_points": 20, "rows_per_point": 37, "point3_old_max_g": 0.000022834729, "point3_new_max_g": -0.0000085449944},
+      "limitations": "The public table supports the comparison, not a fresh SOL 145 run."
+    },
+    {
+      "id": "exact-trim-and-representative-physics",
+      "thesis_refs": ["Chapters 5-6", "Chapter 2, Table 2.3"],
+      "reproduction_level": "saved-result reconstruction",
+      "entrypoint": "matlab/reproduce_representative_physics.m",
+      "inputs": ["data/representative_physics"],
+      "expected_checks": {"exact_trim_rows": 150, "representative_cases": [4, 37, 64, 65, 99]},
+      "limitations": "The compact tables replay derived comparisons; they do not rerun LLT, Nastran, or archived field extraction."
+    }
+  ]
+}

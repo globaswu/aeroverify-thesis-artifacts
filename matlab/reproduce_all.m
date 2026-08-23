@@ -1,5 +1,5 @@
 function summary = reproduce_all(outputDirectory)
-%REPRODUCE_ALL Reproduce FCC and BCC figures, tables, and summary.
+%REPRODUCE_ALL Reproduce all solver-free thesis artifacts in this release.
 
 if nargin < 1 || strlength(string(outputDirectory)) == 0
     outputDirectory = fullfile(artifact_repository_root(), "generated");
@@ -9,14 +9,24 @@ if ~isfolder(outputDirectory)
     mkdir(outputDirectory);
 end
 
-fccSummary = reproduce_topology( ...
-    "fcc", fullfile(outputDirectory, "fcc"));
-bccSummary = reproduce_topology( ...
-    "bcc", fullfile(outputDirectory, "bcc"));
-summary = [fccSummary; bccSummary];
+summaries = cell(8, 1);
+topologies = ["fcc", "bcc", "sc"];
+for index = 1:numel(topologies)
+    topology = topologies(index);
+    summaries{index} = reproduce_topology( ...
+        topology, fullfile(outputDirectory, topology));
+end
+summaries{4} = reproduce_planform(fullfile(outputDirectory, "planform"));
+summaries{5} = reproduce_multiinput(fullfile(outputDirectory, "multiinput"));
+summaries{6} = reproduce_mesh_convergence( ...
+    fullfile(outputDirectory, "mesh_convergence"));
+summaries{7} = reproduce_case067_flutter( ...
+    fullfile(outputDirectory, "case067_flutter"));
+summaries{8} = reproduce_representative_physics( ...
+    fullfile(outputDirectory, "representative_physics"));
+summary = vertcat(summaries{:});
 writetable(summary, fullfile(outputDirectory, ...
     "reproduction_summary.csv"));
-
 disp(summary);
 end
 

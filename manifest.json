@@ -1,270 +1,560 @@
 {
-    "schema_version":  1,
-    "scope":  "FCC, BCC, and SC cTSEMO thesis reproducibility artifacts",
+    "schema_version":  2,
+    "release_tag":  "thesis-v1.0.0",
+    "scope":  "curated solver-free thesis reproduction package",
+    "generated_utc":  "2026-08-23T22:20:14Z",
     "files":  [
                   {
-                      "path":  ".gitignore",
-                      "size_bytes":  335,
-                      "sha256":  "a8e074a3226ea4fcd2ea86dc533fa50d5ab9efb58df8f668f68daaeabb40b114",
-                      "source":  "generated for the public reproducibility package"
+                      "path":  "matlab/reproduce_topology.m",
+                      "size_bytes":  849,
+                      "sha256":  "f84c6873ec01618825d7618e7e64f597017519e2e2a97c9852a7c81d64fe1a1e",
+                      "source":  "authored for the curated public release"
                   },
                   {
-                      "path":  "config/reproduction_config.json",
-                      "size_bytes":  1487,
-                      "sha256":  "0982e3c50e36fabdd30109cadc60deb57a1d1e43b68f86b231fd9468b4f18db1",
-                      "source":  "generated for the public reproducibility package"
+                      "path":  "matlab/run_tests.m",
+                      "size_bytes":  5745,
+                      "sha256":  "55ec9666ec1be6a6186a7b2fd75a4444924fbe906cecc25d88f5a88e2d269925",
+                      "source":  "authored for the curated public release"
                   },
                   {
-                      "path":  "data/bcc/continuation_cases052_071.csv",
-                      "size_bytes":  4846,
-                      "sha256":  "06f174286675d100dfe3ca306ccc0a6b6c5cc4fd33229b50439bb3f99e97ef2a",
-                      "source":  "aeroverify/artifacts/bcc_continuation_latest/bcc_continuation_feasibility_cases052_071.csv"
+                      "path":  "matlab/reproduce_representative_physics.m",
+                      "size_bytes":  3426,
+                      "sha256":  "9ab6fb4abcbc59219dee04b8784709a55dda04be616cc7891fb3c07e8c541d25",
+                      "source":  "authored for the curated public release"
                   },
                   {
-                      "path":  "data/bcc/evaluations_cases001_071.csv",
-                      "size_bytes":  8248,
-                      "sha256":  "a61815c45b7896b8ff5596f47c00f6f3f5be83c28f7185353a1b6e48ab245aa9",
-                      "source":  "aeroverify/artifacts/bcc_continuation_latest/bcc_pf_all_points.csv"
+                      "path":  "matlab/reproduce_multiinput.m",
+                      "size_bytes":  6639,
+                      "sha256":  "18a50a67cc641cca3363225a4102b45e7a5510f0801d90dd43a650ee9b0f009c",
+                      "source":  "authored for the curated public release"
                   },
                   {
-                      "path":  "data/fcc/continuation_cases052_071.csv",
-                      "size_bytes":  4818,
-                      "sha256":  "04d8c1f657ebdf57f8ca675f69a347f9bdd32ca17fc45a4e0aeef0d24117181a",
-                      "source":  "aeroverify FCC continuation exact case records and compact final state"
+                      "path":  "matlab/reproduce_planform.m",
+                      "size_bytes":  4687,
+                      "sha256":  "7e61e7f289ef916ff637e28c4a3566d333e2e776e2b2b2216e3749ba9ac3a8be",
+                      "source":  "authored for the curated public release"
                   },
                   {
-                      "path":  "data/fcc/evaluations_cases001_071.csv",
-                      "size_bytes":  8310,
-                      "sha256":  "81e568f7982b31ab07ba07a4f80f5f1c10d6686843ab1163211ac985867b371e",
-                      "source":  "aeroverify/artifacts/fcc_continuation_pf/fcc_pf_all_points.csv"
-                  },
-                  {
-                      "path":  "data/README.md",
-                      "size_bytes":  3474,
-                      "sha256":  "5d83876cc67e4912cad7328570080f7175097d08ccf65b96c2909a749ba36203",
-                      "source":  "generated for the public reproducibility package"
-                  },
-                  {
-                      "path":  "data/sc/continuation_cases052_071.csv",
-                      "size_bytes":  3893,
-                      "sha256":  "9a383a17fa7d12abfdb54b855f70ed5b7c5f6a0963f0983660623a0af070b953",
-                      "source":  "aeroverify/artifacts/sc_continuation_latest_20260808/sc_continuation_summary.csv"
-                  },
-                  {
-                      "path":  "data/sc/evaluations_cases001_071.csv",
-                      "size_bytes":  9832,
-                      "sha256":  "0c863d9408d2985a61f28e6649239a95c0ee32a193e4843bb395f002ed8b5e03",
-                      "source":  "aeroverify/artifacts/sc_continuation_latest_20260808/sc_all_points.csv"
-                  },
-                  {
-                      "path":  "LICENSE-CTSEMO.txt",
-                      "size_bytes":  1324,
-                      "sha256":  "54d119a07febe0d2b4f15db3a05585ededda24f033d0bf878e7304bfea8d71bd",
-                      "source":  "cTSEMOp/ctsemo-paper-code/LICENSE"
-                  },
-                  {
-                      "path":  "matlab/+ctsemo/binaryLabels.m",
-                      "size_bytes":  1055,
-                      "sha256":  "bbf88a1e4d43fe7d3aac84dfb560b693c29eb56bf26acb06e1ae17a376431b2c",
-                      "source":  "aeroverify/+ctsemo/binaryLabels.m"
-                  },
-                  {
-                      "path":  "matlab/+ctsemo/componentSeed.m",
-                      "size_bytes":  1073,
-                      "sha256":  "c8754b09521d491ec3a5bb30dee10415abed8684ee70cdefc684fd6599e6c702",
-                      "source":  "aeroverify/+ctsemo/componentSeed.m"
+                      "path":  "matlab/to_logical_column.m",
+                      "size_bytes":  569,
+                      "sha256":  "6fd407a1b9ebf6c8ae54298318e6150d9ef719bef8d58033a8a8d3a7c43055c2",
+                      "source":  "authored for the curated public release"
                   },
                   {
                       "path":  "matlab/+ctsemo/crowdingMasks.m",
                       "size_bytes":  7733,
                       "sha256":  "21f8d646610ddf9730f3b32b587c52e3572423af6d04a877239b796764c32c94",
-                      "source":  "aeroverify/+ctsemo/crowdingMasks.m"
+                      "source":  "aeroverify/+ctsemo current modular package"
                   },
                   {
                       "path":  "matlab/+ctsemo/drawObjectiveTS.m",
                       "size_bytes":  5461,
                       "sha256":  "ab80ef9a70de5e7c65e2fd033070116ff59e5afad48395433b6f9bf366b5e7db",
-                      "source":  "aeroverify/+ctsemo/drawObjectiveTS.m"
+                      "source":  "aeroverify/+ctsemo current modular package"
                   },
                   {
-                      "path":  "matlab/+ctsemo/evaluateObjectiveTS.m",
-                      "size_bytes":  2166,
-                      "sha256":  "a7c41750e2b300b7fc36aa014def41122b5c796dd93e3ddc9cd1a47dc1a72d67",
-                      "source":  "aeroverify/+ctsemo/evaluateObjectiveTS.m"
+                      "path":  "matlab/+ctsemo/componentSeed.m",
+                      "size_bytes":  1073,
+                      "sha256":  "c8754b09521d491ec3a5bb30dee10415abed8684ee70cdefc684fd6599e6c702",
+                      "source":  "aeroverify/+ctsemo current modular package"
                   },
                   {
-                      "path":  "matlab/+ctsemo/fitClippedBinaryPof.m",
-                      "size_bytes":  20369,
-                      "sha256":  "d7f073ca234469ce105afbaca6d85850f3aa525df98760d2a6ebac61cf1f1c7e",
-                      "source":  "aeroverify/+ctsemo/fitClippedBinaryPof.m"
+                      "path":  "matlab/write_continuation_table.m",
+                      "size_bytes":  1712,
+                      "sha256":  "b19ec8426950d60a849411e3e69cc247d146fbf09898293fbcc555e577d190fc",
+                      "source":  "authored for the curated public release"
                   },
                   {
-                      "path":  "matlab/+ctsemo/fitObjectiveGP.m",
-                      "size_bytes":  16068,
-                      "sha256":  "d212020e54ba7c6d5c6be4dfa6ace164afdea0a617b581160818b443dc23d800",
-                      "source":  "aeroverify/+ctsemo/fitObjectiveGP.m"
+                      "path":  "matlab/+ctsemo/binaryLabels.m",
+                      "size_bytes":  1055,
+                      "sha256":  "bbf88a1e4d43fe7d3aac84dfb560b693c29eb56bf26acb06e1ae17a376431b2c",
+                      "source":  "aeroverify/+ctsemo current modular package"
                   },
                   {
-                      "path":  "matlab/+ctsemo/hypervolume2d.m",
-                      "size_bytes":  2032,
-                      "sha256":  "07173cbd23251f153c5ae4c07229b8cea438984dc8435f4bb7e295717628ccd9",
-                      "source":  "aeroverify/+ctsemo/hypervolume2d.m"
+                      "path":  "matlab/reproduce_mesh_convergence.m",
+                      "size_bytes":  3895,
+                      "sha256":  "d63ca8772402915f4db915362e228271bb8d630bace8a5200b79e95b15d3c5b1",
+                      "source":  "authored for the curated public release"
                   },
                   {
-                      "path":  "matlab/+ctsemo/localMatern32.m",
-                      "size_bytes":  2150,
-                      "sha256":  "a1e8072aa7d5ec347d80133aee29678fa0f55b634f3a5ea7250d0bae67a301a2",
-                      "source":  "aeroverify/+ctsemo/localMatern32.m"
+                      "path":  "matlab/artifact_repository_root.m",
+                      "size_bytes":  178,
+                      "sha256":  "1b9d904331f82532ddb9fb9f2a5a95235077520838ffa3bbd418b51da625ecf2",
+                      "source":  "authored for the curated public release"
                   },
                   {
-                      "path":  "matlab/+ctsemo/makeCandidatePools.m",
-                      "size_bytes":  7411,
-                      "sha256":  "f613077f70b30bf69a32a7721bf34f971434bebfefabc1aa701c2c38267f61e6",
-                      "source":  "aeroverify/+ctsemo/makeCandidatePools.m"
+                      "path":  "matlab/cTSEMOOptions.m",
+                      "size_bytes":  17756,
+                      "sha256":  "cdc2a8ac18ab094c59e3908f1bce4c505f711b47f787bd18b16ad0603c59309e",
+                      "source":  "aeroverify/cTSEMOOptions.m"
                   },
                   {
-                      "path":  "matlab/+ctsemo/normalizeData.m",
-                      "size_bytes":  2854,
-                      "sha256":  "c253e54f94582ef916ee5d9003a70687e1ca327105d6be67cb0f421721dcbf8d",
-                      "source":  "aeroverify/+ctsemo/normalizeData.m"
+                      "path":  "experiments/planform/README.md",
+                      "size_bytes":  631,
+                      "sha256":  "8faefed9c242bf588d9bf17481a31900d238ad0396b69bdcf8ca6f8def1c56f4",
+                      "source":  "authored for the curated public release"
                   },
                   {
-                      "path":  "matlab/+ctsemo/pareto2d.m",
-                      "size_bytes":  1473,
-                      "sha256":  "a863e73b55f4ad46755f9b9fb1629af89dc708581b40bc91ea9f5deaa2eb8cff",
-                      "source":  "aeroverify/+ctsemo/pareto2d.m"
+                      "path":  "experiments/mesh_convergence/README.md",
+                      "size_bytes":  624,
+                      "sha256":  "1dd85884a2a1a4c6f9281e9452e37e4dcb6fb202278bfd276276213535805592",
+                      "source":  "authored for the curated public release"
                   },
                   {
-                      "path":  "matlab/+ctsemo/predictClippedBinaryPof.m",
-                      "size_bytes":  4211,
-                      "sha256":  "2a61b84a9310cd7e8ca1a16cdd40ee3d8950c0eace371ba534b2e430b95ced30",
-                      "source":  "aeroverify/+ctsemo/predictClippedBinaryPof.m"
+                      "path":  "experiments/multiinput/README.md",
+                      "size_bytes":  746,
+                      "sha256":  "4f415a021855c6cc521955075aa1f23d48ab14c06785f66616a57870da5eca79",
+                      "source":  "authored for the curated public release"
                   },
                   {
-                      "path":  "matlab/+ctsemo/predictObjectiveGP.m",
-                      "size_bytes":  2352,
-                      "sha256":  "9503ece7e77a3844c1c69a8b9339a611f1631d8596f5170849c7286368b0c5f2",
-                      "source":  "aeroverify/+ctsemo/predictObjectiveGP.m"
+                      "path":  "matlab/load_topology_data.m",
+                      "size_bytes":  2078,
+                      "sha256":  "d42bdb0a31911db1ce412c96e38184b6c6a539636c39f042ba38655bf423fb51",
+                      "source":  "authored for the curated public release"
                   },
                   {
-                      "path":  "matlab/+ctsemo/run.m",
-                      "size_bytes":  40278,
-                      "sha256":  "234578fe87eb066f8ad6d7ff2668d07f4fe37040a65fa7895ab06703e5f72a56",
-                      "source":  "aeroverify/+ctsemo/run.m"
+                      "path":  "matlab/reproduce_all.m",
+                      "size_bytes":  1194,
+                      "sha256":  "31cf4ad85b903219153cf0759b165982d195dbc1aa7f8ee74638e2fd8b87ac85",
+                      "source":  "authored for the curated public release"
                   },
                   {
-                      "path":  "matlab/+ctsemo/sampledHVI.m",
-                      "size_bytes":  3931,
-                      "sha256":  "9bc8c38ac838832d7cc8b8ba43c4101c4509213d21d3a7f329138b81a2e482e2",
-                      "source":  "aeroverify/+ctsemo/sampledHVI.m"
+                      "path":  "matlab/reproduce_case067_flutter.m",
+                      "size_bytes":  1869,
+                      "sha256":  "8b3346db82f73ab50c13ed1eb82b480c2509517876712433d989f9321e3c143d",
+                      "source":  "authored for the curated public release"
                   },
                   {
-                      "path":  "matlab/+ctsemo/saveCheckpoint.m",
-                      "size_bytes":  1575,
-                      "sha256":  "3ffbc8b1ed05f2da72d43557179b3c1d340b3528e8788427abd6fba3424937e5",
-                      "source":  "aeroverify/+ctsemo/saveCheckpoint.m"
+                      "path":  "matlab/plot_observed_pareto.m",
+                      "size_bytes":  3430,
+                      "sha256":  "73fcbf60498954484b885108b9be1dc1c1628cbd96aaca0aa8f379f66a97df8a",
+                      "source":  "authored for the curated public release"
                   },
                   {
-                      "path":  "matlab/+ctsemo/scopedRng.m",
-                      "size_bytes":  547,
-                      "sha256":  "58895ae9f80f63b93ad4adc4994405dacbcd0d0241695bd1a24a1b38863f8396",
-                      "source":  "aeroverify/+ctsemo/scopedRng.m"
+                      "path":  "matlab/observed_pareto_mask.m",
+                      "size_bytes":  871,
+                      "sha256":  "7eee13ac2e8fb5ddf0dcb63a412a8097db523237fd94ce03e44c08246c1a6d2a",
+                      "source":  "authored for the curated public release"
+                  },
+                  {
+                      "path":  "matlab/plot_feasibility_score.m",
+                      "size_bytes":  4527,
+                      "sha256":  "b4846da3b006dc6797133c11e4240c4bfd1c628e30b1134d6e321d2e17c5504c",
+                      "source":  "authored for the curated public release"
                   },
                   {
                       "path":  "matlab/+ctsemo/scoreCandidates.m",
-                      "size_bytes":  6424,
-                      "sha256":  "29f8d16b4198b26fb22349c19289bfd08d482305dfd8e8593b55b43dc4e957af",
-                      "source":  "aeroverify/+ctsemo/scoreCandidates.m"
+                      "size_bytes":  6879,
+                      "sha256":  "a460bba452274e126566646a13e34879e576e2d9fcfaf34fc1d0385d53005195",
+                      "source":  "aeroverify/+ctsemo current modular package"
                   },
                   {
                       "path":  "matlab/+ctsemo/selectFallback.m",
                       "size_bytes":  5639,
                       "sha256":  "e3fbed3886e65cbd817fc2b1954a7d9990594b2de841718c3dff757b3ed78716",
-                      "source":  "aeroverify/+ctsemo/selectFallback.m"
+                      "source":  "aeroverify/+ctsemo current modular package"
+                  },
+                  {
+                      "path":  "matlab/+ctsemo/scopedRng.m",
+                      "size_bytes":  547,
+                      "sha256":  "58895ae9f80f63b93ad4adc4994405dacbcd0d0241695bd1a24a1b38863f8396",
+                      "source":  "aeroverify/+ctsemo current modular package"
+                  },
+                  {
+                      "path":  "matlab/+ctsemo/sampledHVI.m",
+                      "size_bytes":  3931,
+                      "sha256":  "9bc8c38ac838832d7cc8b8ba43c4101c4509213d21d3a7f329138b81a2e482e2",
+                      "source":  "aeroverify/+ctsemo current modular package"
+                  },
+                  {
+                      "path":  "matlab/+ctsemo/saveCheckpoint.m",
+                      "size_bytes":  1575,
+                      "sha256":  "3ffbc8b1ed05f2da72d43557179b3c1d340b3528e8788427abd6fba3424937e5",
+                      "source":  "aeroverify/+ctsemo current modular package"
                   },
                   {
                       "path":  "matlab/+ctsemo/updatePareto.m",
                       "size_bytes":  3344,
                       "sha256":  "c753ba0c056528e0cb5fd0196bb74c88e97030988eee9819bed9eedaac131b80",
-                      "source":  "aeroverify/+ctsemo/updatePareto.m"
+                      "source":  "aeroverify/+ctsemo current modular package"
+                  },
+                  {
+                      "path":  "tools/verify_links.ps1",
+                      "size_bytes":  1133,
+                      "sha256":  "c356e22b9196b57c32ea4799aa051c7d39f51597e1108509410c66078c500d82",
+                      "source":  "authored for the curated public release"
+                  },
+                  {
+                      "path":  "tools/verify_manifest.ps1",
+                      "size_bytes":  4430,
+                      "sha256":  "f253e9b019105097fe2730ce653dbd7a9ad46f1e03d20275f2222de0dbea107b",
+                      "source":  "authored for the curated public release"
+                  },
+                  {
+                      "path":  "tools/update_manifest.ps1",
+                      "size_bytes":  2810,
+                      "sha256":  "25a3fbb900d117ab7610f096811db04a7db4a7c728cf65b87b13bdb46105f0a8",
+                      "source":  "authored for the curated public release"
                   },
                   {
                       "path":  "matlab/+ctsemo/validateInputs.m",
                       "size_bytes":  8400,
                       "sha256":  "b46afe7baa9a5d69ec2279a5f6739f0106bb216139058346d4068928bf153893",
-                      "source":  "aeroverify/+ctsemo/validateInputs.m"
+                      "source":  "aeroverify/+ctsemo current modular package"
                   },
                   {
-                      "path":  "matlab/artifact_repository_root.m",
-                      "size_bytes":  173,
-                      "sha256":  "6d0bc7a3f14c9069230f92d21c368ab1d6d249d6bf2c4a4425d5b7cfd3fde799",
-                      "source":  "generated for the public reproducibility package"
+                      "path":  "tools/reproduce.ps1",
+                      "size_bytes":  859,
+                      "sha256":  "0d95d94672b6cabfbe33b36ec55d6efff1282e6d183d13483c01379e0893aa02",
+                      "source":  "authored for the curated public release"
                   },
                   {
-                      "path":  "matlab/cTSEMOOptions.m",
-                      "size_bytes":  15491,
-                      "sha256":  "151ab582928036fbe28a6d8400dd4a262cfe6d1078af0dc107b3681f0041d413",
-                      "source":  "aeroverify/cTSEMOOptions.m"
+                      "path":  "matlab/+ctsemo/run.m",
+                      "size_bytes":  46832,
+                      "sha256":  "0a8d5a35908b7cb683716a592d33ce35614ebb4674e2c659465124885d583248",
+                      "source":  "aeroverify/+ctsemo current modular package"
                   },
                   {
-                      "path":  "matlab/load_topology_data.m",
-                      "size_bytes":  1881,
-                      "sha256":  "ae33c7c3c0f3fde42abc5e6cc48ad458043afa4f884425417b8e60c19fb2b389",
-                      "source":  "generated for the public reproducibility package"
+                      "path":  "matlab/+ctsemo/hypervolume2d.m",
+                      "size_bytes":  2032,
+                      "sha256":  "07173cbd23251f153c5ae4c07229b8cea438984dc8435f4bb7e295717628ccd9",
+                      "source":  "aeroverify/+ctsemo current modular package"
                   },
                   {
-                      "path":  "matlab/observed_pareto_mask.m",
-                      "size_bytes":  844,
-                      "sha256":  "441774daff28c76c26e2b4e38cc8025c9b2ab475bcc27ab9cddf045c78a801f8",
-                      "source":  "generated for the public reproducibility package"
+                      "path":  "matlab/+ctsemo/localMatern32.m",
+                      "size_bytes":  2150,
+                      "sha256":  "a1e8072aa7d5ec347d80133aee29678fa0f55b634f3a5ea7250d0bae67a301a2",
+                      "source":  "aeroverify/+ctsemo current modular package"
                   },
                   {
-                      "path":  "matlab/plot_feasibility_score.m",
-                      "size_bytes":  4389,
-                      "sha256":  "e1b60a01c6085079dabcc6521ab351f4a121f51ee84e5b2dedde1e23fb110b20",
-                      "source":  "generated for the public reproducibility package"
+                      "path":  "matlab/+ctsemo/fitObjectiveGP.m",
+                      "size_bytes":  16068,
+                      "sha256":  "d212020e54ba7c6d5c6be4dfa6ace164afdea0a617b581160818b443dc23d800",
+                      "source":  "aeroverify/+ctsemo current modular package"
                   },
                   {
-                      "path":  "matlab/plot_observed_pareto.m",
-                      "size_bytes":  3349,
-                      "sha256":  "80dab4518a5b27d360a81a5d7cc66a3b950a1945fc1541d075b88258442ea10c",
-                      "source":  "generated for the public reproducibility package"
+                      "path":  "matlab/+ctsemo/evaluateObjectiveTS.m",
+                      "size_bytes":  2166,
+                      "sha256":  "a7c41750e2b300b7fc36aa014def41122b5c796dd93e3ddc9cd1a47dc1a72d67",
+                      "source":  "aeroverify/+ctsemo current modular package"
                   },
                   {
-                      "path":  "matlab/reproduce_all.m",
-                      "size_bytes":  665,
-                      "sha256":  "1aac872bfa54effe6ee0ee0841c1744a9601e639fd986027e77120c8b43490e8",
-                      "source":  "generated for the public reproducibility package"
+                      "path":  "matlab/+ctsemo/fitClippedBinaryPof.m",
+                      "size_bytes":  20369,
+                      "sha256":  "d7f073ca234469ce105afbaca6d85850f3aa525df98760d2a6ebac61cf1f1c7e",
+                      "source":  "aeroverify/+ctsemo current modular package"
                   },
                   {
-                      "path":  "matlab/reproduce_topology.m",
-                      "size_bytes":  1804,
-                      "sha256":  "31bf9eea512c034e0333d795158a4181c41fc4f820c371524d8e2dbc43b1dc50",
-                      "source":  "generated for the public reproducibility package"
+                      "path":  "matlab/+ctsemo/makeCandidatePools.m",
+                      "size_bytes":  7411,
+                      "sha256":  "f613077f70b30bf69a32a7721bf34f971434bebfefabc1aa701c2c38267f61e6",
+                      "source":  "aeroverify/+ctsemo current modular package"
                   },
                   {
-                      "path":  "matlab/run_tests.m",
-                      "size_bytes":  4784,
-                      "sha256":  "ce74b18dca65cef936a3598ae433d6ff58f1970572c5bc59422b785e9a189eaf",
-                      "source":  "generated for the public reproducibility package"
+                      "path":  "matlab/+ctsemo/predictClippedBinaryPof.m",
+                      "size_bytes":  4211,
+                      "sha256":  "2a61b84a9310cd7e8ca1a16cdd40ee3d8950c0eace371ba534b2e430b95ced30",
+                      "source":  "aeroverify/+ctsemo current modular package"
                   },
                   {
-                      "path":  "matlab/write_continuation_table.m",
-                      "size_bytes":  1949,
-                      "sha256":  "034409de9002ccb2a5fa2e619ebde202a2d8dd07085cd7b996bfe384a89ad90b",
-                      "source":  "generated for the public reproducibility package"
+                      "path":  "matlab/+ctsemo/predictObjectiveGP.m",
+                      "size_bytes":  2352,
+                      "sha256":  "9503ece7e77a3844c1c69a8b9339a611f1631d8596f5170849c7286368b0c5f2",
+                      "source":  "aeroverify/+ctsemo current modular package"
+                  },
+                  {
+                      "path":  "matlab/+ctsemo/pareto2d.m",
+                      "size_bytes":  1473,
+                      "sha256":  "a863e73b55f4ad46755f9b9fb1629af89dc708581b40bc91ea9f5deaa2eb8cff",
+                      "source":  "aeroverify/+ctsemo current modular package"
+                  },
+                  {
+                      "path":  "matlab/+ctsemo/normalizeData.m",
+                      "size_bytes":  2854,
+                      "sha256":  "c253e54f94582ef916ee5d9003a70687e1ca327105d6be67cb0f421721dcbf8d",
+                      "source":  "aeroverify/+ctsemo current modular package"
+                  },
+                  {
+                      "path":  "matlab/+ctsemo/optimizePrimaryGA.m",
+                      "size_bytes":  7451,
+                      "sha256":  "efefdd61033386e2f42812b87690cefc43127c4b1c6a03f2a4a87053f21a3595",
+                      "source":  "aeroverify/+ctsemo current modular package"
+                  },
+                  {
+                      "path":  "data/bcc/continuation_cases052_071.csv",
+                      "size_bytes":  4846,
+                      "sha256":  "06f174286675d100dfe3ca306ccc0a6b6c5cc4fd33229b50439bb3f99e97ef2a",
+                      "source":  "finalized BCC public export"
+                  },
+                  {
+                      "path":  "data/bcc/evaluations_cases001_071.csv",
+                      "size_bytes":  8248,
+                      "sha256":  "a61815c45b7896b8ff5596f47c00f6f3f5be83c28f7185353a1b6e48ab245aa9",
+                      "source":  "finalized BCC public export"
+                  },
+                  {
+                      "path":  "data/README.md",
+                      "size_bytes":  2535,
+                      "sha256":  "91cf2e8910728c59d95e804dd3c4981856b3957d83ff78a332ca3dbbbfdfb4f8",
+                      "source":  "authored for the curated public release"
+                  },
+                  {
+                      "path":  "config/external_tools.example.json",
+                      "size_bytes":  327,
+                      "sha256":  "67eb82cb167015e1b7c0f4686fe52996b1c10144659bf9949844b1a32ba07d9f",
+                      "source":  "authored for the curated public release"
+                  },
+                  {
+                      "path":  "config/reproduction_config.json",
+                      "size_bytes":  2839,
+                      "sha256":  "8c14b3988eb445fa04e01bf5e0f2b3ef4ae3b6b0e072bc9b793c0e59dc0956f0",
+                      "source":  "authored for the curated public release"
+                  },
+                  {
+                      "path":  "data/diagnostics/fcc_case067/old_vs_18_point_all20.csv",
+                      "size_bytes":  4187,
+                      "sha256":  "91cc0b7b4b52d8dda35c71e60bd7bca80016e45e8e1bf2198014c2b25651cd4a",
+                      "source":  "aeroverify/artifacts/case067_sol145_mkaero_diagnostic_20260805"
+                  },
+                  {
+                      "path":  "data/mesh_convergence/results_summary.csv",
+                      "size_bytes":  7969,
+                      "sha256":  "2a9df30d50dd9ec4a839c39bef4385343a39d450075565f401f1c0ae79ca9509",
+                      "source":  "aeroverify/artifacts/mesh_convergence path-free projection"
+                  },
+                  {
+                      "path":  "data/mesh_convergence/study_plan.csv",
+                      "size_bytes":  1127,
+                      "sha256":  "69293cb89acacdb624c7207ed24b1fa67cb9ff6c07bf6727bb4db776ddae9894",
+                      "source":  "aeroverify/artifacts/mesh_convergence path-free projection"
+                  },
+                  {
+                      "path":  "data/mesh_convergence/case64_positive_g_root19.csv",
+                      "size_bytes":  5445,
+                      "sha256":  "5cb403da916f6de29aafbe77a1eb8b8810ee54e8eb88e4f88c77be727fff9185",
+                      "source":  "aeroverify/artifacts/mesh_convergence path-free projection"
+                  },
+                  {
+                      "path":  "data/fcc/continuation_cases052_071.csv",
+                      "size_bytes":  4818,
+                      "sha256":  "04d8c1f657ebdf57f8ca675f69a347f9bdd32ca17fc45a4e0aeef0d24117181a",
+                      "source":  "finalized FCC public export"
+                  },
+                  {
+                      "path":  "data/fcc/evaluations_cases001_071.csv",
+                      "size_bytes":  8310,
+                      "sha256":  "81e568f7982b31ab07ba07a4f80f5f1c10d6686843ab1163211ac985867b371e",
+                      "source":  "finalized FCC public export"
+                  },
+                  {
+                      "path":  ".github/workflows/verify.yml",
+                      "size_bytes":  273,
+                      "sha256":  "9cfe43602df608b49a8e3b1bc61f13b388c2e420b95d36e0f86068189bb2c5f2",
+                      "source":  "authored for the curated public release"
+                  },
+                  {
+                      "path":  "CITATION.cff",
+                      "size_bytes":  765,
+                      "sha256":  "6688b4a41bcdec1190023f8cf335bc86c6ca6267be618d53e89b81b61fd9bc5b",
+                      "source":  "authored for the curated public release"
+                  },
+                  {
+                      "path":  "experiments.json",
+                      "size_bytes":  3592,
+                      "sha256":  "1be61b13b69c07dd7a68ef5d06ccdcd321b56998f4a3573d9e6e79ede6dca359",
+                      "source":  "authored for the curated public release"
+                  },
+                  {
+                      "path":  "AGENTS.md",
+                      "size_bytes":  1206,
+                      "sha256":  "9abfc5c20d69a19803f6e53b33e57975380b9839f1d1508607abddba72e6f335",
+                      "source":  "authored for the curated public release"
+                  },
+                  {
+                      "path":  ".gitattributes",
+                      "size_bytes":  45,
+                      "sha256":  "ced447a891638bf2cc804146c15fd5b0d6f511be94c9d2369e4be0e6d8abf09e",
+                      "source":  "authored for the curated public release"
+                  },
+                  {
+                      "path":  ".gitignore",
+                      "size_bytes":  395,
+                      "sha256":  "2809a78ef34aa2998b37486032a495e4fa640fed4053a023e44813aac2c2b348",
+                      "source":  "authored for the curated public release"
+                  },
+                  {
+                      "path":  "LICENSE",
+                      "size_bytes":  1311,
+                      "sha256":  "d2cd49a352dcbd24ef70566ddf60806cdc94ccbf2f7124b9b88e65c4536b2799",
+                      "source":  "authored for the curated public release"
                   },
                   {
                       "path":  "README.md",
-                      "size_bytes":  7956,
-                      "sha256":  "d7c8c9581e178698bedc27f411d784d05f00c542a072e96f04516f73a59807e4",
-                      "source":  "generated for the public reproducibility package"
+                      "size_bytes":  5414,
+                      "sha256":  "32a457c01d2537bdbcb9eae7be5fde4bbdbbb56c706a0ca874b9e2e63da87fa9",
+                      "source":  "authored for the curated public release"
                   },
                   {
-                      "path":  "tools/verify_manifest.ps1",
-                      "size_bytes":  3601,
-                      "sha256":  "b20beb6d83a96d18e90de18a68d393592c60d68c5586cb57e8cf9e9c14f25423",
-                      "source":  "generated for the public reproducibility package"
+                      "path":  "THIRD_PARTY_NOTICES.md",
+                      "size_bytes":  899,
+                      "sha256":  "3c763e71afb13073c47a0104093252db054a8550e7657528cbbb76f94561db2a",
+                      "source":  "authored for the curated public release"
+                  },
+                  {
+                      "path":  "QUICKSTART.md",
+                      "size_bytes":  1772,
+                      "sha256":  "e1a0179b44fac88eeb8b5b284124eb20782e63fb6a3947e1f9f705333de28748",
+                      "source":  "authored for the curated public release"
+                  },
+                  {
+                      "path":  "LICENSE-CTSEMO.txt",
+                      "size_bytes":  1324,
+                      "sha256":  "54d119a07febe0d2b4f15db3a05585ededda24f033d0bf878e7304bfea8d71bd",
+                      "source":  "aeroverify/cTSEMO_release_LICENSE.txt"
+                  },
+                  {
+                      "path":  "NOTICE.md",
+                      "size_bytes":  839,
+                      "sha256":  "b750507b732feb364775d6075346f4b4c1353f60bc901a74a912b88b939fd4ed",
+                      "source":  "authored for the curated public release"
+                  },
+                  {
+                      "path":  "docs/FILE_CROSSWALK.md",
+                      "size_bytes":  1613,
+                      "sha256":  "d25a6c65d2659632329ca84ef3a9137630efb7ef539fbc3cc2c425023dbbca57",
+                      "source":  "authored for the curated public release"
+                  },
+                  {
+                      "path":  "docs/FULL_SOLVER_WORKFLOW.md",
+                      "size_bytes":  2492,
+                      "sha256":  "dac89c915fbbf8fb784514551917ec8855cb03478615dd394119612938943679",
+                      "source":  "authored for the curated public release"
+                  },
+                  {
+                      "path":  "docs/EXPECTED_OUTPUTS.md",
+                      "size_bytes":  1170,
+                      "sha256":  "7cc42c9fec643231d0ef4a765cbf3422499b1ee7d93bd9425a7023dce8ddb3cc",
+                      "source":  "authored for the curated public release"
+                  },
+                  {
+                      "path":  "data/sc/evaluations_cases001_071.csv",
+                      "size_bytes":  9832,
+                      "sha256":  "0c863d9408d2985a61f28e6649239a95c0ee32a193e4843bb395f002ed8b5e03",
+                      "source":  "finalized SC public export"
+                  },
+                  {
+                      "path":  "docs/DATA_PROVENANCE.md",
+                      "size_bytes":  2687,
+                      "sha256":  "047ed5750f151d7ac5bb2d9c084427ceab2573d4cf59975e06319bce8f4b54d9",
+                      "source":  "authored for the curated public release"
+                  },
+                  {
+                      "path":  "docs/REPRODUCIBILITY_SCOPE.md",
+                      "size_bytes":  1602,
+                      "sha256":  "fa001c59b8f4abdf3715e794d08dd9fc401149f021b8487d35d0ff4cffac9895",
+                      "source":  "authored for the curated public release"
+                  },
+                  {
+                      "path":  "experiments/case067_flutter/README.md",
+                      "size_bytes":  696,
+                      "sha256":  "8d7fb99d5b2b0c3d5ac1233601a36d5599e4bb955bbe9eadf76b49e07a90db58",
+                      "source":  "authored for the curated public release"
+                  },
+                  {
+                      "path":  "experiments/lattice_sizing/README.md",
+                      "size_bytes":  694,
+                      "sha256":  "9502ee10d43a193286a76e80c05383378dce875380a73327a1bfcadb9eaf3eff",
+                      "source":  "authored for the curated public release"
+                  },
+                  {
+                      "path":  "experiments/README.md",
+                      "size_bytes":  485,
+                      "sha256":  "9d4fdcbc28794a6d55fd3d5bea7d25bfc46241f46fb15a3ee53797e1999026e3",
+                      "source":  "authored for the curated public release"
+                  },
+                  {
+                      "path":  "docs/SOFTWARE_REQUIREMENTS.md",
+                      "size_bytes":  1125,
+                      "sha256":  "7834669a30c6aa1faa0354e5dd1ce9563fc9dfa639f7558bbe33997ab364a56f",
+                      "source":  "authored for the curated public release"
+                  },
+                  {
+                      "path":  "docs/TROUBLESHOOTING.md",
+                      "size_bytes":  1080,
+                      "sha256":  "8b1d9237cbe624f7177b4aaec37b437592923f2183245a59b785d72833d6d395",
+                      "source":  "authored for the curated public release"
+                  },
+                  {
+                      "path":  "data/sc/continuation_cases052_071.csv",
+                      "size_bytes":  3893,
+                      "sha256":  "9a383a17fa7d12abfdb54b855f70ed5b7c5f6a0963f0983660623a0af070b953",
+                      "source":  "finalized SC public export"
+                  },
+                  {
+                      "path":  "data/multiinput/representative_designs.csv",
+                      "size_bytes":  1130,
+                      "sha256":  "657e65d6582f21e06d15ff1c76deccad29e4a5e344592fc7f6fc689e9ab1b3df",
+                      "source":  "aeroverify/artifacts/thesis_chapter6_cases001_100_meshprovenance_20260819"
+                  },
+                  {
+                      "path":  "data/multiinput/summary.json",
+                      "size_bytes":  7474,
+                      "sha256":  "00442af5ed70e27567e72e15e9a194d663da985727ba13b5ea4275da50d57e2b",
+                      "source":  "aeroverify/artifacts/thesis_chapter6_cases001_100_meshprovenance_20260819"
+                  },
+                  {
+                      "path":  "data/multiinput/observed_pareto.csv",
+                      "size_bytes":  6204,
+                      "sha256":  "5cfadbbeb0c997f52dcf07b3a9121be4db683be68a3312adeed70d116e2b81e8",
+                      "source":  "aeroverify/artifacts/thesis_chapter6_cases001_100_meshprovenance_20260819"
+                  },
+                  {
+                      "path":  "data/multiinput/adaptive_hypervolume_stress.csv",
+                      "size_bytes":  3265,
+                      "sha256":  "5b49783a6ebe6b3c99cf02c215c8f6925eb89568c98bf465de16fbcd18fcbbe3",
+                      "source":  "aeroverify/artifacts/thesis_chapter6_cases001_100_meshprovenance_20260819"
+                  },
+                  {
+                      "path":  "data/multiinput/evaluations_cases001_100.csv",
+                      "size_bytes":  47967,
+                      "sha256":  "9dff06278f0278182e257a1b4b58db214f8872f38bff4d04957ca36c9f721d2b",
+                      "source":  "finalized 100-case progress and mass tables joined on case index"
+                  },
+                  {
+                      "path":  "data/planform/evaluations_cases001_050.csv",
+                      "size_bytes":  8194,
+                      "sha256":  "09f0078b1b8a1b4d103424f25d5c555a66511c159e9420aace7890e4819bf7b2",
+                      "source":  "aeroverify/artifacts/planform_continuation_final_20260815"
+                  },
+                  {
+                      "path":  "data/representative_physics/mass_reconstruction_cases004_037_064_065_099.csv",
+                      "size_bytes":  1188,
+                      "sha256":  "5754498b9eb4524f08fc6fa6f2ab74b5e928273fb2d62197dd16957caf398dfd",
+                      "source":  "aeroverify/artifacts/thesis_representative_physics"
+                  },
+                  {
+                      "path":  "data/representative_physics/representative_physics_cases004_037_064_065_099.csv",
+                      "size_bytes":  2144,
+                      "sha256":  "f4fb809820f4b9b3b187360d11c20154df4c42d9ea619df138ded30a8a281b0f",
+                      "source":  "aeroverify/artifacts/thesis_representative_physics"
+                  },
+                  {
+                      "path":  "data/representative_physics/mass_compliance_check_cases004_037_064_065_099.csv",
+                      "size_bytes":  1710,
+                      "sha256":  "467e26f7c852b213a009d684e51aa8e5672a58efa570e3a8c41e53f1910f65c3",
+                      "source":  "aeroverify/artifacts/thesis_representative_physics"
+                  },
+                  {
+                      "path":  "data/planform/summary.json",
+                      "size_bytes":  1826,
+                      "sha256":  "76763031db6cecb68cb8c8e1a9e8f22fdf586a92dded3afabbb368dffbd36722",
+                      "source":  "aeroverify/artifacts/planform_continuation_final_20260815"
+                  },
+                  {
+                      "path":  "data/representative_physics/exact_trim_cdi_cases001_150.csv",
+                      "size_bytes":  35710,
+                      "sha256":  "5d0d03bb5dac0509e6e8ad6ff45aa04425fdab8b41dcd37a9b7532078b0b2a93",
+                      "source":  "aeroverify/artifacts/thesis_representative_physics"
                   }
               ]
 }

@@ -1,0 +1,11 @@
+{
+  "schema_version": 1,
+  "enabled": false,
+  "matlab_command": "matlab",
+  "ntop_cli": "<set-locally>",
+  "nastran_executable": "<set-locally>",
+  "openfoam_environment": "<set-locally>",
+  "topology_project": "<licensed-project-file-not-in-repository>",
+  "output_root": "<set-locally>",
+  "remote_archive_enabled": false
+}

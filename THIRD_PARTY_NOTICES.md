@@ -2,10 +2,13 @@
 
 ## cTSEMO and TSEMO provenance
 
-The files in `matlab/+ctsemo` and `matlab/cTSEMOOptions.m` are distributed
+The files `matlab/cTSEMO.m`, `matlab/cTSEMOOptions.m`, and those under
+`matlab/+ctsemo` are distributed
 under the BSD 2-Clause notice in `LICENSE-CTSEMO.txt`. They implement a modular
 research derivative of TSEMO. The Bradford TSEMO upstream repository and its
 BSD 2-Clause license are available at:
+
+- canonical derivative release: <https://github.com/globaswu/cTSEMO/releases/tag/v0.2.1>
 
 - <https://github.com/Eric-Bradford/TS-EMO>
 - pinned provenance commit `9ec2aa2f54d1232f80d37494ac067f2ebc112688`

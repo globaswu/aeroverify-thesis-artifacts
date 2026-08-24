@@ -5,10 +5,10 @@ type: software
 authors:
   - family-names: Wu
     given-names: Sen
-version: 1.0.1
+version: 1.0.2
 date-released: 2026-08-24
 repository-code: "https://github.com/globaswu/aeroverify-thesis-artifacts"
-url: "https://github.com/globaswu/aeroverify-thesis-artifacts/releases/tag/thesis-v1.0.1"
+url: "https://github.com/globaswu/aeroverify-thesis-artifacts/releases/tag/thesis-v1.0.2"
 license: BSD-2-Clause
 abstract: >-
   Curated MATLAB workflows and compact evaluated-output tables supporting the

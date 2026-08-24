@@ -6,8 +6,9 @@ Lattice-Structured Wings*. It contains portable MATLAB code and frozen,
 path-free tables for checking the reported finite-sample results without
 uploading the 74 GB research workspace.
 
-- Stable release: [thesis-v1.0.1](https://github.com/globaswu/aeroverify-thesis-artifacts/releases/tag/thesis-v1.0.1)
-- Final thesis: [main.pdf](https://github.com/globaswu/aeroverify-thesis-artifacts/releases/download/thesis-v1.0.1/main.pdf)
+- Stable release: [thesis-v1.0.2](https://github.com/globaswu/aeroverify-thesis-artifacts/releases/tag/thesis-v1.0.2)
+- Final thesis: [main.pdf](https://github.com/globaswu/aeroverify-thesis-artifacts/releases/download/thesis-v1.0.2/main.pdf)
+- Reference verification: [evidence report](https://github.com/globaswu/aeroverify-thesis-artifacts/releases/download/thesis-v1.0.2/thesis_reference_verification_report.pdf)
 - Start here: [QUICKSTART.md](QUICKSTART.md)
 - Thesis-to-file crosswalk: [docs/FILE_CROSSWALK.md](docs/FILE_CROSSWALK.md)
 - Machine-readable experiment register: [experiments.json](experiments.json)
@@ -42,10 +43,11 @@ feasibility labels. Surrogate fronts are not substituted for observed fronts.
 1. **Executable here.** MATLAB regenerates plots and tables from the released
    CSV and JSON files. `run_tests` verifies row counts, logical labels, Pareto
    membership, selected numerical controls, and expected output files.
-2. **Executable core software.** `matlab/+ctsemo` contains the current modular
-   cTSEMO implementation used by this package. The complete analytical
-   benchmark campaigns are maintained as a separate software release and are
-   not reconstructed from the aerostructural tables.
+2. **Executable core software.** `matlab/cTSEMO.m`, `matlab/cTSEMOOptions.m`,
+   and `matlab/+ctsemo` contain the complete lightweight optimizer interface
+   used by this package. The authoritative analytical campaigns, 109-test
+   suite, path-free finite-primary ablation, and WB150 reconstruction are in
+   the public [cTSEMO v0.2.1 release](https://github.com/globaswu/cTSEMO/releases/tag/v0.2.1).
 3. **Documented licensed-solver interface.** New physical evaluations require
    MATLAB, nTopology, MSC Nastran, and, for polar regeneration, OpenFOAM. The
    proprietary nTopology projects, solver-native outputs, and third-party
@@ -119,6 +121,6 @@ Git. Source data under `data/` are treated as immutable release inputs.
 ## License and citation
 
 Project-owned content is released under the BSD 2-Clause License. The cTSEMO
-source retains its own matching notice in `LICENSE-CTSEMO.txt`. Commercial
+source retains the canonical Sen Wu notice in `LICENSE-CTSEMO.txt`. Commercial
 software and proprietary project files are not included. See
 [THIRD_PARTY_NOTICES.md](THIRD_PARTY_NOTICES.md) and [CITATION.cff](CITATION.cff).

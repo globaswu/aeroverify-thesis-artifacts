@@ -2,6 +2,8 @@ function run_tests()
 %RUN_TESTS Validate public data and execute every solver-free workflow.
 
 root = artifact_repository_root();
+assert(strcmp(which("cTSEMO"), fullfile(root, "matlab", "cTSEMO.m")), ...
+    "The public cTSEMO entry point is missing or shadowed.");
 config = jsondecode(fileread(fullfile( ...
     root, "config", "reproduction_config.json")));
 
@@ -127,4 +129,3 @@ if isfolder(path)
     rmdir(path, "s");
 end
 end
-

@@ -1,8 +1,8 @@
 {
     "schema_version":  2,
-    "release_tag":  "thesis-v1.0.1",
+    "release_tag":  "thesis-v1.0.2",
     "scope":  "curated solver-free thesis reproduction package",
-    "generated_utc":  "2026-08-23T22:31:31Z",
+    "generated_utc":  "2026-08-24T02:07:48Z",
     "files":  [
                   {
                       "path":  "matlab/reproduce_topology.m",
@@ -12,8 +12,8 @@
                   },
                   {
                       "path":  "matlab/run_tests.m",
-                      "size_bytes":  5745,
-                      "sha256":  "55ec9666ec1be6a6186a7b2fd75a4444924fbe906cecc25d88f5a88e2d269925",
+                      "size_bytes":  5880,
+                      "sha256":  "842e63454e5a790723151b6dad5512541b44b8b190cca6fc632c8cf5c5ad409d",
                       "source":  "authored for the curated public release"
                   },
                   {
@@ -44,19 +44,19 @@
                       "path":  "matlab/+ctsemo/crowdingMasks.m",
                       "size_bytes":  7733,
                       "sha256":  "21f8d646610ddf9730f3b32b587c52e3572423af6d04a877239b796764c32c94",
-                      "source":  "aeroverify/+ctsemo current modular package"
+                      "source":  "globaswu/cTSEMO v0.2.1 modular package"
                   },
                   {
                       "path":  "matlab/+ctsemo/drawObjectiveTS.m",
                       "size_bytes":  5461,
                       "sha256":  "ab80ef9a70de5e7c65e2fd033070116ff59e5afad48395433b6f9bf366b5e7db",
-                      "source":  "aeroverify/+ctsemo current modular package"
+                      "source":  "globaswu/cTSEMO v0.2.1 modular package"
                   },
                   {
                       "path":  "matlab/+ctsemo/componentSeed.m",
                       "size_bytes":  1073,
                       "sha256":  "c8754b09521d491ec3a5bb30dee10415abed8684ee70cdefc684fd6599e6c702",
-                      "source":  "aeroverify/+ctsemo current modular package"
+                      "source":  "globaswu/cTSEMO v0.2.1 modular package"
                   },
                   {
                       "path":  "matlab/write_continuation_table.m",
@@ -68,7 +68,7 @@
                       "path":  "matlab/+ctsemo/binaryLabels.m",
                       "size_bytes":  1055,
                       "sha256":  "bbf88a1e4d43fe7d3aac84dfb560b693c29eb56bf26acb06e1ae17a376431b2c",
-                      "source":  "aeroverify/+ctsemo current modular package"
+                      "source":  "globaswu/cTSEMO v0.2.1 modular package"
                   },
                   {
                       "path":  "matlab/reproduce_mesh_convergence.m",
@@ -77,33 +77,33 @@
                       "source":  "authored for the curated public release"
                   },
                   {
+                      "path":  "matlab/cTSEMO.m",
+                      "size_bytes":  1244,
+                      "sha256":  "6fd4189442ae7d95f270c3941072b5b932b1109dc4a68ff91553863a755e2f3e",
+                      "source":  "globaswu/cTSEMO v0.2.1 src/cTSEMO.m"
+                  },
+                  {
+                      "path":  "matlab/cTSEMOOptions.m",
+                      "size_bytes":  17756,
+                      "sha256":  "cdc2a8ac18ab094c59e3908f1bce4c505f711b47f787bd18b16ad0603c59309e",
+                      "source":  "globaswu/cTSEMO v0.2.1 src/cTSEMOOptions.m"
+                  },
+                  {
                       "path":  "matlab/artifact_repository_root.m",
                       "size_bytes":  173,
                       "sha256":  "6d0bc7a3f14c9069230f92d21c368ab1d6d249d6bf2c4a4425d5b7cfd3fde799",
                       "source":  "authored for the curated public release"
                   },
                   {
-                      "path":  "matlab/cTSEMOOptions.m",
-                      "size_bytes":  17756,
-                      "sha256":  "cdc2a8ac18ab094c59e3908f1bce4c505f711b47f787bd18b16ad0603c59309e",
-                      "source":  "aeroverify/cTSEMOOptions.m"
+                      "path":  "experiments/multiinput/README.md",
+                      "size_bytes":  746,
+                      "sha256":  "4f415a021855c6cc521955075aa1f23d48ab14c06785f66616a57870da5eca79",
+                      "source":  "authored for the curated public release"
                   },
                   {
                       "path":  "experiments/planform/README.md",
                       "size_bytes":  631,
                       "sha256":  "8faefed9c242bf588d9bf17481a31900d238ad0396b69bdcf8ca6f8def1c56f4",
-                      "source":  "authored for the curated public release"
-                  },
-                  {
-                      "path":  "experiments/mesh_convergence/README.md",
-                      "size_bytes":  624,
-                      "sha256":  "1dd85884a2a1a4c6f9281e9452e37e4dcb6fb202278bfd276276213535805592",
-                      "source":  "authored for the curated public release"
-                  },
-                  {
-                      "path":  "experiments/multiinput/README.md",
-                      "size_bytes":  746,
-                      "sha256":  "4f415a021855c6cc521955075aa1f23d48ab14c06785f66616a57870da5eca79",
                       "source":  "authored for the curated public release"
                   },
                   {
@@ -146,61 +146,61 @@
                       "path":  "matlab/+ctsemo/scoreCandidates.m",
                       "size_bytes":  6879,
                       "sha256":  "a460bba452274e126566646a13e34879e576e2d9fcfaf34fc1d0385d53005195",
-                      "source":  "aeroverify/+ctsemo current modular package"
+                      "source":  "globaswu/cTSEMO v0.2.1 modular package"
                   },
                   {
                       "path":  "matlab/+ctsemo/selectFallback.m",
                       "size_bytes":  5639,
                       "sha256":  "e3fbed3886e65cbd817fc2b1954a7d9990594b2de841718c3dff757b3ed78716",
-                      "source":  "aeroverify/+ctsemo current modular package"
+                      "source":  "globaswu/cTSEMO v0.2.1 modular package"
                   },
                   {
                       "path":  "matlab/+ctsemo/scopedRng.m",
                       "size_bytes":  547,
                       "sha256":  "58895ae9f80f63b93ad4adc4994405dacbcd0d0241695bd1a24a1b38863f8396",
-                      "source":  "aeroverify/+ctsemo current modular package"
+                      "source":  "globaswu/cTSEMO v0.2.1 modular package"
                   },
                   {
                       "path":  "matlab/+ctsemo/sampledHVI.m",
                       "size_bytes":  3931,
                       "sha256":  "9bc8c38ac838832d7cc8b8ba43c4101c4509213d21d3a7f329138b81a2e482e2",
-                      "source":  "aeroverify/+ctsemo current modular package"
+                      "source":  "globaswu/cTSEMO v0.2.1 modular package"
                   },
                   {
                       "path":  "matlab/+ctsemo/saveCheckpoint.m",
                       "size_bytes":  1575,
                       "sha256":  "3ffbc8b1ed05f2da72d43557179b3c1d340b3528e8788427abd6fba3424937e5",
-                      "source":  "aeroverify/+ctsemo current modular package"
+                      "source":  "globaswu/cTSEMO v0.2.1 modular package"
                   },
                   {
                       "path":  "matlab/+ctsemo/updatePareto.m",
                       "size_bytes":  3344,
                       "sha256":  "c753ba0c056528e0cb5fd0196bb74c88e97030988eee9819bed9eedaac131b80",
-                      "source":  "aeroverify/+ctsemo current modular package"
+                      "source":  "globaswu/cTSEMO v0.2.1 modular package"
                   },
                   {
                       "path":  "tools/verify_links.ps1",
-                      "size_bytes":  1150,
-                      "sha256":  "5620f92a63eb9ce5dba3269b5637d1349b691d4e79c13c81be0f24057cb41c49",
+                      "size_bytes":  3492,
+                      "sha256":  "1782445c1fc1eac1a80d1276c15812097440c5f2ea8c0a71e1bba3c1ee59f08b",
                       "source":  "authored for the curated public release"
                   },
                   {
                       "path":  "tools/verify_manifest.ps1",
-                      "size_bytes":  5279,
-                      "sha256":  "ed3dfe3c972b6227a67ec2c2445f688cc6ff6fb2b52ae2f1e67e37a6abd7c054",
+                      "size_bytes":  5560,
+                      "sha256":  "1b923791e932a6e7354283f2ef19ce861dd60425e127329375183e4f44cd621c",
                       "source":  "authored for the curated public release"
                   },
                   {
                       "path":  "tools/update_manifest.ps1",
-                      "size_bytes":  3678,
-                      "sha256":  "2d3941090597f085b50b189346e2d52d35456e3a1ee99b880adad4c121ae7e60",
+                      "size_bytes":  3761,
+                      "sha256":  "0961fd9626943b3a417a29c597c54129710ed3d13612579516d1f7a4556d0563",
                       "source":  "authored for the curated public release"
                   },
                   {
                       "path":  "matlab/+ctsemo/validateInputs.m",
                       "size_bytes":  8400,
                       "sha256":  "b46afe7baa9a5d69ec2279a5f6739f0106bb216139058346d4068928bf153893",
-                      "source":  "aeroverify/+ctsemo current modular package"
+                      "source":  "globaswu/cTSEMO v0.2.1 modular package"
                   },
                   {
                       "path":  "tools/reproduce.ps1",
@@ -212,73 +212,79 @@
                       "path":  "matlab/+ctsemo/run.m",
                       "size_bytes":  46832,
                       "sha256":  "0a8d5a35908b7cb683716a592d33ce35614ebb4674e2c659465124885d583248",
-                      "source":  "aeroverify/+ctsemo current modular package"
+                      "source":  "globaswu/cTSEMO v0.2.1 modular package"
                   },
                   {
                       "path":  "matlab/+ctsemo/hypervolume2d.m",
                       "size_bytes":  2032,
                       "sha256":  "07173cbd23251f153c5ae4c07229b8cea438984dc8435f4bb7e295717628ccd9",
-                      "source":  "aeroverify/+ctsemo current modular package"
+                      "source":  "globaswu/cTSEMO v0.2.1 modular package"
                   },
                   {
                       "path":  "matlab/+ctsemo/localMatern32.m",
                       "size_bytes":  2150,
                       "sha256":  "a1e8072aa7d5ec347d80133aee29678fa0f55b634f3a5ea7250d0bae67a301a2",
-                      "source":  "aeroverify/+ctsemo current modular package"
+                      "source":  "globaswu/cTSEMO v0.2.1 modular package"
                   },
                   {
                       "path":  "matlab/+ctsemo/fitObjectiveGP.m",
                       "size_bytes":  16068,
                       "sha256":  "d212020e54ba7c6d5c6be4dfa6ace164afdea0a617b581160818b443dc23d800",
-                      "source":  "aeroverify/+ctsemo current modular package"
+                      "source":  "globaswu/cTSEMO v0.2.1 modular package"
                   },
                   {
                       "path":  "matlab/+ctsemo/evaluateObjectiveTS.m",
                       "size_bytes":  2166,
                       "sha256":  "a7c41750e2b300b7fc36aa014def41122b5c796dd93e3ddc9cd1a47dc1a72d67",
-                      "source":  "aeroverify/+ctsemo current modular package"
+                      "source":  "globaswu/cTSEMO v0.2.1 modular package"
                   },
                   {
                       "path":  "matlab/+ctsemo/fitClippedBinaryPof.m",
                       "size_bytes":  20369,
                       "sha256":  "d7f073ca234469ce105afbaca6d85850f3aa525df98760d2a6ebac61cf1f1c7e",
-                      "source":  "aeroverify/+ctsemo current modular package"
+                      "source":  "globaswu/cTSEMO v0.2.1 modular package"
                   },
                   {
                       "path":  "matlab/+ctsemo/makeCandidatePools.m",
                       "size_bytes":  7411,
                       "sha256":  "f613077f70b30bf69a32a7721bf34f971434bebfefabc1aa701c2c38267f61e6",
-                      "source":  "aeroverify/+ctsemo current modular package"
+                      "source":  "globaswu/cTSEMO v0.2.1 modular package"
                   },
                   {
                       "path":  "matlab/+ctsemo/predictClippedBinaryPof.m",
                       "size_bytes":  4211,
                       "sha256":  "2a61b84a9310cd7e8ca1a16cdd40ee3d8950c0eace371ba534b2e430b95ced30",
-                      "source":  "aeroverify/+ctsemo current modular package"
+                      "source":  "globaswu/cTSEMO v0.2.1 modular package"
                   },
                   {
                       "path":  "matlab/+ctsemo/predictObjectiveGP.m",
                       "size_bytes":  2352,
                       "sha256":  "9503ece7e77a3844c1c69a8b9339a611f1631d8596f5170849c7286368b0c5f2",
-                      "source":  "aeroverify/+ctsemo current modular package"
+                      "source":  "globaswu/cTSEMO v0.2.1 modular package"
                   },
                   {
                       "path":  "matlab/+ctsemo/pareto2d.m",
                       "size_bytes":  1473,
                       "sha256":  "a863e73b55f4ad46755f9b9fb1629af89dc708581b40bc91ea9f5deaa2eb8cff",
-                      "source":  "aeroverify/+ctsemo current modular package"
+                      "source":  "globaswu/cTSEMO v0.2.1 modular package"
                   },
                   {
                       "path":  "matlab/+ctsemo/normalizeData.m",
                       "size_bytes":  2854,
                       "sha256":  "c253e54f94582ef916ee5d9003a70687e1ca327105d6be67cb0f421721dcbf8d",
-                      "source":  "aeroverify/+ctsemo current modular package"
+                      "source":  "globaswu/cTSEMO v0.2.1 modular package"
                   },
                   {
                       "path":  "matlab/+ctsemo/optimizePrimaryGA.m",
                       "size_bytes":  7451,
                       "sha256":  "efefdd61033386e2f42812b87690cefc43127c4b1c6a03f2a4a87053f21a3595",
-                      "source":  "aeroverify/+ctsemo current modular package"
+                      "source":  "globaswu/cTSEMO v0.2.1 modular package"
+                  },
+                  {
+                      "path":  "experiments/mesh_convergence/README.md",
+                      "size_bytes":  624,
+                      "sha256":  "1dd85884a2a1a4c6f9281e9452e37e4dcb6fb202278bfd276276213535805592",
+                      "source":  "authored for the curated public release"
                   },
                   {
                       "path":  "data/bcc/continuation_cases052_071.csv",
@@ -349,19 +355,19 @@
                   {
                       "path":  ".github/workflows/verify.yml",
                       "size_bytes":  273,
-                      "sha256":  "9cfe43602df608b49a8e3b1bc61f13b388c2e420b95d36e0f86068189bb2c5f2",
+                      "sha256":  "e277da8fb2d3aabc37676f7e9154ea14ac0df5b4bbefe50ab2a62b655a50a994",
                       "source":  "authored for the curated public release"
                   },
                   {
                       "path":  "CITATION.cff",
                       "size_bytes":  765,
-                      "sha256":  "d477b2c216838238a68e807937fe1b14aa41cf080df4d38e0ae8752b47b9f6ed",
+                      "sha256":  "568b488202aa862a8a656db85c4c4229d23d53a31c3f43c738c7e8acb87c533a",
                       "source":  "authored for the curated public release"
                   },
                   {
                       "path":  "experiments.json",
                       "size_bytes":  3592,
-                      "sha256":  "02b7c012dd020300a6eec74c0d88a145684d6210654044d20ef0513e01f42939",
+                      "sha256":  "9557f7ce4336fa7450bd9d7743f54d39d904a7fe29aad47da124659d8e3072b0",
                       "source":  "authored for the curated public release"
                   },
                   {
@@ -390,38 +396,38 @@
                   },
                   {
                       "path":  "README.md",
-                      "size_bytes":  5414,
-                      "sha256":  "dff0e6e7674c2470ab01647a4238a3879220b8d1cd62c8d97d541712a94ddfa4",
+                      "size_bytes":  5713,
+                      "sha256":  "8078904cba126fde65e3f80208c209578c1eedd61a96fd1472ea73cd44e4f2fa",
                       "source":  "authored for the curated public release"
                   },
                   {
                       "path":  "THIRD_PARTY_NOTICES.md",
-                      "size_bytes":  899,
-                      "sha256":  "3c763e71afb13073c47a0104093252db054a8550e7657528cbbb76f94561db2a",
+                      "size_bytes":  1018,
+                      "sha256":  "c0cb5e7cf2931313b86305bd04ea89608da208a3335cebbe4884c61e43a18b84",
                       "source":  "authored for the curated public release"
                   },
                   {
                       "path":  "QUICKSTART.md",
                       "size_bytes":  1772,
-                      "sha256":  "a96c159da925d79211ee24319be6ca26df3b5c8ad47f0a81e0c48b415da74e40",
+                      "sha256":  "d1d9c6491f8155576e29ec285b9158ba9f1de4cde6ceca231a96b8cd71cb2427",
                       "source":  "authored for the curated public release"
                   },
                   {
                       "path":  "LICENSE-CTSEMO.txt",
-                      "size_bytes":  1324,
-                      "sha256":  "54d119a07febe0d2b4f15db3a05585ededda24f033d0bf878e7304bfea8d71bd",
-                      "source":  "aeroverify/cTSEMO_release_LICENSE.txt"
+                      "size_bytes":  1311,
+                      "sha256":  "d2cd49a352dcbd24ef70566ddf60806cdc94ccbf2f7124b9b88e65c4536b2799",
+                      "source":  "globaswu/cTSEMO v0.2.1 LICENSE"
                   },
                   {
                       "path":  "NOTICE.md",
-                      "size_bytes":  839,
-                      "sha256":  "b750507b732feb364775d6075346f4b4c1353f60bc901a74a912b88b939fd4ed",
+                      "size_bytes":  989,
+                      "sha256":  "45f1007719bd9ef0e9fbd124c3d4ae8cd2bce83160884f15bdac2b12b202ac9a",
                       "source":  "authored for the curated public release"
                   },
                   {
                       "path":  "docs/FILE_CROSSWALK.md",
-                      "size_bytes":  1613,
-                      "sha256":  "c5cf3daa12ae4e98207c930b46b88510eaf2d295bf72ee8bfcb2af50533636e6",
+                      "size_bytes":  1820,
+                      "sha256":  "052bfd7b81e50cd85189bc1d7f3f1d5c6ffd4b4f1bf591aa85cd7140a120d3b3",
                       "source":  "authored for the curated public release"
                   },
                   {
@@ -474,8 +480,8 @@
                   },
                   {
                       "path":  "docs/SOFTWARE_REQUIREMENTS.md",
-                      "size_bytes":  1125,
-                      "sha256":  "7834669a30c6aa1faa0354e5dd1ce9563fc9dfa639f7558bbe33997ab364a56f",
+                      "size_bytes":  1365,
+                      "sha256":  "775512d134f874a2b7b56d291c1a85900b95d76940e25527a67775794c8b3790",
                       "source":  "authored for the curated public release"
                   },
                   {

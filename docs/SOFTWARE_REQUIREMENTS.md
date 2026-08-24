@@ -4,8 +4,12 @@
 
 - MATLAB R2025b: validated release.
 - Minimum MATLAB release: Not found in available files.
-- Statistics and Machine Learning Toolbox: used by cTSEMO objective models.
+- The cTSEMO objective Gaussian processes are implemented in repository code
+  and do not require Statistics and Machine Learning Toolbox.
 - Global Optimization Toolbox: used by the optional GA-primary path.
+- Statistics and Machine Learning Toolbox: required only by the separate
+  Introduction classifier comparison and random-forest diagnostic in the
+  canonical cTSEMO repository.
 
 The packaged figure replay and integrity tests do not intentionally call
 nTopology, MSC Nastran, or OpenFOAM.

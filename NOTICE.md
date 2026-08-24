@@ -3,7 +3,10 @@
 This repository contains project-owned reproduction scripts and curated
 numerical tables supporting Sen Wu's doctoral thesis.
 
-The modular cTSEMO implementation in `matlab/+ctsemo` is a research derivative
+The cTSEMO wrapper, options, and modular implementation under `matlab/` are a
+content-preserving copy from the public
+[cTSEMO v0.2.1 release](https://github.com/globaswu/cTSEMO/releases/tag/v0.2.1)
+and form a research derivative
 of the TSEMO method reported by Eric Bradford, Artur M. Schweidtmann, and Alexei
 A. Lapkin. The original authors do not endorse this derivative release and are
 not responsible for its modifications or conclusions. The canonical upstream

@@ -1,11 +1,11 @@
 # Thesis-to-repository file crosswalk
 
-All links below are frozen by the `thesis-v1.0.1` tag.
+All thesis-artifact links below are version-pinned by the `thesis-v1.0.2` tag.
 
 | Thesis material | Public entry point | Public evidence |
 |---|---|---|
 | Release identity and integrity | [`tools/verify_manifest.ps1`](../tools/verify_manifest.ps1) | [`manifest.json`](../manifest.json) |
-| cTSEMO modular core | [`matlab/+ctsemo/`](../matlab/+ctsemo/) | [`LICENSE-CTSEMO.txt`](../LICENSE-CTSEMO.txt) |
+| cTSEMO implementation and Chapter 3 | [`matlab/cTSEMO.m`](../matlab/cTSEMO.m), [`matlab/+ctsemo/`](../matlab/+ctsemo/) | [canonical cTSEMO v0.2.1 release](https://github.com/globaswu/cTSEMO/releases/tag/v0.2.1), [result map](https://github.com/globaswu/cTSEMO/blob/v0.2.1/docs/RESULTS_MAP.md) |
 | FCC/BCC/SC lattice studies | [`matlab/reproduce_topology.m`](../matlab/reproduce_topology.m) | [`data/fcc`](../data/fcc), [`data/bcc`](../data/bcc), [`data/sc`](../data/sc) |
 | Fixed-area planform | [`matlab/reproduce_planform.m`](../matlab/reproduce_planform.m) | [`data/planform`](../data/planform) |
 | Four-input campaign | [`matlab/reproduce_multiinput.m`](../matlab/reproduce_multiinput.m) | [`data/multiinput`](../data/multiinput) |

@@ -1,5 +1,8 @@
 {
   "schema_version": 1,
+  "_comment": "Copy this example to config/external_tools.local.json. Never commit licence-server endpoints, credentials, remote-archive addresses, or machine-specific paths.",
+  "_comment_license": "Configure commercial-solver licensing through your own local vendor-supported environment or wrapper.",
+  "_comment_archive": "Remote archiving is optional and disabled by default. Configure your own backend locally or leave it disabled.",
   "enabled": false,
   "matlab_command": "matlab",
   "ntop_cli": "<set-locally>",
@@ -7,5 +10,6 @@
   "openfoam_environment": "<set-locally>",
   "topology_project": "<licensed-project-file-not-in-repository>",
   "output_root": "<set-locally>",
-  "remote_archive_enabled": false
+  "remote_archive_enabled": false,
+  "remote_archive_root": "<optional-set-locally>"
 }

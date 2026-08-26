@@ -27,6 +27,26 @@ These assets are not in this repository. Several historical nTopology projects
 exceed GitHub's ordinary file limit, and redistribution permission was not
 established from the available files.
 
+## User-owned local configuration
+
+This repository intentionally contains no licence-server endpoint, credential,
+remote-archive address, or user-specific host path. Each user must establish
+these settings for their own installation:
+
+1. Copy `config/external_tools.example.json` to
+   `config/external_tools.local.json`; the local file is ignored by Git.
+2. Configure nTop and MSC Nastran licensing through the vendor-supported local
+   environment or a private wrapper. Do not place licence endpoints or
+   credentials in tracked files.
+3. Leave `remote_archive_enabled` set to `false` unless an archive is required.
+   If enabled, configure an archive backend owned by the user through the
+   untracked local configuration or a secret manager.
+4. Remote archiving is optional and is not required to perform a local solver
+   evaluation.
+
+Published examples must retain placeholders only. Before committing, verify
+that configuration files contain no server names, IP addresses, usernames,
+tokens, network shares, or machine-specific absolute paths.
 ## Why raw launchers are absent
 
 The research launchers contain machine-specific executable paths, private

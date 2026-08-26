@@ -8,6 +8,15 @@ tmp/
 *.m~
 slprj/
 
+# Local external-tool, licence, and archive configuration
+config/external_tools.local.json
+config/*secrets*.json
+.env
+.env.*
+!.env.example
+*.lic
+license.dat
+.flexlmrc
 # Heavy or solver-native files are outside this repository's scope
 *.mat
 *.fig

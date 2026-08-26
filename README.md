@@ -59,6 +59,15 @@ campaigns bitwise reproducible. The repository supports independent replay of
 the reported compact-record analyses and records what is missing for a fresh
 solver run.
 
+## Local solver and archive configuration
+
+The published code contains no licence-server or remote-archive endpoint. Users
+who perform a new coupled evaluation must supply their own valid nTop and MSC
+Nastran configuration. Remote archiving is optional and disabled by default;
+configure a user-owned backend locally or leave it disabled. Never commit
+licence endpoints, credentials, archive addresses, or machine-specific paths.
+See [`config/external_tools.example.json`](config/external_tools.example.json)
+and [`docs/FULL_SOLVER_WORKFLOW.md`](docs/FULL_SOLVER_WORKFLOW.md).
 ## Validate before use
 
 ```powershell

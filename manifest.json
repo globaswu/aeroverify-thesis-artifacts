@@ -2,7 +2,7 @@
   "schema_version": 2,
   "release_tag": "thesis-v1.0.2",
   "scope": "curated solver-free thesis reproduction package",
-  "generated_utc": "2026-08-26T23:16:28Z",
+  "generated_utc": "2026-08-26T23:19:59Z",
   "files": [
     {
       "path": "matlab/reproduce_topology.m",
@@ -306,8 +306,8 @@
     },
     {
       "path": "config/external_tools.example.json",
-      "size_bytes": 832,
-      "sha256": "b522086d546dd64674d2b065c0d74cdaf2e972a214b9120fbbea4f4d89b674f2",
+      "size_bytes": 818,
+      "sha256": "cd0201bbb3ac468ac907f9780823eca1fe962a432149dc5001953d47569214b6",
       "source": "authored for the curated public release"
     },
     {

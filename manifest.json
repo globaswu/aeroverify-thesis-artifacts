@@ -2,7 +2,7 @@
   "schema_version": 2,
   "release_tag": "thesis-v1.0.2",
   "scope": "curated solver-free thesis reproduction package",
-  "generated_utc": "2026-08-26T23:19:59Z",
+  "generated_utc": "2026-08-26T23:23:05Z",
   "files": [
     {
       "path": "matlab/reproduce_topology.m",
@@ -444,8 +444,8 @@
     },
     {
       "path": "data/sc/evaluations_cases001_071.csv",
-      "size_bytes": 9760,
-      "sha256": "352122779d3f93f99be67b96149388ef37909965118dae93cd8781d617fc8264",
+      "size_bytes": 9757,
+      "sha256": "2e055ef4777c370491375246c54049b7a6ff177ad23bd2c8f5ac1627a87ea641",
       "source": "finalized SC public export"
     },
     {
@@ -492,8 +492,8 @@
     },
     {
       "path": "data/sc/continuation_cases052_071.csv",
-      "size_bytes": 3872,
-      "sha256": "79cdf00b6ccd9c662493b92c6fe131b74b9968607e15ab78a91373ae3dcacb23",
+      "size_bytes": 3869,
+      "sha256": "063f1af15e67c42a97a2a1326f9b2c5a95778eb31bf16fb832d86ab645e5d49a",
       "source": "finalized SC public export"
     },
     {

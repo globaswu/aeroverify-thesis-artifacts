@@ -1,4 +1,4 @@
-﻿"case_id","a_m","t1_over_a","mass_kg","compliance_Nm","constraint","feasible","pareto_case071","evaluation_period","evidence_role"
+"case_id","a_m","t1_over_a","mass_kg","compliance_Nm","constraint","feasible","pareto_case071","evaluation_period","evidence_role"
 "1","0.0144974658813887","0.160574896040572","38.7206092950201","52.9551960274814","1","0","0","initial_training","conditioning_only"
 "2","0.0134898097690815","0.356100123735996","49.6852742099205","47.810674604504","-1","1","0","initial_training","conditioning_only"
 "3","0.0269880858966697","0.301500031087591","47.0974119843595","52.9471292391916","1","0","0","initial_training","conditioning_only"

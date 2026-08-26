@@ -1,4 +1,4 @@
-﻿"case_id","a_m","t1_over_a","mass_kg","compliance_Nm","constraint","feasible","pareto_case071","feasibility_result","selection_source","archive_verified","flutter_screen"
+"case_id","a_m","t1_over_a","mass_kg","compliance_Nm","constraint","feasible","pareto_case071","feasibility_result","selection_source","archive_verified","flutter_screen"
 "52","0.01319654437097808","0.3801323706670447","50.905800599226026","47.258492753298924","-1.0","1","0","pass","primary","1","revised_strict_18_point_mkaero1_any_positive_damping"
 "53","0.019530778130431324","0.3046212460520837","46.924365269563346","49.376863154211314","-1.0","1","1","pass","challenger","1","revised_strict_18_point_mkaero1_any_positive_damping"
 "54","0.012874676750283077","0.3946435632385684","51.6476906324464","46.9816678164466","-1.0","1","0","pass","challenger","1","revised_strict_18_point_mkaero1_any_positive_damping"

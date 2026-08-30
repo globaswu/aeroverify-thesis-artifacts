@@ -1,4 +1,4 @@
-# Thesis reproducibility package v1.0.3
+# Thesis reproducibility package
 
 This release adds the completed harmonized SOL 145 topology reassessment and
 synchronizes the public thesis and Paper 2 artifacts.

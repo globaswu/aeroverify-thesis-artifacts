@@ -1,6 +1,6 @@
 {
   "schema_version": 1,
-  "release_tag": "thesis-v1.0.3",
+  "release_tag": "thesis",
   "thesis_title": "Aeroelastic Bayesian Optimization of Additively Manufactured Multi-Layer Lattice-Structured Wings",
   "experiments": [
     {

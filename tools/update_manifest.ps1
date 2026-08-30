@@ -57,7 +57,8 @@ foreach ($file in Get-ChildItem -LiteralPath $packageRoot -Recurse -File) {
     if ($relative -eq 'manifest.json' -or
             $relative.StartsWith('.git/', [System.StringComparison]::OrdinalIgnoreCase) -or
             $relative.StartsWith('generated/', [System.StringComparison]::OrdinalIgnoreCase) -or
-            $relative.StartsWith('test-output/', [System.StringComparison]::OrdinalIgnoreCase)) {
+            $relative.StartsWith('test-output/', [System.StringComparison]::OrdinalIgnoreCase) -or
+            $relative.StartsWith('tmp/', [System.StringComparison]::OrdinalIgnoreCase)) {
         continue
     }
     [byte[]]$portableBytes = Get-PortableBytes -File $file
@@ -71,9 +72,8 @@ foreach ($file in Get-ChildItem -LiteralPath $packageRoot -Recurse -File) {
 
 $manifest = [ordered]@{
     schema_version = 2
-    release_tag = 'thesis-v1.0.3'
+    release_tag = 'thesis'
     scope = 'curated solver-free thesis reproduction package'
-    generated_utc = [DateTime]::UtcNow.ToString('yyyy-MM-ddTHH:mm:ssZ')
     files = @($entries | Sort-Object path)
 }
 $json = ($manifest | ConvertTo-Json -Depth 6) -replace "`r`n", "`n"

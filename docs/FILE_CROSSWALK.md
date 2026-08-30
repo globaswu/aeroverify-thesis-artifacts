@@ -1,6 +1,6 @@
 # Thesis-to-repository file crosswalk
 
-All thesis-artifact links below are version-pinned by the `thesis-v1.0.3` tag.
+All thesis-artifact links below resolve through the stable `thesis` tag.
 
 | Thesis material | Public entry point | Public evidence |
 |---|---|---|

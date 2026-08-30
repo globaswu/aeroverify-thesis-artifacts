@@ -2,7 +2,7 @@
 
 ## 1. Download
 
-Download the `thesis-v1.0.3` source archive from the GitHub release and extract
+Download the `thesis` source archive from the GitHub release and extract
 it to a writable directory. Do not place generated files under `data/`.
 
 ## 2. Verify the release

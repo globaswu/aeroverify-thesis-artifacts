@@ -41,6 +41,7 @@ function Get-SourceDescription {
         '^data/multiinput/' { return 'aeroverify/artifacts/thesis_chapter6_cases001_100_meshprovenance_20260819' }
         '^data/mesh_convergence/' { return 'aeroverify/artifacts/mesh_convergence path-free projection' }
         '^data/diagnostics/fcc_case067/' { return 'aeroverify/artifacts/case067_sol145_mkaero_diagnostic_20260805' }
+        '^data/flutter/' { return 'sanitized projection of the guarded final SOL 145 rerun ledger' }
         '^data/representative_physics/' { return 'aeroverify/artifacts/thesis_representative_physics' }
         '^matlab/\+ctsemo/' { return 'globaswu/cTSEMO v0.2.1 modular package' }
         '^matlab/cTSEMO\.m$' { return 'globaswu/cTSEMO v0.2.1 src/cTSEMO.m' }
@@ -70,7 +71,7 @@ foreach ($file in Get-ChildItem -LiteralPath $packageRoot -Recurse -File) {
 
 $manifest = [ordered]@{
     schema_version = 2
-    release_tag = 'thesis-v1.0.2'
+    release_tag = 'thesis-v1.0.3'
     scope = 'curated solver-free thesis reproduction package'
     generated_utc = [DateTime]::UtcNow.ToString('yyyy-MM-ddTHH:mm:ssZ')
     files = @($entries | Sort-Object path)

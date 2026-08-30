@@ -1,6 +1,6 @@
 # Thesis-to-repository file crosswalk
 
-All thesis-artifact links below are version-pinned by the `thesis-v1.0.2` tag.
+All thesis-artifact links below are version-pinned by the `thesis-v1.0.3` tag.
 
 | Thesis material | Public entry point | Public evidence |
 |---|---|---|
@@ -11,6 +11,7 @@ All thesis-artifact links below are version-pinned by the `thesis-v1.0.2` tag.
 | Four-input campaign | [`matlab/reproduce_multiinput.m`](../matlab/reproduce_multiinput.m) | [`data/multiinput`](../data/multiinput) |
 | Structural-mesh sensitivity | [`matlab/reproduce_mesh_convergence.m`](../matlab/reproduce_mesh_convergence.m) | [`data/mesh_convergence`](../data/mesh_convergence) |
 | FCC case-67 MKAERO1 diagnostic | [`matlab/reproduce_case067_flutter.m`](../matlab/reproduce_case067_flutter.m) | [`data/diagnostics/fcc_case067`](../data/diagnostics/fcc_case067) |
+| Harmonized topology SOL 145 reassessment | [`matlab/reproduce_flutter_reassessment.m`](../matlab/reproduce_flutter_reassessment.m) | [`data/flutter/harmonized_sol145_results.csv`](../data/flutter/harmonized_sol145_results.csv) |
 | Exact-trim and representative physics | [`matlab/reproduce_representative_physics.m`](../matlab/reproduce_representative_physics.m) | [`data/representative_physics`](../data/representative_physics) |
 | New coupled evaluations | [`docs/FULL_SOLVER_WORKFLOW.md`](FULL_SOLVER_WORKFLOW.md) | external licensed assets required |
 

@@ -16,6 +16,7 @@ Public filenames are timestamp-free and stable.
 | `data/mesh_convergence/results_summary.csv` | `artifacts/mesh_convergence/mesh_convergence_results_summary.csv` | `LightOutputFile` column removed |
 | `data/mesh_convergence/study_plan.csv` | public projection of the final results ledger | label, source case, tolerance, and mesh edge length retained |
 | `data/diagnostics/fcc_case067/` | `artifacts/case067_sol145_mkaero_diagnostic_20260805/` | 20-point comparison copied and renamed |
+| `data/flutter/harmonized_sol145_results.csv` | guarded final SOL 145 rerun ledger and archived success receipts | selected path-free fields projected; local and network archive addresses removed |
 | `data/representative_physics/` | `artifacts/thesis_representative_physics/` | four path-free final tables copied and renamed |
 
 `manifest.json` stores a SHA-256 digest and byte count for every release file
@@ -32,3 +33,6 @@ checks, and known limitation for each public experiment.
 - Four-input cases 1-64 and 66-70 use the baseline mesh epoch, whereas the
   replacement case 65 and cases 71-100 use the refined epoch.
 - Solver-native arrays and commercial project files are intentionally absent.
+- The harmonized table verifies the implemented strict screen but does not
+  replace source-campaign labels, provide V-g histories, or establish
+  independent physical validation.

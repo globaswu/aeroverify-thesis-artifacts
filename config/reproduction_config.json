@@ -74,6 +74,17 @@
     "point3_old_max_damping": 0.000022834729,
     "point3_new_max_damping": -0.0000085449944
   },
+  "flutter_reassessment": {
+    "expected_cases": 65,
+    "expected_pass": 65,
+    "expected_bcc": 15,
+    "expected_fcc": 32,
+    "expected_sc": 18,
+    "expected_roots_per_case": 20,
+    "expected_velocities_per_root": 37,
+    "expected_rows_per_case": 740,
+    "least_negative_maximum_damping": -0.00000036565278
+  },
   "representative_physics": {
     "expected_exact_trim_rows": 150,
     "expected_representative_cases": [4, 37, 64, 65, 99]

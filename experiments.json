@@ -1,6 +1,6 @@
 {
   "schema_version": 1,
-  "release_tag": "thesis-v1.0.2",
+  "release_tag": "thesis-v1.0.3",
   "thesis_title": "Aeroelastic Bayesian Optimization of Additively Manufactured Multi-Layer Lattice-Structured Wings",
   "experiments": [
     {
@@ -49,6 +49,15 @@
       "inputs": ["data/diagnostics/fcc_case067/old_vs_18_point_all20.csv"],
       "expected_checks": {"tracked_points": 20, "rows_per_point": 37, "point3_old_max_g": 0.000022834729, "point3_new_max_g": -0.0000085449944},
       "limitations": "The public table supports the comparison, not a fresh SOL 145 run."
+    },
+    {
+      "id": "harmonized-sol145-topology-reassessment",
+      "thesis_refs": ["Chapter 5, Table 5.1", "Chapter 7", "Appendix A"],
+      "reproduction_level": "saved-result consistency check",
+      "entrypoint": "matlab/reproduce_flutter_reassessment.m",
+      "inputs": ["data/flutter/harmonized_sol145_results.csv"],
+      "expected_checks": {"cases": 65, "strict_pass": 65, "bcc": 15, "fcc": 32, "sc": 18, "roots_per_case": 20, "velocities_per_root": 37},
+      "limitations": "The public table verifies the completed numerical screen; it does not rerun SOL 145 or establish physical flutter clearance."
     },
     {
       "id": "exact-trim-and-representative-physics",

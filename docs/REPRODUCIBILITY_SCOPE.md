@@ -6,7 +6,9 @@ The repository independently recomputes finite-sample feasibility counts,
 observed Pareto membership, selected summary statistics, and publication-ready
 plots from frozen compact records. It also runs the binary-label score fitting
 used by the two-input public visualizations and verifies exact interpolation at
-the evaluated labels.
+the evaluated labels. The harmonized SOL 145 table additionally supports a
+solver-free consistency check of 65 strict-screen outcomes while preserving
+the historical optimization labels separately.
 
 This is a post-processing and record-consistency result. It establishes that
 the released scalar evidence supports the reported tabulations and plotted
@@ -22,8 +24,13 @@ The package does not:
 - validate physical-model fidelity against experiment or higher-fidelity data;
 - establish optimizer superiority from the expensive single trajectories;
 - reconstruct missing historical acquisition settings;
-- make topology-specific flutter labels directly interchangeable; or
+- rewrite historical topology flutter labels or acquisition histories; or
 - recover field-level output for records retained only as scalar summaries.
+
+The public harmonized table supports the bounded statement that all 65 targeted
+reruns passed the implemented 18-value-grid screen. It does not support
+reduced-frequency convergence, automatic mode/root correspondence, a causal
+topology comparison, or certification-level flutter clearance.
 
 ## Three levels
 

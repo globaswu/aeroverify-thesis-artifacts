@@ -9,6 +9,7 @@
 | `multiinput/` | observed Pareto, six square normalized pair plots, adaptive history, summary CSV |
 | `mesh_convergence/` | primary-metric PDF/PNG; case-64 root-19 PDF/PNG; summary CSV |
 | `case067_flutter/` | four-versus-18-point MKAERO1 comparison PDF/PNG; summary CSV |
+| `flutter_reassessment/` | topology-level strict-screen summary CSV |
 | `representative_physics/` | exact-trim CDi comparison; representative mass comparison; summary CSV |
 | root | `reproduction_summary.csv` |
 
@@ -21,6 +22,7 @@ Expected numerical postconditions are:
 - four-input: 100, 70, 38;
 - mesh convergence: 17 result rows;
 - case 67: 20 points and 37 velocity rows summarized per point;
+- harmonized flutter reassessment: 65 cases and 65 strict passes;
 - exact-trim reconstruction: 150 rows;
 - representative cases: 4, 37, 64, 65, and 99.
 

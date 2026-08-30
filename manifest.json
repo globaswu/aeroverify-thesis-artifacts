@@ -1,566 +1,596 @@
 {
-  "schema_version": 2,
-  "release_tag": "thesis-v1.0.2",
-  "scope": "curated solver-free thesis reproduction package",
-  "generated_utc": "2026-08-26T23:23:05Z",
-  "files": [
-    {
-      "path": "matlab/reproduce_topology.m",
-      "size_bytes": 849,
-      "sha256": "f84c6873ec01618825d7618e7e64f597017519e2e2a97c9852a7c81d64fe1a1e",
-      "source": "authored for the curated public release"
-    },
-    {
-      "path": "matlab/run_tests.m",
-      "size_bytes": 5880,
-      "sha256": "842e63454e5a790723151b6dad5512541b44b8b190cca6fc632c8cf5c5ad409d",
-      "source": "authored for the curated public release"
-    },
-    {
-      "path": "matlab/reproduce_representative_physics.m",
-      "size_bytes": 3426,
-      "sha256": "9ab6fb4abcbc59219dee04b8784709a55dda04be616cc7891fb3c07e8c541d25",
-      "source": "authored for the curated public release"
-    },
-    {
-      "path": "matlab/reproduce_multiinput.m",
-      "size_bytes": 6639,
-      "sha256": "18a50a67cc641cca3363225a4102b45e7a5510f0801d90dd43a650ee9b0f009c",
-      "source": "authored for the curated public release"
-    },
-    {
-      "path": "matlab/reproduce_planform.m",
-      "size_bytes": 4687,
-      "sha256": "7e61e7f289ef916ff637e28c4a3566d333e2e776e2b2b2216e3749ba9ac3a8be",
-      "source": "authored for the curated public release"
-    },
-    {
-      "path": "matlab/to_logical_column.m",
-      "size_bytes": 569,
-      "sha256": "6fd407a1b9ebf6c8ae54298318e6150d9ef719bef8d58033a8a8d3a7c43055c2",
-      "source": "authored for the curated public release"
-    },
-    {
-      "path": "matlab/+ctsemo/crowdingMasks.m",
-      "size_bytes": 7733,
-      "sha256": "21f8d646610ddf9730f3b32b587c52e3572423af6d04a877239b796764c32c94",
-      "source": "globaswu/cTSEMO v0.2.1 modular package"
-    },
-    {
-      "path": "matlab/+ctsemo/drawObjectiveTS.m",
-      "size_bytes": 5461,
-      "sha256": "ab80ef9a70de5e7c65e2fd033070116ff59e5afad48395433b6f9bf366b5e7db",
-      "source": "globaswu/cTSEMO v0.2.1 modular package"
-    },
-    {
-      "path": "matlab/+ctsemo/componentSeed.m",
-      "size_bytes": 1073,
-      "sha256": "c8754b09521d491ec3a5bb30dee10415abed8684ee70cdefc684fd6599e6c702",
-      "source": "globaswu/cTSEMO v0.2.1 modular package"
-    },
-    {
-      "path": "matlab/write_continuation_table.m",
-      "size_bytes": 1712,
-      "sha256": "b19ec8426950d60a849411e3e69cc247d146fbf09898293fbcc555e577d190fc",
-      "source": "authored for the curated public release"
-    },
-    {
-      "path": "matlab/+ctsemo/binaryLabels.m",
-      "size_bytes": 1055,
-      "sha256": "bbf88a1e4d43fe7d3aac84dfb560b693c29eb56bf26acb06e1ae17a376431b2c",
-      "source": "globaswu/cTSEMO v0.2.1 modular package"
-    },
-    {
-      "path": "matlab/reproduce_mesh_convergence.m",
-      "size_bytes": 3895,
-      "sha256": "d63ca8772402915f4db915362e228271bb8d630bace8a5200b79e95b15d3c5b1",
-      "source": "authored for the curated public release"
-    },
-    {
-      "path": "matlab/cTSEMO.m",
-      "size_bytes": 1244,
-      "sha256": "6fd4189442ae7d95f270c3941072b5b932b1109dc4a68ff91553863a755e2f3e",
-      "source": "globaswu/cTSEMO v0.2.1 src/cTSEMO.m"
-    },
-    {
-      "path": "matlab/cTSEMOOptions.m",
-      "size_bytes": 17756,
-      "sha256": "cdc2a8ac18ab094c59e3908f1bce4c505f711b47f787bd18b16ad0603c59309e",
-      "source": "globaswu/cTSEMO v0.2.1 src/cTSEMOOptions.m"
-    },
-    {
-      "path": "matlab/artifact_repository_root.m",
-      "size_bytes": 173,
-      "sha256": "6d0bc7a3f14c9069230f92d21c368ab1d6d249d6bf2c4a4425d5b7cfd3fde799",
-      "source": "authored for the curated public release"
-    },
-    {
-      "path": "experiments/multiinput/README.md",
-      "size_bytes": 746,
-      "sha256": "4f415a021855c6cc521955075aa1f23d48ab14c06785f66616a57870da5eca79",
-      "source": "authored for the curated public release"
-    },
-    {
-      "path": "experiments/planform/README.md",
-      "size_bytes": 631,
-      "sha256": "8faefed9c242bf588d9bf17481a31900d238ad0396b69bdcf8ca6f8def1c56f4",
-      "source": "authored for the curated public release"
-    },
-    {
-      "path": "matlab/load_topology_data.m",
-      "size_bytes": 2078,
-      "sha256": "d42bdb0a31911db1ce412c96e38184b6c6a539636c39f042ba38655bf423fb51",
-      "source": "authored for the curated public release"
-    },
-    {
-      "path": "matlab/reproduce_all.m",
-      "size_bytes": 1194,
-      "sha256": "31cf4ad85b903219153cf0759b165982d195dbc1aa7f8ee74638e2fd8b87ac85",
-      "source": "authored for the curated public release"
-    },
-    {
-      "path": "matlab/reproduce_case067_flutter.m",
-      "size_bytes": 1869,
-      "sha256": "8b3346db82f73ab50c13ed1eb82b480c2509517876712433d989f9321e3c143d",
-      "source": "authored for the curated public release"
-    },
-    {
-      "path": "matlab/plot_observed_pareto.m",
-      "size_bytes": 3353,
-      "sha256": "5fbc28c11218dae3d829a53e38d3999f6d15d63e8768317393c9b2d46c21a573",
-      "source": "authored for the curated public release"
-    },
-    {
-      "path": "matlab/observed_pareto_mask.m",
-      "size_bytes": 844,
-      "sha256": "441774daff28c76c26e2b4e38cc8025c9b2ab475bcc27ab9cddf045c78a801f8",
-      "source": "authored for the curated public release"
-    },
-    {
-      "path": "matlab/plot_feasibility_score.m",
-      "size_bytes": 4423,
-      "sha256": "41e7d20925407e680fd84a1992f646f67e9c2e40dda97a302aa23df3e9c318ab",
-      "source": "authored for the curated public release"
-    },
-    {
-      "path": "matlab/+ctsemo/scoreCandidates.m",
-      "size_bytes": 6879,
-      "sha256": "a460bba452274e126566646a13e34879e576e2d9fcfaf34fc1d0385d53005195",
-      "source": "globaswu/cTSEMO v0.2.1 modular package"
-    },
-    {
-      "path": "matlab/+ctsemo/selectFallback.m",
-      "size_bytes": 5639,
-      "sha256": "e3fbed3886e65cbd817fc2b1954a7d9990594b2de841718c3dff757b3ed78716",
-      "source": "globaswu/cTSEMO v0.2.1 modular package"
-    },
-    {
-      "path": "matlab/+ctsemo/scopedRng.m",
-      "size_bytes": 547,
-      "sha256": "58895ae9f80f63b93ad4adc4994405dacbcd0d0241695bd1a24a1b38863f8396",
-      "source": "globaswu/cTSEMO v0.2.1 modular package"
-    },
-    {
-      "path": "matlab/+ctsemo/sampledHVI.m",
-      "size_bytes": 3931,
-      "sha256": "9bc8c38ac838832d7cc8b8ba43c4101c4509213d21d3a7f329138b81a2e482e2",
-      "source": "globaswu/cTSEMO v0.2.1 modular package"
-    },
-    {
-      "path": "matlab/+ctsemo/saveCheckpoint.m",
-      "size_bytes": 1575,
-      "sha256": "3ffbc8b1ed05f2da72d43557179b3c1d340b3528e8788427abd6fba3424937e5",
-      "source": "globaswu/cTSEMO v0.2.1 modular package"
-    },
-    {
-      "path": "matlab/+ctsemo/updatePareto.m",
-      "size_bytes": 3344,
-      "sha256": "c753ba0c056528e0cb5fd0196bb74c88e97030988eee9819bed9eedaac131b80",
-      "source": "globaswu/cTSEMO v0.2.1 modular package"
-    },
-    {
-      "path": "tools/verify_links.ps1",
-      "size_bytes": 3492,
-      "sha256": "1782445c1fc1eac1a80d1276c15812097440c5f2ea8c0a71e1bba3c1ee59f08b",
-      "source": "authored for the curated public release"
-    },
-    {
-      "path": "tools/verify_manifest.ps1",
-      "size_bytes": 5560,
-      "sha256": "1b923791e932a6e7354283f2ef19ce861dd60425e127329375183e4f44cd621c",
-      "source": "authored for the curated public release"
-    },
-    {
-      "path": "tools/update_manifest.ps1",
-      "size_bytes": 3761,
-      "sha256": "0961fd9626943b3a417a29c597c54129710ed3d13612579516d1f7a4556d0563",
-      "source": "authored for the curated public release"
-    },
-    {
-      "path": "matlab/+ctsemo/validateInputs.m",
-      "size_bytes": 8400,
-      "sha256": "b46afe7baa9a5d69ec2279a5f6739f0106bb216139058346d4068928bf153893",
-      "source": "globaswu/cTSEMO v0.2.1 modular package"
-    },
-    {
-      "path": "tools/reproduce.ps1",
-      "size_bytes": 859,
-      "sha256": "0d95d94672b6cabfbe33b36ec55d6efff1282e6d183d13483c01379e0893aa02",
-      "source": "authored for the curated public release"
-    },
-    {
-      "path": "matlab/+ctsemo/run.m",
-      "size_bytes": 46832,
-      "sha256": "0a8d5a35908b7cb683716a592d33ce35614ebb4674e2c659465124885d583248",
-      "source": "globaswu/cTSEMO v0.2.1 modular package"
-    },
-    {
-      "path": "matlab/+ctsemo/hypervolume2d.m",
-      "size_bytes": 2032,
-      "sha256": "07173cbd23251f153c5ae4c07229b8cea438984dc8435f4bb7e295717628ccd9",
-      "source": "globaswu/cTSEMO v0.2.1 modular package"
-    },
-    {
-      "path": "matlab/+ctsemo/localMatern32.m",
-      "size_bytes": 2150,
-      "sha256": "a1e8072aa7d5ec347d80133aee29678fa0f55b634f3a5ea7250d0bae67a301a2",
-      "source": "globaswu/cTSEMO v0.2.1 modular package"
-    },
-    {
-      "path": "matlab/+ctsemo/fitObjectiveGP.m",
-      "size_bytes": 16068,
-      "sha256": "d212020e54ba7c6d5c6be4dfa6ace164afdea0a617b581160818b443dc23d800",
-      "source": "globaswu/cTSEMO v0.2.1 modular package"
-    },
-    {
-      "path": "matlab/+ctsemo/evaluateObjectiveTS.m",
-      "size_bytes": 2166,
-      "sha256": "a7c41750e2b300b7fc36aa014def41122b5c796dd93e3ddc9cd1a47dc1a72d67",
-      "source": "globaswu/cTSEMO v0.2.1 modular package"
-    },
-    {
-      "path": "matlab/+ctsemo/fitClippedBinaryPof.m",
-      "size_bytes": 20369,
-      "sha256": "d7f073ca234469ce105afbaca6d85850f3aa525df98760d2a6ebac61cf1f1c7e",
-      "source": "globaswu/cTSEMO v0.2.1 modular package"
-    },
-    {
-      "path": "matlab/+ctsemo/makeCandidatePools.m",
-      "size_bytes": 7411,
-      "sha256": "f613077f70b30bf69a32a7721bf34f971434bebfefabc1aa701c2c38267f61e6",
-      "source": "globaswu/cTSEMO v0.2.1 modular package"
-    },
-    {
-      "path": "matlab/+ctsemo/predictClippedBinaryPof.m",
-      "size_bytes": 4211,
-      "sha256": "2a61b84a9310cd7e8ca1a16cdd40ee3d8950c0eace371ba534b2e430b95ced30",
-      "source": "globaswu/cTSEMO v0.2.1 modular package"
-    },
-    {
-      "path": "matlab/+ctsemo/predictObjectiveGP.m",
-      "size_bytes": 2352,
-      "sha256": "9503ece7e77a3844c1c69a8b9339a611f1631d8596f5170849c7286368b0c5f2",
-      "source": "globaswu/cTSEMO v0.2.1 modular package"
-    },
-    {
-      "path": "matlab/+ctsemo/pareto2d.m",
-      "size_bytes": 1473,
-      "sha256": "a863e73b55f4ad46755f9b9fb1629af89dc708581b40bc91ea9f5deaa2eb8cff",
-      "source": "globaswu/cTSEMO v0.2.1 modular package"
-    },
-    {
-      "path": "matlab/+ctsemo/normalizeData.m",
-      "size_bytes": 2854,
-      "sha256": "c253e54f94582ef916ee5d9003a70687e1ca327105d6be67cb0f421721dcbf8d",
-      "source": "globaswu/cTSEMO v0.2.1 modular package"
-    },
-    {
-      "path": "matlab/+ctsemo/optimizePrimaryGA.m",
-      "size_bytes": 7451,
-      "sha256": "efefdd61033386e2f42812b87690cefc43127c4b1c6a03f2a4a87053f21a3595",
-      "source": "globaswu/cTSEMO v0.2.1 modular package"
-    },
-    {
-      "path": "experiments/mesh_convergence/README.md",
-      "size_bytes": 624,
-      "sha256": "1dd85884a2a1a4c6f9281e9452e37e4dcb6fb202278bfd276276213535805592",
-      "source": "authored for the curated public release"
-    },
-    {
-      "path": "data/bcc/continuation_cases052_071.csv",
-      "size_bytes": 4825,
-      "sha256": "9afdf42acb2b0f918857364309617010055a9c3089b9520e00864d803f05253b",
-      "source": "finalized BCC public export"
-    },
-    {
-      "path": "data/bcc/evaluations_cases001_071.csv",
-      "size_bytes": 8176,
-      "sha256": "d4b7c6bd13b9e873ecc0ca81b4f321be82c3b8c0e2b2e10d3eafa6f1ac5c297c",
-      "source": "finalized BCC public export"
-    },
-    {
-      "path": "data/README.md",
-      "size_bytes": 2535,
-      "sha256": "91cf2e8910728c59d95e804dd3c4981856b3957d83ff78a332ca3dbbbfdfb4f8",
-      "source": "authored for the curated public release"
-    },
-    {
-      "path": "config/external_tools.example.json",
-      "size_bytes": 818,
-      "sha256": "cd0201bbb3ac468ac907f9780823eca1fe962a432149dc5001953d47569214b6",
-      "source": "authored for the curated public release"
-    },
-    {
-      "path": "config/reproduction_config.json",
-      "size_bytes": 2839,
-      "sha256": "8c14b3988eb445fa04e01bf5e0f2b3ef4ae3b6b0e072bc9b793c0e59dc0956f0",
-      "source": "authored for the curated public release"
-    },
-    {
-      "path": "data/diagnostics/fcc_case067/old_vs_18_point_all20.csv",
-      "size_bytes": 4166,
-      "sha256": "48d741d9c3ad6c072c06559186719106277f7dcd246809135503a7d0c55958ea",
-      "source": "aeroverify/artifacts/case067_sol145_mkaero_diagnostic_20260805"
-    },
-    {
-      "path": "data/mesh_convergence/results_summary.csv",
-      "size_bytes": 7951,
-      "sha256": "956454c27385976ba4ab4a4f2e80fb341eb65e9fb13358e53bb1eb463643b19a",
-      "source": "aeroverify/artifacts/mesh_convergence path-free projection"
-    },
-    {
-      "path": "data/mesh_convergence/study_plan.csv",
-      "size_bytes": 1109,
-      "sha256": "3ee9e01b1c2e1770d0ac12775fac2549ae59d1ee884246bef966422b82632a5f",
-      "source": "aeroverify/artifacts/mesh_convergence path-free projection"
-    },
-    {
-      "path": "data/mesh_convergence/case64_positive_g_root19.csv",
-      "size_bytes": 5370,
-      "sha256": "bf4edd1af81df160151efe8f7dce68adb32635d6e6aad13289b90ac64e8ee0c8",
-      "source": "aeroverify/artifacts/mesh_convergence path-free projection"
-    },
-    {
-      "path": "data/fcc/continuation_cases052_071.csv",
-      "size_bytes": 4797,
-      "sha256": "f407852c692c609139cb2b0c53e2dab8b5bbd5d18e7770cdbcb585bda7ca9c69",
-      "source": "finalized FCC public export"
-    },
-    {
-      "path": "data/fcc/evaluations_cases001_071.csv",
-      "size_bytes": 8238,
-      "sha256": "6fb599eb1ae36a25d04dfbd5c5b394e35c9c3f5d7e58d5852f455f0d05ad6484",
-      "source": "finalized FCC public export"
-    },
-    {
-      "path": ".github/workflows/verify.yml",
-      "size_bytes": 273,
-      "sha256": "e277da8fb2d3aabc37676f7e9154ea14ac0df5b4bbefe50ab2a62b655a50a994",
-      "source": "authored for the curated public release"
-    },
-    {
-      "path": "CITATION.cff",
-      "size_bytes": 765,
-      "sha256": "568b488202aa862a8a656db85c4c4229d23d53a31c3f43c738c7e8acb87c533a",
-      "source": "authored for the curated public release"
-    },
-    {
-      "path": "experiments.json",
-      "size_bytes": 3592,
-      "sha256": "9557f7ce4336fa7450bd9d7743f54d39d904a7fe29aad47da124659d8e3072b0",
-      "source": "authored for the curated public release"
-    },
-    {
-      "path": "AGENTS.md",
-      "size_bytes": 1206,
-      "sha256": "9abfc5c20d69a19803f6e53b33e57975380b9839f1d1508607abddba72e6f335",
-      "source": "authored for the curated public release"
-    },
-    {
-      "path": ".gitattributes",
-      "size_bytes": 45,
-      "sha256": "ced447a891638bf2cc804146c15fd5b0d6f511be94c9d2369e4be0e6d8abf09e",
-      "source": "authored for the curated public release"
-    },
-    {
-      "path": ".gitignore",
-      "size_bytes": 537,
-      "sha256": "0e36835006fd20c096278e3843a6e29a2cc827da6b58222e4dda0e65c799b2aa",
-      "source": "authored for the curated public release"
-    },
-    {
-      "path": "LICENSE",
-      "size_bytes": 1311,
-      "sha256": "d2cd49a352dcbd24ef70566ddf60806cdc94ccbf2f7124b9b88e65c4536b2799",
-      "source": "authored for the curated public release"
-    },
-    {
-      "path": "README.md",
-      "size_bytes": 6290,
-      "sha256": "689d6eaa7d023acc226f49a9884ccda129a910bce25bc71bb3d6a70d0e176420",
-      "source": "authored for the curated public release"
-    },
-    {
-      "path": "THIRD_PARTY_NOTICES.md",
-      "size_bytes": 1018,
-      "sha256": "c0cb5e7cf2931313b86305bd04ea89608da208a3335cebbe4884c61e43a18b84",
-      "source": "authored for the curated public release"
-    },
-    {
-      "path": "QUICKSTART.md",
-      "size_bytes": 1772,
-      "sha256": "d1d9c6491f8155576e29ec285b9158ba9f1de4cde6ceca231a96b8cd71cb2427",
-      "source": "authored for the curated public release"
-    },
-    {
-      "path": "LICENSE-CTSEMO.txt",
-      "size_bytes": 1311,
-      "sha256": "d2cd49a352dcbd24ef70566ddf60806cdc94ccbf2f7124b9b88e65c4536b2799",
-      "source": "globaswu/cTSEMO v0.2.1 LICENSE"
-    },
-    {
-      "path": "NOTICE.md",
-      "size_bytes": 989,
-      "sha256": "45f1007719bd9ef0e9fbd124c3d4ae8cd2bce83160884f15bdac2b12b202ac9a",
-      "source": "authored for the curated public release"
-    },
-    {
-      "path": "docs/FILE_CROSSWALK.md",
-      "size_bytes": 1820,
-      "sha256": "052bfd7b81e50cd85189bc1d7f3f1d5c6ffd4b4f1bf591aa85cd7140a120d3b3",
-      "source": "authored for the curated public release"
-    },
-    {
-      "path": "docs/FULL_SOLVER_WORKFLOW.md",
-      "size_bytes": 3544,
-      "sha256": "f316a1de55f2bdc99fdfbe928b5ebfdf6094248baa9bd08da10d95fd26f35c7f",
-      "source": "authored for the curated public release"
-    },
-    {
-      "path": "docs/EXPECTED_OUTPUTS.md",
-      "size_bytes": 1170,
-      "sha256": "7cc42c9fec643231d0ef4a765cbf3422499b1ee7d93bd9425a7023dce8ddb3cc",
-      "source": "authored for the curated public release"
-    },
-    {
-      "path": "data/sc/evaluations_cases001_071.csv",
-      "size_bytes": 9757,
-      "sha256": "2e055ef4777c370491375246c54049b7a6ff177ad23bd2c8f5ac1627a87ea641",
-      "source": "finalized SC public export"
-    },
-    {
-      "path": "docs/DATA_PROVENANCE.md",
-      "size_bytes": 2687,
-      "sha256": "047ed5750f151d7ac5bb2d9c084427ceab2573d4cf59975e06319bce8f4b54d9",
-      "source": "authored for the curated public release"
-    },
-    {
-      "path": "docs/REPRODUCIBILITY_SCOPE.md",
-      "size_bytes": 1602,
-      "sha256": "fa001c59b8f4abdf3715e794d08dd9fc401149f021b8487d35d0ff4cffac9895",
-      "source": "authored for the curated public release"
-    },
-    {
-      "path": "experiments/case067_flutter/README.md",
-      "size_bytes": 696,
-      "sha256": "8d7fb99d5b2b0c3d5ac1233601a36d5599e4bb955bbe9eadf76b49e07a90db58",
-      "source": "authored for the curated public release"
-    },
-    {
-      "path": "experiments/lattice_sizing/README.md",
-      "size_bytes": 694,
-      "sha256": "9502ee10d43a193286a76e80c05383378dce875380a73327a1bfcadb9eaf3eff",
-      "source": "authored for the curated public release"
-    },
-    {
-      "path": "experiments/README.md",
-      "size_bytes": 485,
-      "sha256": "9d4fdcbc28794a6d55fd3d5bea7d25bfc46241f46fb15a3ee53797e1999026e3",
-      "source": "authored for the curated public release"
-    },
-    {
-      "path": "docs/SOFTWARE_REQUIREMENTS.md",
-      "size_bytes": 1365,
-      "sha256": "775512d134f874a2b7b56d291c1a85900b95d76940e25527a67775794c8b3790",
-      "source": "authored for the curated public release"
-    },
-    {
-      "path": "docs/TROUBLESHOOTING.md",
-      "size_bytes": 1080,
-      "sha256": "8b1d9237cbe624f7177b4aaec37b437592923f2183245a59b785d72833d6d395",
-      "source": "authored for the curated public release"
-    },
-    {
-      "path": "data/sc/continuation_cases052_071.csv",
-      "size_bytes": 3869,
-      "sha256": "063f1af15e67c42a97a2a1326f9b2c5a95778eb31bf16fb832d86ab645e5d49a",
-      "source": "finalized SC public export"
-    },
-    {
-      "path": "data/multiinput/representative_designs.csv",
-      "size_bytes": 1124,
-      "sha256": "0f3aae00d52f4db730e7e71fd8d2a2e83f6c28f3a9d46616790a10b805a8fffe",
-      "source": "aeroverify/artifacts/thesis_chapter6_cases001_100_meshprovenance_20260819"
-    },
-    {
-      "path": "data/multiinput/summary.json",
-      "size_bytes": 7157,
-      "sha256": "9a703a846e52462471e7e615420956115a3f8e52a1be6eaa426ea0a454b234e7",
-      "source": "aeroverify/artifacts/thesis_chapter6_cases001_100_meshprovenance_20260819"
-    },
-    {
-      "path": "data/multiinput/observed_pareto.csv",
-      "size_bytes": 6165,
-      "sha256": "e07971ffbd797940f41c359f32a0ac8b844e42582a674c22253488b9b74fc38a",
-      "source": "aeroverify/artifacts/thesis_chapter6_cases001_100_meshprovenance_20260819"
-    },
-    {
-      "path": "data/multiinput/adaptive_hypervolume_stress.csv",
-      "size_bytes": 3194,
-      "sha256": "1b09a0df82c9cc2fa03ce910b4f11c8481f76a9448dfd4c7b416853a7f7249be",
-      "source": "aeroverify/artifacts/thesis_chapter6_cases001_100_meshprovenance_20260819"
-    },
-    {
-      "path": "data/multiinput/evaluations_cases001_100.csv",
-      "size_bytes": 47866,
-      "sha256": "78b8f59092eb50334b04b91d272d3cdd1b0dd56c76531bbb2a34c3d23344be87",
-      "source": "finalized 100-case progress and mass tables joined on case index"
-    },
-    {
-      "path": "data/planform/evaluations_cases001_050.csv",
-      "size_bytes": 8143,
-      "sha256": "e95dfd350f80d3a5b6b7d12d7f310133c871eefb7c0da579a3d097dc0c90151f",
-      "source": "aeroverify/artifacts/planform_continuation_final_20260815"
-    },
-    {
-      "path": "data/representative_physics/mass_reconstruction_cases004_037_064_065_099.csv",
-      "size_bytes": 1182,
-      "sha256": "3ba6534a19deb303e8e67a1075f5ef6f58c5c3bcad8bb87120dac9927f745499",
-      "source": "aeroverify/artifacts/thesis_representative_physics"
-    },
-    {
-      "path": "data/representative_physics/representative_physics_cases004_037_064_065_099.csv",
-      "size_bytes": 2138,
-      "sha256": "37dd1c975b4bd2045ea7ca4c09b69275179c6ceab7b4efaba707906ccbec5eed",
-      "source": "aeroverify/artifacts/thesis_representative_physics"
-    },
-    {
-      "path": "data/representative_physics/mass_compliance_check_cases004_037_064_065_099.csv",
-      "size_bytes": 1704,
-      "sha256": "af90e6674511e84e4eeaaf13304746e016da9873c3a75b5ea27841931ad5e901",
-      "source": "aeroverify/artifacts/thesis_representative_physics"
-    },
-    {
-      "path": "data/planform/summary.json",
-      "size_bytes": 1733,
-      "sha256": "932fa4261a80818803ccacb6e11a58e15eb00e39248ee97ad7835d4c8cdc9a13",
-      "source": "aeroverify/artifacts/planform_continuation_final_20260815"
-    },
-    {
-      "path": "data/representative_physics/exact_trim_cdi_cases001_150.csv",
-      "size_bytes": 35559,
-      "sha256": "1148c5cfd519d7a6c3e33964138842982ea72bdbf971b98d661ff9a074105153",
-      "source": "aeroverify/artifacts/thesis_representative_physics"
-    }
-  ]
+    "schema_version":  2,
+    "release_tag":  "thesis-v1.0.3",
+    "scope":  "curated solver-free thesis reproduction package",
+    "generated_utc":  "2026-08-30T16:35:07Z",
+    "files":  [
+                  {
+                      "path":  "matlab/reproduce_multiinput.m",
+                      "size_bytes":  6639,
+                      "sha256":  "18a50a67cc641cca3363225a4102b45e7a5510f0801d90dd43a650ee9b0f009c",
+                      "source":  "authored for the curated public release"
+                  },
+                  {
+                      "path":  "matlab/reproduce_planform.m",
+                      "size_bytes":  4687,
+                      "sha256":  "7e61e7f289ef916ff637e28c4a3566d333e2e776e2b2b2216e3749ba9ac3a8be",
+                      "source":  "authored for the curated public release"
+                  },
+                  {
+                      "path":  "matlab/reproduce_representative_physics.m",
+                      "size_bytes":  3426,
+                      "sha256":  "9ab6fb4abcbc59219dee04b8784709a55dda04be616cc7891fb3c07e8c541d25",
+                      "source":  "authored for the curated public release"
+                  },
+                  {
+                      "path":  "matlab/reproduce_case067_flutter.m",
+                      "size_bytes":  1869,
+                      "sha256":  "8b3346db82f73ab50c13ed1eb82b480c2509517876712433d989f9321e3c143d",
+                      "source":  "authored for the curated public release"
+                  },
+                  {
+                      "path":  "matlab/reproduce_flutter_reassessment.m",
+                      "size_bytes":  2479,
+                      "sha256":  "5274dfdd32298946e44cdea58923dba433976b8dff93ab68328a41e7386342cd",
+                      "source":  "authored for the curated public release"
+                  },
+                  {
+                      "path":  "matlab/reproduce_mesh_convergence.m",
+                      "size_bytes":  3895,
+                      "sha256":  "d63ca8772402915f4db915362e228271bb8d630bace8a5200b79e95b15d3c5b1",
+                      "source":  "authored for the curated public release"
+                  },
+                  {
+                      "path":  "matlab/write_continuation_table.m",
+                      "size_bytes":  1712,
+                      "sha256":  "b19ec8426950d60a849411e3e69cc247d146fbf09898293fbcc555e577d190fc",
+                      "source":  "authored for the curated public release"
+                  },
+                  {
+                      "path":  "matlab/+ctsemo/binaryLabels.m",
+                      "size_bytes":  1055,
+                      "sha256":  "bbf88a1e4d43fe7d3aac84dfb560b693c29eb56bf26acb06e1ae17a376431b2c",
+                      "source":  "globaswu/cTSEMO v0.2.1 modular package"
+                  },
+                  {
+                      "path":  "matlab/+ctsemo/componentSeed.m",
+                      "size_bytes":  1073,
+                      "sha256":  "c8754b09521d491ec3a5bb30dee10415abed8684ee70cdefc684fd6599e6c702",
+                      "source":  "globaswu/cTSEMO v0.2.1 modular package"
+                  },
+                  {
+                      "path":  "matlab/reproduce_topology.m",
+                      "size_bytes":  849,
+                      "sha256":  "f84c6873ec01618825d7618e7e64f597017519e2e2a97c9852a7c81d64fe1a1e",
+                      "source":  "authored for the curated public release"
+                  },
+                  {
+                      "path":  "matlab/run_tests.m",
+                      "size_bytes":  7060,
+                      "sha256":  "c457ccbb022474d331530cbcdddfd36f7dd6a242129b287a9fa89aec7953dc76",
+                      "source":  "authored for the curated public release"
+                  },
+                  {
+                      "path":  "matlab/to_logical_column.m",
+                      "size_bytes":  569,
+                      "sha256":  "6fd407a1b9ebf6c8ae54298318e6150d9ef719bef8d58033a8a8d3a7c43055c2",
+                      "source":  "authored for the curated public release"
+                  },
+                  {
+                      "path":  "experiments/planform/README.md",
+                      "size_bytes":  631,
+                      "sha256":  "8faefed9c242bf588d9bf17481a31900d238ad0396b69bdcf8ca6f8def1c56f4",
+                      "source":  "authored for the curated public release"
+                  },
+                  {
+                      "path":  "matlab/artifact_repository_root.m",
+                      "size_bytes":  173,
+                      "sha256":  "6d0bc7a3f14c9069230f92d21c368ab1d6d249d6bf2c4a4425d5b7cfd3fde799",
+                      "source":  "authored for the curated public release"
+                  },
+                  {
+                      "path":  "matlab/cTSEMO.m",
+                      "size_bytes":  1244,
+                      "sha256":  "6fd4189442ae7d95f270c3941072b5b932b1109dc4a68ff91553863a755e2f3e",
+                      "source":  "globaswu/cTSEMO v0.2.1 src/cTSEMO.m"
+                  },
+                  {
+                      "path":  "experiments/lattice_sizing/README.md",
+                      "size_bytes":  694,
+                      "sha256":  "9502ee10d43a193286a76e80c05383378dce875380a73327a1bfcadb9eaf3eff",
+                      "source":  "authored for the curated public release"
+                  },
+                  {
+                      "path":  "experiments/mesh_convergence/README.md",
+                      "size_bytes":  624,
+                      "sha256":  "1dd85884a2a1a4c6f9281e9452e37e4dcb6fb202278bfd276276213535805592",
+                      "source":  "authored for the curated public release"
+                  },
+                  {
+                      "path":  "experiments/multiinput/README.md",
+                      "size_bytes":  746,
+                      "sha256":  "4f415a021855c6cc521955075aa1f23d48ab14c06785f66616a57870da5eca79",
+                      "source":  "authored for the curated public release"
+                  },
+                  {
+                      "path":  "matlab/plot_feasibility_score.m",
+                      "size_bytes":  4423,
+                      "sha256":  "41e7d20925407e680fd84a1992f646f67e9c2e40dda97a302aa23df3e9c318ab",
+                      "source":  "authored for the curated public release"
+                  },
+                  {
+                      "path":  "matlab/plot_observed_pareto.m",
+                      "size_bytes":  3353,
+                      "sha256":  "5fbc28c11218dae3d829a53e38d3999f6d15d63e8768317393c9b2d46c21a573",
+                      "source":  "authored for the curated public release"
+                  },
+                  {
+                      "path":  "matlab/reproduce_all.m",
+                      "size_bytes":  1300,
+                      "sha256":  "beaa78ddd0b776c8792be3fe908d8b0b4c20a5f5da869fe1771bb703c701757a",
+                      "source":  "authored for the curated public release"
+                  },
+                  {
+                      "path":  "matlab/cTSEMOOptions.m",
+                      "size_bytes":  17756,
+                      "sha256":  "cdc2a8ac18ab094c59e3908f1bce4c505f711b47f787bd18b16ad0603c59309e",
+                      "source":  "globaswu/cTSEMO v0.2.1 src/cTSEMOOptions.m"
+                  },
+                  {
+                      "path":  "matlab/load_topology_data.m",
+                      "size_bytes":  2078,
+                      "sha256":  "d42bdb0a31911db1ce412c96e38184b6c6a539636c39f042ba38655bf423fb51",
+                      "source":  "authored for the curated public release"
+                  },
+                  {
+                      "path":  "matlab/observed_pareto_mask.m",
+                      "size_bytes":  844,
+                      "sha256":  "441774daff28c76c26e2b4e38cc8025c9b2ab475bcc27ab9cddf045c78a801f8",
+                      "source":  "authored for the curated public release"
+                  },
+                  {
+                      "path":  "matlab/+ctsemo/crowdingMasks.m",
+                      "size_bytes":  7733,
+                      "sha256":  "21f8d646610ddf9730f3b32b587c52e3572423af6d04a877239b796764c32c94",
+                      "source":  "globaswu/cTSEMO v0.2.1 modular package"
+                  },
+                  {
+                      "path":  "matlab/+ctsemo/scopedRng.m",
+                      "size_bytes":  547,
+                      "sha256":  "58895ae9f80f63b93ad4adc4994405dacbcd0d0241695bd1a24a1b38863f8396",
+                      "source":  "globaswu/cTSEMO v0.2.1 modular package"
+                  },
+                  {
+                      "path":  "matlab/+ctsemo/scoreCandidates.m",
+                      "size_bytes":  6879,
+                      "sha256":  "a460bba452274e126566646a13e34879e576e2d9fcfaf34fc1d0385d53005195",
+                      "source":  "globaswu/cTSEMO v0.2.1 modular package"
+                  },
+                  {
+                      "path":  "matlab/+ctsemo/selectFallback.m",
+                      "size_bytes":  5639,
+                      "sha256":  "e3fbed3886e65cbd817fc2b1954a7d9990594b2de841718c3dff757b3ed78716",
+                      "source":  "globaswu/cTSEMO v0.2.1 modular package"
+                  },
+                  {
+                      "path":  "matlab/+ctsemo/run.m",
+                      "size_bytes":  46832,
+                      "sha256":  "0a8d5a35908b7cb683716a592d33ce35614ebb4674e2c659465124885d583248",
+                      "source":  "globaswu/cTSEMO v0.2.1 modular package"
+                  },
+                  {
+                      "path":  "matlab/+ctsemo/sampledHVI.m",
+                      "size_bytes":  3931,
+                      "sha256":  "9bc8c38ac838832d7cc8b8ba43c4101c4509213d21d3a7f329138b81a2e482e2",
+                      "source":  "globaswu/cTSEMO v0.2.1 modular package"
+                  },
+                  {
+                      "path":  "matlab/+ctsemo/saveCheckpoint.m",
+                      "size_bytes":  1575,
+                      "sha256":  "3ffbc8b1ed05f2da72d43557179b3c1d340b3528e8788427abd6fba3424937e5",
+                      "source":  "globaswu/cTSEMO v0.2.1 modular package"
+                  },
+                  {
+                      "path":  "tools/update_manifest.ps1",
+                      "size_bytes":  3862,
+                      "sha256":  "42792b7a0fde9d9ae2da077d64e717ee1a7bf7e4c32bae3e2cbec66d86bbdb03",
+                      "source":  "authored for the curated public release"
+                  },
+                  {
+                      "path":  "tools/verify_links.ps1",
+                      "size_bytes":  3867,
+                      "sha256":  "0e5ca2ce17066c91f87b011e78fee53382b465f54317ce9c21345cfd39fcc608",
+                      "source":  "authored for the curated public release"
+                  },
+                  {
+                      "path":  "tools/verify_manifest.ps1",
+                      "size_bytes":  5560,
+                      "sha256":  "1b923791e932a6e7354283f2ef19ce861dd60425e127329375183e4f44cd621c",
+                      "source":  "authored for the curated public release"
+                  },
+                  {
+                      "path":  "matlab/+ctsemo/updatePareto.m",
+                      "size_bytes":  3344,
+                      "sha256":  "c753ba0c056528e0cb5fd0196bb74c88e97030988eee9819bed9eedaac131b80",
+                      "source":  "globaswu/cTSEMO v0.2.1 modular package"
+                  },
+                  {
+                      "path":  "matlab/+ctsemo/validateInputs.m",
+                      "size_bytes":  8400,
+                      "sha256":  "b46afe7baa9a5d69ec2279a5f6739f0106bb216139058346d4068928bf153893",
+                      "source":  "globaswu/cTSEMO v0.2.1 modular package"
+                  },
+                  {
+                      "path":  "tools/reproduce.ps1",
+                      "size_bytes":  859,
+                      "sha256":  "0d95d94672b6cabfbe33b36ec55d6efff1282e6d183d13483c01379e0893aa02",
+                      "source":  "authored for the curated public release"
+                  },
+                  {
+                      "path":  "matlab/+ctsemo/fitObjectiveGP.m",
+                      "size_bytes":  16068,
+                      "sha256":  "d212020e54ba7c6d5c6be4dfa6ace164afdea0a617b581160818b443dc23d800",
+                      "source":  "globaswu/cTSEMO v0.2.1 modular package"
+                  },
+                  {
+                      "path":  "matlab/+ctsemo/hypervolume2d.m",
+                      "size_bytes":  2032,
+                      "sha256":  "07173cbd23251f153c5ae4c07229b8cea438984dc8435f4bb7e295717628ccd9",
+                      "source":  "globaswu/cTSEMO v0.2.1 modular package"
+                  },
+                  {
+                      "path":  "matlab/+ctsemo/localMatern32.m",
+                      "size_bytes":  2150,
+                      "sha256":  "a1e8072aa7d5ec347d80133aee29678fa0f55b634f3a5ea7250d0bae67a301a2",
+                      "source":  "globaswu/cTSEMO v0.2.1 modular package"
+                  },
+                  {
+                      "path":  "matlab/+ctsemo/drawObjectiveTS.m",
+                      "size_bytes":  5461,
+                      "sha256":  "ab80ef9a70de5e7c65e2fd033070116ff59e5afad48395433b6f9bf366b5e7db",
+                      "source":  "globaswu/cTSEMO v0.2.1 modular package"
+                  },
+                  {
+                      "path":  "matlab/+ctsemo/evaluateObjectiveTS.m",
+                      "size_bytes":  2166,
+                      "sha256":  "a7c41750e2b300b7fc36aa014def41122b5c796dd93e3ddc9cd1a47dc1a72d67",
+                      "source":  "globaswu/cTSEMO v0.2.1 modular package"
+                  },
+                  {
+                      "path":  "matlab/+ctsemo/fitClippedBinaryPof.m",
+                      "size_bytes":  20369,
+                      "sha256":  "d7f073ca234469ce105afbaca6d85850f3aa525df98760d2a6ebac61cf1f1c7e",
+                      "source":  "globaswu/cTSEMO v0.2.1 modular package"
+                  },
+                  {
+                      "path":  "matlab/+ctsemo/pareto2d.m",
+                      "size_bytes":  1473,
+                      "sha256":  "a863e73b55f4ad46755f9b9fb1629af89dc708581b40bc91ea9f5deaa2eb8cff",
+                      "source":  "globaswu/cTSEMO v0.2.1 modular package"
+                  },
+                  {
+                      "path":  "matlab/+ctsemo/predictClippedBinaryPof.m",
+                      "size_bytes":  4211,
+                      "sha256":  "2a61b84a9310cd7e8ca1a16cdd40ee3d8950c0eace371ba534b2e430b95ced30",
+                      "source":  "globaswu/cTSEMO v0.2.1 modular package"
+                  },
+                  {
+                      "path":  "matlab/+ctsemo/predictObjectiveGP.m",
+                      "size_bytes":  2352,
+                      "sha256":  "9503ece7e77a3844c1c69a8b9339a611f1631d8596f5170849c7286368b0c5f2",
+                      "source":  "globaswu/cTSEMO v0.2.1 modular package"
+                  },
+                  {
+                      "path":  "matlab/+ctsemo/makeCandidatePools.m",
+                      "size_bytes":  7411,
+                      "sha256":  "f613077f70b30bf69a32a7721bf34f971434bebfefabc1aa701c2c38267f61e6",
+                      "source":  "globaswu/cTSEMO v0.2.1 modular package"
+                  },
+                  {
+                      "path":  "matlab/+ctsemo/normalizeData.m",
+                      "size_bytes":  2854,
+                      "sha256":  "c253e54f94582ef916ee5d9003a70687e1ca327105d6be67cb0f421721dcbf8d",
+                      "source":  "globaswu/cTSEMO v0.2.1 modular package"
+                  },
+                  {
+                      "path":  "matlab/+ctsemo/optimizePrimaryGA.m",
+                      "size_bytes":  7451,
+                      "sha256":  "efefdd61033386e2f42812b87690cefc43127c4b1c6a03f2a4a87053f21a3595",
+                      "source":  "globaswu/cTSEMO v0.2.1 modular package"
+                  },
+                  {
+                      "path":  "data/README.md",
+                      "size_bytes":  2904,
+                      "sha256":  "6406a785c70e687acd364adf9327466a57fccf870f64010b24a94524a4f12ee2",
+                      "source":  "authored for the curated public release"
+                  },
+                  {
+                      "path":  "data/bcc/continuation_cases052_071.csv",
+                      "size_bytes":  4825,
+                      "sha256":  "9afdf42acb2b0f918857364309617010055a9c3089b9520e00864d803f05253b",
+                      "source":  "finalized BCC public export"
+                  },
+                  {
+                      "path":  "data/bcc/evaluations_cases001_071.csv",
+                      "size_bytes":  8176,
+                      "sha256":  "d4b7c6bd13b9e873ecc0ca81b4f321be82c3b8c0e2b2e10d3eafa6f1ac5c297c",
+                      "source":  "finalized BCC public export"
+                  },
+                  {
+                      "path":  ".github/workflows/verify.yml",
+                      "size_bytes":  273,
+                      "sha256":  "e277da8fb2d3aabc37676f7e9154ea14ac0df5b4bbefe50ab2a62b655a50a994",
+                      "source":  "authored for the curated public release"
+                  },
+                  {
+                      "path":  "config/external_tools.example.json",
+                      "size_bytes":  818,
+                      "sha256":  "cd0201bbb3ac468ac907f9780823eca1fe962a432149dc5001953d47569214b6",
+                      "source":  "authored for the curated public release"
+                  },
+                  {
+                      "path":  "config/reproduction_config.json",
+                      "size_bytes":  3160,
+                      "sha256":  "2d835d7c7bd69509ba14a2f4a1c784f26fada0e44b6174c6bb3477db292a4071",
+                      "source":  "authored for the curated public release"
+                  },
+                  {
+                      "path":  "data/flutter/harmonized_sol145_results.csv",
+                      "size_bytes":  18369,
+                      "sha256":  "080e0d2c940774f651771ecdff31cb717b5afbc8d75b3273257dbf6a7fc90e57",
+                      "source":  "sanitized projection of the guarded final SOL 145 rerun ledger"
+                  },
+                  {
+                      "path":  "data/flutter/README.md",
+                      "size_bytes":  1374,
+                      "sha256":  "7f15724feeb25a5c70039b6922d1aa30924f7b3decb20de7e7204226f22e9fc8",
+                      "source":  "sanitized projection of the guarded final SOL 145 rerun ledger"
+                  },
+                  {
+                      "path":  "data/mesh_convergence/case64_positive_g_root19.csv",
+                      "size_bytes":  5370,
+                      "sha256":  "bf4edd1af81df160151efe8f7dce68adb32635d6e6aad13289b90ac64e8ee0c8",
+                      "source":  "aeroverify/artifacts/mesh_convergence path-free projection"
+                  },
+                  {
+                      "path":  "data/diagnostics/fcc_case067/old_vs_18_point_all20.csv",
+                      "size_bytes":  4166,
+                      "sha256":  "48d741d9c3ad6c072c06559186719106277f7dcd246809135503a7d0c55958ea",
+                      "source":  "aeroverify/artifacts/case067_sol145_mkaero_diagnostic_20260805"
+                  },
+                  {
+                      "path":  "data/fcc/continuation_cases052_071.csv",
+                      "size_bytes":  4797,
+                      "sha256":  "f407852c692c609139cb2b0c53e2dab8b5bbd5d18e7770cdbcb585bda7ca9c69",
+                      "source":  "finalized FCC public export"
+                  },
+                  {
+                      "path":  "data/fcc/evaluations_cases001_071.csv",
+                      "size_bytes":  8238,
+                      "sha256":  "6fb599eb1ae36a25d04dfbd5c5b394e35c9c3f5d7e58d5852f455f0d05ad6484",
+                      "source":  "finalized FCC public export"
+                  },
+                  {
+                      "path":  "CITATION.cff",
+                      "size_bytes":  765,
+                      "sha256":  "2d7140ed0dbb314383dde8008e6c1578a0dbccf9157491f56d5ec012b1332e9b",
+                      "source":  "authored for the curated public release"
+                  },
+                  {
+                      "path":  "experiments.json",
+                      "size_bytes":  4211,
+                      "sha256":  "1d0183447ae0bd0c1f5b626ea6a6c5df3e23d9668f5af150cdb74bd8021467a3",
+                      "source":  "authored for the curated public release"
+                  },
+                  {
+                      "path":  "LICENSE",
+                      "size_bytes":  1311,
+                      "sha256":  "d2cd49a352dcbd24ef70566ddf60806cdc94ccbf2f7124b9b88e65c4536b2799",
+                      "source":  "authored for the curated public release"
+                  },
+                  {
+                      "path":  ".gitattributes",
+                      "size_bytes":  45,
+                      "sha256":  "ced447a891638bf2cc804146c15fd5b0d6f511be94c9d2369e4be0e6d8abf09e",
+                      "source":  "authored for the curated public release"
+                  },
+                  {
+                      "path":  ".gitignore",
+                      "size_bytes":  537,
+                      "sha256":  "0e36835006fd20c096278e3843a6e29a2cc827da6b58222e4dda0e65c799b2aa",
+                      "source":  "authored for the curated public release"
+                  },
+                  {
+                      "path":  "AGENTS.md",
+                      "size_bytes":  1206,
+                      "sha256":  "9abfc5c20d69a19803f6e53b33e57975380b9839f1d1508607abddba72e6f335",
+                      "source":  "authored for the curated public release"
+                  },
+                  {
+                      "path":  "README.md",
+                      "size_bytes":  6643,
+                      "sha256":  "970ca01d168004a9764e5351ffb8bffe0c20bc733bc5263c4558fdcab6fe334a",
+                      "source":  "authored for the curated public release"
+                  },
+                  {
+                      "path":  "RELEASE_NOTES.md",
+                      "size_bytes":  1909,
+                      "sha256":  "d301b783201ea3313bd88343719473570fc6045b521f3dd8ba6f898aeac2bcd0",
+                      "source":  "authored for the curated public release"
+                  },
+                  {
+                      "path":  "THIRD_PARTY_NOTICES.md",
+                      "size_bytes":  1018,
+                      "sha256":  "c0cb5e7cf2931313b86305bd04ea89608da208a3335cebbe4884c61e43a18b84",
+                      "source":  "authored for the curated public release"
+                  },
+                  {
+                      "path":  "LICENSE-CTSEMO.txt",
+                      "size_bytes":  1311,
+                      "sha256":  "d2cd49a352dcbd24ef70566ddf60806cdc94ccbf2f7124b9b88e65c4536b2799",
+                      "source":  "globaswu/cTSEMO v0.2.1 LICENSE"
+                  },
+                  {
+                      "path":  "NOTICE.md",
+                      "size_bytes":  989,
+                      "sha256":  "45f1007719bd9ef0e9fbd124c3d4ae8cd2bce83160884f15bdac2b12b202ac9a",
+                      "source":  "authored for the curated public release"
+                  },
+                  {
+                      "path":  "QUICKSTART.md",
+                      "size_bytes":  1888,
+                      "sha256":  "7d979f861ee3965752e64eb6533ffa216622469e9fb623182116a81cfc6f84d7",
+                      "source":  "authored for the curated public release"
+                  },
+                  {
+                      "path":  "data/mesh_convergence/results_summary.csv",
+                      "size_bytes":  7951,
+                      "sha256":  "956454c27385976ba4ab4a4f2e80fb341eb65e9fb13358e53bb1eb463643b19a",
+                      "source":  "aeroverify/artifacts/mesh_convergence path-free projection"
+                  },
+                  {
+                      "path":  "docs/EXPECTED_OUTPUTS.md",
+                      "size_bytes":  1307,
+                      "sha256":  "faeddf4ae9b42e90a03418c9a272231c6a84c33ee2e2909fd4049a6768cf6ea5",
+                      "source":  "authored for the curated public release"
+                  },
+                  {
+                      "path":  "docs/FILE_CROSSWALK.md",
+                      "size_bytes":  2051,
+                      "sha256":  "e2db410d4a90daa228cb5d2901d8bc5c77eab2098e3d83b0c1b969a19fb07ca1",
+                      "source":  "authored for the curated public release"
+                  },
+                  {
+                      "path":  "docs/FULL_SOLVER_WORKFLOW.md",
+                      "size_bytes":  3544,
+                      "sha256":  "f316a1de55f2bdc99fdfbe928b5ebfdf6094248baa9bd08da10d95fd26f35c7f",
+                      "source":  "authored for the curated public release"
+                  },
+                  {
+                      "path":  "data/sc/continuation_cases052_071.csv",
+                      "size_bytes":  3869,
+                      "sha256":  "063f1af15e67c42a97a2a1326f9b2c5a95778eb31bf16fb832d86ab645e5d49a",
+                      "source":  "finalized SC public export"
+                  },
+                  {
+                      "path":  "data/sc/evaluations_cases001_071.csv",
+                      "size_bytes":  9757,
+                      "sha256":  "2e055ef4777c370491375246c54049b7a6ff177ad23bd2c8f5ac1627a87ea641",
+                      "source":  "finalized SC public export"
+                  },
+                  {
+                      "path":  "docs/DATA_PROVENANCE.md",
+                      "size_bytes":  3066,
+                      "sha256":  "20217a79fb10ee4911fd66105ad63ab1cf85fbdd3c636a1743dc07c682eaf00f",
+                      "source":  "authored for the curated public release"
+                  },
+                  {
+                      "path":  "experiments/README.md",
+                      "size_bytes":  485,
+                      "sha256":  "9d4fdcbc28794a6d55fd3d5bea7d25bfc46241f46fb15a3ee53797e1999026e3",
+                      "source":  "authored for the curated public release"
+                  },
+                  {
+                      "path":  "experiments/case067_flutter/README.md",
+                      "size_bytes":  696,
+                      "sha256":  "8d7fb99d5b2b0c3d5ac1233601a36d5599e4bb955bbe9eadf76b49e07a90db58",
+                      "source":  "authored for the curated public release"
+                  },
+                  {
+                      "path":  "experiments/flutter_reassessment/README.md",
+                      "size_bytes":  957,
+                      "sha256":  "55a86d9a4adbe14d2d844defc0a88acd20417501b5e2019242aacc01814165e6",
+                      "source":  "authored for the curated public release"
+                  },
+                  {
+                      "path":  "docs/REPRODUCIBILITY_SCOPE.md",
+                      "size_bytes":  2075,
+                      "sha256":  "686f5b4446ef93b3b60289565f9b3bb12628a4def72387f0af74ace105898810",
+                      "source":  "authored for the curated public release"
+                  },
+                  {
+                      "path":  "docs/SOFTWARE_REQUIREMENTS.md",
+                      "size_bytes":  1365,
+                      "sha256":  "775512d134f874a2b7b56d291c1a85900b95d76940e25527a67775794c8b3790",
+                      "source":  "authored for the curated public release"
+                  },
+                  {
+                      "path":  "docs/TROUBLESHOOTING.md",
+                      "size_bytes":  1080,
+                      "sha256":  "8b1d9237cbe624f7177b4aaec37b437592923f2183245a59b785d72833d6d395",
+                      "source":  "authored for the curated public release"
+                  },
+                  {
+                      "path":  "data/multiinput/observed_pareto.csv",
+                      "size_bytes":  6165,
+                      "sha256":  "e07971ffbd797940f41c359f32a0ac8b844e42582a674c22253488b9b74fc38a",
+                      "source":  "aeroverify/artifacts/thesis_chapter6_cases001_100_meshprovenance_20260819"
+                  },
+                  {
+                      "path":  "data/multiinput/representative_designs.csv",
+                      "size_bytes":  1124,
+                      "sha256":  "0f3aae00d52f4db730e7e71fd8d2a2e83f6c28f3a9d46616790a10b805a8fffe",
+                      "source":  "aeroverify/artifacts/thesis_chapter6_cases001_100_meshprovenance_20260819"
+                  },
+                  {
+                      "path":  "data/multiinput/summary.json",
+                      "size_bytes":  7157,
+                      "sha256":  "9a703a846e52462471e7e615420956115a3f8e52a1be6eaa426ea0a454b234e7",
+                      "source":  "aeroverify/artifacts/thesis_chapter6_cases001_100_meshprovenance_20260819"
+                  },
+                  {
+                      "path":  "data/mesh_convergence/study_plan.csv",
+                      "size_bytes":  1109,
+                      "sha256":  "3ee9e01b1c2e1770d0ac12775fac2549ae59d1ee884246bef966422b82632a5f",
+                      "source":  "aeroverify/artifacts/mesh_convergence path-free projection"
+                  },
+                  {
+                      "path":  "data/multiinput/adaptive_hypervolume_stress.csv",
+                      "size_bytes":  3194,
+                      "sha256":  "1b09a0df82c9cc2fa03ce910b4f11c8481f76a9448dfd4c7b416853a7f7249be",
+                      "source":  "aeroverify/artifacts/thesis_chapter6_cases001_100_meshprovenance_20260819"
+                  },
+                  {
+                      "path":  "data/multiinput/evaluations_cases001_100.csv",
+                      "size_bytes":  47866,
+                      "sha256":  "78b8f59092eb50334b04b91d272d3cdd1b0dd56c76531bbb2a34c3d23344be87",
+                      "source":  "finalized 100-case progress and mass tables joined on case index"
+                  },
+                  {
+                      "path":  "data/representative_physics/mass_compliance_check_cases004_037_064_065_099.csv",
+                      "size_bytes":  1704,
+                      "sha256":  "af90e6674511e84e4eeaaf13304746e016da9873c3a75b5ea27841931ad5e901",
+                      "source":  "aeroverify/artifacts/thesis_representative_physics"
+                  },
+                  {
+                      "path":  "data/representative_physics/mass_reconstruction_cases004_037_064_065_099.csv",
+                      "size_bytes":  1182,
+                      "sha256":  "3ba6534a19deb303e8e67a1075f5ef6f58c5c3bcad8bb87120dac9927f745499",
+                      "source":  "aeroverify/artifacts/thesis_representative_physics"
+                  },
+                  {
+                      "path":  "data/representative_physics/representative_physics_cases004_037_064_065_099.csv",
+                      "size_bytes":  2138,
+                      "sha256":  "37dd1c975b4bd2045ea7ca4c09b69275179c6ceab7b4efaba707906ccbec5eed",
+                      "source":  "aeroverify/artifacts/thesis_representative_physics"
+                  },
+                  {
+                      "path":  "data/planform/evaluations_cases001_050.csv",
+                      "size_bytes":  8143,
+                      "sha256":  "e95dfd350f80d3a5b6b7d12d7f310133c871eefb7c0da579a3d097dc0c90151f",
+                      "source":  "aeroverify/artifacts/planform_continuation_final_20260815"
+                  },
+                  {
+                      "path":  "data/planform/summary.json",
+                      "size_bytes":  1733,
+                      "sha256":  "932fa4261a80818803ccacb6e11a58e15eb00e39248ee97ad7835d4c8cdc9a13",
+                      "source":  "aeroverify/artifacts/planform_continuation_final_20260815"
+                  },
+                  {
+                      "path":  "data/representative_physics/exact_trim_cdi_cases001_150.csv",
+                      "size_bytes":  35559,
+                      "sha256":  "1148c5cfd519d7a6c3e33964138842982ea72bdbf971b98d661ff9a074105153",
+                      "source":  "aeroverify/artifacts/thesis_representative_physics"
+                  }
+              ]
 }

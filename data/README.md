@@ -26,6 +26,14 @@ SC export. Missing SC stress, damping, acquisition, and fallback fields are not
 inferred. The three campaigns also retain different contemporaneous flutter
 rules; see each `flutter_screen` field.
 
+## Harmonized flutter reassessment
+
+`flutter/harmonized_sol145_results.csv` contains a separate retrospective
+verification layer for 65 targeted stress-admissible cases. It preserves the
+historical labels above while recording the common strict-screen result. All 65
+rows pass. The table contains no native solver output or machine, archive, or
+license configuration.
+
 ## Planform
 
 `planform/evaluations_cases001_050.csv` contains aspect ratio, taper ratio,

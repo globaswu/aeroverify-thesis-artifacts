@@ -2,7 +2,7 @@
 
 ## 1. Download
 
-Download the `thesis-v1.0.2` source archive from the GitHub release and extract
+Download the `thesis-v1.0.3` source archive from the GitHub release and extract
 it to a writable directory. Do not place generated files under `data/`.
 
 ## 2. Verify the release
@@ -38,6 +38,7 @@ matlab -batch "addpath('matlab'); reproduce_topology('fcc',fullfile(pwd,'generat
 matlab -batch "addpath('matlab'); reproduce_planform(fullfile(pwd,'generated','planform'))"
 matlab -batch "addpath('matlab'); reproduce_multiinput(fullfile(pwd,'generated','multiinput'))"
 matlab -batch "addpath('matlab'); reproduce_mesh_convergence(fullfile(pwd,'generated','mesh_convergence'))"
+matlab -batch "addpath('matlab'); reproduce_flutter_reassessment(fullfile(pwd,'generated','flutter_reassessment'))"
 ```
 
 Expected filenames and numerical postconditions are listed in

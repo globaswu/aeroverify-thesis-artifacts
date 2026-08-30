@@ -6,9 +6,10 @@ Lattice-Structured Wings*. It contains portable MATLAB code and frozen,
 path-free tables for checking the reported finite-sample results without
 uploading the 74 GB research workspace.
 
-- Stable release: [thesis-v1.0.2](https://github.com/globaswu/aeroverify-thesis-artifacts/releases/tag/thesis-v1.0.2)
-- Final thesis: [main.pdf](https://github.com/globaswu/aeroverify-thesis-artifacts/releases/download/thesis-v1.0.2/main.pdf)
-- Reference verification: [evidence report](https://github.com/globaswu/aeroverify-thesis-artifacts/releases/download/thesis-v1.0.2/thesis_reference_verification_report.pdf)
+- Stable release: [thesis-v1.0.3](https://github.com/globaswu/aeroverify-thesis-artifacts/releases/tag/thesis-v1.0.3)
+- Final thesis: [main.pdf](https://github.com/globaswu/aeroverify-thesis-artifacts/releases/download/thesis-v1.0.3/main.pdf)
+- Paper 2 manuscript: [AIAA-format PDF](https://github.com/globaswu/aeroverify-thesis-artifacts/releases/download/thesis-v1.0.3/paper2_lattice_topology_aiaa.pdf)
+- Reference verification: [evidence report](https://github.com/globaswu/aeroverify-thesis-artifacts/releases/download/thesis-v1.0.3/thesis_reference_verification_report.pdf)
 - Start here: [QUICKSTART.md](QUICKSTART.md)
 - Thesis-to-file crosswalk: [docs/FILE_CROSSWALK.md](docs/FILE_CROSSWALK.md)
 - Machine-readable experiment register: [experiments.json](experiments.json)
@@ -33,6 +34,7 @@ The package checks the following frozen records:
 | Four-input aerostructural campaign | 100 | 70 | 38 |
 | Structural-mesh sensitivity | 17 | not applicable | not applicable |
 | FCC case-67 reduced-frequency diagnostic | 20 tracked points | not applicable | not applicable |
+| Harmonized topology SOL 145 reassessment | 65 cases | 65 strict pass | not applicable |
 | Exact-trim LLT reconstruction | 150 cases | not applicable | not applicable |
 
 These counts are recomputed from evaluated objectives and authoritative stored
@@ -90,9 +92,10 @@ downloading the release archive.
 - Topology cases 1-51 are retained as inherited conditioning and descriptive
   data. Their source settings do not match the final configuration, and the
   exact setting-level differences are unresolved.
-- The FCC continuation retains its contemporaneous four-point MKAERO1 screen.
-  BCC and SC use later strict positive-damping rejection rules. These labels
-  must not be homogenized retrospectively.
+- The FCC continuation retains its contemporaneous four-point MKAERO1 label,
+  while BCC and SC retain their later strict-screen labels. The separate
+  harmonized reassessment verifies the strict flutter outcome without rewriting
+  those historical labels or acquisition histories.
 - Planform cases 1-40 do not have a fully reconstructed candidate-selection
   history. Cases 41-50 are the documented continuation.
 - The final four-input record spans two mesh epochs and includes a replacement
@@ -117,6 +120,7 @@ downloading the release archive.
 |   |-- multiinput/
 |   |-- mesh_convergence/
 |   |-- diagnostics/fcc_case067/
+|   |-- flutter/
 |   `-- representative_physics/
 |-- experiments/              study-specific guides
 |-- matlab/                    executable public workflows

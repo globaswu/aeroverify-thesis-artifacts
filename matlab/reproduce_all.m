@@ -9,7 +9,7 @@ if ~isfolder(outputDirectory)
     mkdir(outputDirectory);
 end
 
-summaries = cell(8, 1);
+summaries = cell(9, 1);
 topologies = ["fcc", "bcc", "sc"];
 for index = 1:numel(topologies)
     topology = topologies(index);
@@ -24,9 +24,10 @@ summaries{7} = reproduce_case067_flutter( ...
     fullfile(outputDirectory, "case067_flutter"));
 summaries{8} = reproduce_representative_physics( ...
     fullfile(outputDirectory, "representative_physics"));
+summaries{9} = reproduce_flutter_reassessment( ...
+    fullfile(outputDirectory, "flutter_reassessment"));
 summary = vertcat(summaries{:});
 writetable(summary, fullfile(outputDirectory, ...
     "reproduction_summary.csv"));
 disp(summary);
 end
-

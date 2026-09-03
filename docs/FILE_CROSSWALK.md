@@ -5,6 +5,7 @@ All thesis-artifact links below resolve through the stable `thesis` tag.
 | Thesis material | Public entry point | Public evidence |
 |---|---|---|
 | Release identity and integrity | [`tools/verify_manifest.ps1`](../tools/verify_manifest.ps1) | [`manifest.json`](../manifest.json) |
+| Exact plotted data for thesis figures | [`docs/FIGURE_DATA_MAP.md`](FIGURE_DATA_MAP.md) | [`data/figures`](../data/figures) |
 | cTSEMO implementation and Chapter 3 | [`matlab/cTSEMO.m`](../matlab/cTSEMO.m), [`matlab/+ctsemo/`](../matlab/+ctsemo/) | [canonical cTSEMO v0.2.1 release](https://github.com/globaswu/cTSEMO/releases/tag/v0.2.1), [result map](https://github.com/globaswu/cTSEMO/blob/v0.2.1/docs/RESULTS_MAP.md) |
 | FCC/BCC/SC lattice studies | [`matlab/reproduce_topology.m`](../matlab/reproduce_topology.m) | [`data/fcc`](../data/fcc), [`data/bcc`](../data/bcc), [`data/sc`](../data/sc) |
 | Fixed-area planform | [`matlab/reproduce_planform.m`](../matlab/reproduce_planform.m) | [`data/planform`](../data/planform) |

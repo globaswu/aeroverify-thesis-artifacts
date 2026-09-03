@@ -64,3 +64,13 @@ compact physical and mass-convention checks.
 
 Source folders, transformations, and limitations are recorded in
 `docs/DATA_PROVENANCE.md` and `experiments.json`.
+
+## Figure-level exports
+
+`figures/chapter02`, `figures/chapter03`, `figures/chapter04`,
+`figures/chapter05`, and `figures/chapter06` contain the exact numerical rows
+used by thesis figures that cannot be reconstructed directly from the compact
+campaign tables above. Their schemas, filters, and relationships to the
+rendered panels are listed in [`docs/FIGURE_DATA_MAP.md`](../docs/FIGURE_DATA_MAP.md).
+These exports omit native solver files, machine paths, archive locations,
+licence configuration, and non-scientific execution timestamps.

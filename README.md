@@ -12,6 +12,7 @@ uploading the 74 GB research workspace.
 - Reference verification: [evidence report](https://github.com/globaswu/aeroverify-thesis-artifacts/releases/download/thesis/thesis_reference_verification_report.pdf)
 - Start here: [QUICKSTART.md](QUICKSTART.md)
 - Thesis-to-file crosswalk: [docs/FILE_CROSSWALK.md](docs/FILE_CROSSWALK.md)
+- Figure-to-data index: [docs/FIGURE_DATA_MAP.md](docs/FIGURE_DATA_MAP.md)
 - Machine-readable experiment register: [experiments.json](experiments.json)
 
 ## What runs from this repository

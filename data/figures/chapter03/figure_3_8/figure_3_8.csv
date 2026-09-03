@@ -1,0 +1,106 @@
+record_type,solver_id,solver_label,pareto_point_index,retained_evaluations,true_oracle_calls,objective_f1_fabrication_cost,objective_f2_end_deflection
+pareto_point,historical_ctsemo,Historical cTSEMO,1,150,150,3.89927539295895,0.0217507003427642
+pareto_point,historical_ctsemo,Historical cTSEMO,2,150,150,5.52667155524589,0.0211549206925216
+pareto_point,historical_ctsemo,Historical cTSEMO,3,150,150,5.53373361346666,0.010065294364911
+pareto_point,historical_ctsemo,Historical cTSEMO,4,150,150,9.13990763317944,0.00858506172934546
+pareto_point,historical_ctsemo,Historical cTSEMO,5,150,150,10.8004709956879,0.00502949698636135
+pareto_point,historical_ctsemo,Historical cTSEMO,6,150,150,11.7924645841138,0.00460476843434542
+pareto_point,historical_ctsemo,Historical cTSEMO,7,150,150,12.2703286465776,0.00400429661716555
+pareto_point,historical_ctsemo,Historical cTSEMO,8,150,150,13.4917837435146,0.00375797719635018
+pareto_point,historical_ctsemo,Historical cTSEMO,9,150,150,21.1903202301623,0.00339196164683167
+pareto_point,historical_ctsemo,Historical cTSEMO,10,150,150,27.4531646869244,0.00236682751230902
+pareto_point,historical_ctsemo,Historical cTSEMO,11,150,150,29.2413320852047,0.00109195116401573
+pareto_point,historical_ctsemo,Historical cTSEMO,12,150,150,31.854199324163,0.00105815061946742
+pareto_point,historical_ctsemo,Historical cTSEMO,13,150,150,35.3190947894028,0.000983129981651934
+pareto_point,historical_ctsemo,Historical cTSEMO,14,150,150,40.6571487426367,0.000978444859687323
+pareto_point,historical_ctsemo,Historical cTSEMO,15,150,150,40.7730091277008,0.000916150140504429
+pareto_point,historical_ctsemo,Historical cTSEMO,16,150,150,43.7062578290531,0.000737580771438816
+pareto_point,historical_ctsemo,Historical cTSEMO,17,150,150,48.0101234765401,0.000645107285590113
+pareto_point,historical_ctsemo,Historical cTSEMO,18,150,150,53.5394007908342,0.000535498366790118
+pareto_point,historical_ctsemo,Historical cTSEMO,19,150,150,55.1051041016087,0.000487929102920478
+pareto_point,historical_ctsemo,Historical cTSEMO,20,150,150,58.2726289721335,0.00043904
+pareto_point,usemoc,USeMOC,1,150,150,4.314753,0.015624
+pareto_point,usemoc,USeMOC,2,150,150,6.989677,0.007858
+pareto_point,usemoc,USeMOC,3,150,150,7.947111,0.006522
+pareto_point,usemoc,USeMOC,4,150,150,12.244981,0.002533
+pareto_point,usemoc,USeMOC,5,150,150,16.632978,0.002502
+pareto_point,usemoc,USeMOC,6,150,150,16.728183,0.001905
+pareto_point,usemoc,USeMOC,7,150,150,18.691603,0.001711
+pareto_point,usemoc,USeMOC,8,150,150,24.86974,0.001513
+pareto_point,usemoc,USeMOC,9,150,150,25.596734,0.00127
+pareto_point,usemoc,USeMOC,10,150,150,27.905423,0.001175
+pareto_point,usemoc,USeMOC,11,150,150,32.346056,0.001085
+pareto_point,usemoc,USeMOC,12,150,150,36.20312,0.001058
+pareto_point,usemoc,USeMOC,13,150,150,43.222061,0.000838
+pareto_point,usemoc,USeMOC,14,150,150,50.006913,0.000519
+pareto_point,usemoc,USeMOC,15,150,150,93.268943,0.000473
+pareto_point,pac_moo,PAC-MOO,1,150,178,15.92191,0.002487
+pareto_point,pac_moo,PAC-MOO,2,150,178,17.673049,0.002014
+pareto_point,pac_moo,PAC-MOO,3,150,178,25.608176,0.001925
+pareto_point,pac_moo,PAC-MOO,4,150,178,25.863318,0.001776
+pareto_point,pac_moo,PAC-MOO,5,150,178,28.309252,0.001595
+pareto_point,pac_moo,PAC-MOO,6,150,178,28.402284,0.001064
+pareto_point,pac_moo,PAC-MOO,7,150,178,40.49381,0.001004
+pareto_point,pac_moo,PAC-MOO,8,150,178,41.203256,0.000904
+pareto_point,pac_moo,PAC-MOO,9,150,178,41.67596,0.000884
+pareto_point,pac_moo,PAC-MOO,10,150,178,43.836558,0.000801
+pareto_point,pac_moo,PAC-MOO,11,150,178,44.912827,0.000775
+pareto_point,pac_moo,PAC-MOO,12,150,178,45.870218,0.000764
+pareto_point,pac_moo,PAC-MOO,13,150,178,49.989823,0.000738
+pareto_point,pac_moo,PAC-MOO,14,150,178,52.523598,0.000605
+pareto_point,pac_moo,PAC-MOO,15,150,178,58.238917,0.000567
+pareto_point,pac_moo,PAC-MOO,16,150,178,61.494079,0.000506
+pareto_point,pac_moo,PAC-MOO,17,150,178,65.811673,0.000498
+pareto_point,pac_moo,PAC-MOO,18,150,178,73.816928,0.000481
+pareto_point,botorch_qlognehvi,BoTorch qLogNEHVI,1,150,150,3.70633925676407,0.0224682251340237
+pareto_point,botorch_qlognehvi,BoTorch qLogNEHVI,2,150,150,4.14754925921682,0.00700933442239259
+pareto_point,botorch_qlognehvi,BoTorch qLogNEHVI,3,150,150,6.33014344032282,0.00540643371621856
+pareto_point,botorch_qlognehvi,BoTorch qLogNEHVI,4,150,150,7.0944578837483,0.00438143985171789
+pareto_point,botorch_qlognehvi,BoTorch qLogNEHVI,5,150,150,7.86512417309488,0.00346536250261737
+pareto_point,botorch_qlognehvi,BoTorch qLogNEHVI,6,150,150,10.0878994017331,0.00260868474333031
+pareto_point,botorch_qlognehvi,BoTorch qLogNEHVI,7,150,150,14.0596060199239,0.00239406451152326
+pareto_point,botorch_qlognehvi,BoTorch qLogNEHVI,8,150,150,17.7725722538906,0.00219265210302897
+pareto_point,botorch_qlognehvi,BoTorch qLogNEHVI,9,150,150,22.5630879480234,0.00140728934372501
+pareto_point,botorch_qlognehvi,BoTorch qLogNEHVI,10,150,150,25.2862716614362,0.00129654488989802
+pareto_point,botorch_qlognehvi,BoTorch qLogNEHVI,11,150,150,28.1606398967542,0.00127424478590732
+pareto_point,botorch_qlognehvi,BoTorch qLogNEHVI,12,150,150,33.6010188651444,0.0010308852690773
+pareto_point,botorch_qlognehvi,BoTorch qLogNEHVI,13,150,150,33.6099274327851,0.000907384142264586
+pareto_point,botorch_qlognehvi,BoTorch qLogNEHVI,14,150,150,35.2447180050386,0.000806813841132806
+pareto_point,botorch_qlognehvi,BoTorch qLogNEHVI,15,150,150,54.3361548676767,0.000491381972196739
+pareto_point,botorch_qlognehvi,BoTorch qLogNEHVI,16,150,150,57.9046109375,0.00043904
+pareto_point,trieste_echvi,Trieste ECHVI,1,150,150,2.79937216214465,0.0123022937334654
+pareto_point,trieste_echvi,Trieste ECHVI,2,150,150,3.02471306356097,0.0116931696751056
+pareto_point,trieste_echvi,Trieste ECHVI,3,150,150,3.24954084628728,0.0109959413005781
+pareto_point,trieste_echvi,Trieste ECHVI,4,150,150,3.58779642509673,0.0102357349037594
+pareto_point,trieste_echvi,Trieste ECHVI,5,150,150,3.86688056974991,0.00964356393283094
+pareto_point,trieste_echvi,Trieste ECHVI,6,150,150,4.60557295190339,0.00827775371037349
+pareto_point,trieste_echvi,Trieste ECHVI,7,150,150,5.23111691715259,0.00527203144029146
+pareto_point,trieste_echvi,Trieste ECHVI,8,150,150,6.20145624942819,0.00507175113422111
+pareto_point,trieste_echvi,Trieste ECHVI,9,150,150,6.66785040871647,0.00401600022681547
+pareto_point,trieste_echvi,Trieste ECHVI,10,150,150,8.23061222310223,0.00372715638681339
+pareto_point,trieste_echvi,Trieste ECHVI,11,150,150,9.69610157867985,0.0033448804739852
+pareto_point,trieste_echvi,Trieste ECHVI,12,150,150,11.7472267527711,0.00241562355192938
+pareto_point,trieste_echvi,Trieste ECHVI,13,150,150,12.206909975635,0.00210620138320312
+pareto_point,trieste_echvi,Trieste ECHVI,14,150,150,17.987748300303,0.00144158691685927
+pareto_point,trieste_echvi,Trieste ECHVI,15,150,150,22.342037318083,0.00122100245997127
+pareto_point,trieste_echvi,Trieste ECHVI,16,150,150,24.4780147867636,0.00112890303635472
+pareto_point,trieste_echvi,Trieste ECHVI,17,150,150,27.9601275754448,0.00106979889509872
+pareto_point,trieste_echvi,Trieste ECHVI,18,150,150,44.2794340577164,0.00072686611175233
+pareto_point,comboo,COMBOO,1,150,150,3.72741458622596,0.00973651601723691
+pareto_point,comboo,COMBOO,2,150,150,18.8991876952192,0.00566815614301378
+pareto_point,comboo,COMBOO,3,150,150,18.9141007108777,0.00344537307109068
+pareto_point,comboo,COMBOO,4,150,150,20.7454763578229,0.00301442018836279
+pareto_point,comboo,COMBOO,5,150,150,35.0713495964071,0.0013184835501516
+pareto_point,comboo,COMBOO,6,150,150,37.4416618634271,0.00130210377141351
+pareto_point,comboo,COMBOO,7,150,150,43.2596147407804,0.000824922427813073
+pareto_point,comboo,COMBOO,8,150,150,50.827930048069,0.000580404582857899
+pareto_point,comboo,COMBOO,9,150,150,52.4429588087742,0.000542381151022661
+pareto_point,comboo,COMBOO,10,150,150,57.4727335050734,0.000442349093583689
+pareto_point,comboo,COMBOO,11,150,150,57.9046092897324,0.000439040026536097
+pareto_point,comboo,COMBOO,12,150,150,57.9046109375,0.00043904
+pareto_point,ppesmoc,PPESMOC,1,150,150,10.3522981039892,0.00396983793953733
+pareto_point,ppesmoc,PPESMOC,2,150,150,12.4017086932477,0.00226148416361723
+pareto_point,ppesmoc,PPESMOC,3,150,150,22.2033902880277,0.00121659658304004
+pareto_point,ppesmoc,PPESMOC,4,150,150,42.6185172075449,0.00061060996649548
+pareto_point,ppesmoc,PPESMOC,5,150,150,57.4759291831591,0.000442281766907092
+pareto_point,ppesmoc,PPESMOC,6,150,150,333.9095,0.00043904

@@ -14,6 +14,7 @@ uploading the 74 GB research workspace.
 - Start here: [QUICKSTART.md](QUICKSTART.md)
 - Thesis-to-file crosswalk: [docs/FILE_CROSSWALK.md](docs/FILE_CROSSWALK.md)
 - Figure-to-data index: [docs/FIGURE_DATA_MAP.md](docs/FIGURE_DATA_MAP.md)
+- Reproduce every quantitative figure: [docs/CSV_FIGURE_REPRODUCTION.md](docs/CSV_FIGURE_REPRODUCTION.md)
 - Machine-readable experiment register: [experiments.json](experiments.json)
 
 ## What runs from this repository

@@ -67,7 +67,7 @@ foreach ($entry in $manifest.files) {
     }
 }
 
-$maximumBytes = 20MB
+$maximumBytes = 100MB
 $prohibitedExtensions = @(
     '.op2', '.f04', '.f06', '.h5', '.hdf5', '.ntop', '.mat', '.fig',
     '.bdf', '.dat', '.pch', '.rcf', '.zip', '.mexw64', '.exe', '.dll'
@@ -82,7 +82,7 @@ foreach ($file in Get-ChildItem -LiteralPath $packageRoot -Recurse -File) {
         continue
     }
     if ($file.Length -ge $maximumBytes) {
-        throw "Release file is not below 20 MB: $relative"
+        throw "Release file reaches or exceeds GitHub's 100 MiB limit: $relative"
     }
     if ($prohibitedExtensions -contains $file.Extension.ToLowerInvariant()) {
         throw "Prohibited release file type: $relative"

@@ -12,3 +12,5 @@ jobs:
       - name: Verify hashes, package scope, and path hygiene
         shell: pwsh
         run: ./tools/verify_manifest.ps1
+      - name: Verify self-contained figure folders
+        run: python scripts/verify_figure_packages.py

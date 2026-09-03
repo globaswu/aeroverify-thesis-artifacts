@@ -27,3 +27,10 @@ Expected numerical postconditions are:
 - representative cases: 4, 37, 64, 65, and 99.
 
 The tests fail if any expected output is missing or empty.
+
+## Per-figure packages
+
+Every folder indexed in `docs/FIGURE_DATA_MAP.md` contains `figure_C_N.csv`,
+`plot_C_N.py`, and `plot_C_N.m`. Running either script produces one PNG by
+default; an explicit PDF or SVG output path may also be supplied. The optional
+Python dispatcher can reproduce one requested figure or all 50 figures.

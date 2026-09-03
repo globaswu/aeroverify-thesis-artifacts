@@ -11,6 +11,7 @@ From PowerShell in the repository root:
 
 ```powershell
 powershell -ExecutionPolicy Bypass -File .\tools\verify_manifest.ps1
+python scripts/verify_figure_packages.py
 ```
 
 A successful run reports the number of listed files and confirms hashes,
@@ -44,7 +45,26 @@ matlab -batch "addpath('matlab'); reproduce_flutter_reassessment(fullfile(pwd,'g
 Expected filenames and numerical postconditions are listed in
 [docs/EXPECTED_OUTPUTS.md](docs/EXPECTED_OUTPUTS.md).
 
-## 5. Understand the boundary
+## 5. Reproduce one thesis figure
+
+Each quantitative figure has a self-contained CSV/Python/MATLAB folder. For
+example:
+
+```powershell
+python data/figures/chapter05/figure_5_1/plot_5_1.py
+matlab -batch "addpath('data/figures/chapter05/figure_5_1'); plot_5_1"
+```
+
+To use the optional Python dispatcher:
+
+```powershell
+python -m pip install -r requirements-figures.txt
+python scripts/reproduce_thesis_figure.py 5.1
+```
+
+See [docs/FIGURE_DATA_MAP.md](docs/FIGURE_DATA_MAP.md) for all 50 folders.
+
+## 6. Understand the boundary
 
 The public commands reconstruct analyses from evaluated scalar records. A new
 physical case needs licensed external software and project assets that are not

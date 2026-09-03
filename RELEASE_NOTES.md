@@ -12,12 +12,15 @@ direct CSV-and-script reproduction for every quantitative thesis figure.
 - A sanitized 65-row public table with no machine path, network address,
   license configuration, credential, or native solver output.
 - A MATLAB consistency checker and experiment guide.
-- Figure-specific CSV files for all 50 quantitative figures in Chapters 2--6.
-- A Python dispatcher that regenerates all 50 figures from public CSV files
-  only, without MAT files, Nastran output, nTop projects, or private paths.
-- A MATLAB routine that refits the five lattice/planform feasibility maps from
-  the published design inputs (X) and binary labels (C); the accompanying
-  case CSVs retain the objective responses (Y).
+- Fifty self-contained figure folders. Each contains one consolidated CSV,
+  one standalone Python plotting script, and one standalone MATLAB plotting
+  script.
+- An optional Python dispatcher that regenerates one requested figure or all
+  50 figures without MAT files, Nastran output, nTop projects, or private paths.
+- Feasibility-map CSVs that retain design inputs X, objective responses Y,
+  binary labels C, and the plotted field records in the same figure folder.
+- The thesis embeds 300 dpi raster versions of its former vector-PDF figure
+  assets to reduce rendering work in mobile PDF viewers.
 
 Together with the prior FCC case-67 diagnostic and 26 BCC/SC continuation
 cases already produced under the strict configuration, all 92
@@ -27,8 +30,8 @@ selection histories.
 
 ## Attached PDFs
 
-- `main.pdf`: updated thesis with the harmonized campaign in the abstract,
-  methodology, results, synthesis, and provenance appendix.
+- `main.pdf`: updated thesis with direct per-figure data/script hyperlinks and
+  300 dpi raster figure assets.
 - `paper2_lattice_topology_aiaa.pdf`: revised AIAA-format manuscript.
 - `paper3_integrated_aerostructural_aiaa.pdf`: revised AIAA-format manuscript.
 - `thesis_reference_verification_report.pdf`: unchanged citation-evidence
@@ -37,7 +40,7 @@ selection histories.
 
 | Asset | Pages | SHA-256 |
 |---|---:|---|
-| `main.pdf` | 218 | `b2948682205f439808a5d459e3eaad5fb0f19909d8d956fbc4d48c6a2d743c03` |
+| `main.pdf` | 218 | `8c48c508ee4289673444393528993f9b3af25378dc73220f666ce9a7201ac1e5` |
 | `paper2_lattice_topology_aiaa.pdf` | 14 | `88250ab56a7c063a2940e0ef2809b4d6abb1fb7c27e0959b964c95eaa81042f3` |
 | `paper3_integrated_aerostructural_aiaa.pdf` | 16 | `f6934d07ce8b5790abff524b5a94554d600a5a96394f719135e71b409a58a8c6` |
 | `thesis_reference_verification_report.pdf` | 49 | `c1e7f14a58389fa472c6b2a00ce420335a63eab2a2e715a3dcb9c1a2663c9740` |

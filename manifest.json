@@ -959,8 +959,8 @@
                   },
                   {
                       "path":  "RELEASE_NOTES.md",
-                      "size_bytes":  2555,
-                      "sha256":  "e0b9b94736a2bb318fe939456c8ed8d94f23421ebd97430049162a12adeddca5",
+                      "size_bytes":  2703,
+                      "sha256":  "8c2b469132e9f242dbf5af8a39e0b699243dd1e1285df585568f092e705432d7",
                       "source":  "authored for the curated public release"
                   },
                   {

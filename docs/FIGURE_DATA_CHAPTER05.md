@@ -18,7 +18,7 @@ implemented optimizer. They are not calibrated posterior probabilities.
 | 5.4 | [FCC failure mechanisms](../data/figures/chapter05/figure_5_4_fcc_failure_mechanisms.csv) | `a_m`, `t1_over_a`, `plot_category`, `pareto_case071`, skin and lattice stresses | 71 |
 | 5.5 | [FCC score fields](../data/figures/chapter05/figures_5_3_and_5_5_fcc_feasibility_score_grids.csv), [plotted points and labels](../data/figures/chapter05/figures_5_3_and_5_5_fcc_points.csv) | `score_before_cases_8_29_feasible`, `score_after_cases_8_29_feasible`, and hypothetical label flags | 160,801 field nodes and 71 labels |
 | 5.6 | [Case-67 flutter histories](../data/figures/chapter05/figure_5_6_5_8_case067_flutter_histories.csv) | Filter to `point = 3`; plot `velocity_mps` against the four-point and eighteen-point damping columns. | 37 |
-| <a id="figure-57"></a>5.7 | [Case-67 mode-3 node-shard manifest](../data/figures/chapter05/figure_5_7_case067_mode3_nodes_manifest.csv) | Eight ordered CSV shards retain reference node coordinates, the mode-3 translational eigenvector, displacement magnitude, mode index, and frequency for a portable four-view point-cloud reconstruction. The original nTop surface shading is not reproduced. | 531,682 |
+| <a id="figure-57"></a>5.7 | [Node-shard manifest](../data/figures/chapter05/figure_5_7_case067_mode3_nodes_manifest.csv), [node-shard directory](../data/figures/chapter05/), [CSV-only plotting script](../scripts/reproduce_thesis_figure.py) | Eight ordered CSV shards retain reference node coordinates, the mode-3 translational eigenvector, displacement magnitude, mode index, and frequency for a portable four-view point-cloud reconstruction. The original nTop surface shading is not reproduced. | 531,682 |
 | 5.8 | [Case-67 flutter histories](../data/figures/chapter05/figure_5_6_5_8_case067_flutter_histories.csv) | Group by `point`; plot `velocity_mps` against both damping histories. | 740 |
 | 5.9 | [BCC evaluations](../data/bcc/evaluations_cases001_071.csv) | `case_id`, `mass_kg`, `compliance_Nm`, `feasible`, `pareto_case071` | 71 |
 | 5.10 | [BCC score field](../data/figures/chapter05/figure_5_10_bcc_feasibility_score_grid.csv), [BCC evaluations](../data/bcc/evaluations_cases001_071.csv) | Field coordinates and `feasibility_score`; evaluated-design overlays and Pareto status | 160,801 field nodes and 71 evaluations |
@@ -42,7 +42,8 @@ records used to generate the thesis figures:
 - Figures 5.1--5.5 use the authoritative lattice comparison, FCC continuation,
   feasibility-score, and label-sensitivity records.
 - Figures 5.6--5.8 use the two case-67 SOL 145 calculations and the retained
-  SOL 103 mode-shape rendering.
+  SOL 103 mode-shape coordinates. The public plotting script reconstructs a
+  portable node-cloud view rather than the proprietary nTop surface rendering.
 - Figures 5.9--5.16 use the completed BCC and SC continuation records and the
   corresponding compact stress audits.
 - Figure 5.17 uses the three representative topology records selected in the

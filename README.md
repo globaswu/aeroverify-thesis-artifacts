@@ -9,6 +9,7 @@ uploading the 74 GB research workspace.
 - Stable release: [thesis](https://github.com/globaswu/aeroverify-thesis-artifacts/releases/tag/thesis)
 - Final thesis: [main.pdf](https://github.com/globaswu/aeroverify-thesis-artifacts/releases/download/thesis/main.pdf)
 - Paper 2 manuscript: [AIAA-format PDF](https://github.com/globaswu/aeroverify-thesis-artifacts/releases/download/thesis/paper2_lattice_topology_aiaa.pdf)
+- Paper 3 manuscript: [AIAA-format PDF](https://github.com/globaswu/aeroverify-thesis-artifacts/releases/download/thesis/paper3_integrated_aerostructural_aiaa.pdf)
 - Reference verification: [evidence report](https://github.com/globaswu/aeroverify-thesis-artifacts/releases/download/thesis/thesis_reference_verification_report.pdf)
 - Start here: [QUICKSTART.md](QUICKSTART.md)
 - Thesis-to-file crosswalk: [docs/FILE_CROSSWALK.md](docs/FILE_CROSSWALK.md)

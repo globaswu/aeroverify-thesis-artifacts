@@ -1,7 +1,7 @@
 # Thesis reproducibility package
 
-This release adds the completed harmonized SOL 145 topology reassessment and
-synchronizes the public thesis and Paper 2 artifacts.
+This release synchronizes the thesis and both AIAA-format manuscripts and adds
+direct CSV-and-script reproduction for every quantitative thesis figure.
 
 ## New evidence
 
@@ -12,6 +12,12 @@ synchronizes the public thesis and Paper 2 artifacts.
 - A sanitized 65-row public table with no machine path, network address,
   license configuration, credential, or native solver output.
 - A MATLAB consistency checker and experiment guide.
+- Figure-specific CSV files for all 50 quantitative figures in Chapters 2--6.
+- A Python dispatcher that regenerates all 50 figures from public CSV files
+  only, without MAT files, Nastran output, nTop projects, or private paths.
+- A MATLAB routine that refits the five lattice/planform feasibility maps from
+  the published design inputs (X) and binary labels (C); the accompanying
+  case CSVs retain the objective responses (Y).
 
 Together with the prior FCC case-67 diagnostic and 26 BCC/SC continuation
 cases already produced under the strict configuration, all 92
@@ -24,14 +30,16 @@ selection histories.
 - `main.pdf`: updated thesis with the harmonized campaign in the abstract,
   methodology, results, synthesis, and provenance appendix.
 - `paper2_lattice_topology_aiaa.pdf`: revised AIAA-format manuscript.
+- `paper3_integrated_aerostructural_aiaa.pdf`: revised AIAA-format manuscript.
 - `thesis_reference_verification_report.pdf`: unchanged citation-evidence
   report; no citation-bearing thesis sentence was changed by this campaign
   update.
 
 | Asset | Pages | SHA-256 |
 |---|---:|---|
-| `main.pdf` | 218 | `6f56dd6f3bf592f2037cbf7153742f6190f6d969366b5c970df6ac20c548618c` |
-| `paper2_lattice_topology_aiaa.pdf` | 14 | `f4c760fe431b102b51cdc903d1be8128d33ca8230260bbda9eff4430ede1e637` |
+| `main.pdf` | 218 | `b2948682205f439808a5d459e3eaad5fb0f19909d8d956fbc4d48c6a2d743c03` |
+| `paper2_lattice_topology_aiaa.pdf` | 14 | `88250ab56a7c063a2940e0ef2809b4d6abb1fb7c27e0959b964c95eaa81042f3` |
+| `paper3_integrated_aerostructural_aiaa.pdf` | 16 | `f6934d07ce8b5790abff524b5a94554d600a5a96394f719135e71b409a58a8c6` |
 | `thesis_reference_verification_report.pdf` | 49 | `c1e7f14a58389fa472c6b2a00ce420335a63eab2a2e715a3dcb9c1a2663c9740` |
 
 ## Boundary

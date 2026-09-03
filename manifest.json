@@ -641,8 +641,8 @@
                   },
                   {
                       "path":  "README.md",
-                      "size_bytes":  6683,
-                      "sha256":  "084f0496850210d8e8c61f539a19db8189f4fc8bed35455205f64230c231261e",
+                      "size_bytes":  6847,
+                      "sha256":  "c34c2b328d877cd0e5f614faddfb687abced0bfa65fb4e0f35cd7433ba57979a",
                       "source":  "authored for the curated public release"
                   },
                   {
@@ -719,8 +719,8 @@
                   },
                   {
                       "path":  "RELEASE_NOTES.md",
-                      "size_bytes":  1902,
-                      "sha256":  "843cd7f3d1ee2379e8e77037d010792ef3c3cff9b7af893a497b0fc88e807b17",
+                      "size_bytes":  2555,
+                      "sha256":  "e0b9b94736a2bb318fe939456c8ed8d94f23421ebd97430049162a12adeddca5",
                       "source":  "authored for the curated public release"
                   },
                   {

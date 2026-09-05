@@ -1,6 +1,6 @@
 # Thesis figure-data index
 
-This index follows the revised thesis numbering. Each of the 53 linked folders
+This index follows the revised thesis numbering. Each of the 57 linked folders
 contains one CSV, one independent Python plotting script, and one independent
 MATLAB plotting script. Either script reads its adjacent CSV alone.
 
@@ -8,11 +8,19 @@ MATLAB plotting script. Either script reads its adjacent CSV alone.
 
 | Figure | Content |
 |---|---|
+| [2.1](../data/figures/chapter02/figure_2_1) | Linear spanwise strut-diameter profile; nTop screenshot is not regenerated |
+| [2.3](../data/figures/chapter02/figure_2_3) | Actual skin triangles, beam-node relocation, and finite-offset MPC |
+| [2.4](../data/figures/chapter02/figure_2_4) | Lifting-line schematic with the supplied NACA 65-210 profile |
 | [2.7](../data/figures/chapter02/figure_2_7) | FCC case 67: tracked mode and MKAERO1 settings |
 | [2.8](../data/figures/chapter02/figure_2_8) | FCC case 67: nTop mode-shape screenshots and point-cloud reconstruction |
 | [2.9](../data/figures/chapter02/figure_2_9) | FCC case 67: all 20 tracked flutter points |
 | [2.10](../data/figures/chapter02/figure_2_10) | Structural-mesh sensitivity |
 | [2.11](../data/figures/chapter02/figure_2_11) | Mesh-sensitive positive-damping diagnostic |
+| [2.12](../data/figures/chapter02/figure_2_12) | Nastran and lifting-line lift curves against Sivells's experimental linear characteristics |
+
+See [Chapter 2 reproduction notes](CHAPTER02_FIGURES.md) for column definitions,
+source scope, and the distinction between a reconstructed experimental line and
+measured data points.
 
 ## Chapter 3
 

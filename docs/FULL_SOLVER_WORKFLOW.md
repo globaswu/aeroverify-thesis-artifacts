@@ -14,6 +14,40 @@ is not an executable historical campaign archive.
 7. Store a compact evaluated row and immutable provenance receipt.
 8. Update the optimizer only after the evaluation is finalized.
 
+## Geometry input interface
+
+The physical adapter receives an 18-column row:
+
+```matlab
+Input = [zeros(1,11), s, croot, lambda, tskin, a, r1, r2];
+```
+
+| Columns | Quantity | Definition and units |
+|---|---|---|
+| 1–11 | Reserved PARSEC inputs | Zero throughout the thesis; these do not define the airfoil used in the calculations. |
+| 12 | `s` | Wing semispan (m). |
+| 13 | `croot` | Root chord (m). |
+| 14 | `lambda` | Tip chord divided by root chord. |
+| 15 | `tskin` | Skin thickness (m). |
+| 16 | `a` | Periodic lattice cell size before warping and trimming (m). |
+| 17 | `r1` | Root-end geometric strut diameter divided by cell size, `t1/a`. |
+| 18 | `r2` | Tip-to-root geometric strut diameter ratio, `t2/t1`. |
+
+The fixed NACA 65-210 airfoil is supplied by a coordinate file, not generated
+from the reserved PARSEC inputs. The available interface does not establish
+individual physical names for those inactive slots. Airfoil shape is not
+optimized in the thesis.
+
+The geometric strut diameter is `t1 = a*r1` at the root and `t2 = t1*r2` at the
+tip. It varies linearly with spanwise coordinate: `t(y) = t1 + (t2-t1)*y/s`,
+for `0 <= y <= s`. These geometric diameters are distinct from the beam
+section properties exported for structural analysis. At fixed full-wing
+area `S`, the planform mapping uses `b = sqrt(AR*S)`, `s = b/2`,
+`croot = S/(s*(1+lambda))`, and `ctip = lambda*croot`.
+
+SC, BCC, and FCC are separate lattice-model choices, not additional numeric
+columns in this row. Chapter 4 states which inputs vary in each campaign.
+
 ## Required external assets
 
 - a rights-cleared, versioned nTopology project matching the selected campaign;

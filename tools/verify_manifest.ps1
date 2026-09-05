@@ -9,7 +9,7 @@ if (-not (Test-Path -LiteralPath $manifestPath -PathType Leaf)) {
 }
 
 $manifest = Get-Content -LiteralPath $manifestPath -Raw | ConvertFrom-Json
-$textExtensions = @('.md', '.m', '.ps1', '.json', '.csv', '.txt', '.yml', '.cff')
+$textExtensions = @('.md', '.m', '.py', '.tex', '.ps1', '.json', '.csv', '.txt', '.yml', '.cff')
 $utf8WithoutBom = [System.Text.UTF8Encoding]::new($false)
 
 function Get-PortableBytes {
@@ -75,7 +75,8 @@ $prohibitedExtensions = @(
 $unlisted = [System.Collections.Generic.List[string]]::new()
 foreach ($file in Get-ChildItem -LiteralPath $packageRoot -Recurse -File) {
     $relative = $file.FullName.Substring($packageRoot.Length + 1).Replace('\', '/')
-    if ($relative.StartsWith('.git/', [System.StringComparison]::OrdinalIgnoreCase) -or
+    if ($relative -eq '.git' -or
+            $relative.StartsWith('.git/', [System.StringComparison]::OrdinalIgnoreCase) -or
             $relative.StartsWith('generated/', [System.StringComparison]::OrdinalIgnoreCase) -or
             $relative.StartsWith('test-output/', [System.StringComparison]::OrdinalIgnoreCase) -or
             $relative.StartsWith('tmp/', [System.StringComparison]::OrdinalIgnoreCase)) {
@@ -95,7 +96,7 @@ if ($unlisted.Count -gt 0) {
     throw "Files absent from manifest: $($unlisted -join ', ')"
 }
 
-$drivePattern = '[A-Za-z]' + [char]58 + '\\'
+$drivePattern = '(?<![A-Za-z0-9_])[A-Za-z]' + [char]58 + '\\'
 $uncIpPattern = '\\\\(?:\d{1,3}\.){3}\d{1,3}\\'
 $profilePattern = '(?i)Users\\[^\\]+\\|OneDrive\\Desktop|/home/[^/]+/'
 $privateHostPattern = '(?i)YH-WS117'
@@ -108,7 +109,8 @@ $secretPatterns = @(
 
 foreach ($file in Get-ChildItem -LiteralPath $packageRoot -Recurse -File) {
     $relative = $file.FullName.Substring($packageRoot.Length + 1).Replace('\', '/')
-    if ($relative.StartsWith('.git/', [System.StringComparison]::OrdinalIgnoreCase) -or
+    if ($relative -eq '.git' -or
+            $relative.StartsWith('.git/', [System.StringComparison]::OrdinalIgnoreCase) -or
             $relative.StartsWith('generated/', [System.StringComparison]::OrdinalIgnoreCase) -or
             $relative.StartsWith('test-output/', [System.StringComparison]::OrdinalIgnoreCase) -or
             $relative.StartsWith('tmp/', [System.StringComparison]::OrdinalIgnoreCase) -or

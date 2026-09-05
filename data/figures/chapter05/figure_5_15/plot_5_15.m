@@ -2,7 +2,7 @@ function plot_5_15(outputFile)
 if nargin < 1, outputFile=fullfile(fileparts(mfilename('fullpath')),'plot_5_15.png'); end
 T=loadSiblingData('figure_5_15.csv');
 
-G=T(textCol(T,'record_type')=="grid",:); P=T(textCol(T,'record_type')=="evaluation",:); fig=figure('Visible','off','Color','w'); ax=axes(fig); plotScore(ax,G,P,'a_m','t1_over_a','binary_feasibility_score','a_m','t1_over_a','feasible','pareto_case071'); colormap(ax,'parula'); colorbar(ax); xlabel(ax,'Cell size, a (m)'); ylabel(ax,'Primary-member ratio, t1/a'); title(ax,'Completed SC feasibility-score map'); finishPlot(fig,outputFile);
+fig=figure('Visible','off','Color','w'); ax=axes(fig); plotPareto(ax,T,'CDitrim','Ctrim_Nm','feasible','final_pareto','case'); cont=numericCol(T,'case')>=41 & logicalCol(T,'final_pareto'); scatter(ax,numericSubset(T,'CDitrim',cont),numericSubset(T,'Ctrim_Nm',cont),65,'o','MarkerFaceColor','none','MarkerEdgeColor',[.90 .38 0],'DisplayName','Continuation Pareto'); ylim(ax,[8 125]); xlabel(ax,'Trim induced-drag coefficient'); ylabel(ax,'Trim compliance (N m)'); title(ax,'Observed planform objective trade-off'); legend(ax,'Location','best'); finishPlot(fig,outputFile);
 end
 
 function T = loadSiblingData(csvName)

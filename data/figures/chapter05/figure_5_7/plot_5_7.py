@@ -60,13 +60,10 @@ def finish(fig):
     out=parse_output(); out.parent.mkdir(parents=True,exist_ok=True); fig.savefig(out,dpi=180,bbox_inches="tight"); plt.close(fig); print(out)
 
 def main():
-    d=load_rows(); xyz=np.column_stack([num(d,"x_m"),num(d,"y_m"),num(d,"z_m")]); disp=np.column_stack([num(d,"ux_mode3"),num(d,"uy_mode3"),num(d,"uz_mode3")]); mag=num(d,"displacement_magnitude"); deformed=xyz+disp
-    stride=max(1,int(math.ceil(len(d)/160000))); take=np.arange(0,len(d),stride); ref=take[::5]
-    fig=plt.figure(figsize=(10.5,7.7),constrained_layout=True); axes=[fig.add_subplot(2,2,1),fig.add_subplot(2,2,2,projection="3d"),fig.add_subplot(2,2,3),fig.add_subplot(2,2,4)]
-    for ax,(i,j,title,xl,yl) in zip([axes[0],axes[2],axes[3]],[(0,1,"Top","x (m)","y (m)"),(0,2,"Front","x (m)","z (m)"),(1,2,"Right","y (m)","z (m)")]):
-        ax.scatter(xyz[ref,i],xyz[ref,j],s=.05,c="#dddddd",rasterized=True); sc=ax.scatter(deformed[take,i],deformed[take,j],s=.09,c=mag[take],cmap="turbo",rasterized=True); ax.set_title(title); ax.set_xlabel(xl); ax.set_ylabel(yl); ax.set_aspect("equal",adjustable="datalim")
-    a=axes[1]; a.scatter(xyz[ref,0],xyz[ref,1],xyz[ref,2],s=.03,c="#dddddd",rasterized=True); a.scatter(deformed[take,0],deformed[take,1],deformed[take,2],s=.07,c=mag[take],cmap="turbo",rasterized=True); a.view_init(elev=22,azim=-55); a.set_title("Oblique"); a.set_xlabel("x (m)"); a.set_ylabel("y (m)"); a.set_zlabel("z (m)")
-    fig.colorbar(sc,ax=axes,pad=.02,shrink=.72,label="Normalized mode-3 displacement magnitude"); fig.suptitle(f"FCC case 67 SOL 103 mode 3 ({num(d,'frequency_hz')[0]:.6f} Hz)"); finish(fig)
+    d=load_rows(); cats=list(dict.fromkeys(text(d,"plot_category").tolist())); markers=["o","x","+","s","^","D","v"]; fig,ax=plt.subplots(figsize=(6.3,5.3),constrained_layout=True); x=num(d,"a_m"); y=num(d,"t1_over_a")
+    for cat,marker in zip(cats,markers):
+        m=text(d,"plot_category")==cat; ax.scatter(x[m],y[m],marker=marker,s=35,label=cat.replace("_"," "))
+    pf=flag(d,"pareto_optimal"); ax.scatter(x[pf],y[pf],s=65,facecolors="none",edgecolors=INK,label="Observed Pareto"); ax.set_xlabel("Cell size, a (m)"); ax.set_ylabel("Primary-member ratio, t1/a"); ax.set_box_aspect(1); ax.set_title("BCC observed stress-failure mechanisms"); ax.legend(frameon=False,fontsize=6,ncol=2); finish(fig)
 
 if __name__ == "__main__":
     main()

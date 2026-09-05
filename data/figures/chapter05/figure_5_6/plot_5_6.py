@@ -60,9 +60,7 @@ def finish(fig):
     out=parse_output(); out.parent.mkdir(parents=True,exist_ok=True); fig.savefig(out,dpi=180,bbox_inches="tight"); plt.close(fig); print(out)
 
 def main():
-    d=load_rows(); order=np.argsort(num(d,"velocity_mps")); x=num(d,"velocity_mps")[order]
-    fig,ax=plt.subplots(figsize=(6.7,4.4),constrained_layout=True); ax.plot(x,num(d,"four_point_damping_g")[order],color=GREY,ls="--",lw=1.4,label="Four-value MKAERO1"); ax.plot(x,num(d,"eighteen_point_damping_g")[order],color=RED,lw=1.5,label="Revised 18-value MKAERO1"); ax.axhline(0,color=INK,ls=":",lw=.8)
-    ax.set_xlabel("Velocity (m/s)"); ax.set_ylabel("Damping, g"); ax.set_title("FCC case 67 point-3 MKAERO1 sensitivity"); ax.legend(frameon=False); finish(fig)
+    d=load_rows(); g=select(d,"grid"); p=select(d,"evaluation"); fig,ax=plt.subplots(figsize=(6.3,5.3),constrained_layout=True); im=score_panel(ax,g,p,"a_m","t1_over_a","feasibility_score","a_m","t1_over_a","feasible","pareto_case071","Completed BCC feasibility-score map"); ax.set_xlabel("Cell size, a (m)"); ax.set_ylabel("Primary-member ratio, t1/a"); fig.colorbar(im,ax=ax,label="Binary-feasibility score"); ax.legend(frameon=False); finish(fig)
 
 if __name__ == "__main__":
     main()

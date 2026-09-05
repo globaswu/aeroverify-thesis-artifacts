@@ -15,6 +15,7 @@ parser.add_argument("--output", type=Path, help="Output image path; defaults bes
 arguments = parser.parse_args()
 OUTPUT = (arguments.output if arguments.output is not None else HERE / "plot_6_8.png").resolve()
 OUTPUT.parent.mkdir(parents=True, exist_ok=True)
+
 plt.rcParams.update({"font.family": "serif", "font.serif": ["Times New Roman", "DejaVu Serif"], "font.size": 9})
 
 def rows_from(path):
@@ -24,40 +25,37 @@ def rows_from(path):
 def number(row, key):
     return float(row[key])
 
-rows=rows_from(DATA)
-profile=[r for r in rows if r["record_type"]=="profile"]
-survival=[r for r in rows if r["record_type"]=="survival"]
-profile=sorted(profile,key=lambda r:number(r,"input_physical"))
-x=np.array([number(r,"input_physical") for r in profile])
-thresholds=np.array(sorted({number(r,"normalized_hvi_threshold") for r in survival}))
-xi=np.array(sorted({number(r,"input_physical") for r in survival}))
-lookup={(number(r,"normalized_hvi_threshold"),number(r,"input_physical")):r for r in survival}
-prob=np.array([[number(lookup[(t,v)],"conditional_exceedance_probability") for v in xi] for t in thresholds])
-display=np.array([[number(lookup[(t,v)],"display_log10_exceedance_probability") for v in xi] for t in thresholds])
-fig,axes=plt.subplots(3,1,figsize=(7.5,10.2))
-ax=axes[0]
-mesh=ax.pcolormesh(xi,np.log10(thresholds),display,shading="auto",cmap="viridis",vmin=np.log10(1/2048),vmax=0)
-cs=ax.contour(xi,np.log10(thresholds),prob,levels=[.01,.1,.5],colors="#222222",linewidths=.8)
-ax.clabel(cs,fontsize=7)
-ax.set(xlabel="Secondary-member ratio, r2 [-]",ylabel="log10 normalized HVI threshold",title="A. Conditional HVI survival field")
-fig.colorbar(mesh,ax=ax,label="log10 conditional exceedance probability")
-def positive(name):
-    a=np.array([number(r,name) for r in profile])
-    return np.where(a>0,a,np.nan)
-ax=axes[1]
-ax.plot(x,positive("p90_normalized_hvi"),color="#D59E1A",lw=1.6,label="90th percentile")
-ax.plot(x,positive("p99_normalized_hvi"),color="#E86E17",lw=1.8,label="99th percentile")
-ax.plot(x,positive("mean_normalized_hvi"),"--",color="#1769AA",lw=1.7,label="Conditional mean")
-ax.plot(x,positive("sampled_profile_maximum_normalized_hvi"),color="#222222",lw=2,label="Sampled profile maximum")
-ax.scatter([number(profile[0],"selected_input_physical")],[number(profile[0],"selected_hvi_normalized")],marker="p",s=72,color="#B33A3A",edgecolors="white",label="Selected design")
-ax.set_yscale("log"); ax.set_ylim(1e-8,1.15)
-ax.set(xlabel="Secondary-member ratio, r2 [-]",ylabel="Normalized HVI",title="B. Conditional quantiles and profile")
-ax.grid(True,which="both",color="#d9d9d9",lw=.5); ax.legend(fontsize=7)
-ax=axes[2]
-ax.plot(x,positive("positive_hvi_fraction"),color="#E86E17",lw=2,label="Positive-HVI fraction")
-ax.plot(x,positive("mean_normalized_hvi"),"--",color="#1769AA",lw=1.8,label="Conditional mean")
-ax.set_yscale("log"); ax.set_ylim(1e-8,1)
-ax.set(xlabel="Secondary-member ratio, r2 [-]",ylabel="Conditional statistic",title="C. Positive-HVI support and conditional mean")
-ax.grid(True,which="both",color="#d9d9d9",lw=.5); ax.legend(fontsize=8)
-fig.suptitle("Frozen sampled-HVI field versus secondary-member ratio before evaluation 100",fontweight="bold")
-fig.tight_layout(); fig.savefig(OUTPUT,dpi=200,bbox_inches="tight"); plt.close(fig); print(OUTPUT)
+def flag(value):
+    return str(value).strip().lower() == "true"
+
+rows = rows_from(DATA)
+evaluations = sorted((r for r in rows if r["record_type"] == "evaluation"), key=lambda r: int(r["case_id"]))
+summary = {r["phase"]: r for r in rows if r["record_type"] == "phase_summary"}
+cases = np.array([int(r["case_id"]) for r in evaluations])
+hv = np.array([number(r, "normalized_hypervolume") for r in evaluations])
+fig, axes = plt.subplots(1, 2, figsize=(7.2, 3.35))
+ax = axes[0]
+ax.plot(cases[cases <= 30], hv[cases <= 30], color="#2878B5", lw=1.5)
+ax.plot(cases[cases >= 30], hv[cases >= 30], color="#E66101", lw=1.8)
+ax.scatter([30], [1.0], color="#2878B5", s=28, zorder=3)
+ax.scatter([100], [hv[-1]], color="#E66101", marker="D", s=32, zorder=3)
+ax.axvline(30, color="#222222", ls="--", lw=0.8)
+ax.set(xlabel="Finalized evaluation", ylabel=r"$HV_{box}$ / value at case 30", title="Box-restricted hypervolume")
+ax.grid(True, color="#d9d9d9", lw=0.55)
+ax = axes[1]
+phases = ["initial_design", "adaptive_phase"]
+labels = ["Initial\ndesign", "Adaptive\nphase"]
+feas = [number(summary[p], "phase_feasible_share_percent") for p in phases]
+pareto = [number(summary[p], "phase_final_pareto_share_percent") for p in phases]
+x = np.arange(2); width = 0.34
+ax.bar(x-width/2, feas, width, color="#2878B5", edgecolor="#222222", lw=0.5, label="Feasible evaluations")
+ax.bar(x+width/2, pareto, width, color="#E66101", edgecolor="#222222", lw=0.5, label="Members of case-100 PF")
+for i,p in enumerate(phases):
+    ax.text(i-width/2, feas[i]+2, f'{summary[p]["phase_feasible_count"]}/{summary[p]["phase_size"]}', ha="center", fontsize=7)
+    ax.text(i+width/2, pareto[i]+2, f'{summary[p]["phase_final_pareto_count"]}/{summary[p]["phase_size"]}', ha="center", fontsize=7)
+ax.set_xticks(x, labels); ax.set_ylim(0,100)
+ax.set(ylabel="Share of phase evaluations [%]", title="Feasibility and retained-front yield")
+ax.grid(True, axis="y", color="#d9d9d9", lw=0.55); ax.legend(fontsize=7)
+fig.suptitle("Optimization Progress Through Case 100", fontweight="bold")
+fig.tight_layout(); fig.savefig(OUTPUT, dpi=200, bbox_inches="tight"); plt.close(fig)
+print(OUTPUT)

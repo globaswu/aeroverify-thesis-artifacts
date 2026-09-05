@@ -2,9 +2,7 @@ function plot_5_5(outputFile)
 if nargin < 1, outputFile=fullfile(fileparts(mfilename('fullpath')),'plot_5_5.png'); end
 T=loadSiblingData('figure_5_5.csv');
 
-G=T(textCol(T,'record_type')=="grid",:); P=T(textCol(T,'record_type')=="evaluation",:); fig=figure('Visible','off','Color','w','Position',[100 100 650 900]); tl=tiledlayout(fig,2,1,'Padding','compact','TileSpacing','compact'); scores={'score_before_cases_8_29_feasible','score_after_cases_8_29_feasible'}; bases={'score_before_observed','score_after_observed'}; last=[51 71]; labels={'Before continuation','Through case 71'};
-for q=1:2, ax=nexttile(tl); [xv,yv,Z]=gridData(G,'a_m','t1_over_a',scores{q}); [~,~,Zb]=gridData(G,'a_m','t1_over_a',bases{q}); imagesc(ax,xv,yv,Z); set(ax,'YDir','normal'); hold(ax,'on'); contour(ax,xv,yv,Z,[.5 .5],'w','LineWidth',1); contour(ax,xv,yv,Zb,[.5 .5],'k--','LineWidth',.9); m=numericCol(P,'case_id')<=last(q); S=P(m,:); feasible=numericCol(S,'constraint_hypothetical')<=0; plotObservations(ax,numericCol(S,'a_m'),numericCol(S,'t1_over_a'),feasible); flip=logicalCol(S,'hypothetically_flipped'); scatter(ax,numericSubset(S,'a_m',flip),numericSubset(S,'t1_over_a',flip),55,'d','MarkerFaceColor','none','MarkerEdgeColor',[0.90 .38 0]); axis(ax,'square'); xlabel(ax,'Cell size, a (m)'); ylabel(ax,'Primary-member ratio, t1/a'); title(ax,labels{q}); colorbar(ax); end
-colormap(fig,'parula'); title(tl,'Hypothetical FCC feasibility-label sensitivity'); finishPlot(fig,outputFile);
+fig=figure('Visible','off','Color','w'); ax=axes(fig); plotPareto(ax,T,'mass_kg','compliance_Nm','feasible','pareto_case071','case_id'); xlabel(ax,'Lattice-wing mass (kg)'); ylabel(ax,'Trim compliance (N m)'); title(ax,'Completed BCC continuation Pareto front'); legend(ax,'Location','best'); finishPlot(fig,outputFile);
 end
 
 function T = loadSiblingData(csvName)

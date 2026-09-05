@@ -2,7 +2,7 @@ function plot_5_12(outputFile)
 if nargin < 1, outputFile=fullfile(fileparts(mfilename('fullpath')),'plot_5_12.png'); end
 T=loadSiblingData('figure_5_12.csv');
 
-cases=unique(round(numericCol(T,'case'))); fig=figure('Visible','off','Color','w'); ax=axes(fig); hold(ax,'on'); for c=cases', m=round(numericCol(T,'case'))==c; r=numericCol(T,'rank_descending'); r=r(m); s=numericCol(T,'shell_von_mises_stress_mpa'); s=s(m); [r,ord]=sort(r); plot(ax,r,s(ord),'LineWidth',1,'DisplayName',sprintf('Case %d',c)); end; yline(ax,median(numericCol(T,'stress_limit_mpa'),'omitnan'),'--','Stress screen'); set(ax,'XScale','log'); xlabel(ax,'Descending stress rank'); ylabel(ax,'Shell von Mises stress (MPa)'); title(ax,'BCC upper shell-stress tails'); legend(ax,'Location','best'); finishPlot(fig,outputFile);
+cases=unique(round(numericCol(T,'case'))); fig=figure('Visible','off','Color','w','Position',[100 100 1050 650]); tl=tiledlayout(fig,2,3,'Padding','compact','TileSpacing','compact'); for c=cases', ax=nexttile(tl); m=round(numericCol(T,'case'))==c; scatter(ax,numericSubset(T,'x_m',m),numericSubset(T,'span_y_mm',m),28,numericSubset(T,'shell_von_mises_stress_mpa',m),'filled'); hold(ax,'on'); crit=m & logicalCol(T,'is_critical_element'); scatter(ax,numericSubset(T,'x_m',crit),numericSubset(T,'span_y_mm',crit),90,'*','MarkerEdgeColor',[.75 .08 .12]); title(ax,sprintf('Case %d',c)); xlabel(ax,'Chordwise x (m)'); ylabel(ax,'Spanwise y (mm)'); end; colormap(fig,'parula'); colorbar; title(tl,'BCC localization of the highest shell stresses'); finishPlot(fig,outputFile);
 end
 
 function T = loadSiblingData(csvName)

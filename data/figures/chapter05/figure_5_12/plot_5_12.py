@@ -60,10 +60,10 @@ def finish(fig):
     out=parse_output(); out.parent.mkdir(parents=True,exist_ok=True); fig.savefig(out,dpi=180,bbox_inches="tight"); plt.close(fig); print(out)
 
 def main():
-    d=load_rows(); cases=np.unique(num(d,"case").astype(int)); fig,ax=plt.subplots(figsize=(7,4.8),constrained_layout=True)
-    for case in cases:
-        m=num(d,"case").astype(int)==case; order=np.argsort(num(d,"rank_descending")[m]); ax.plot(num(d,"rank_descending")[m][order],num(d,"shell_von_mises_stress_mpa")[m][order],lw=1,label=f"Case {case}")
-    ax.axhline(np.nanmedian(num(d,"stress_limit_mpa")),color=INK,ls="--",lw=.9,label="Stress screen"); ax.set_xscale("log"); ax.set_xlabel("Descending stress rank"); ax.set_ylabel("Shell von Mises stress (MPa)"); ax.set_title("BCC upper shell-stress tails"); ax.legend(frameon=False,ncol=2); finish(fig)
+    d=load_rows(); cases=np.unique(num(d,"case").astype(int)); fig,axes=plt.subplots(2,3,figsize=(10.5,6.5),constrained_layout=True)
+    for ax,case in zip(axes.flat,cases):
+        m=num(d,"case").astype(int)==case; sc=ax.scatter(num(d,"x_m")[m],num(d,"span_y_mm")[m],c=num(d,"shell_von_mises_stress_mpa")[m],cmap="viridis",vmin=175,vmax=240,s=24); crit=m & flag(d,"is_critical_element"); ax.scatter(num(d,"x_m")[crit],num(d,"span_y_mm")[crit],marker="*",s=90,c=RED,edgecolors=INK); ax.set_title(f"Case {case}"); ax.set_xlabel("Chordwise x (m)"); ax.set_ylabel("Spanwise y (mm)")
+    fig.colorbar(sc,ax=axes,label="Stress (MPa)"); fig.suptitle("BCC localization of the highest shell stresses"); finish(fig)
 
 if __name__ == "__main__":
     main()

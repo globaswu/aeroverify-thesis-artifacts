@@ -2,11 +2,7 @@ function plot_5_7(outputFile)
 if nargin < 1, outputFile=fullfile(fileparts(mfilename('fullpath')),'plot_5_7.png'); end
 T=loadSiblingData('figure_5_7.csv');
 
-xyz=[numericCol(T,'x_m') numericCol(T,'y_m') numericCol(T,'z_m')]; u=[numericCol(T,'ux_mode3') numericCol(T,'uy_mode3') numericCol(T,'uz_mode3')]; mag=numericCol(T,'displacement_magnitude'); def=xyz+u; stride=max(1,ceil(height(T)/160000)); take=1:stride:height(T); ref=take(1:5:end); fig=figure('Visible','off','Color','w','Position',[100 100 1050 760]); tl=tiledlayout(fig,2,2,'Padding','compact','TileSpacing','compact');
-ax=nexttile(tl); scatter(ax,xyz(ref,1),xyz(ref,2),1,[.85 .85 .85],'.'); hold(ax,'on'); scatter(ax,def(take,1),def(take,2),2,mag(take),'filled'); axis(ax,'equal'); title(ax,'Top'); xlabel(ax,'x (m)'); ylabel(ax,'y (m)');
-ax=nexttile(tl); scatter3(ax,xyz(ref,1),xyz(ref,2),xyz(ref,3),1,[.85 .85 .85],'.'); hold(ax,'on'); scatter3(ax,def(take,1),def(take,2),def(take,3),2,mag(take),'filled'); axis(ax,'equal'); view(ax,-55,22); title(ax,'Oblique'); xlabel(ax,'x (m)'); ylabel(ax,'y (m)'); zlabel(ax,'z (m)');
-ax=nexttile(tl); scatter(ax,xyz(ref,1),xyz(ref,3),1,[.85 .85 .85],'.'); hold(ax,'on'); scatter(ax,def(take,1),def(take,3),2,mag(take),'filled'); axis(ax,'equal'); title(ax,'Front'); xlabel(ax,'x (m)'); ylabel(ax,'z (m)');
-ax=nexttile(tl); scatter(ax,xyz(ref,2),xyz(ref,3),1,[.85 .85 .85],'.'); hold(ax,'on'); scatter(ax,def(take,2),def(take,3),2,mag(take),'filled'); axis(ax,'equal'); title(ax,'Right'); xlabel(ax,'y (m)'); ylabel(ax,'z (m)'); colormap(fig,'turbo'); colorbar(ax); title(tl,sprintf('FCC case 67 SOL 103 mode 3 (%.6f Hz)',numericSubset(T,'frequency_hz',1))); finishPlot(fig,outputFile);
+fig=figure('Visible','off','Color','w'); ax=axes(fig); hold(ax,'on'); cats=unique(textCol(T,'plot_category'),'stable'); marks={'o','x','+','s','^','d','v'}; x=numericCol(T,'a_m'); y=numericCol(T,'t1_over_a'); for i=1:numel(cats), m=textCol(T,'plot_category')==cats(i); scatter(ax,x(m),y(m),36,marks{1+mod(i-1,numel(marks))},'DisplayName',strrep(cats(i),'_',' ')); end; pf=logicalCol(T,'pareto_optimal'); scatter(ax,x(pf),y(pf),70,'o','MarkerFaceColor','none','MarkerEdgeColor','k','DisplayName','Observed Pareto'); axis(ax,'square'); xlabel(ax,'Cell size, a (m)'); ylabel(ax,'Primary-member ratio, t1/a'); title(ax,'BCC observed stress-failure mechanisms'); legend(ax,'Location','bestoutside'); finishPlot(fig,outputFile);
 end
 
 function T = loadSiblingData(csvName)

@@ -60,10 +60,17 @@ def finish(fig):
     out=parse_output(); out.parent.mkdir(parents=True,exist_ok=True); fig.savefig(out,dpi=180,bbox_inches="tight"); plt.close(fig); print(out)
 
 def main():
-    d=load_rows(); names=np.asarray([f"{g} case {int(float(c))}" for g,c in zip(text(d,"group"),num(d,"case"))]); x=np.arange(len(d)); skin=2*num(d,"skin_mass_single_kg"); lattice=2*num(d,"lattice_mass_single_kg")
-    fig,axes=plt.subplots(2,1,figsize=(7,6),constrained_layout=True); axes[0].bar(x,skin,color=LIGHT,label="Skin"); axes[0].bar(x,lattice,bottom=skin,color=ORANGE,label="Lattice"); axes[0].set_ylabel("Two-wing mass (kg)"); axes[0].legend(frameon=False); axes[1].bar(x,num(d,"max_vm_MPa"),color=[BLUE,ORANGE,PURPLE]); axes[1].axhline(220,color=INK,ls="--",label="220 MPa screen"); axes[1].set_ylabel("Maximum stress (MPa)"); axes[1].legend(frameon=False)
-    for ax in axes: ax.set_xticks(x,names)
-    fig.suptitle("Material allocation and stress reserve of representative cells"); finish(fig)
+    d=load_rows(); obs=select(d,"observed"); ref=select(d,"reference"); ar=num(ref,"AR"); taper=num(ref,"TaperRatio"); chosen=np.asarray([6.,9.,12.]); fig,axes=plt.subplots(3,1,figsize=(7.2,10),constrained_layout=True)
+    feas=flag(obs,"Feasible"); axes[0].scatter(num(obs,"TaperRatio")[feas],1000*num(obs,"CDitrim")[feas],c=num(obs,"AR")[feas],cmap="viridis",s=32,label="Feasible"); axes[0].scatter(num(obs,"TaperRatio")[~feas],1000*num(obs,"CDitrim")[~feas],marker="x",c=GREY,s=30,label="Infeasible"); pf=flag(obs,"Pareto"); axes[0].scatter(num(obs,"TaperRatio")[pf],1000*num(obs,"CDitrim")[pf],s=60,facecolors="none",edgecolors=INK); axes[0].set_ylabel("Trim induced drag, 1000 CDi")
+    for value in chosen:
+        m=np.isclose(ar,value); order=np.argsort(taper[m]); axes[1].plot(taper[m][order],num(ref,"RigidSpanEfficiency")[m][order],label=f"Rigid LLT, AR={value:g}")
+    axes[1].scatter(num(obs,"TaperRatio")[feas],num(obs,"TorsionCorrectedE")[feas],c=num(obs,"AR")[feas],cmap="viridis",s=30); axes[1].scatter(num(obs,"TaperRatio")[~feas],num(obs,"TorsionCorrectedE")[~feas],marker="x",c=GREY,s=28); axes[1].set_ylabel("Span efficiency"); axes[1].legend(frameon=False,ncol=3)
+    ut=np.unique(taper); lo=[]; hi=[]
+    for t in ut:
+        vals=num(ref,"TaperOnlyCDiPenaltyPct")[np.isclose(taper,t)]; lo.append(vals.min()); hi.append(vals.max())
+    axes[2].fill_between(ut,lo,hi,color=LIGHT,label="Rigid LLT envelope, AR=6-12"); m=np.isclose(ar,9); order=np.argsort(taper[m]); axes[2].plot(taper[m][order],num(ref,"TaperOnlyCDiPenaltyPct")[m][order],color=BLUE,label="Rigid LLT, AR=9"); axes[2].scatter(num(obs,"TaperRatio")[feas],num(obs,"TaperOnlyCDiPenaltyPct")[feas],c=num(obs,"AR")[feas],cmap="viridis",s=30); axes[2].scatter(num(obs,"TaperRatio")[~feas],num(obs,"TaperOnlyCDiPenaltyPct")[~feas],marker="x",c=GREY,s=28); axes[2].set_ylabel("Taper-only CDi penalty (%)"); axes[2].legend(frameon=False)
+    for ax in axes: ax.set_xlabel("Taper ratio")
+    fig.suptitle("Taper-ratio theory and observed-result consistency checks"); finish(fig)
 
 if __name__ == "__main__":
     main()

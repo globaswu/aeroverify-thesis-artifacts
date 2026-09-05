@@ -2,7 +2,7 @@ function plot_5_10(outputFile)
 if nargin < 1, outputFile=fullfile(fileparts(mfilename('fullpath')),'plot_5_10.png'); end
 T=loadSiblingData('figure_5_10.csv');
 
-G=T(textCol(T,'record_type')=="grid",:); P=T(textCol(T,'record_type')=="evaluation",:); fig=figure('Visible','off','Color','w'); ax=axes(fig); plotScore(ax,G,P,'a_m','t1_over_a','feasibility_score','a_m','t1_over_a','feasible','pareto_case071'); colormap(ax,'parula'); colorbar(ax); xlabel(ax,'Cell size, a (m)'); ylabel(ax,'Primary-member ratio, t1/a'); title(ax,'Completed BCC feasibility-score map'); finishPlot(fig,outputFile);
+fig=figure('Visible','off','Color','w'); ax=axes(fig); hold(ax,'on'); cats=unique(textCol(T,'plot_category'),'stable'); marks={'o','x','+','s','^','d','v'}; x=numericCol(T,'a_m'); y=numericCol(T,'t1_over_a'); for i=1:numel(cats), m=textCol(T,'plot_category')==cats(i); scatter(ax,x(m),y(m),36,marks{1+mod(i-1,numel(marks))},'DisplayName',strrep(cats(i),'_',' ')); end; pf=logicalCol(T,'pareto_optimal'); scatter(ax,x(pf),y(pf),70,'o','MarkerFaceColor','none','MarkerEdgeColor','k','DisplayName','Observed Pareto'); axis(ax,'square'); xlabel(ax,'Cell size, a (m)'); ylabel(ax,'Primary-member ratio, t1/a'); title(ax,'SC observed stress-failure mechanisms'); legend(ax,'Location','bestoutside'); finishPlot(fig,outputFile);
 end
 
 function T = loadSiblingData(csvName)

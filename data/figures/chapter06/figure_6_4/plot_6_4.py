@@ -22,23 +22,17 @@ def rows_from(path):
     with path.open(newline="", encoding="utf-8-sig") as handle:
         return list(csv.DictReader(handle))
 
-def number(row, key):
-    return float(row[key])
+def number(row, key): return float(row[key])
+def flag(value): return str(value).strip().lower() == "true"
 
-def flag(value):
-    return str(value).strip().lower() == "true"
-
-rows=rows_from(DATA)
-keys=["normalized_x1_ar","normalized_x2_taper_ratio","normalized_x3_primary_member_ratio","normalized_x4_secondary_member_ratio"]
-labels=["Normalized AR","Normalized taper ratio","Normalized primary-member ratio","Normalized secondary-member ratio"]
-pairs=[(0,1),(0,2),(0,3),(1,2),(1,3),(2,3)]
-fig,axes=plt.subplots(3,2,figsize=(6.8,8.2))
-for ax,(i,j) in zip(axes.flat,pairs):
-    inf=[r for r in rows if not flag(r["c_feasible_label"])]; ini=[r for r in rows if flag(r["c_feasible_label"]) and r["phase"]=="initial_design"]; ada=[r for r in rows if flag(r["c_feasible_label"]) and r["phase"]=="adaptive_phase"]; pf=[r for r in rows if flag(r["final_pareto"])]
-    ax.scatter([number(r,keys[i]) for r in inf],[number(r,keys[j]) for r in inf],marker="x",s=25,color="#8c8c8c",label="Infeasible")
-    ax.scatter([number(r,keys[i]) for r in ini],[number(r,keys[j]) for r in ini],marker="o",s=25,facecolors="white",edgecolors="#2878B5",label="Initial feasible")
-    ax.scatter([number(r,keys[i]) for r in ada],[number(r,keys[j]) for r in ada],marker="D",s=27,color="#E66101",label="Adaptive feasible")
-    ax.scatter([number(r,keys[i]) for r in pf],[number(r,keys[j]) for r in pf],marker="o",s=53,facecolors="none",edgecolors="#222222",label="Case-100 Pareto")
-    ax.set(xlim=(-.025,1.025),ylim=(-.025,1.025),xlabel=labels[i],ylabel=labels[j]); ax.set_xticks([0,.5,1]); ax.set_yticks([0,.5,1]); ax.set_aspect("equal",adjustable="box"); ax.grid(True,color="#d9d9d9",lw=.55)
-handles,legend_labels=axes.flat[0].get_legend_handles_labels(); fig.legend(handles,legend_labels,loc="lower center",ncol=4,fontsize=7)
-fig.suptitle("Pairwise Projections of the Four-Dimensional Design Domain",fontweight="bold"); fig.tight_layout(rect=(0,.06,1,.96)); fig.savefig(OUTPUT,dpi=200,bbox_inches="tight"); plt.close(fig); print(OUTPUT)
+rows=rows_from(DATA); llt=[r for r in rows if r["record_type"]=="llt"]; disp=[r for r in rows if r["record_type"]=="trim_displacement"]; cases=sorted({int(r["case_id"]) for r in llt}); colors=plt.cm.tab10(np.linspace(0,.8,len(cases)))
+fig,axes=plt.subplots(2,2,figsize=(7.5,8.5))
+for case,color in zip(cases,colors):
+    a=sorted([r for r in llt if int(r["case_id"])==case],key=lambda r:number(r,"normalized_semispan")); d=sorted([r for r in disp if int(r["case_id"])==case],key=lambda r:number(r,"normalized_semispan")); eta=[number(r,"normalized_semispan") for r in a]; etad=[number(r,"normalized_semispan") for r in d]
+    axes[0,0].plot(eta,[number(r,"lift_per_unit_span_n_per_m") for r in a],color=color,lw=1.35,label=f"MI{case}")
+    axes[0,1].plot(eta,[number(r,"outboard_bending_moment_nm")/1000 for r in a],color=color,lw=1.35)
+    axes[1,0].plot(etad,[number(r,"trim_twist_deg") for r in d],color=color,lw=1.35)
+    axes[1,1].plot(etad,[1000*number(r,"trim_vertical_displacement_m") for r in d],color=color,lw=1.35)
+titles=["A. Torsion-corrected LLT load","B. Derived outboard-load moment","C. SOL 144 trim twist","D. SOL 144 trim vertical displacement"]; ylabels=["LLT lift per unit span [N/m]","Aerodynamic bending moment [kN m]","Torsional displacement [deg]","Vertical displacement [mm]"]
+for ax,title,ylabel in zip(axes.flat,titles,ylabels): ax.set(xlim=(0,1),xlabel="Normalized semispan, y/s [-]",ylabel=ylabel,title=title); ax.grid(True,color="#d9d9d9",lw=.5)
+axes[0,0].legend(fontsize=7); fig.suptitle("Representative Static Aerostructural Decomposition",fontweight="bold"); fig.tight_layout(); fig.savefig(OUTPUT,dpi=200,bbox_inches="tight"); plt.close(fig); print(OUTPUT)

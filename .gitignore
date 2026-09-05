@@ -39,8 +39,8 @@ checkpoints/
 *.pdf
 *.png
 *.svg
+!docs/figures/*.png
 
 # Platform files
 .DS_Store
 Thumbs.db
-

@@ -3,7 +3,7 @@ param()
 
 $ErrorActionPreference = 'Stop'
 $packageRoot = [System.IO.Path]::GetFullPath((Split-Path -Parent $PSScriptRoot))
-$textExtensions = @('.md', '.m', '.ps1', '.json', '.csv', '.txt', '.yml', '.cff')
+$textExtensions = @('.md', '.m', '.py', '.tex', '.ps1', '.json', '.csv', '.txt', '.yml', '.cff')
 $utf8WithoutBom = [System.Text.UTF8Encoding]::new($false)
 
 function Get-PortableBytes {
@@ -43,6 +43,9 @@ function Get-SourceDescription {
         '^data/diagnostics/fcc_case067/' { return 'aeroverify/artifacts/case067_sol145_mkaero_diagnostic_20260805' }
         '^data/flutter/' { return 'sanitized projection of the guarded final SOL 145 rerun ledger' }
         '^data/representative_physics/' { return 'aeroverify/artifacts/thesis_representative_physics' }
+        '^data/benchmarks/seven_solver_comparison/' { return 'completed seven-problem seven-solver comparison, 150 observations per trajectory' }
+        '^data/figures/' { return 'standalone figure data and scripts indexed by the current thesis figure number' }
+        '^data/tables/chapter05/' { return 'completed topology comparison and selected localized stress observations' }
         '^matlab/\+ctsemo/' { return 'globaswu/cTSEMO v0.2.1 modular package' }
         '^matlab/cTSEMO\.m$' { return 'globaswu/cTSEMO v0.2.1 src/cTSEMO.m' }
         '^matlab/cTSEMOOptions\.m$' { return 'globaswu/cTSEMO v0.2.1 src/cTSEMOOptions.m' }
@@ -54,7 +57,7 @@ function Get-SourceDescription {
 $entries = [System.Collections.Generic.List[object]]::new()
 foreach ($file in Get-ChildItem -LiteralPath $packageRoot -Recurse -File) {
     $relative = $file.FullName.Substring($packageRoot.Length + 1).Replace('\', '/')
-    if ($relative -eq 'manifest.json' -or
+    if ($relative -eq 'manifest.json' -or $relative -eq '.git' -or
             $relative.StartsWith('.git/', [System.StringComparison]::OrdinalIgnoreCase) -or
             $relative.StartsWith('generated/', [System.StringComparison]::OrdinalIgnoreCase) -or
             $relative.StartsWith('test-output/', [System.StringComparison]::OrdinalIgnoreCase) -or

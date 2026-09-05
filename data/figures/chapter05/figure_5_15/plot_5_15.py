@@ -60,7 +60,7 @@ def finish(fig):
     out=parse_output(); out.parent.mkdir(parents=True,exist_ok=True); fig.savefig(out,dpi=180,bbox_inches="tight"); plt.close(fig); print(out)
 
 def main():
-    d=load_rows(); g=select(d,"grid"); p=select(d,"evaluation"); fig,ax=plt.subplots(figsize=(6.3,5.3),constrained_layout=True); im=score_panel(ax,g,p,"a_m","t1_over_a","binary_feasibility_score","a_m","t1_over_a","feasible","pareto_case071","Completed SC feasibility-score map"); ax.set_xlabel("Cell size, a (m)"); ax.set_ylabel("Primary-member ratio, t1/a"); fig.colorbar(im,ax=ax,label="Binary-feasibility score"); ax.legend(frameon=False); finish(fig)
+    d=load_rows(); fig,ax=plt.subplots(figsize=(6.5,4.8),constrained_layout=True); pareto_panel(ax,d,"CDitrim","Ctrim_Nm","feasible","final_pareto","case"); continuation=(num(d,"case")>=41)&flag(d,"final_pareto"); ax.scatter(num(d,"CDitrim")[continuation],num(d,"Ctrim_Nm")[continuation],s=60,facecolors="none",edgecolors=ORANGE,label="Continuation Pareto"); ax.set_ylim(8,125); ax.set_xlabel("Trim induced-drag coefficient"); ax.set_ylabel("Trim compliance (N m)"); ax.set_title("Observed planform objective trade-off"); ax.legend(frameon=False); finish(fig)
 
 if __name__ == "__main__":
     main()

@@ -67,12 +67,43 @@ Source folders, transformations, and limitations are recorded in
 
 ## Figure-level exports
 
-`figures/chapter02`, `figures/chapter03`, `figures/chapter04`,
-`figures/chapter05`, and `figures/chapter06` contain one self-contained folder
-for each of the 50 quantitative thesis figures. Every folder contains exactly
-one consolidated CSV, one standalone Python plot script, and one standalone
-MATLAB plot script. Each script reads only its sibling CSV. The complete index
-is [`docs/FIGURE_DATA_MAP.md`](../docs/FIGURE_DATA_MAP.md).
+`figures/chapter02` through `figures/chapter06`, plus `figures/chapterC` and
+`figures/chapterD`, contain 53 figure packages under the current thesis
+numbering. Every folder contains exactly one consolidated CSV, one independent
+Python plotting script, and one independent MATLAB plotting script. Each script
+reads only its adjacent CSV. The complete index is
+[`docs/FIGURE_DATA_MAP.md`](../docs/FIGURE_DATA_MAP.md).
+
+Figure 2.8 displays nTop screenshots in the thesis; its CSV and scripts
+reconstruct the mode shape as a point cloud. They do not recreate the exact
+nTop surface rendering or camera settings.
+
+Figure 5.1 combines the completed 71-case records for FCC, BCC, and SC.
+`X1_cell_size_m` and `X2_t1_over_a` are the input variables; the Y columns
+contain two-wing structural mass [kg] and trim compliance [N m].
+`C_binary_feasible` uses 1 for feasible and 0 for infeasible, while
+`C_signed_recorded` preserves -1 for feasible and +1 for infeasible. The
+within-topology and pooled Pareto columns apply to the recorded feasible
+observations. Empty component or flutter fields indicate missing or
+inapplicable values, not zero.
+
+## Seven-solver benchmark
+
+[`benchmarks/seven_solver_comparison`](benchmarks/seven_solver_comparison/README.md)
+contains the seven-by-seven
+[hypervolume-ratio table](benchmarks/seven_solver_comparison/hv_ratio_table.csv),
+all 7,350 evaluated X/Y/C observations, the observed Pareto sets, empirical
+reference fronts, and metric records for 49 solver/problem trajectories.
+Figures 3.7 and 3.8 each contain their required rows in one adjacent CSV.
+cTSEMO and HyperMapper received binary labels; five other methods received
+continuous constraint margins. Margins retained for binary-method rows are
+post hoc audit evidence and were not supplied during candidate selection.
+
+## Chapter 5 supporting tables
+
+[`tables/chapter05`](tables/chapter05) contains the final topology endpoint
+table and localized-stress records for the selected FCC and BCC cases. These
+tables support the Chapter 5 numerical discussion alongside the figure CSVs.
 
 The exports omit native solver files, machine paths, archive locations,
 licence configuration, and non-scientific execution timestamps.

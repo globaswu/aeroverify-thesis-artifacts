@@ -18,6 +18,8 @@ Public filenames are timestamp-free and stable.
 | `data/diagnostics/fcc_case067/` | `artifacts/case067_sol145_mkaero_diagnostic_20260805/` | 20-point comparison copied and renamed |
 | `data/flutter/harmonized_sol145_results.csv` | guarded final SOL 145 rerun ledger and archived success receipts | selected path-free fields projected; local and network archive addresses removed |
 | `data/representative_physics/` | `artifacts/thesis_representative_physics/` | four path-free final tables copied and renamed |
+| `data/benchmarks/seven_solver_comparison/` | completed seven-problem, seven-solver analytical comparison | evaluated X/Y/C records, observed fronts, empirical GA references, and reconstructed metrics exported to CSV |
+| `data/figures/` | thesis figure data and associated plot scripts | packages mapped to current chapter and appendix numbering; each script reads its adjacent CSV only |
 
 `manifest.json` stores a SHA-256 digest and byte count for every release file
 except itself. `experiments.json` records the entry point, inputs, expected
@@ -33,6 +35,11 @@ checks, and known limitation for each public experiment.
 - Four-input cases 1-64 and 66-70 use the baseline mesh epoch, whereas the
   replacement case 65 and cases 71-100 use the refined epoch.
 - Solver-native arrays and commercial project files are intentionally absent.
+- The seven-solver comparison contains one trajectory per solver/problem;
+  cTSEMO reuses repetition 1 of an earlier study. The 7,350 recorded
+  observations include the repeated accounting of shared initial designs.
+  The five continuous-margin methods receive richer constraint feedback than
+  the binary-label cTSEMO and HyperMapper implementations.
 - The harmonized table verifies the implemented strict screen but does not
   replace source-campaign labels, provide V-g histories, or establish
   independent physical validation.

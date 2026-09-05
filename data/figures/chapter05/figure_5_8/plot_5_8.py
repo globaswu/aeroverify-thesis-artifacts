@@ -60,13 +60,7 @@ def finish(fig):
     out=parse_output(); out.parent.mkdir(parents=True,exist_ok=True); fig.savefig(out,dpi=180,bbox_inches="tight"); plt.close(fig); print(out)
 
 def main():
-    d=load_rows(); points=np.unique(num(d,"point").astype(int)); fig,axes=plt.subplots(5,4,figsize=(10.2,10.2),sharex=True)
-    for ax,point in zip(axes.flat,points):
-        m=num(d,"point").astype(int)==point; order=np.argsort(num(d,"velocity_mps")[m]); x=num(d,"velocity_mps")[m][order]
-        ax.plot(x,num(d,"four_point_damping_g")[m][order],color=GREY,ls="--",lw=.9); ax.plot(x,num(d,"eighteen_point_damping_g")[m][order],color=RED,lw=1); ax.axhline(0,color=INK,ls=":",lw=.6); ax.set_title(f"Point {point}")
-    for ax in axes[-1,:]: ax.set_xlabel("Velocity (m/s)")
-    for ax in axes[:,0]: ax.set_ylabel("Damping, g")
-    fig.suptitle("FCC case 67 all-point MKAERO1 sensitivity",y=.995); fig.legend(handles=[Line2D([0],[0],color=GREY,ls="--",label="Four-value MKAERO1"),Line2D([0],[0],color=RED,label="Revised 18-value MKAERO1")],loc="upper center",ncol=2,frameon=False,bbox_to_anchor=(.5,.975)); fig.subplots_adjust(top=.92,wspace=.3,hspace=.35); finish(fig)
+    d=load_rows(); fig,ax=plt.subplots(figsize=(6.5,4.8),constrained_layout=True); pareto_panel(ax,d,"mass_kg","compliance_Nm","feasible","pareto_case071","case_id"); ax.set_xlabel("Lattice-wing mass (kg)"); ax.set_ylabel("Trim compliance (N m)"); ax.set_title("Completed SC continuation Pareto front"); ax.legend(frameon=False); finish(fig)
 
 if __name__ == "__main__":
     main()

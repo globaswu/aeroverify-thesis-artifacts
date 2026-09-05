@@ -60,7 +60,7 @@ def finish(fig):
     out=parse_output(); out.parent.mkdir(parents=True,exist_ok=True); fig.savefig(out,dpi=180,bbox_inches="tight"); plt.close(fig); print(out)
 
 def main():
-    d=load_rows(); fig,ax=plt.subplots(figsize=(6.5,4.8),constrained_layout=True); pareto_panel(ax,d,"mass_kg","compliance_Nm","feasible","pareto_case071","case_id"); ax.set_xlabel("Lattice-wing mass (kg)"); ax.set_ylabel("Trim compliance (N m)"); ax.set_title("Completed SC continuation Pareto front"); ax.legend(frameon=False); finish(fig)
+    d=load_rows(); g=select(d,"grid"); p=select(d,"evaluation"); fig,ax=plt.subplots(figsize=(6.3,5.3),constrained_layout=True); im=score_panel(ax,g,p,"aspect_ratio","taper_ratio","binary_feasibility_score","AR","taper_ratio","feasible","final_pareto","Final planform feasibility-score field"); ax.set_xlabel("Aspect ratio"); ax.set_ylabel("Taper ratio"); fig.colorbar(im,ax=ax,label="Binary-feasibility score"); ax.legend(frameon=False); finish(fig)
 
 if __name__ == "__main__":
     main()

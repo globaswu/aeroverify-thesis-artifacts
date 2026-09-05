@@ -28,28 +28,22 @@ def number(row, key):
 def flag(value):
     return str(value).strip().lower() == "true"
 
-rows = rows_from(DATA)
-def xy(group): return [number(r,"y1_cditrim") for r in group], [number(r,"y2_ctrim_nm") for r in group]
-def draw(ax):
-    groups=[([r for r in rows if not flag(r["c_feasible_label"])],"x",36,"#8c8c8c","Infeasible"),
-            ([r for r in rows if flag(r["c_feasible_label"]) and not flag(r["final_pareto"])],"o",40,"#2878B5","Feasible, dominated"),
-            ([r for r in rows if flag(r["final_pareto"]) and int(r["case_id"])<=30],"o",48,"#222222","Initial-design Pareto"),
-            ([r for r in rows if flag(r["final_pareto"]) and int(r["case_id"])>30],"D",50,"#E66101","Adaptive Pareto")]
-    for group,marker,size,color,label in groups:
-        x,y=xy(group)
-        if marker=="o" and label.startswith("Feasible"):
-            ax.scatter(x,y,marker=marker,s=size,facecolors="white",edgecolors=color,lw=1.1,label=label)
-        else: ax.scatter(x,y,marker=marker,s=size,color=color,label=label)
-    refined=[r for r in rows if flag(r["refined_mesh"])]
-    x,y=xy(refined); ax.scatter(x,y,marker="s",s=66,facecolors="none",edgecolors="#6A3D9A",lw=0.8,label="Refined mesh")
-    front=sorted([r for r in rows if flag(r["final_pareto"])],key=lambda r:number(r,"y1_cditrim"))
-    x,y=xy(front); ax.plot(x,y,color="#222222",lw=1)
-    ax.grid(True,color="#d9d9d9",lw=0.55)
-fig,ax=plt.subplots(figsize=(7.0,5.1))
-draw(ax); ax.set(xlabel=r"Trim induced-drag coefficient, $C_{D_i,trim}$ [-]",ylabel=r"Two-wing trim compliance, $C_{trim}$ [N m]",title="Four-Input Objective Space (100 Evaluations)")
-ax.legend(loc="lower center",bbox_to_anchor=(0.5,-0.29),ncol=2,fontsize=7)
-inset=ax.inset_axes([0.43,0.43,0.54,0.48]); draw(inset)
-front=[r for r in rows if flag(r["final_pareto"])]; xs=[number(r,"y1_cditrim") for r in front]; ys=[number(r,"y2_ctrim_nm") for r in front]
-inset.set_xlim(min(xs)-0.06*(max(xs)-min(xs)),max(xs)+0.06*(max(xs)-min(xs))); inset.set_ylim(min(ys)-0.06*(max(ys)-min(ys)),max(ys)+0.06*(max(ys)-min(ys))); inset.set_title("Feasible-front detail",fontsize=8)
-if inset.get_legend() is not None: inset.get_legend().remove()
-fig.tight_layout(); fig.savefig(OUTPUT,dpi=200,bbox_inches="tight"); plt.close(fig); print(OUTPUT)
+rows=rows_from(DATA)
+fig,axes=plt.subplots(1,2,figsize=(7.2,3.65))
+cats=["feasible","shell_von_mises_only","cbeam_normal_only","shell_and_cbeam"]
+labels=["Feasible","Shell VM","CBEAM normal","Shell + CBEAM"]
+phases=["initial_design","adaptive_phase"]; colors=["#2878B5","#E66101"]; x=np.arange(len(cats)); width=.36
+for j,p in enumerate(phases):
+    counts=[sum(r["phase"]==p and r["failure_mechanism"]==c for r in rows) for c in cats]
+    axes[0].bar(x+(j-.5)*width,counts,width,color=colors[j],edgecolor="#222222",lw=.5,label=p.replace("_"," ").title())
+axes[0].set_xticks(x,labels,rotation=18,ha="right"); axes[0].set_ylabel("Number of evaluations"); axes[0].set_title("Feasibility outcomes"); axes[0].grid(True,axis="y",color="#d9d9d9",lw=.55); axes[0].legend(fontsize=7)
+ax=axes[1]
+groups=[([r for r in rows if not flag(r["c_feasible_label"])],"x","#8c8c8c","Infeasible"),([r for r in rows if flag(r["c_feasible_label"]) and r["phase"]=="initial_design"],"o","#2878B5","Initial feasible"),([r for r in rows if flag(r["c_feasible_label"]) and r["phase"]=="adaptive_phase"],"D","#E66101","Adaptive feasible")]
+for group,m,c,label in groups:
+    xs=[number(r,"shell_utilization") for r in group]; ys=[number(r,"cbeam_utilization") for r in group]
+    if label=="Initial feasible": ax.scatter(xs,ys,marker=m,s=29,facecolors="white",edgecolors=c,label=label)
+    else: ax.scatter(xs,ys,marker=m,s=30,color=c,label=label)
+pareto=[r for r in rows if flag(r["final_pareto"])]; ax.scatter([number(r,"shell_utilization") for r in pareto],[number(r,"cbeam_utilization") for r in pareto],s=57,facecolors="none",edgecolors="#222222",label="Case-100 Pareto")
+ax.axvline(1,color="#222222",ls="--",lw=.8); ax.axhline(1,color="#222222",ls="--",lw=.8); ax.set_xscale("log"); ax.set_yscale("log"); ax.set_aspect("equal",adjustable="box")
+ax.set(xlabel="Shell von Mises utilization",ylabel="CBEAM normal-stress utilization",title="Stress-screening map"); ax.grid(True,color="#d9d9d9",lw=.55); ax.legend(fontsize=6.5)
+fig.suptitle("Feasibility Mechanisms at 100 Finalized Evaluations",fontweight="bold"); fig.tight_layout(); fig.savefig(OUTPUT,dpi=200,bbox_inches="tight"); plt.close(fig); print(OUTPUT)

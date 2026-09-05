@@ -29,21 +29,16 @@ def flag(value):
     return str(value).strip().lower() == "true"
 
 rows=rows_from(DATA)
-fig,axes=plt.subplots(1,2,figsize=(7.2,3.65))
-cats=["feasible","shell_von_mises_only","cbeam_normal_only","shell_and_cbeam"]
-labels=["Feasible","Shell VM","CBEAM normal","Shell + CBEAM"]
-phases=["initial_design","adaptive_phase"]; colors=["#2878B5","#E66101"]; x=np.arange(len(cats)); width=.36
-for j,p in enumerate(phases):
-    counts=[sum(r["phase"]==p and r["failure_mechanism"]==c for r in rows) for c in cats]
-    axes[0].bar(x+(j-.5)*width,counts,width,color=colors[j],edgecolor="#222222",lw=.5,label=p.replace("_"," ").title())
-axes[0].set_xticks(x,labels,rotation=18,ha="right"); axes[0].set_ylabel("Number of evaluations"); axes[0].set_title("Feasibility outcomes"); axes[0].grid(True,axis="y",color="#d9d9d9",lw=.55); axes[0].legend(fontsize=7)
-ax=axes[1]
-groups=[([r for r in rows if not flag(r["c_feasible_label"])],"x","#8c8c8c","Infeasible"),([r for r in rows if flag(r["c_feasible_label"]) and r["phase"]=="initial_design"],"o","#2878B5","Initial feasible"),([r for r in rows if flag(r["c_feasible_label"]) and r["phase"]=="adaptive_phase"],"D","#E66101","Adaptive feasible")]
-for group,m,c,label in groups:
-    xs=[number(r,"shell_utilization") for r in group]; ys=[number(r,"cbeam_utilization") for r in group]
-    if label=="Initial feasible": ax.scatter(xs,ys,marker=m,s=29,facecolors="white",edgecolors=c,label=label)
-    else: ax.scatter(xs,ys,marker=m,s=30,color=c,label=label)
-pareto=[r for r in rows if flag(r["final_pareto"])]; ax.scatter([number(r,"shell_utilization") for r in pareto],[number(r,"cbeam_utilization") for r in pareto],s=57,facecolors="none",edgecolors="#222222",label="Case-100 Pareto")
-ax.axvline(1,color="#222222",ls="--",lw=.8); ax.axhline(1,color="#222222",ls="--",lw=.8); ax.set_xscale("log"); ax.set_yscale("log"); ax.set_aspect("equal",adjustable="box")
-ax.set(xlabel="Shell von Mises utilization",ylabel="CBEAM normal-stress utilization",title="Stress-screening map"); ax.grid(True,color="#d9d9d9",lw=.55); ax.legend(fontsize=6.5)
-fig.suptitle("Feasibility Mechanisms at 100 Finalized Evaluations",fontweight="bold"); fig.tight_layout(); fig.savefig(OUTPUT,dpi=200,bbox_inches="tight"); plt.close(fig); print(OUTPUT)
+keys=["normalized_x1_ar","normalized_x2_taper_ratio","normalized_x3_primary_member_ratio","normalized_x4_secondary_member_ratio"]
+labels=["Normalized AR","Normalized taper ratio","Normalized primary-member ratio","Normalized secondary-member ratio"]
+pairs=[(0,1),(0,2),(0,3),(1,2),(1,3),(2,3)]
+fig,axes=plt.subplots(3,2,figsize=(6.8,8.2))
+for ax,(i,j) in zip(axes.flat,pairs):
+    inf=[r for r in rows if not flag(r["c_feasible_label"])]; ini=[r for r in rows if flag(r["c_feasible_label"]) and r["phase"]=="initial_design"]; ada=[r for r in rows if flag(r["c_feasible_label"]) and r["phase"]=="adaptive_phase"]; pf=[r for r in rows if flag(r["final_pareto"])]
+    ax.scatter([number(r,keys[i]) for r in inf],[number(r,keys[j]) for r in inf],marker="x",s=25,color="#8c8c8c",label="Infeasible")
+    ax.scatter([number(r,keys[i]) for r in ini],[number(r,keys[j]) for r in ini],marker="o",s=25,facecolors="white",edgecolors="#2878B5",label="Initial feasible")
+    ax.scatter([number(r,keys[i]) for r in ada],[number(r,keys[j]) for r in ada],marker="D",s=27,color="#E66101",label="Adaptive feasible")
+    ax.scatter([number(r,keys[i]) for r in pf],[number(r,keys[j]) for r in pf],marker="o",s=53,facecolors="none",edgecolors="#222222",label="Case-100 Pareto")
+    ax.set(xlim=(-.025,1.025),ylim=(-.025,1.025),xlabel=labels[i],ylabel=labels[j]); ax.set_xticks([0,.5,1]); ax.set_yticks([0,.5,1]); ax.set_aspect("equal",adjustable="box"); ax.grid(True,color="#d9d9d9",lw=.55)
+handles,legend_labels=axes.flat[0].get_legend_handles_labels(); fig.legend(handles,legend_labels,loc="lower center",ncol=4,fontsize=7)
+fig.suptitle("Pairwise Projections of the Four-Dimensional Design Domain",fontweight="bold"); fig.tight_layout(rect=(0,.06,1,.96)); fig.savefig(OUTPUT,dpi=200,bbox_inches="tight"); plt.close(fig); print(OUTPUT)

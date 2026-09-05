@@ -1,6 +1,6 @@
 # Self-contained thesis figure packages
 
-Every quantitative thesis figure has its own folder. For example:
+Every data-based thesis figure has its own folder. For example:
 
 ```text
 data/figures/chapter05/figure_5_1/
@@ -53,8 +53,27 @@ where a figure requires more than one data grain.
 
 ## Scope
 
-The per-figure contract covers 50 figures: 2.7--2.8, 3.1--3.13, 4.1--4.2,
-5.1--5.21, and 6.1--6.12. Figure 5.7 contains all 531,682 recovered mode-shape
-nodes in one CSV. Its scripts provide a portable point-cloud reconstruction;
-they do not claim to duplicate proprietary nTop surface shading or camera
-settings.
+The [figure index](FIGURE_DATA_MAP.md) lists all 53 packages under the current
+thesis numbering, including the supplementary figures in Appendices C and D.
+Figure 2.8 contains all 531,682 recovered mode-shape nodes in one CSV. The
+thesis image consists of nTop screenshots; its scripts provide a portable
+point-cloud reconstruction from the reference coordinates and mode-3
+displacements. nTop surface shading and camera settings are not reproduced.
+Modal amplitudes have arbitrary normalization and are not operational wing
+deflections.
+
+Figure 5.1 contains all 213 completed FCC, BCC, and SC evaluations. Its CSV
+retains the two input variables, two-wing mass and compliance objectives,
+binary and original signed feasibility labels, and both within-topology and
+pooled observed Pareto flags. `C_binary_feasible=1` corresponds to feasible,
+whereas the original `C_signed_recorded=-1` denotes feasible. The figure
+supports the observed trade-offs within these finite samples. Missing field
+values are left empty, and historical labels are preserved alongside the
+separate harmonized flutter evidence.
+
+Figures 3.7 and 3.8 contain evaluated inputs X, objectives Y, binary labels C,
+observed Pareto flags, and empirical reference-front rows. Their scripts plot
+the observed feasible nondominated objective pairs. Audit margins retained in
+binary-method rows were not supplied to those optimizers. The complete
+comparison and metric definitions are available in the
+[seven-solver dataset](../data/benchmarks/seven_solver_comparison/README.md).

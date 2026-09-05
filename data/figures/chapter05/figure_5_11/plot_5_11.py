@@ -60,10 +60,10 @@ def finish(fig):
     out=parse_output(); out.parent.mkdir(parents=True,exist_ok=True); fig.savefig(out,dpi=180,bbox_inches="tight"); plt.close(fig); print(out)
 
 def main():
-    d=load_rows(); cats=list(dict.fromkeys(text(d,"plot_category").tolist())); markers=["o","x","+","s","^","D","v"]; fig,ax=plt.subplots(figsize=(6.3,5.3),constrained_layout=True); x=num(d,"a_m"); y=num(d,"t1_over_a")
-    for cat,marker in zip(cats,markers):
-        m=text(d,"plot_category")==cat; ax.scatter(x[m],y[m],marker=marker,s=35,label=cat.replace("_"," "))
-    pf=flag(d,"pareto_optimal"); ax.scatter(x[pf],y[pf],s=65,facecolors="none",edgecolors=INK,label="Observed Pareto"); ax.set_xlabel("Cell size, a (m)"); ax.set_ylabel("Primary-member ratio, t1/a"); ax.set_box_aspect(1); ax.set_title("BCC observed stress-failure mechanisms"); ax.legend(frameon=False,fontsize=6,ncol=2); finish(fig)
+    d=load_rows(); cases=np.unique(num(d,"case").astype(int)); fig,ax=plt.subplots(figsize=(7,4.8),constrained_layout=True)
+    for case in cases:
+        m=num(d,"case").astype(int)==case; order=np.argsort(num(d,"rank_descending")[m]); ax.plot(num(d,"rank_descending")[m][order],num(d,"shell_von_mises_stress_mpa")[m][order],lw=1,label=f"Case {case}")
+    ax.axhline(np.nanmedian(num(d,"stress_limit_mpa")),color=INK,ls="--",lw=.9,label="Stress screen"); ax.set_xscale("log"); ax.set_xlabel("Descending stress rank"); ax.set_ylabel("Shell von Mises stress (MPa)"); ax.set_title("BCC upper shell-stress tails"); ax.legend(frameon=False,ncol=2); finish(fig)
 
 if __name__ == "__main__":
     main()

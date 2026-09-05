@@ -60,16 +60,7 @@ def finish(fig):
     out=parse_output(); out.parent.mkdir(parents=True,exist_ok=True); fig.savefig(out,dpi=180,bbox_inches="tight"); plt.close(fig); print(out)
 
 def main():
-    d=load_rows(); g=select(d,"grid"); p=select(d,"evaluation")
-    panels=[("score_before_cases_8_29_feasible","score_before_observed",51,"Before continuation"),("score_after_cases_8_29_feasible","score_after_observed",71,"Through case 71")]
-    fig,axes=plt.subplots(2,1,figsize=(6.5,10),constrained_layout=True)
-    for ax,(score,baseline,last,title) in zip(axes,panels):
-        xs,ys,z=gridify(g,"a_m","t1_over_a",score); _,_,zb=gridify(g,"a_m","t1_over_a",baseline)
-        im=ax.pcolormesh(xs,ys,z,shading="auto",cmap="cividis",vmin=0,vmax=1); ax.contour(xs,ys,z,[0.5],colors="white"); ax.contour(xs,ys,zb,[0.5],colors=INK,linestyles="--")
-        m=num(p,"case_id")<=last; pp=[p[i] for i in np.flatnonzero(m)]; feas=num(pp,"constraint_hypothetical")<=0
-        observations(ax,num(pp,"a_m"),num(pp,"t1_over_a"),feas); flip=flag(pp,"hypothetically_flipped"); ax.scatter(num(pp,"a_m")[flip],num(pp,"t1_over_a")[flip],marker="D",s=48,facecolors="none",edgecolors=ORANGE)
-        ax.set_xlabel("Cell size, a (m)"); ax.set_ylabel("Primary-member ratio, t1/a"); ax.set_box_aspect(1); ax.set_title(title); fig.colorbar(im,ax=ax,label="Binary-feasibility score")
-    fig.suptitle("Hypothetical FCC feasibility-label sensitivity"); finish(fig)
+    d=load_rows(); fig,ax=plt.subplots(figsize=(6.5,4.8),constrained_layout=True); pareto_panel(ax,d,"mass_kg","compliance_Nm","feasible","pareto_case071","case_id"); ax.set_xlabel("Lattice-wing mass (kg)"); ax.set_ylabel("Trim compliance (N m)"); ax.set_title("Completed BCC continuation Pareto front"); ax.legend(frameon=False); finish(fig)
 
 if __name__ == "__main__":
     main()

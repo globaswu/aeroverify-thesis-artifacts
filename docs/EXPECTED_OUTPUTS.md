@@ -33,4 +33,13 @@ The tests fail if any expected output is missing or empty.
 Every folder indexed in `docs/FIGURE_DATA_MAP.md` contains `figure_C_N.csv`,
 `plot_C_N.py`, and `plot_C_N.m`. Running either script produces one PNG by
 default; an explicit PDF or SVG output path may also be supplied. The optional
-Python dispatcher can reproduce one requested figure or all 50 figures.
+Python dispatcher can reproduce one requested figure or all 53 packages listed
+in the [figure index](FIGURE_DATA_MAP.md), including Appendix C and D figures.
+Figure 2.8 produces a modal point cloud corresponding to the nTop screenshots
+shown in the thesis. The rendered appearance is not an exact screenshot copy.
+
+The benchmark packages for Figures 3.7 and 3.8 plot seven constrained solvers'
+observed Pareto sets against an empirical reference. The separate
+`data/benchmarks/seven_solver_comparison` tables contain 49 trajectory summaries,
+7,350 evaluated observations, and the hypervolume-ratio table. These benchmark
+packages are independent of the wing-study MATLAB `reproduce_all` outputs.

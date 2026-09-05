@@ -2,7 +2,7 @@ function plot_5_9(outputFile)
 if nargin < 1, outputFile=fullfile(fileparts(mfilename('fullpath')),'plot_5_9.png'); end
 T=loadSiblingData('figure_5_9.csv');
 
-fig=figure('Visible','off','Color','w'); ax=axes(fig); plotPareto(ax,T,'mass_kg','compliance_Nm','feasible','pareto_case071','case_id'); xlabel(ax,'Lattice-wing mass (kg)'); ylabel(ax,'Trim compliance (N m)'); title(ax,'Completed BCC continuation Pareto front'); legend(ax,'Location','best'); finishPlot(fig,outputFile);
+G=T(textCol(T,'record_type')=="grid",:); P=T(textCol(T,'record_type')=="evaluation",:); fig=figure('Visible','off','Color','w'); ax=axes(fig); plotScore(ax,G,P,'a_m','t1_over_a','binary_feasibility_score','a_m','t1_over_a','feasible','pareto_case071'); colormap(ax,'parula'); colorbar(ax); xlabel(ax,'Cell size, a (m)'); ylabel(ax,'Primary-member ratio, t1/a'); title(ax,'Completed SC feasibility-score map'); finishPlot(fig,outputFile);
 end
 
 function T = loadSiblingData(csvName)

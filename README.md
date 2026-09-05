@@ -2,9 +2,8 @@
 
 This repository is the curated public companion to Sen Wu's doctoral thesis,
 *Aeroelastic Bayesian Optimization of Additively Manufactured Multi-Layer
-Lattice-Structured Wings*. It contains portable MATLAB code and frozen,
-path-free tables for checking the reported finite-sample results without
-uploading the 74 GB research workspace.
+Lattice-Structured Wings*. It contains evaluated data, portable plotting
+scripts, and MATLAB analysis code for inspecting the reported results.
 
 - Stable release: [thesis](https://github.com/globaswu/aeroverify-thesis-artifacts/releases/tag/thesis)
 - Final thesis: [main.pdf](https://github.com/globaswu/aeroverify-thesis-artifacts/releases/download/thesis/main.pdf)
@@ -16,6 +15,23 @@ uploading the 74 GB research workspace.
 - Figure-to-data index: [docs/FIGURE_DATA_MAP.md](docs/FIGURE_DATA_MAP.md)
 - Reproduce every quantitative figure: [docs/CSV_FIGURE_REPRODUCTION.md](docs/CSV_FIGURE_REPRODUCTION.md)
 - Machine-readable experiment register: [experiments.json](experiments.json)
+
+The [figure index](docs/FIGURE_DATA_MAP.md) follows the revised thesis
+numbering and covers 53 data-based figures in Chapters 2–6 and Appendices C–D.
+Each figure folder contains one CSV and independent Python and MATLAB scripts
+that read that CSV alone. Figure 2.8 displays nTop screenshots in the thesis;
+its scripts reconstruct the mode shape as a point cloud rather than duplicating
+the nTop rendering.
+
+The completed seven-solver comparison is also included: [hypervolume-ratio
+table](data/benchmarks/seven_solver_comparison/hv_ratio_table.csv), [evaluated
+X/Y/C records](data/benchmarks/seven_solver_comparison/evaluations.csv), and
+[observed Pareto points](data/benchmarks/seven_solver_comparison/observed_pareto.csv).
+It contains one 150-observation trajectory for each solver/problem pair across
+seven benchmark instances. cTSEMO and HyperMapper use binary feasibility labels;
+the other five methods use continuous constraint margins. These differing
+information conditions and single trajectories limit comparisons. See the
+[benchmark guide](experiments/seven_solver_comparison/README.md).
 
 ## What runs from this repository
 
@@ -42,6 +58,10 @@ The package checks the following frozen records:
 
 These counts are recomputed from evaluated objectives and authoritative stored
 feasibility labels. Surrogate fronts are not substituted for observed fronts.
+The separate benchmark dataset contains 49 trajectories and 7,350 recorded
+observations, including reused cTSEMO records and shared initial observations.
+It is reproduced through the per-figure scripts and is not part of the
+wing-study `reproduce_all` command above.
 
 ## Reproducibility levels
 
@@ -77,6 +97,8 @@ and [`docs/FULL_SOLVER_WORKFLOW.md`](docs/FULL_SOLVER_WORKFLOW.md).
 
 ```powershell
 powershell -ExecutionPolicy Bypass -File .\tools\verify_manifest.ps1
+python scripts/verify_figure_packages.py
+python scripts/verify_benchmark_comparison.py
 matlab -batch "addpath('matlab'); run_tests"
 ```
 
@@ -124,6 +146,8 @@ downloading the release archive.
 |   |-- mesh_convergence/
 |   |-- diagnostics/fcc_case067/
 |   |-- flutter/
+|   |-- benchmarks/seven_solver_comparison/
+|   |-- figures/              one CSV and two plotting scripts per figure
 |   `-- representative_physics/
 |-- experiments/              study-specific guides
 |-- matlab/                    executable public workflows

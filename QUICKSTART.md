@@ -47,7 +47,7 @@ Expected filenames and numerical postconditions are listed in
 
 ## 5. Reproduce one thesis figure
 
-Each quantitative figure has a self-contained CSV/Python/MATLAB folder. For
+Each data-based figure has a self-contained CSV/Python/MATLAB folder. For
 example:
 
 ```powershell
@@ -62,7 +62,17 @@ python -m pip install -r requirements-figures.txt
 python scripts/reproduce_thesis_figure.py 5.1
 ```
 
-See [docs/FIGURE_DATA_MAP.md](docs/FIGURE_DATA_MAP.md) for all 50 folders.
+See [docs/FIGURE_DATA_MAP.md](docs/FIGURE_DATA_MAP.md) for all 53 folders,
+including supplementary figures in Appendices C and D. Figure 2.8 is a special
+case: the thesis displays nTop screenshots, whereas the scripts reconstruct
+the same modal node field as a point cloud.
+
+The seven-solver benchmark's [hypervolume-ratio table](data/benchmarks/seven_solver_comparison/hv_ratio_table.csv)
+and [evaluations](data/benchmarks/seven_solver_comparison/evaluations.csv)
+are directly inspectable as CSV. Figures 3.7 and 3.8 plot the observed Pareto
+sets using only their respective adjacent CSV files. Consult the
+[benchmark guide](experiments/seven_solver_comparison/README.md) for the
+binary-label versus continuous-margin information supplied to the methods.
 
 ## 6. Understand the boundary
 

@@ -2,7 +2,7 @@ function plot_5_13(outputFile)
 if nargin < 1, outputFile=fullfile(fileparts(mfilename('fullpath')),'plot_5_13.png'); end
 T=loadSiblingData('figure_5_13.csv');
 
-cases=unique(round(numericCol(T,'case'))); fig=figure('Visible','off','Color','w','Position',[100 100 1050 650]); tl=tiledlayout(fig,2,3,'Padding','compact','TileSpacing','compact'); for c=cases', ax=nexttile(tl); m=round(numericCol(T,'case'))==c; scatter(ax,numericSubset(T,'x_m',m),numericSubset(T,'span_y_mm',m),28,numericSubset(T,'shell_von_mises_stress_mpa',m),'filled'); hold(ax,'on'); crit=m & logicalCol(T,'is_critical_element'); scatter(ax,numericSubset(T,'x_m',crit),numericSubset(T,'span_y_mm',crit),90,'*','MarkerEdgeColor',[.75 .08 .12]); title(ax,sprintf('Case %d',c)); xlabel(ax,'Chordwise x (m)'); ylabel(ax,'Spanwise y (mm)'); end; colormap(fig,'parula'); colorbar; title(tl,'BCC localization of the highest shell stresses'); finishPlot(fig,outputFile);
+names=textCol(T,'group')+" case "+string(round(numericCol(T,'case'))); x=1:height(T); skin=2*numericCol(T,'skin_mass_single_kg'); lattice=2*numericCol(T,'lattice_mass_single_kg'); fig=figure('Visible','off','Color','w'); tl=tiledlayout(fig,2,1,'Padding','compact'); ax=nexttile(tl); bar(ax,x,[skin lattice],'stacked'); ylabel(ax,'Two-wing mass (kg)'); legend(ax,{'Skin','Lattice'}); set(ax,'XTick',x,'XTickLabel',names); ax=nexttile(tl); bar(ax,x,numericCol(T,'max_vm_MPa')); hold(ax,'on'); yline(ax,220,'--','220 MPa screen'); ylabel(ax,'Maximum stress (MPa)'); set(ax,'XTick',x,'XTickLabel',names); title(tl,'Material allocation and stress reserve of representative cells'); finishPlot(fig,outputFile);
 end
 
 function T = loadSiblingData(csvName)

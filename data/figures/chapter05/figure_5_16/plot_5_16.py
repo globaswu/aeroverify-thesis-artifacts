@@ -60,10 +60,11 @@ def finish(fig):
     out=parse_output(); out.parent.mkdir(parents=True,exist_ok=True); fig.savefig(out,dpi=180,bbox_inches="tight"); plt.close(fig); print(out)
 
 def main():
-    d=load_rows(); cats=list(dict.fromkeys(text(d,"plot_category").tolist())); markers=["o","x","+","s","^","D","v"]; fig,ax=plt.subplots(figsize=(6.3,5.3),constrained_layout=True); x=num(d,"a_m"); y=num(d,"t1_over_a")
-    for cat,marker in zip(cats,markers):
-        m=text(d,"plot_category")==cat; ax.scatter(x[m],y[m],marker=marker,s=35,label=cat.replace("_"," "))
-    pf=flag(d,"pareto_optimal"); ax.scatter(x[pf],y[pf],s=65,facecolors="none",edgecolors=INK,label="Observed Pareto"); ax.set_xlabel("Cell size, a (m)"); ax.set_ylabel("Primary-member ratio, t1/a"); ax.set_box_aspect(1); ax.set_title("SC observed stress-failure mechanisms"); ax.legend(frameon=False,fontsize=6,ncol=2); finish(fig)
+    d=load_rows(); panels=[("AR","CDitrim","Aspect ratio","Trim induced-drag coefficient"),("AR","Ctrim_Nm","Aspect ratio","Trim compliance (N m)"),("AR","max_screening_stress_mpa","Aspect ratio","Maximum screening stress (MPa)"),("modeled_half_wing_mass_kg","Ctrim_Nm","Modeled half-wing mass (kg)","Trim compliance (N m)")]
+    feas=flag(d,"feasible"); pf=flag(d,"final_pareto"); cont=num(d,"case")>=41; fig,axes=plt.subplots(2,2,figsize=(8.8,7),constrained_layout=True)
+    for ax,(xc,yc,xl,yl) in zip(axes.flat,panels):
+        x=num(d,xc); y=num(d,yc); ax.scatter(x[~feas],y[~feas],marker="x",c=GREY,s=25); ax.scatter(x[feas&~pf],y[feas&~pf],facecolors="white",edgecolors=BLUE,s=27); ax.scatter(x[pf],y[pf],c=INK,s=27); ax.scatter(x[pf&cont],y[pf&cont],facecolors="none",edgecolors=ORANGE,s=52); ax.set_xlabel(xl); ax.set_ylabel(yl); ax.set_box_aspect(1)
+    fig.suptitle("Observed structural and objective trends"); finish(fig)
 
 if __name__ == "__main__":
     main()

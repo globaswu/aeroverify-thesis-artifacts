@@ -5,68 +5,209 @@
   "experiments": [
     {
       "id": "lattice-sizing-fcc-bcc-sc",
-      "thesis_refs": ["Chapter 5, Figures 5.1-5.17", "Appendix A"],
+      "thesis_refs": [
+        "Chapter 5, Figures 5.1-5.13",
+        "Appendix D, Figures D.1-D.2"
+      ],
       "reproduction_level": "solver-free post-processing",
       "entrypoint": "matlab/reproduce_topology.m",
-      "inputs": ["data/fcc", "data/bcc", "data/sc", "config/reproduction_config.json"],
-      "expected_checks": {"fcc": [71, 33, 26], "bcc": [71, 27, 17], "sc": [71, 32, 8]},
+      "inputs": [
+        "data/fcc",
+        "data/bcc",
+        "data/sc",
+        "config/reproduction_config.json"
+      ],
+      "expected_checks": {
+        "fcc": [
+          71,
+          33,
+          26
+        ],
+        "bcc": [
+          71,
+          27,
+          17
+        ],
+        "sc": [
+          71,
+          32,
+          8
+        ]
+      },
       "limitations": "Cases 1-51 have unresolved setting-level differences from the final configuration; physical reruns require licensed external assets."
     },
     {
       "id": "fixed-area-planform",
-      "thesis_refs": ["Chapter 5, Figures 5.18-5.21"],
+      "thesis_refs": [
+        "Chapter 5, Figures 5.14-5.17"
+      ],
       "reproduction_level": "solver-free post-processing",
       "entrypoint": "matlab/reproduce_planform.m",
-      "inputs": ["data/planform/evaluations_cases001_050.csv", "data/planform/summary.json"],
-      "expected_checks": {"evaluations": 50, "feasible": 39, "observed_pareto": 14, "continuation_primary": 8, "continuation_challenger": 2},
+      "inputs": [
+        "data/planform/evaluations_cases001_050.csv",
+        "data/planform/summary.json"
+      ],
+      "expected_checks": {
+        "evaluations": 50,
+        "feasible": 39,
+        "observed_pareto": 14,
+        "continuation_primary": 8,
+        "continuation_challenger": 2
+      },
       "limitations": "The exact selection mechanism for cases 1-40 is not fully reconstructed."
     },
     {
       "id": "four-input-aerostructural",
-      "thesis_refs": ["Chapter 6, Figures 6.1-6.12"],
+      "thesis_refs": [
+        "Chapter 6, Figures 6.1-6.8",
+        "Appendix D, Figures D.3-D.6"
+      ],
       "reproduction_level": "solver-free post-processing",
       "entrypoint": "matlab/reproduce_multiinput.m",
-      "inputs": ["data/multiinput/evaluations_cases001_100.csv", "data/multiinput/adaptive_hypervolume_stress.csv", "data/multiinput/summary.json"],
+      "inputs": [
+        "data/multiinput/evaluations_cases001_100.csv",
+        "data/multiinput/adaptive_hypervolume_stress.csv",
+        "data/multiinput/summary.json"
+      ],
       "seed": 20260809,
-      "budget": {"corners": 16, "latin_hypercube": 14, "adaptive": 70},
-      "expected_checks": {"evaluations": 100, "feasible": 70, "observed_pareto": 38},
+      "budget": {
+        "corners": 16,
+        "latin_hypercube": 14,
+        "adaptive": 70
+      },
+      "expected_checks": {
+        "evaluations": 100,
+        "feasible": 70,
+        "observed_pareto": 38
+      },
       "limitations": "The final record spans two mesh epochs and includes the replacement evaluation for case 65."
     },
     {
       "id": "structural-mesh-sensitivity",
-      "thesis_refs": ["Chapter 2, Table 2.2 and Figures 2.7-2.8"],
+      "thesis_refs": [
+        "Chapter 2, Figures 2.10-2.11"
+      ],
       "reproduction_level": "saved-result reconstruction",
       "entrypoint": "matlab/reproduce_mesh_convergence.m",
-      "inputs": ["data/mesh_convergence/results_summary.csv", "data/mesh_convergence/case64_positive_g_root19.csv"],
-      "expected_checks": {"summary_rows": 17},
+      "inputs": [
+        "data/mesh_convergence/results_summary.csv",
+        "data/mesh_convergence/case64_positive_g_root19.csv"
+      ],
+      "expected_checks": {
+        "summary_rows": 17
+      },
       "limitations": "New mesh evaluations require nTopology, MSC Nastran, and source-case inputs not redistributed here."
     },
     {
       "id": "fcc-case067-mkaero1",
-      "thesis_refs": ["Chapter 5, Table 5.4 and Figures 5.6-5.8", "Appendix B"],
+      "thesis_refs": [
+        "Chapter 2, Figures 2.7-2.9"
+      ],
       "reproduction_level": "saved-result reconstruction",
       "entrypoint": "matlab/reproduce_case067_flutter.m",
-      "inputs": ["data/diagnostics/fcc_case067/old_vs_18_point_all20.csv"],
-      "expected_checks": {"tracked_points": 20, "rows_per_point": 37, "point3_old_max_g": 0.000022834729, "point3_new_max_g": -0.0000085449944},
-      "limitations": "The public table supports the comparison, not a fresh SOL 145 run."
+      "inputs": [
+        "data/diagnostics/fcc_case067/old_vs_18_point_all20.csv"
+      ],
+      "expected_checks": {
+        "tracked_points": 20,
+        "rows_per_point": 37,
+        "point3_old_max_g": 0.000022834729,
+        "point3_new_max_g": -0.0000085449944
+      },
+      "limitations": "The public tables support the MKAERO1 comparison, not a fresh SOL 145 run. Figure 2.8 shows nTop screenshots; its CSV/scripts reproduce the modal node field as a point cloud, not an exact nTop rendering."
     },
     {
       "id": "harmonized-sol145-topology-reassessment",
-      "thesis_refs": ["Chapter 5, Table 5.1", "Chapter 7", "Appendix A"],
+      "thesis_refs": [
+        "Chapter 5, Table 5.1",
+        "Chapter 7",
+        "Appendix A"
+      ],
       "reproduction_level": "saved-result consistency check",
       "entrypoint": "matlab/reproduce_flutter_reassessment.m",
-      "inputs": ["data/flutter/harmonized_sol145_results.csv"],
-      "expected_checks": {"cases": 65, "strict_pass": 65, "bcc": 15, "fcc": 32, "sc": 18, "roots_per_case": 20, "velocities_per_root": 37},
+      "inputs": [
+        "data/flutter/harmonized_sol145_results.csv"
+      ],
+      "expected_checks": {
+        "cases": 65,
+        "strict_pass": 65,
+        "bcc": 15,
+        "fcc": 32,
+        "sc": 18,
+        "roots_per_case": 20,
+        "velocities_per_root": 37
+      },
       "limitations": "The public table verifies the completed numerical screen; it does not rerun SOL 145 or establish physical flutter clearance."
     },
     {
       "id": "exact-trim-and-representative-physics",
-      "thesis_refs": ["Chapters 5-6", "Chapter 2, Table 2.3"],
+      "thesis_refs": [
+        "Chapters 2, 5, and 6"
+      ],
       "reproduction_level": "saved-result reconstruction",
       "entrypoint": "matlab/reproduce_representative_physics.m",
-      "inputs": ["data/representative_physics"],
-      "expected_checks": {"exact_trim_rows": 150, "representative_cases": [4, 37, 64, 65, 99]},
+      "inputs": [
+        "data/representative_physics"
+      ],
+      "expected_checks": {
+        "exact_trim_rows": 150,
+        "representative_cases": [
+          4,
+          37,
+          64,
+          65,
+          99
+        ]
+      },
       "limitations": "The compact tables replay derived comparisons; they do not rerun LLT, Nastran, or archived field extraction."
+    },
+    {
+      "id": "seven-solver-constrained-comparison",
+      "thesis_refs": [
+        "Chapter 3, Figures 3.7-3.8"
+      ],
+      "reproduction_level": "solver-free post-processing",
+      "entrypoint": "scripts/reproduce_thesis_figure.py",
+      "figure_ids": [
+        "3.7",
+        "3.8"
+      ],
+      "inputs": [
+        "data/benchmarks/seven_solver_comparison/evaluations.csv",
+        "data/benchmarks/seven_solver_comparison/observed_pareto.csv",
+        "data/benchmarks/seven_solver_comparison/empirical_ga_fronts.csv",
+        "data/benchmarks/seven_solver_comparison/solver_metrics.csv",
+        "data/benchmarks/seven_solver_comparison/hv_ratio_table.csv",
+        "data/figures/chapter03/figure_3_7/figure_3_7.csv",
+        "data/figures/chapter03/figure_3_8/figure_3_8.csv"
+      ],
+      "budget": {
+        "recorded_observations_per_trajectory": 150,
+        "shared_initial": 20,
+        "adaptive": 130
+      },
+      "constraint_information": {
+        "binary_labels": [
+          "cTSEMO",
+          "HyperMapper"
+        ],
+        "continuous_margins": [
+          "BoTorch (qLogNEHVI)",
+          "Trieste (ECHVI)",
+          "USeMOC",
+          "COMBOO",
+          "PAC-MOO"
+        ]
+      },
+      "expected_checks": {
+        "problem_instances": 7,
+        "solvers": 7,
+        "trajectories": 49,
+        "recorded_observations": 7350,
+        "observed_pareto_rows": 757,
+        "empirical_reference_rows": 2884
+      },
+      "limitations": "One trajectory per solver/problem; cTSEMO reuses an earlier repetition. The observation total includes shared and reused records. Differing constraint information prevents attributing performance differences solely to binary labels. The larger-budget GA reference is empirical, not certified. No statistical or runtime ranking is established."
     }
   ]
 }

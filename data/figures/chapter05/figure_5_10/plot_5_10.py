@@ -60,7 +60,10 @@ def finish(fig):
     out=parse_output(); out.parent.mkdir(parents=True,exist_ok=True); fig.savefig(out,dpi=180,bbox_inches="tight"); plt.close(fig); print(out)
 
 def main():
-    d=load_rows(); g=select(d,"grid"); p=select(d,"evaluation"); fig,ax=plt.subplots(figsize=(6.3,5.3),constrained_layout=True); im=score_panel(ax,g,p,"a_m","t1_over_a","feasibility_score","a_m","t1_over_a","feasible","pareto_case071","Completed BCC feasibility-score map"); ax.set_xlabel("Cell size, a (m)"); ax.set_ylabel("Primary-member ratio, t1/a"); fig.colorbar(im,ax=ax,label="Binary-feasibility score"); ax.legend(frameon=False); finish(fig)
+    d=load_rows(); cats=list(dict.fromkeys(text(d,"plot_category").tolist())); markers=["o","x","+","s","^","D","v"]; fig,ax=plt.subplots(figsize=(6.3,5.3),constrained_layout=True); x=num(d,"a_m"); y=num(d,"t1_over_a")
+    for cat,marker in zip(cats,markers):
+        m=text(d,"plot_category")==cat; ax.scatter(x[m],y[m],marker=marker,s=35,label=cat.replace("_"," "))
+    pf=flag(d,"pareto_optimal"); ax.scatter(x[pf],y[pf],s=65,facecolors="none",edgecolors=INK,label="Observed Pareto"); ax.set_xlabel("Cell size, a (m)"); ax.set_ylabel("Primary-member ratio, t1/a"); ax.set_box_aspect(1); ax.set_title("SC observed stress-failure mechanisms"); ax.legend(frameon=False,fontsize=6,ncol=2); finish(fig)
 
 if __name__ == "__main__":
     main()

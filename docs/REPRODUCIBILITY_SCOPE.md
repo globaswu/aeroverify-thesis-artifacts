@@ -10,6 +10,18 @@ the evaluated labels. The harmonized SOL 145 table additionally supports a
 solver-free consistency check of 65 strict-screen outcomes while preserving
 the historical optimization labels separately.
 
+The seven-solver benchmark supplies the evaluated input vectors, objectives,
+binary labels, observed Pareto sets, empirical reference fronts, and metric
+tables for all 49 solver/problem trajectories. Figures 3.7 and 3.8 can be
+replotted from their adjacent CSV files. cTSEMO and HyperMapper received binary
+labels; the other five methods received continuous constraint margins.
+Post hoc audit margins in the released binary-method rows do not change that
+information boundary. One trajectory per solver/problem cannot establish a
+statistical ranking or isolate an effect caused by the constraint information.
+
+The thesis shows nTop screenshots in Figure 2.8. Its CSV supports a point-cloud
+reconstruction of the mode shape, not nTop's precise shading or camera view.
+
 This is a post-processing and record-consistency result. It establishes that
 the released scalar evidence supports the reported tabulations and plotted
 relationships under the stored labels.

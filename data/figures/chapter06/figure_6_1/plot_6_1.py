@@ -29,33 +29,27 @@ def flag(value):
     return str(value).strip().lower() == "true"
 
 rows = rows_from(DATA)
-evaluations = sorted((r for r in rows if r["record_type"] == "evaluation"), key=lambda r: int(r["case_id"]))
-summary = {r["phase"]: r for r in rows if r["record_type"] == "phase_summary"}
-cases = np.array([int(r["case_id"]) for r in evaluations])
-hv = np.array([number(r, "normalized_hypervolume") for r in evaluations])
-fig, axes = plt.subplots(1, 2, figsize=(7.2, 3.35))
-ax = axes[0]
-ax.plot(cases[cases <= 30], hv[cases <= 30], color="#2878B5", lw=1.5)
-ax.plot(cases[cases >= 30], hv[cases >= 30], color="#E66101", lw=1.8)
-ax.scatter([30], [1.0], color="#2878B5", s=28, zorder=3)
-ax.scatter([100], [hv[-1]], color="#E66101", marker="D", s=32, zorder=3)
-ax.axvline(30, color="#222222", ls="--", lw=0.8)
-ax.set(xlabel="Finalized evaluation", ylabel=r"$HV_{box}$ / value at case 30", title="Box-restricted hypervolume")
-ax.grid(True, color="#d9d9d9", lw=0.55)
-ax = axes[1]
-phases = ["initial_design", "adaptive_phase"]
-labels = ["Initial\ndesign", "Adaptive\nphase"]
-feas = [number(summary[p], "phase_feasible_share_percent") for p in phases]
-pareto = [number(summary[p], "phase_final_pareto_share_percent") for p in phases]
-x = np.arange(2); width = 0.34
-ax.bar(x-width/2, feas, width, color="#2878B5", edgecolor="#222222", lw=0.5, label="Feasible evaluations")
-ax.bar(x+width/2, pareto, width, color="#E66101", edgecolor="#222222", lw=0.5, label="Members of case-100 PF")
-for i,p in enumerate(phases):
-    ax.text(i-width/2, feas[i]+2, f'{summary[p]["phase_feasible_count"]}/{summary[p]["phase_size"]}', ha="center", fontsize=7)
-    ax.text(i+width/2, pareto[i]+2, f'{summary[p]["phase_final_pareto_count"]}/{summary[p]["phase_size"]}', ha="center", fontsize=7)
-ax.set_xticks(x, labels); ax.set_ylim(0,100)
-ax.set(ylabel="Share of phase evaluations [%]", title="Feasibility and retained-front yield")
-ax.grid(True, axis="y", color="#d9d9d9", lw=0.55); ax.legend(fontsize=7)
-fig.suptitle("Optimization Progress Through Case 100", fontweight="bold")
-fig.tight_layout(); fig.savefig(OUTPUT, dpi=200, bbox_inches="tight"); plt.close(fig)
-print(OUTPUT)
+def xy(group): return [number(r,"y1_cditrim") for r in group], [number(r,"y2_ctrim_nm") for r in group]
+def draw(ax):
+    groups=[([r for r in rows if not flag(r["c_feasible_label"])],"x",36,"#8c8c8c","Infeasible"),
+            ([r for r in rows if flag(r["c_feasible_label"]) and not flag(r["final_pareto"])],"o",40,"#2878B5","Feasible, dominated"),
+            ([r for r in rows if flag(r["final_pareto"]) and int(r["case_id"])<=30],"o",48,"#222222","Initial-design Pareto"),
+            ([r for r in rows if flag(r["final_pareto"]) and int(r["case_id"])>30],"D",50,"#E66101","Adaptive Pareto")]
+    for group,marker,size,color,label in groups:
+        x,y=xy(group)
+        if marker=="o" and label.startswith("Feasible"):
+            ax.scatter(x,y,marker=marker,s=size,facecolors="white",edgecolors=color,lw=1.1,label=label)
+        else: ax.scatter(x,y,marker=marker,s=size,color=color,label=label)
+    refined=[r for r in rows if flag(r["refined_mesh"])]
+    x,y=xy(refined); ax.scatter(x,y,marker="s",s=66,facecolors="none",edgecolors="#6A3D9A",lw=0.8,label="Refined mesh")
+    front=sorted([r for r in rows if flag(r["final_pareto"])],key=lambda r:number(r,"y1_cditrim"))
+    x,y=xy(front); ax.plot(x,y,color="#222222",lw=1)
+    ax.grid(True,color="#d9d9d9",lw=0.55)
+fig,ax=plt.subplots(figsize=(7.0,5.1))
+draw(ax); ax.set(xlabel=r"Trim induced-drag coefficient, $C_{D_i,trim}$ [-]",ylabel=r"Two-wing trim compliance, $C_{trim}$ [N m]",title="Four-Input Objective Space (100 Evaluations)")
+ax.legend(loc="lower center",bbox_to_anchor=(0.5,-0.29),ncol=2,fontsize=7)
+inset=ax.inset_axes([0.43,0.43,0.54,0.48]); draw(inset)
+front=[r for r in rows if flag(r["final_pareto"])]; xs=[number(r,"y1_cditrim") for r in front]; ys=[number(r,"y2_ctrim_nm") for r in front]
+inset.set_xlim(min(xs)-0.06*(max(xs)-min(xs)),max(xs)+0.06*(max(xs)-min(xs))); inset.set_ylim(min(ys)-0.06*(max(ys)-min(ys)),max(ys)+0.06*(max(ys)-min(ys))); inset.set_title("Feasible-front detail",fontsize=8)
+if inset.get_legend() is not None: inset.get_legend().remove()
+fig.tight_layout(); fig.savefig(OUTPUT,dpi=200,bbox_inches="tight"); plt.close(fig); print(OUTPUT)

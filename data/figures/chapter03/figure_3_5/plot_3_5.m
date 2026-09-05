@@ -1,13 +1,12 @@
 function plot_3_5(outputFile)
-% Standalone renderer for a single Chapter 3 figure-data CSV.
+% Standalone renderer for a single thesis figure-data CSV.
 scriptPath = mfilename('fullpath');
 [scriptFolder, scriptName] = fileparts(scriptPath);
-token = regexp(scriptName, '^plot_3_(\d+)$', 'tokens', 'once');
-assert(~isempty(token), 'Script name must be plot_3_N.m.');
-figureNumber = str2double(token{1});
-csvFile = fullfile(scriptFolder, sprintf('figure_3_%d.csv', figureNumber));
+% Preserve the original renderer selection after chapter reorganization.
+figureNumber = 6;
+csvFile = fullfile(scriptFolder, 'figure_3_5.csv');
 if nargin < 1 || strlength(string(outputFile)) == 0
-    outputFile = fullfile(scriptFolder, sprintf('plot_3_%d.png', figureNumber));
+    outputFile = fullfile(scriptFolder, 'plot_3_5.png');
 else
     outputFile = char(outputFile);
 end

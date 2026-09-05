@@ -20,32 +20,33 @@ from pathlib import Path
 
 ROOT = Path(__file__).resolve().parents[1]
 SUPPORTED = (
-    "2.7", "2.8",
+    "2.7", "2.8", "2.9", "2.10", "2.11",
     "3.1", "3.2", "3.3", "3.4", "3.5", "3.6", "3.7", "3.8",
-    "3.9", "3.10", "3.11", "3.12", "3.13",
     "4.1", "4.2",
     "5.1", "5.2", "5.3", "5.4", "5.5", "5.6", "5.7", "5.8",
     "5.9", "5.10", "5.11", "5.12", "5.13", "5.14", "5.15",
-    "5.16", "5.17", "5.18", "5.19", "5.20", "5.21",
+    "5.16", "5.17",
     "6.1", "6.2", "6.3", "6.4", "6.5", "6.6", "6.7", "6.8",
-    "6.9", "6.10", "6.11", "6.12",
+    "C.1", "C.2", "C.3", "C.4", "C.5", "C.6", "C.7",
+    "D.1", "D.2", "D.3", "D.4", "D.5", "D.6",
 )
 
 
 def package_paths(figure_id: str) -> tuple[Path, Path, Path]:
     chapter_text, number_text = figure_id.split(".")
-    stem = f"figure_{int(chapter_text)}_{int(number_text)}"
-    folder = ROOT / "data" / "figures" / f"chapter{int(chapter_text):02d}" / stem
-    return folder / f"{stem}.csv", folder / f"plot_{int(chapter_text)}_{int(number_text)}.py", folder
+    chapter_dir = chapter_text.zfill(2) if chapter_text.isdigit() else chapter_text
+    stem = f"figure_{chapter_text}_{int(number_text)}"
+    folder = ROOT / "data" / "figures" / f"chapter{chapter_dir}" / stem
+    return folder / f"{stem}.csv", folder / f"plot_{chapter_text}_{int(number_text)}.py", folder
 
 
 def main() -> int:
     parser = argparse.ArgumentParser(description=__doc__, formatter_class=argparse.RawDescriptionHelpFormatter)
-    parser.add_argument("figures", nargs="*", help="Figure IDs such as 5.1 or 6.12")
+    parser.add_argument("figures", nargs="*", help="Figure IDs such as 5.1, C.1, or D.6")
     parser.add_argument("--all", action="store_true", help="Run every figure package")
     parser.add_argument("--list", action="store_true", help="List available packages")
     parser.add_argument("--format", choices=("png", "pdf", "svg"), default="png")
-    parser.add_argument("--output-dir", type=Path, default=ROOT / "reproduced")
+    parser.add_argument("--output-dir", type=Path, default=ROOT / "generated" / "figures")
     args = parser.parse_args()
 
     if args.list:
@@ -61,6 +62,7 @@ def main() -> int:
     if unknown:
         parser.error("unknown figure ID(s): " + ", ".join(unknown))
 
+    args.output_dir = args.output_dir.resolve()
     args.output_dir.mkdir(parents=True, exist_ok=True)
     failures: list[tuple[str, int]] = []
     for figure_id in targets:
@@ -70,7 +72,8 @@ def main() -> int:
             failures.append((figure_id, 2))
             continue
         chapter_text, number_text = figure_id.split(".")
-        output = args.output_dir / f"thesis_figure_{int(chapter_text):02d}_{int(number_text):02d}.{args.format}"
+        chapter_dir = chapter_text.zfill(2) if chapter_text.isdigit() else chapter_text
+        output = args.output_dir / f"thesis_figure_{chapter_dir}_{int(number_text):02d}.{args.format}"
         result = subprocess.run(
             [sys.executable, str(script_path), "--output", str(output)],
             cwd=folder,

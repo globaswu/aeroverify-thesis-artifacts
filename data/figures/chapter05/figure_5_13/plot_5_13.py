@@ -60,10 +60,10 @@ def finish(fig):
     out=parse_output(); out.parent.mkdir(parents=True,exist_ok=True); fig.savefig(out,dpi=180,bbox_inches="tight"); plt.close(fig); print(out)
 
 def main():
-    d=load_rows(); cases=np.unique(num(d,"case").astype(int)); fig,axes=plt.subplots(2,3,figsize=(10.5,6.5),constrained_layout=True)
-    for ax,case in zip(axes.flat,cases):
-        m=num(d,"case").astype(int)==case; sc=ax.scatter(num(d,"x_m")[m],num(d,"span_y_mm")[m],c=num(d,"shell_von_mises_stress_mpa")[m],cmap="viridis",vmin=175,vmax=240,s=24); crit=m & flag(d,"is_critical_element"); ax.scatter(num(d,"x_m")[crit],num(d,"span_y_mm")[crit],marker="*",s=90,c=RED,edgecolors=INK); ax.set_title(f"Case {case}"); ax.set_xlabel("Chordwise x (m)"); ax.set_ylabel("Spanwise y (mm)")
-    fig.colorbar(sc,ax=axes,label="Stress (MPa)"); fig.suptitle("BCC localization of the highest shell stresses"); finish(fig)
+    d=load_rows(); names=np.asarray([f"{g} case {int(float(c))}" for g,c in zip(text(d,"group"),num(d,"case"))]); x=np.arange(len(d)); skin=2*num(d,"skin_mass_single_kg"); lattice=2*num(d,"lattice_mass_single_kg")
+    fig,axes=plt.subplots(2,1,figsize=(7,6),constrained_layout=True); axes[0].bar(x,skin,color=LIGHT,label="Skin"); axes[0].bar(x,lattice,bottom=skin,color=ORANGE,label="Lattice"); axes[0].set_ylabel("Two-wing mass (kg)"); axes[0].legend(frameon=False); axes[1].bar(x,num(d,"max_vm_MPa"),color=[BLUE,ORANGE,PURPLE]); axes[1].axhline(220,color=INK,ls="--",label="220 MPa screen"); axes[1].set_ylabel("Maximum stress (MPa)"); axes[1].legend(frameon=False)
+    for ax in axes: ax.set_xticks(x,names)
+    fig.suptitle("Material allocation and stress reserve of representative cells"); finish(fig)
 
 if __name__ == "__main__":
     main()

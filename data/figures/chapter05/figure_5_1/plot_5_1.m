@@ -1,65 +1,72 @@
 function plot_5_1(outputFile)
-if nargin < 1, outputFile=fullfile(fileparts(mfilename('fullpath')),'plot_5_1.png'); end
-T=loadSiblingData('figure_5_1.csv');
+if nargin < 1, outputFile = fullfile(fileparts(mfilename('fullpath')), 'plot_5_1.png'); end
+% Reproduce the completed topology comparison using figure_5_1.csv only.
+% No simulation software or external data is required.
+% Lines join observed nondominated points as visual guides, not predictions.
+folder = fileparts(mfilename('fullpath'));
+T = readtable(fullfile(folder, 'figure_5_1.csv'), TextType='string');
+Y = [T.Y1_two_wing_mass_kg, T.Y2_two_wing_trim_compliance_Nm];
+feasible = T.C_binary_feasible == 1;
+familyPF = T.within_topology_observed_pareto == 1;
+pooledPF = T.pooled_observed_pareto == 1;
+assert(height(T) == 213 && all(isfinite(Y), 'all'));
+assert(isequal(observedFront(Y, feasible), pooledPF));
+families = ["FCC", "BCC", "SC"];
+colors = [23,107,145; 185,120,36; 164,80,120] / 255;
+markers = {'o', 's', '^'};
+f = figure(Visible='off', Color='w', Units='inches', Position=[1,1,7.2,5.3]);
+ax = axes(f, Position=[0.105,0.125,0.87,0.635], FontName='Times New Roman', ...
+    FontSize=10, LineWidth=0.7, Box='off', XGrid='on', YGrid='on', GridAlpha=0.15);
+hold(ax,'on');
+handles = gobjects(6,1);
+for k = 1:numel(families)
+    group = T.topology == families(k);
+    assert(sum(group) == 71);
+    assert(isequal(observedFront(Y(group,:),feasible(group)),familyPF(group)));
+    mask = group & ~feasible;
+    scatter(ax,Y(mask,1),Y(mask,2),26,colors(k,:),markers{k}, ...
+        MarkerFaceColor='none',MarkerEdgeAlpha=0.52,LineWidth=0.7,HandleVisibility='off');
+    mask = group & feasible;
+    scatter(ax,Y(mask,1),Y(mask,2),30,colors(k,:),markers{k}, ...
+        'filled',MarkerEdgeColor='w',LineWidth=0.35,HandleVisibility='off');
+    P = sortrows(Y(group & familyPF,:),1);
+    plot(ax,P(:,1),P(:,2),Color=colors(k,:),LineWidth=1.1,HandleVisibility='off');
+    handles(k) = plot(ax,nan,nan,Color=colors(k,:),Marker=markers{k}, ...
+        MarkerFaceColor=colors(k,:),MarkerSize=6,LineWidth=1.1);
+end
+scatter(ax,Y(pooledPF,1),Y(pooledPF,2),82,'o',MarkerFaceColor='none', ...
+    MarkerEdgeColor=[0.125,0.125,0.125],LineWidth=0.75,HandleVisibility='off');
+handles(4) = plot(ax,nan,nan,'o',Color=[0.33,0.33,0.33],MarkerFaceColor=[0.33,0.33,0.33],LineStyle='none');
+handles(5) = plot(ax,nan,nan,'o',Color=[0.47,0.47,0.47],MarkerFaceColor='none',LineStyle='none');
+handles(6) = plot(ax,nan,nan,'o',Color=[0.125,0.125,0.125],MarkerFaceColor='none',MarkerSize=9,LineStyle='none');
+xlabel(ax,'Two-wing structural mass (kg)',FontSize=11);
+ylabel(ax,'Two-wing trim compliance (N \cdot m)',FontSize=11);
+xlim(ax,[31,86]); ylim(ax,[42.8,56.4]);
+annotation(f,'textbox',[0.1,0.927,0.8,0.065],String='Completed lattice-sizing campaigns', ...
+    EdgeColor='none',HorizontalAlignment='center',FontName='Times New Roman',FontSize=13);
+annotation(f,'textbox',[0.1,0.883,0.8,0.055],String='71 evaluations per topology; 92 feasible observations', ...
+    EdgeColor='none',HorizontalAlignment='center',FontName='Times New Roman',FontSize=10);
+leg = legend(ax,handles([1,4,2,5,3,6]),{'FCC','Feasible','BCC','Infeasible','SC','Pooled front'}, ...
+    NumColumns=3,Box='off',FontName='Times New Roman',FontSize=9.5);
+leg.Units = 'normalized'; leg.Position = [0.2,0.765,0.65,0.115];
+for id = ["FCC70", "FCC26", "SC70"]
+    i = find(T.design_id == id);
+    dx = 0; dy = 0.45; align = 'left';
+    if id == "FCC26", dx = -0.5; align = 'right'; end
+    if id == "SC70", dx = 0.7; dy = 0.25; end
+    text(ax,Y(i,1)+dx,Y(i,2)+dy,id,FontName='Times New Roman',FontSize=9, ...
+        HorizontalAlignment=align,BackgroundColor='w',Margin=0.6);
+end
+exportgraphics(f,outputFile,Resolution=300);
+close(f);
+fprintf('Saved plot_5_1: %d evaluations, %d feasible, %d pooled-front points.\n',height(T),sum(feasible),sum(pooledPF));
 
-topo=textCol(T,'topology'); names=unique(topo,'stable'); fig=figure('Visible','off','Color','w','Position',[100 100 900 720]); tl=tiledlayout(fig,2,2,'Padding','compact','TileSpacing','compact');
-for i=1:min(3,numel(names)), ax=nexttile(tl); S=T(topo==names(i),:); plotPareto(ax,S,'mass_kg','compliance_Nm','feasible','topology_pareto_case051','case_id'); title(ax,names(i)); xlabel(ax,'Lattice-wing mass (kg)'); ylabel(ax,'Trim compliance (N m)'); end
-ax=nexttile(tl); plotPareto(ax,T,'mass_kg','compliance_Nm','feasible','pooled_pareto_case051','case_id'); title(ax,'Pooled'); xlabel(ax,'Lattice-wing mass (kg)'); ylabel(ax,'Trim compliance (N m)'); title(tl,'Observed lattice mass-compliance trade-offs'); finishPlot(fig,outputFile);
 end
 
-function T = loadSiblingData(csvName)
-here = fileparts(mfilename('fullpath'));
-T = readtable(fullfile(here, csvName), 'VariableNamingRule', 'preserve');
+function mask = observedFront(Y, eligible)
+mask = false(size(eligible));
+for i = find(eligible).'
+    dominates = eligible & all(Y <= Y(i,:),2) & any(Y < Y(i,:),2);
+    mask(i) = ~any(dominates);
 end
-function v = numericCol(T, name)
-x = T.(name);
-if isnumeric(x) || islogical(x)
-    v = double(x);
-else
-    v = str2double(string(x));
-end
-v = v(:);
-end
-function v = numericSubset(T, name, index)
-v = numericCol(T,name); v = v(index);
-end
-function s = textCol(T, name)
-s = string(T.(name)); s = s(:);
-end
-function tf = logicalCol(T, name)
-x = T.(name);
-if islogical(x)
-    tf = x;
-elseif isnumeric(x)
-    tf = x ~= 0;
-else
-    tf = ismember(lower(strtrim(string(x))), ["1","true","yes"]);
-end
-tf = tf(:);
-end
-function [xv, yv, Z] = gridData(T, xName, yName, zName)
-x = numericCol(T,xName); y = numericCol(T,yName); z = numericCol(T,zName);
-valid = isfinite(x) & isfinite(y) & isfinite(z); x=x(valid); y=y(valid); z=z(valid);
-xv = unique(x,'sorted'); yv = unique(y,'sorted');
-[~,ix] = ismember(x,xv); [~,iy] = ismember(y,yv);
-Z = nan(numel(yv),numel(xv)); Z(sub2ind(size(Z),iy,ix)) = z;
-end
-function plotObservations(ax,x,y,feasible)
-scatter(ax,x(~feasible),y(~feasible),28,[0.70 0.09 0.17],'x','LineWidth',1.0,'DisplayName','Infeasible'); hold(ax,'on');
-scatter(ax,x(feasible),y(feasible),30,'o','MarkerFaceColor','w','MarkerEdgeColor',[0.09 0.41 0.67],'LineWidth',0.9,'DisplayName','Feasible');
-end
-function plotPareto(ax,T,xName,yName,feasName,pfName,caseName)
-x=numericCol(T,xName); y=numericCol(T,yName); feasible=logicalCol(T,feasName); pf=logicalCol(T,pfName);
-plotObservations(ax,x,y,feasible); [sx,ord]=sort(x(pf)); sy=y(pf); sy=sy(ord); plot(ax,sx,sy,'-','Color',[0.13 0.13 0.13],'LineWidth',0.9,'HandleVisibility','off');
-scatter(ax,x(pf),y(pf),36,[0.13 0.13 0.13],'filled','DisplayName','Observed Pareto');
-cases=numericCol(T,caseName); ids=find(pf); for k=1:numel(ids), text(ax,x(ids(k)),y(ids(k)),sprintf(' %d',round(cases(ids(k)))),'FontSize',7); end
-end
-function h = plotScore(ax,G,P,xName,yName,scoreName,pxName,pyName,feasName,pfName)
-[xv,yv,Z]=gridData(G,xName,yName,scoreName); h=imagesc(ax,xv,yv,Z); set(ax,'YDir','normal'); hold(ax,'on');
-if min(Z,[],'all','omitnan') <= 0.5 && max(Z,[],'all','omitnan') >= 0.5, contour(ax,xv,yv,Z,[0.5 0.5],'w','LineWidth',1.0); end
-xp=numericCol(P,pxName); yp=numericCol(P,pyName); feasible=logicalCol(P,feasName); pf=logicalCol(P,pfName); plotObservations(ax,xp,yp,feasible); scatter(ax,xp(pf),yp(pf),55,'o','MarkerFaceColor','none','MarkerEdgeColor',[0.13 0.13 0.13],'LineWidth',1.1,'DisplayName','Observed Pareto'); axis(ax,'square');
-end
-function finishPlot(fig, outputFile)
-folder=fileparts(outputFile); if ~isempty(folder) && ~isfolder(folder), mkdir(folder); end
-exportgraphics(fig,outputFile,'Resolution',180,'BackgroundColor','white'); close(fig);
 end

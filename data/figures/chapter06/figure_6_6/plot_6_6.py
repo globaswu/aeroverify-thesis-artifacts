@@ -15,49 +15,33 @@ parser.add_argument("--output", type=Path, help="Output image path; defaults bes
 arguments = parser.parse_args()
 OUTPUT = (arguments.output if arguments.output is not None else HERE / "plot_6_6.png").resolve()
 OUTPUT.parent.mkdir(parents=True, exist_ok=True)
+
 plt.rcParams.update({"font.family": "serif", "font.serif": ["Times New Roman", "DejaVu Serif"], "font.size": 9})
 
 def rows_from(path):
     with path.open(newline="", encoding="utf-8-sig") as handle:
         return list(csv.DictReader(handle))
 
-def number(row, key):
-    return float(row[key])
+def number(row, key): return float(row[key])
+def flag(value): return str(value).strip().lower() == "true"
 
-rows=rows_from(DATA)
-profile=[r for r in rows if r["record_type"]=="profile"]
-survival=[r for r in rows if r["record_type"]=="survival"]
-profile=sorted(profile,key=lambda r:number(r,"input_physical"))
-x=np.array([number(r,"input_physical") for r in profile])
-thresholds=np.array(sorted({number(r,"normalized_hvi_threshold") for r in survival}))
-xi=np.array(sorted({number(r,"input_physical") for r in survival}))
-lookup={(number(r,"normalized_hvi_threshold"),number(r,"input_physical")):r for r in survival}
-prob=np.array([[number(lookup[(t,v)],"conditional_exceedance_probability") for v in xi] for t in thresholds])
-display=np.array([[number(lookup[(t,v)],"display_log10_exceedance_probability") for v in xi] for t in thresholds])
-fig,axes=plt.subplots(3,1,figsize=(7.5,10.2))
-ax=axes[0]
-mesh=ax.pcolormesh(xi,np.log10(thresholds),display,shading="auto",cmap="viridis",vmin=np.log10(1/2048),vmax=0)
-cs=ax.contour(xi,np.log10(thresholds),prob,levels=[.01,.1,.5],colors="#222222",linewidths=.8)
-ax.clabel(cs,fontsize=7)
-ax.set(xlabel="Taper ratio, lambda [-]",ylabel="log10 normalized HVI threshold",title="A. Conditional HVI survival field")
-fig.colorbar(mesh,ax=ax,label="log10 conditional exceedance probability")
-def positive(name):
-    a=np.array([number(r,name) for r in profile])
-    return np.where(a>0,a,np.nan)
-ax=axes[1]
-ax.plot(x,positive("p90_normalized_hvi"),color="#D59E1A",lw=1.6,label="90th percentile")
-ax.plot(x,positive("p99_normalized_hvi"),color="#E86E17",lw=1.8,label="99th percentile")
-ax.plot(x,positive("mean_normalized_hvi"),"--",color="#1769AA",lw=1.7,label="Conditional mean")
-ax.plot(x,positive("sampled_profile_maximum_normalized_hvi"),color="#222222",lw=2,label="Sampled profile maximum")
-ax.scatter([number(profile[0],"selected_input_physical")],[number(profile[0],"selected_hvi_normalized")],marker="p",s=72,color="#B33A3A",edgecolors="white",label="Selected design")
-ax.set_yscale("log"); ax.set_ylim(1e-8,1.15)
-ax.set(xlabel="Taper ratio, lambda [-]",ylabel="Normalized HVI",title="B. Conditional quantiles and profile")
-ax.grid(True,which="both",color="#d9d9d9",lw=.5); ax.legend(fontsize=7)
-ax=axes[2]
-ax.plot(x,positive("positive_hvi_fraction"),color="#E86E17",lw=2,label="Positive-HVI fraction")
-ax.plot(x,positive("mean_normalized_hvi"),"--",color="#1769AA",lw=1.8,label="Conditional mean")
-ax.set_yscale("log"); ax.set_ylim(1e-8,1)
-ax.set(xlabel="Taper ratio, lambda [-]",ylabel="Conditional statistic",title="C. Positive-HVI support and conditional mean")
-ax.grid(True,which="both",color="#d9d9d9",lw=.5); ax.legend(fontsize=8)
-fig.suptitle("Frozen sampled-HVI field versus taper ratio before evaluation 100",fontweight="bold")
+rows=[r for r in rows_from(DATA) if flag(r["c_feasible_label"])]
+keys=["x1_ar","x2_taper_ratio","x3_primary_member_ratio","x4_secondary_member_ratio","two_wing_mass_kg","y1_cditrim","y2_ctrim_nm"]
+labels=["AR","lambda","r1","r2","m2W","CDi,trim","Ctrim"]
+bounds={"x1_ar":(6,12),"x2_taper_ratio":(.2,.8),"x3_primary_member_ratio":(.05,.4),"x4_secondary_member_ratio":(.15,.5)}
+ranges={k:(min(number(r,k) for r in rows),max(number(r,k) for r in rows)) for k in keys}; ranges.update(bounds)
+def scaled(r): return [(number(r,k)-ranges[k][0])/(ranges[k][1]-ranges[k][0]) for k in keys]
+fig,ax=plt.subplots(figsize=(7.2,4.9)); x=np.arange(len(keys))
+for r in rows:
+    if flag(r["final_pareto"]) and r["phase"]=="adaptive_phase": color,lw,alpha="#E66101",1.8,.92
+    elif flag(r["final_pareto"]): color,lw,alpha="#222222",1.35,.78
+    else: color,lw,alpha="#2878B5",.8,.28
+    ax.plot(x,scaled(r),color=color,lw=lw,alpha=alpha)
+for i in range(len(keys)): ax.plot([i,i],[0,1],color="#222222",lw=.65)
+ax.set_xticks(x,labels); ax.set_yticks([]); ax.set_xlim(-.2,len(keys)-.8); ax.set_ylim(-.03,1.03)
+ax.set_title("Parallel Coordinates of the 70 Feasible Evaluations\n"
+             "Mass is diagnostic; the two rightmost axes are minimized objectives")
+for spine in ax.spines.values(): spine.set_visible(False)
+from matplotlib.lines import Line2D
+ax.legend(handles=[Line2D([0],[0],color="#2878B5",label="Feasible, dominated"),Line2D([0],[0],color="#222222",label="Initial-design Pareto"),Line2D([0],[0],color="#E66101",label="Adaptive Pareto")],loc="lower center",bbox_to_anchor=(.5,-.16),ncol=3,fontsize=7)
 fig.tight_layout(); fig.savefig(OUTPUT,dpi=200,bbox_inches="tight"); plt.close(fig); print(OUTPUT)

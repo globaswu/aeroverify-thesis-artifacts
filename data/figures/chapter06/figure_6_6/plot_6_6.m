@@ -9,14 +9,19 @@ if ~isempty(outputDir) && ~isfolder(outputDir), mkdir(outputDir); end
 dataFile = fullfile(scriptDir, 'figure_6_6.csv');
 T = readtable(dataFile, 'TextType', 'string', 'VariableNamingRule', 'preserve');
 set(groot, 'defaultAxesFontName', 'Times New Roman'); set(groot, 'defaultTextFontName', 'Times New Roman');
-P = sortrows(T(T.record_type == "profile", :), 'input_physical'); S = T(T.record_type == "survival", :);
-x = unique(S.input_physical,'sorted'); threshold = unique(S.normalized_hvi_threshold,'sorted');
-probability = reshape(S.conditional_exceedance_probability,numel(threshold),numel(x));
-displayValue = reshape(S.display_log10_exceedance_probability,numel(threshold),numel(x));
-fig=figure('Color','w','Visible','off','Position',[100 100 850 1050]); tl=tiledlayout(fig,3,1,'TileSpacing','compact','Padding','compact');
-ax=nexttile(tl); imagesc(ax,x,log10(threshold),displayValue); set(ax,'YDir','normal'); hold(ax,'on'); [c,h]=contour(ax,x,log10(threshold),probability,[.01 .1 .5],'LineColor',[.13 .13 .13],'LineWidth',.8); clabel(c,h,'FontSize',7); xlabel(ax,'Taper ratio, lambda [-]'); ylabel(ax,'log10 normalized HVI threshold'); title(ax,'A. Conditional HVI survival field'); cb=colorbar(ax); ylabel(cb,'log10 conditional exceedance probability'); clim(ax,[log10(1/2048) 0]);
-ax=nexttile(tl); hold(ax,'on'); semilogy(ax,P.input_physical,positive(P.p90_normalized_hvi),'Color',[.84 .62 .10],'LineWidth',1.6,'DisplayName','90th percentile'); semilogy(ax,P.input_physical,positive(P.p99_normalized_hvi),'Color',[.91 .43 .09],'LineWidth',1.8,'DisplayName','99th percentile'); semilogy(ax,P.input_physical,positive(P.mean_normalized_hvi),'--','Color',[.09 .41 .67],'LineWidth',1.7,'DisplayName','Conditional mean'); semilogy(ax,P.input_physical,positive(P.sampled_profile_maximum_normalized_hvi),'Color',[.13 .13 .13],'LineWidth',2,'DisplayName','Sampled profile maximum'); scatter(ax,P.selected_input_physical(1),P.selected_hvi_normalized(1),72,[.70 .23 .23],'p','filled','DisplayName','Selected design'); ylim(ax,[1e-8 1.15]); grid(ax,'on'); xlabel(ax,'Taper ratio, lambda [-]'); ylabel(ax,'Normalized HVI'); title(ax,'B. Conditional quantiles and profile'); legend(ax,'Location','southwest','FontSize',7);
-ax=nexttile(tl); hold(ax,'on'); semilogy(ax,P.input_physical,positive(P.positive_hvi_fraction),'Color',[.91 .43 .09],'LineWidth',2,'DisplayName','Positive-HVI fraction'); semilogy(ax,P.input_physical,positive(P.mean_normalized_hvi),'--','Color',[.09 .41 .67],'LineWidth',1.8,'DisplayName','Conditional mean'); ylim(ax,[1e-8 1]); grid(ax,'on'); xlabel(ax,'Taper ratio, lambda [-]'); ylabel(ax,'Conditional statistic'); title(ax,'C. Positive-HVI support and conditional mean'); legend(ax,'Location','best','FontSize',8);
-title(tl,'Frozen sampled-HVI field versus taper ratio before evaluation 100','FontWeight','bold'); exportgraphics(fig,outputFile,'Resolution',200); close(fig); disp(outputFile);
+T=T(truth(T.c_feasible_label),:); keys={'x1_ar','x2_taper_ratio','x3_primary_member_ratio','x4_secondary_member_ratio','two_wing_mass_kg','y1_cditrim','y2_ctrim_nm'}; labels={'AR','lambda','r1','r2','m2W','CDi,trim','Ctrim'}; X=zeros(height(T),numel(keys));
+for j=1:numel(keys), X(:,j)=T.(keys{j}); end
+bounds=[6 12;.2 .8;.05 .4;.15 .5];
+for j=1:4, X(:,j)=(X(:,j)-bounds(j,1))/(bounds(j,2)-bounds(j,1)); end
+for j=5:7, X(:,j)=(X(:,j)-min(X(:,j)))/(max(X(:,j))-min(X(:,j))); end
+fig=figure('Color','w','Visible','off','Position',[100 100 950 620]); ax=axes(fig); hold(ax,'on');
+for i=1:height(T)
+ if truth(T.final_pareto(i)) && T.phase(i)=="adaptive_phase", c=[.90 .38 .01]; w=1.8; a=.92; elseif truth(T.final_pareto(i)), c=[.13 .13 .13]; w=1.35; a=.78; else, c=[.16 .47 .71]; w=.8; a=.28; end
+ plot(ax,1:7,X(i,:),'Color',[c a],'LineWidth',w);
 end
-function y=positive(x), y=x; y(y<=0)=NaN; end
+for j=1:7, plot(ax,[j j],[0 1],'Color',[.13 .13 .13],'LineWidth',.65); end
+xlim(ax,[.8 6.2]); ylim(ax,[-.03 1.03]); set(ax,'XTick',1:7,'XTickLabel',labels,'YTick',[]); box(ax,'off'); title(ax,sprintf('Parallel Coordinates of the 70 Feasible Evaluations\nMass is diagnostic; the two rightmost axes are minimized objectives'));
+h1=plot(ax,nan,nan,'Color',[.16 .47 .71],'LineWidth',1.2); h2=plot(ax,nan,nan,'Color',[.13 .13 .13],'LineWidth',1.5); h3=plot(ax,nan,nan,'Color',[.90 .38 .01],'LineWidth',2); legend(ax,[h1 h2 h3],{'Feasible, dominated','Initial-design Pareto','Adaptive Pareto'},'Location','southoutside','NumColumns',3);
+exportgraphics(fig,outputFile,'Resolution',200); close(fig); disp(outputFile);
+end
+function v=truth(x), if islogical(x),v=x; elseif isnumeric(x),v=x~=0; else,v=strcmpi(string(x),'true'); end, end

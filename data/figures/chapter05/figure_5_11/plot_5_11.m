@@ -2,7 +2,7 @@ function plot_5_11(outputFile)
 if nargin < 1, outputFile=fullfile(fileparts(mfilename('fullpath')),'plot_5_11.png'); end
 T=loadSiblingData('figure_5_11.csv');
 
-fig=figure('Visible','off','Color','w'); ax=axes(fig); hold(ax,'on'); cats=unique(textCol(T,'plot_category'),'stable'); marks={'o','x','+','s','^','d','v'}; x=numericCol(T,'a_m'); y=numericCol(T,'t1_over_a'); for i=1:numel(cats), m=textCol(T,'plot_category')==cats(i); scatter(ax,x(m),y(m),36,marks{1+mod(i-1,numel(marks))},'DisplayName',strrep(cats(i),'_',' ')); end; pf=logicalCol(T,'pareto_optimal'); scatter(ax,x(pf),y(pf),70,'o','MarkerFaceColor','none','MarkerEdgeColor','k','DisplayName','Observed Pareto'); axis(ax,'square'); xlabel(ax,'Cell size, a (m)'); ylabel(ax,'Primary-member ratio, t1/a'); title(ax,'BCC observed stress-failure mechanisms'); legend(ax,'Location','bestoutside'); finishPlot(fig,outputFile);
+cases=unique(round(numericCol(T,'case'))); fig=figure('Visible','off','Color','w'); ax=axes(fig); hold(ax,'on'); for c=cases', m=round(numericCol(T,'case'))==c; r=numericCol(T,'rank_descending'); r=r(m); s=numericCol(T,'shell_von_mises_stress_mpa'); s=s(m); [r,ord]=sort(r); plot(ax,r,s(ord),'LineWidth',1,'DisplayName',sprintf('Case %d',c)); end; yline(ax,median(numericCol(T,'stress_limit_mpa'),'omitnan'),'--','Stress screen'); set(ax,'XScale','log'); xlabel(ax,'Descending stress rank'); ylabel(ax,'Shell von Mises stress (MPa)'); title(ax,'BCC upper shell-stress tails'); legend(ax,'Location','best'); finishPlot(fig,outputFile);
 end
 
 function T = loadSiblingData(csvName)

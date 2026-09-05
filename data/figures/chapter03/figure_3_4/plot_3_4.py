@@ -1,4 +1,4 @@
-"""Standalone renderer for a single Chapter 3 figure-data CSV."""
+"""Standalone renderer for a single thesis figure-data CSV."""
 
 from __future__ import annotations
 
@@ -17,21 +17,20 @@ import numpy as np
 
 
 SCRIPT = Path(__file__).resolve()
-MATCH = re.fullmatch(r"plot_3_(\d+)\.py", SCRIPT.name)
-if MATCH is None:
-    raise RuntimeError("Script name must be plot_3_N.py.")
-NUMBER = int(MATCH.group(1))
-CSV_FILE = SCRIPT.parent / f"figure_3_{NUMBER}.csv"
-DEFAULT_OUTPUT = SCRIPT.parent / f"plot_3_{NUMBER}.png"
+# This identifier selects the original numerical renderer independently
+# of the figure number in the revised thesis.
+NUMBER = 7
+CSV_FILE = SCRIPT.parent / "figure_3_4.csv"
+DEFAULT_OUTPUT = SCRIPT.parent / "plot_3_4.png"
 
 PARSER = argparse.ArgumentParser(
-    description=f"Render Thesis Figure 3.{NUMBER} from its sibling CSV."
+    description="Render Thesis Figure 3.4 from its sibling CSV."
 )
 PARSER.add_argument(
     "--output",
     type=Path,
     default=DEFAULT_OUTPUT,
-    help="Output image path (default: sibling plot_3_N.png).",
+    help="Output image path (default: sibling plot_3_4.png).",
 )
 OUTPUT_FILE = PARSER.parse_args().output.resolve()
 

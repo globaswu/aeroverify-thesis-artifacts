@@ -2,7 +2,7 @@ function plot_5_6(outputFile)
 if nargin < 1, outputFile=fullfile(fileparts(mfilename('fullpath')),'plot_5_6.png'); end
 T=loadSiblingData('figure_5_6.csv');
 
-x=numericCol(T,'velocity_mps'); [x,ord]=sort(x); old=numericCol(T,'four_point_damping_g'); new=numericCol(T,'eighteen_point_damping_g'); fig=figure('Visible','off','Color','w'); ax=axes(fig); plot(ax,x,old(ord),'--','Color',[.6 .6 .6],'LineWidth',1.4,'DisplayName','Four-value MKAERO1'); hold(ax,'on'); plot(ax,x,new(ord),'-','Color',[.75 .08 .12],'LineWidth',1.5,'DisplayName','Revised 18-value MKAERO1'); yline(ax,0,':'); xlabel(ax,'Velocity (m/s)'); ylabel(ax,'Damping, g'); title(ax,'FCC case 67 point-3 MKAERO1 sensitivity'); legend(ax); finishPlot(fig,outputFile);
+G=T(textCol(T,'record_type')=="grid",:); P=T(textCol(T,'record_type')=="evaluation",:); fig=figure('Visible','off','Color','w'); ax=axes(fig); plotScore(ax,G,P,'a_m','t1_over_a','feasibility_score','a_m','t1_over_a','feasible','pareto_case071'); colormap(ax,'parula'); colorbar(ax); xlabel(ax,'Cell size, a (m)'); ylabel(ax,'Primary-member ratio, t1/a'); title(ax,'Completed BCC feasibility-score map'); finishPlot(fig,outputFile);
 end
 
 function T = loadSiblingData(csvName)

@@ -9,6 +9,9 @@ if (-not (Test-Path -LiteralPath $manifestPath -PathType Leaf)) {
 }
 
 $manifest = Get-Content -LiteralPath $manifestPath -Raw | ConvertFrom-Json
+if ($manifest.schema_version -ne 2) {
+    throw 'Unsupported manifest schema. Download the complete current tagged release; do not mix verifier and manifest revisions.'
+}
 $textExtensions = @('.md', '.m', '.py', '.tex', '.ps1', '.json', '.csv', '.txt', '.yml', '.cff')
 $utf8WithoutBom = [System.Text.UTF8Encoding]::new($false)
 
@@ -56,11 +59,15 @@ foreach ($entry in $manifest.files) {
     $file = Get-Item -LiteralPath $candidate
     [byte[]]$portableBytes = Get-PortableBytes -File $file
     if ([int64]$entry.size_bytes -ne $portableBytes.LongLength) {
-        throw "Size mismatch for $relative"
+        throw ("Size mismatch for {0}: expected {1} portable bytes, found {2}. " +
+            "Text is normalized to UTF-8/LF; check for edited or mixed-release files.") -f
+            $relative, $entry.size_bytes, $portableBytes.LongLength
     }
     $hash = Get-Sha256Hex -Bytes $portableBytes
     if ($hash -ne ([string]$entry.sha256).ToLowerInvariant()) {
-        throw "SHA-256 mismatch for $relative"
+        throw ("SHA-256 mismatch for {0}: expected {1}, found {2}. " +
+            "Re-download a complete release before trusting changed content.") -f
+            $relative, $entry.sha256, $hash
     }
     if (-not $listed.Add($relative.Replace('\', '/'))) {
         throw "Duplicate manifest path: $relative"
@@ -130,6 +137,6 @@ foreach ($file in Get-ChildItem -LiteralPath $packageRoot -Recurse -File) {
     }
 }
 
-Write-Output (("Manifest verified: {0} files; hashes, sizes, completeness, " +
+Write-Output (("Manifest verified: {0} files; portable UTF-8/LF text hashes, sizes, completeness, " +
     "excluded types, machine paths, and high-confidence secret patterns passed.") -f
     $manifest.files.Count)

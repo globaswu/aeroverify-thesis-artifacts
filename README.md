@@ -1,12 +1,14 @@
 # Aeroelastic Lattice-Wing Thesis Reproducibility Package
 
+[![Verify release manifest](https://github.com/globaswu/aeroverify-thesis-artifacts/actions/workflows/verify.yml/badge.svg?branch=main)](https://github.com/globaswu/aeroverify-thesis-artifacts/actions/workflows/verify.yml)
+
 This repository is the curated public companion to Sen Wu's doctoral thesis,
 *Aeroelastic Bayesian Optimization of Additively Manufactured Multi-Layer
 Lattice-Structured Wings*. It contains evaluated data, portable plotting
 scripts, and MATLAB analysis code for inspecting the reported results.
 
 - Stable release: [thesis](https://github.com/globaswu/aeroverify-thesis-artifacts/releases/tag/thesis)
-- Final thesis: [main.pdf](https://github.com/globaswu/aeroverify-thesis-artifacts/releases/download/thesis/main.pdf)
+- The provisional thesis PDF and audio recordings are private and are not included in this public package.
 - Paper 2 manuscript: [AIAA-format PDF](https://github.com/globaswu/aeroverify-thesis-artifacts/releases/download/thesis/paper2_lattice_topology_aiaa.pdf)
 - Paper 3 manuscript: [AIAA-format PDF](https://github.com/globaswu/aeroverify-thesis-artifacts/releases/download/thesis/paper3_integrated_aerostructural_aiaa.pdf)
 - Reference verification: [evidence report](https://github.com/globaswu/aeroverify-thesis-artifacts/releases/download/thesis/thesis_reference_verification_report.pdf)
@@ -14,6 +16,7 @@ scripts, and MATLAB analysis code for inspecting the reported results.
 - Thesis-to-file crosswalk: [docs/FILE_CROSSWALK.md](docs/FILE_CROSSWALK.md)
 - Figure-to-data index: [docs/FIGURE_DATA_MAP.md](docs/FIGURE_DATA_MAP.md)
 - Reproduce every quantitative figure: [docs/CSV_FIGURE_REPRODUCTION.md](docs/CSV_FIGURE_REPRODUCTION.md)
+- View or plot FCC/BCC/SC data: [step-by-step lattice-sizing guide](experiments/lattice_sizing/README.md)
 - Machine-readable experiment register: [experiments.json](experiments.json)
 
 The [figure index](docs/FIGURE_DATA_MAP.md) follows the revised thesis
@@ -102,7 +105,7 @@ python scripts/verify_benchmark_comparison.py
 matlab -batch "addpath('matlab'); run_tests"
 ```
 
-Or run both through:
+Or run the packaged checks and MATLAB reproduction through:
 
 ```powershell
 powershell -ExecutionPolicy Bypass -File .\tools\reproduce.ps1

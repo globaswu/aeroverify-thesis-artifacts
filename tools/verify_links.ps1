@@ -4,8 +4,8 @@ param()
 $ErrorActionPreference = 'Stop'
 $urls = @(
     'https://github.com/globaswu/aeroverify-thesis-artifacts/releases/tag/thesis',
-    'https://github.com/globaswu/aeroverify-thesis-artifacts/releases/download/thesis/main.pdf',
     'https://github.com/globaswu/aeroverify-thesis-artifacts/releases/download/thesis/paper2_lattice_topology_aiaa.pdf',
+    'https://github.com/globaswu/aeroverify-thesis-artifacts/releases/download/thesis/paper3_integrated_aerostructural_aiaa.pdf',
     'https://github.com/globaswu/aeroverify-thesis-artifacts/releases/download/thesis/thesis_reference_verification_report.pdf',
     'https://github.com/globaswu/aeroverify-thesis-artifacts/blob/thesis/README.md',
     'https://github.com/globaswu/aeroverify-thesis-artifacts/blob/thesis/QUICKSTART.md',

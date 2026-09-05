@@ -2,8 +2,17 @@
 
 ## 1. Download
 
-Download the `thesis` source archive from the GitHub release and extract
-it to a writable directory. Do not place generated files under `data/`.
+Download the [complete `thesis` source ZIP](https://github.com/globaswu/aeroverify-thesis-artifacts/archive/refs/tags/thesis.zip)
+and extract it to a writable directory. The repository root is the extracted
+folder containing `matlab`, `data`, and `config`. Run the terminal commands
+below from that folder, not from an `experiments/` subfolder. Do not place
+generated files under `data/`.
+
+To inspect data without software, open the [FCC](data/fcc/evaluations_cases001_071.csv),
+[BCC](data/bcc/evaluations_cases001_071.csv), or
+[SC](data/sc/evaluations_cases001_071.csv) CSV directly on GitHub.
+For MATLAB Command Window instructions and the images to open afterwards,
+see the [lattice-sizing guide](experiments/lattice_sizing/README.md).
 
 ## 2. Verify the release
 
@@ -16,6 +25,10 @@ python scripts/verify_figure_packages.py
 
 A successful run reports the number of listed files and confirms hashes,
 sizes, excluded file types, machine-path screening, and file completeness.
+The verifier compares text as UTF-8 with LF line endings, so normal Windows
+CRLF conversion does not invalidate a release. For a red cross shown beside
+an older file commit, consult the [current workflow runs](https://github.com/globaswu/aeroverify-thesis-artifacts/actions/workflows/verify.yml)
+and [troubleshooting](docs/TROUBLESHOOTING.md#a-manifest-check-fails).
 
 ## 3. Run all solver-free checks
 

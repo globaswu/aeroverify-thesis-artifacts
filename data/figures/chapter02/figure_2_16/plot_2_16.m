@@ -1,0 +1,104 @@
+function plot_2_16(outputPath)
+%PLOT_2_16 Reproduce all five lift curves and dihedral differences.
+% The only input is the adjacent figure_2_16.csv.
+folder=fileparts(mfilename('fullpath'));
+if nargin<1 || isempty(outputPath),outputPath=fullfile(folder,'figure_2_16.png');end
+data=readtable(fullfile(folder,'figure_2_16.csv'));
+alpha=data.alpha_deg;
+assert(isequal(alpha,(-4:2:12)'), 'Expected nine verified incidence values.');
+assert(all(data.aerodynamic_boxes==5500) && all(abs(data.Mach-.17)<1e-12));
+values=[data.CL_dihedral0_on,data.CL_dihedral3_on,data.CL_dihedral0_off,data.CL_dihedral3_off];
+assert(all(isfinite(values),'all'));
+reference=data.CL_Sivells_TableI_linear_reference;
+assert(max(abs(reference-.085*(alpha+1.3)))<1e-12);
+deltaOn=data.CL_dihedral3_on-data.CL_dihedral0_on;
+deltaOff=data.CL_dihedral3_off-data.CL_dihedral0_off;
+assert(max(abs(deltaOn-data.delta_CL_3deg_minus_0deg_ON))<1e-12);
+assert(max(abs(deltaOff-data.delta_CL_3deg_minus_0deg_OFF))<1e-12);
+blue=[0 .4353 .6392];orange=[.7882 .4157 0];ink=[.1451 .1647 .1882];grey=[.4 .4275 .4588];
+fig=figure('Visible','off','Color','w','Units','inches','Position',[1 1 8.27 7.6]);
+cleanup=onCleanup(@() close(fig));
+canvas=axes(fig,'Position',[0 0 1 1],'Color','none');
+xlim(canvas,[0 1]);ylim(canvas,[0 1]);axis(canvas,'off');hold(canvas,'on');
+put(canvas,.115,.978,'Effect of dihedral and W2GJ on rigid-wing lift',15,ink,'bold');
+put(canvas,.115,.946,'Four matched rigid DLM cases; Mach 0.17; 5500 aerodynamic boxes',10,grey);
+ax=axes(fig,'Position',[.115 .405 .845 .485]);hold(ax,'on');
+h3on=plot(ax,alpha,data.CL_dihedral3_on,'--o','Color',blue,'LineWidth',1.25, ...
+    'MarkerSize',6.7,'MarkerFaceColor','w','MarkerEdgeColor',blue);
+h3off=plot(ax,alpha,data.CL_dihedral3_off,'--s','Color',orange,'LineWidth',1.25, ...
+    'MarkerSize',6.7,'MarkerFaceColor','w','MarkerEdgeColor',orange);
+h0on=plot(ax,alpha,data.CL_dihedral0_on,'-o','Color',blue,'LineWidth',1.25, ...
+    'MarkerSize',3.8,'MarkerFaceColor',blue,'MarkerEdgeColor',blue);
+h0off=plot(ax,alpha,data.CL_dihedral0_off,'-s','Color',orange,'LineWidth',1.25, ...
+    'MarkerSize',3.8,'MarkerFaceColor',orange,'MarkerEdgeColor',orange);
+hpaper=plot(ax,alpha,reference,'-.','Color',ink,'LineWidth',1.45);
+xlim(ax,[-4.5 12.5]);ylim(ax,[-.42 1.27]);xticks(ax,-4:2:12);yticks(ax,-.4:.2:1.2);
+set(ax,'XTickLabel',[]);ylabel(ax,'Lift coefficient C_L');
+panelTitle(ax,'A. Lift curves');
+legend(ax,[h0on h3on h0off h3off hpaper], ...
+    {'0° / W2GJ on (optimization convention)','3° / W2GJ on', ...
+    '0° / W2GJ off','3° / W2GJ off','Sivells Table I reconstruction'}, ...
+    'Location','northwest','Box','off','FontName','Times New Roman','FontSize',9.5);
+text(ax,.42,.09, ...
+    {'Table I line: C_L=0.085(\alpha_{deg}+1.3)', ...
+    'Reconstructed from slope and zero-lift angle;', ...
+    'not individual measured points.'}, ...
+    'Units','normalized','VerticalAlignment','bottom','FontName','Times New Roman', ...
+    'FontSize',9,'Color',grey,'Interpreter','tex');
+
+diff=axes(fig,'Position',[.115 .151 .845 .185]);hold(diff,'on');
+yline(diff,0,'Color',ink,'LineWidth',.9);
+hon=plot(diff,alpha,deltaOn*1e3,'-o','Color',blue,'MarkerSize',4.2, ...
+    'MarkerFaceColor',blue,'LineWidth',1.3);
+hoff=plot(diff,alpha,deltaOff*1e3,'--s','Color',orange,'MarkerSize',4.5, ...
+    'MarkerFaceColor','w','LineWidth',1.3);
+xlim(diff,[-4.5 12.5]);ylim(diff,[-1.03 .41]);xticks(diff,-4:2:12);yticks(diff,[-1 -.5 0]);
+xlabel(diff,'Incidence \alpha (deg)');ylabel(diff,'\Delta C_L (10^{-3})');
+panelTitle(diff,'B. Dihedral difference: \Delta C_L=C_L(3°)-C_L(0°)');
+legend(diff,[hon hoff],{'W2GJ on','W2GJ off'},'Location','northeast', ...
+    'Box','off','Orientation','horizontal','FontName','Times New Roman','FontSize',9);
+[maximumOn,maxIndex]=max(abs(deltaOn));maximumOff=max(abs(deltaOff));
+text(diff,.018,.065,sprintf('Max. |\\Delta C_L| at %g°: on %.3f\\times10^{-3}; off %.3f\\times10^{-3}', ...
+    alpha(maxIndex),maximumOn*1e3,maximumOff*1e3), ...
+    'Units','normalized','VerticalAlignment','bottom','FontName','Times New Roman', ...
+    'FontSize',8.5,'Color',grey,'Interpreter','tex');
+set([ax diff],'FontName','Times New Roman','FontSize',10,'Box','off', ...
+    'XGrid','on','YGrid','on','GridColor',[.86 .88 .895],'GridAlpha',1,'LineWidth',.65);
+put(canvas,.115,.074,'Fit statistics use −2° ≤ α ≤ 8°; all nine computed incidences are displayed.',8.8,grey);
+put(canvas,.115,.044, ...
+    'All numerical curves are rigid benchmarks using the same historical 600-point airfoil. The 0° case follows',8.6,ink);
+put(canvas,.115,.024, ...
+    'the optimization geometry/camber convention; these are not full flexible-optimization results.',8.6,ink);
+drawnow;
+[outputFolder,~,extension]=fileparts(outputPath);
+if ~isempty(outputFolder) && ~isfolder(outputFolder),mkdir(outputFolder);end
+if strcmpi(extension,'.pdf')
+    exportgraphics(fig,outputPath,'ContentType','vector','BackgroundColor','white');
+else
+    set(fig,'PaperPositionMode','auto','InvertHardcopy','off');
+    print(fig,outputPath,'-dpng','-r400');
+end
+disp(outputPath)
+use=alpha>=-2 & alpha<=8;
+assert(nnz(use)==6);
+fields=["CL_dihedral0_on","CL_dihedral3_on","CL_dihedral0_off","CL_dihedral3_off"];
+for k=1:numel(fields)
+    y=data.(fields(k));
+    fitted=polyfit(alpha(use),y(use),1);
+    rmse=sqrt(mean((y(use)-reference(use)).^2));
+    fprintf('%s: fit -2..8 deg; slope=%.12g/deg; fitted alpha0=%.12g deg; reference RMSE=%.12g\n', ...
+        fields(k),fitted(1),-fitted(2)/fitted(1),rmse);
+end
+end
+
+function put(ax,x,y,value,fontSize,color,weight)
+if nargin<7,weight='normal';end
+text(ax,x,y,value,'FontName','Times New Roman','FontSize',fontSize,'Color',color, ...
+    'FontWeight',weight,'VerticalAlignment','middle','Interpreter','none','Clipping','off');
+end
+
+function panelTitle(ax,value)
+text(ax,0,1.04,value,'Units','normalized','FontName','Times New Roman', ...
+    'FontSize',11,'FontWeight','bold','VerticalAlignment','bottom', ...
+    'Interpreter','tex','Clipping','off');
+end

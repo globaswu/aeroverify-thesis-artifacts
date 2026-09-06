@@ -8,7 +8,7 @@ functions. Neither route launches a solver or contacts an external data service.
 From the repository root, for example:
 
 ```text
-python scripts/reproduce_thesis_figure.py 2.1 2.3 2.4 2.12 2.13 2.14 2.15
+python scripts/reproduce_thesis_figure.py 2.1 2.3 2.4 2.12 2.13 2.14 2.15 2.16
 ```
 
 The figure-specific script can also be run directly with `--output` to select
@@ -190,3 +190,32 @@ describe displacement along the local panel normal, no additional
 ordinate plane sufficiently to resolve this choice, so the global-XZ
 interpretation is an explicit replication assumption, not a universal
 Nastran rule.
+
+## Figure 2.16: four rigid dihedral/W2GJ cases
+
+[CSV and scripts](../data/figures/chapter02/figure_2_16)
+
+The four numerical curves are actual rigid SOL 144 calculations combining
+zero or 3 degrees dihedral with W2GJ enabled or disabled. They share Mach
+0.17, 5500 aerodynamic boxes, and the same historical 600-point NACA 65-210
+coordinate dataset. All nine incidences from −4 to 12 degrees are plotted;
+regressions and reference-error statistics use only −2 to 8 degrees. The
+fifth line is reconstructed from Sivells Table I as
+`CL = 0.085*(alpha_deg+1.3)`, not digitized measured points. Panel B displays
+the signed difference `CL(3 degrees)-CL(0 degrees)` in units of `10^-3`.
+The CSV retains independent force-sum checks and physical metadata alongside
+the plotted coefficients; no numerical curve is synthesized by scaling
+another curve.
+
+The flat case follows the optimization geometry/camber **convention only**.
+These are zero-motion rigid benchmarks, not flexible-wing optimization
+results, and they do not use the current 516-point coordinate file. The
+3-degree W2GJ-on case uses one cosine projection of the historical unprojected
+camber array; the flat case uses that array without a dihedral projection.
+The fixed reference node and unloaded scalar carrier are numerical devices,
+not a wing structural model. The small dihedral differences apply to these
+four inviscid cases on one mesh; they do not establish stall, total-drag
+accuracy, or mesh convergence. A panel-normal incidence/camber projection
+does not justify applying a blanket cosine factor to the final lift from
+the separate planar lifting-line calculation. No lifting-line solver is
+implemented or modified by this reproduction package.

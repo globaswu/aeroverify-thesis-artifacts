@@ -68,7 +68,7 @@ Source folders, transformations, and limitations are recorded in
 ## Figure-level exports
 
 `figures/chapter02` through `figures/chapter06`, plus `figures/chapterC` and
-`figures/chapterD`, contain 58 figure packages under the current thesis
+`figures/chapterD`, contain 60 figure packages under the current thesis
 numbering. Every folder contains exactly one consolidated CSV, one independent
 Python plotting script, and one independent MATLAB plotting script. Each script
 reads only its adjacent CSV. The complete index is

@@ -8,7 +8,7 @@ functions. Neither route launches a solver or contacts an external data service.
 From the repository root, for example:
 
 ```text
-python scripts/reproduce_thesis_figure.py 2.1 2.3 2.4 2.12 2.13
+python scripts/reproduce_thesis_figure.py 2.1 2.3 2.4 2.12 2.13 2.14 2.15
 ```
 
 The figure-specific script can also be run directly with `--output` to select
@@ -128,3 +128,55 @@ quality check; no wall-resolution verification or matched experimental
 total-drag comparison was available. The figure documents these CFD results
 and their limitations without treating the terminal iteration ranges or
 small medium-to-fine difference as a validated uncertainty assessment.
+
+## Figure 2.14: mean camber at aerodynamic-box controls
+
+[CSV and scripts](../data/figures/chapter02/figure_2_14)
+
+The CSV supplies 4001 normalized chordwise samples of the NACA 65-210 upper
+surface, lower surface, mean camber, and numerical camber derivative. These
+values reproduce the geometry preprocessing used for W2GJ, including the
+implemented endpoint treatment and piecewise cubic Hermite interpolation.
+They are not new CFD or aeroelastic simulation results.
+
+There are 50 control rows, identified by `box_j_zero_based` values 0–49.
+At the control of chordwise box `j`, `control_x_over_c = (j+0.75)/50` and
+`control_W2GJ = -control_dzc_dx`. Non-control rows use `box_j_zero_based=-1`
+and leave control-specific fields as NaN. These NaN entries are intentional,
+not missing simulation observations. All fifty control locations and signs,
+the fine-grid derivative, and the surface/camber values were checked against
+the supplied coordinate profile and preprocessing convention.
+
+Panel A represents 110 spanwise strips by 50 chordwise boxes in normalized
+coordinates, without assigning a physical planform aspect ratio. The
+highlighted five boxes have indices 35–39. Panel B preserves equal chord and
+vertical scale. Panel C explicitly magnifies the vertical coordinate by
+36.5 relative to the displayed chord scale; its tangent angles are therefore
+visually magnified, while the listed derivatives retain their actual values.
+
+The three-quarter-box control locations are not the quarter-chord lifting
+line or its ten spanwise collocation stations. Mean camber supplies an
+imposed normal-flow boundary-condition correction. It does not move the
+planar aerodynamic surface or represent aeroelastic displacement.
+
+## Figure 2.15: matched rigid W2GJ on/off comparison
+
+[CSV and scripts](../data/figures/chapter02/figure_2_15)
+
+The CSV retains all nine verified incidences from −4 to 12 degrees, the
+on/off lift coefficients, independent force-sum checks, and reference/model
+metadata. The figure and reported fits use the six points from −2 to
+8 degrees. Both SOL 144 runs use the same 5500-box aerodynamic model at
+Mach 0.17, 3 degrees dihedral, and zero washout; only the W2GJ include differs.
+A fully fixed reference node, rigid aerodynamic interpolation, and an
+unloaded scalar carrier provide a **zero-motion numerical carrier**, not a
+model of the wing's skin or lattice structure. Camber values use the geometric
+dihedral projection without empirical fitting. The half-domain coefficient
+reference area is 1.1585009088000002 m². The dashed reference is reconstructed
+from Sivells's experimental Table I slope of 0.085 per degree and zero-lift
+angle of −1.3 degrees, not digitized measurements. At zero incidence,
+`CL_W2GJ_on=0.1379893` and `CL_W2GJ_off=0`. This matched pair isolates the camber
+contribution within one rigid inviscid discretization. It does not establish
+total-drag accuracy, stall prediction, or mesh convergence; the rounded
+experimental tips are approximated by a straight trapezoid, and the residual
+against the reconstructed experimental lift relation remains visible.

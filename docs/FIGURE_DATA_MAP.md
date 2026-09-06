@@ -1,6 +1,6 @@
 # Thesis figure-data index
 
-This index follows the revised thesis numbering. Each of the 58 linked folders
+This index follows the revised thesis numbering. Each of the 60 linked folders
 contains one CSV, one independent Python plotting script, and one independent
 MATLAB plotting script. Either script reads its adjacent CSV alone.
 
@@ -18,6 +18,8 @@ MATLAB plotting script. Either script reads its adjacent CSV alone.
 | [2.11](../data/figures/chapter02/figure_2_11) | Mesh-sensitive positive-damping diagnostic |
 | [2.12](../data/figures/chapter02/figure_2_12) | Nastran and lifting-line lift curves against Sivells's experimental linear characteristics |
 | [2.13](../data/figures/chapter02/figure_2_13) | Full-wing CFD total-drag histories and terminal mesh values |
+| [2.14](../data/figures/chapter02/figure_2_14) | NACA 65-210 mean camber and W2GJ at individual aerodynamic-box controls |
+| [2.15](../data/figures/chapter02/figure_2_15) | Matched rigid-wing lift calculation with W2GJ enabled and disabled |
 
 See [Chapter 2 reproduction notes](CHAPTER02_FIGURES.md) for column definitions,
 source scope, and the distinction between a reconstructed experimental line and

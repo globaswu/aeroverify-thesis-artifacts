@@ -20,7 +20,7 @@ scripts, and MATLAB analysis code for inspecting the reported results.
 - Machine-readable experiment register: [experiments.json](experiments.json)
 
 The [figure index](docs/FIGURE_DATA_MAP.md) follows the revised thesis
-numbering and covers 58 data-based figures in Chapters 2–6 and Appendices C–D.
+numbering and covers 60 data-based figures in Chapters 2–6 and Appendices C–D.
 Each figure folder contains one CSV and independent Python and MATLAB scripts
 that read that CSV alone. Figure 2.8 displays nTop screenshots in the thesis;
 its scripts reconstruct the mode shape as a point cloud rather than duplicating

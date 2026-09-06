@@ -8,7 +8,7 @@ functions. Neither route launches a solver or contacts an external data service.
 From the repository root, for example:
 
 ```text
-python scripts/reproduce_thesis_figure.py 2.1 2.3 2.4 2.12
+python scripts/reproduce_thesis_figure.py 2.1 2.3 2.4 2.12 2.13
 ```
 
 The figure-specific script can also be run directly with `--output` to select
@@ -89,3 +89,42 @@ It is not a matched W2GJ-on/off test. Agreement in lift-curve slope supports
 the lift calculation within this comparison; any zero-lift-angle difference
 must remain visible. The comparison does not establish accuracy of profile,
 parasite, or total drag, or independently validate the induced-drag objective.
+
+## Figure 2.13: full-wing CFD drag diagnostics
+
+[CSV and scripts](../data/figures/chapter02/figure_2_13)
+
+The CSV contains all 75 samples from a three-mesh full-wing CFD campaign:
+25 samples per mesh at iterations 0, 10, ..., 240. The history panel displays
+iterations 40–240 so that startup transients do not obscure the later values;
+the omitted startup rows remain available in the CSV. `mesh_id` identifies
+the coarse, medium, or fine mesh. Iteration, cell count, total drag, pressure
+and viscous drag components, flow/reference quantities, and monitor settings
+are retained as separate numeric columns.
+
+`CD_total` is the recorded pressure-plus-viscous wing drag coefficient, not
+lifting-line induced drag. The pressure and viscous coefficients are
+calculated by projecting the respective recorded forces onto the prescribed
+drag direction and dividing by dynamic pressure times reference area. Their
+sum agrees with the recorded total coefficient to within 4.3e-10 across the
+75 rows.
+
+This calculation used the NACA 65-210 coordinate input at 7 degrees incidence,
+98.6847632 m/s, nominal Mach 0.29, and reference area 2.32245987 m². It is
+distinct from the Mach 0.17 Sivells lift comparison. The three mesh levels
+use incompressible RANS with the Spalart–Allmaras turbulence model.
+
+The shading and horizontal whiskers use the nine terminal samples at
+iterations 160–240. Whiskers are **observed iteration ranges**, not confidence
+intervals, uncertainty bounds, or estimates of discretization error. All
+three runs passed their original trailing force-range monitor at iteration
+240. Its 60 N drag tolerance exceeded the observed ranges of 1.4628845,
+6.2463705, and 12.7891070 N. These accepted results must not be described as
+failed convergence under that original criterion.
+
+Monitor acceptance does not demonstrate total-drag accuracy. Boundary-layer
+extrusion was disabled in all three meshes; the fine mesh failed one mesh
+quality check; no wall-resolution verification or matched experimental
+total-drag comparison was available. The figure documents these CFD results
+and their limitations without treating the terminal iteration ranges or
+small medium-to-fine difference as a validated uncertainty assessment.

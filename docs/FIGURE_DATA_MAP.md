@@ -1,6 +1,6 @@
 # Thesis figure-data index
 
-This index follows the revised thesis numbering. Each of the 57 linked folders
+This index follows the revised thesis numbering. Each of the 58 linked folders
 contains one CSV, one independent Python plotting script, and one independent
 MATLAB plotting script. Either script reads its adjacent CSV alone.
 
@@ -17,6 +17,7 @@ MATLAB plotting script. Either script reads its adjacent CSV alone.
 | [2.10](../data/figures/chapter02/figure_2_10) | Structural-mesh sensitivity |
 | [2.11](../data/figures/chapter02/figure_2_11) | Mesh-sensitive positive-damping diagnostic |
 | [2.12](../data/figures/chapter02/figure_2_12) | Nastran and lifting-line lift curves against Sivells's experimental linear characteristics |
+| [2.13](../data/figures/chapter02/figure_2_13) | Full-wing CFD total-drag histories and terminal mesh values |
 
 See [Chapter 2 reproduction notes](CHAPTER02_FIGURES.md) for column definitions,
 source scope, and the distinction between a reconstructed experimental line and

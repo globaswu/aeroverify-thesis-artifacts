@@ -38,10 +38,10 @@ def main(output: Path):
              fontsize=10,color=grey)
     ax=fig.add_axes([.115,keep_top(.405),.845,upper_height])
     handles={}
-    specs=[('CL_dihedral3_on',blue,'--','o','white',6.7,'3° / W2GJ on'),
-           ('CL_dihedral3_off',orange,'--','s','white',6.7,'3° / W2GJ off'),
-           ('CL_dihedral0_on',blue,'-','o',blue,3.8,'0° / W2GJ on (optimization convention)'),
-           ('CL_dihedral0_off',orange,'-','s',orange,3.8,'0° / W2GJ off')]
+    specs=[('CL_dihedral3_on',blue,'--','o','white',6.7,'dihedral 3° / W2GJ On'),
+           ('CL_dihedral3_off',orange,'--','s','white',6.7,'dihedral 3° / W2GJ Off'),
+           ('CL_dihedral0_on',blue,'-','o',blue,3.8,'dihedral 0° / W2GJ On (optimization convention)'),
+           ('CL_dihedral0_off',orange,'-','s',orange,3.8,'dihedral 0° / W2GJ Off')]
     for field,color,style,marker,face,size,label in specs:
         handles[field],=ax.plot(alpha,data[field],color=color,ls=style,lw=1.25,
             marker=marker,ms=size,mfc=face,mec=color,mew=1.0,label=label,zorder=3)
@@ -63,9 +63,9 @@ def main(output: Path):
     zoom=fig.add_axes([.115,lower_bottom,.845,lower_height])
     # Draw only the original nine points and their straight connecting segments.
     zoom.plot(alpha,data['CL_dihedral0_on'],'-o',color=blue,ms=4.2,lw=1.4,
-              mfc=blue,mec=blue,label='0° / W2GJ on')
+              mfc=blue,mec=blue,label='dihedral 0° / W2GJ On')
     zoom.plot(alpha,data['CL_dihedral3_on'],'--o',color=blue,ms=6.7,lw=1.4,
-              mfc='white',mec=blue,label='3° / W2GJ on')
+              mfc='white',mec=blue,label='dihedral 3° / W2GJ On')
     zoom.set_xlim(11.985,12.003);zoom.set_ylim(1.1494,1.1523)
     zoom.set_xticks([11.985,11.990,11.995,12.000])
     zoom.set_yticks([1.1495,1.1500,1.1505,1.1510,1.1515,1.1520])
@@ -79,11 +79,11 @@ def main(output: Path):
     zoom.legend(loc='upper left',frameon=False,handlelength=2.8,fontsize=9.5)
     endpoint0=float(data['CL_dihedral0_on'][alpha==12][0])
     endpoint3=float(data['CL_dihedral3_on'][alpha==12][0])
-    zoom.annotate(fr'0°: $C_L={endpoint0:.6f}$',xy=(12,endpoint0),
-        xytext=(11.995,1.15212),color=blue,fontsize=9.5,ha='left',va='center',
+    zoom.annotate(fr'dihedral 0°: $C_L={endpoint0:.6f}$',xy=(12,endpoint0),
+        xytext=(11.994,1.15212),color=blue,fontsize=9.5,ha='left',va='center',
         arrowprops=dict(arrowstyle='->',color=blue,lw=.8))
-    zoom.annotate(fr'3°: $C_L={endpoint3:.6f}$',xy=(12,endpoint3),
-        xytext=(11.995,1.15030),color=blue,fontsize=9.5,ha='left',va='center',
+    zoom.annotate(fr'dihedral 3°: $C_L={endpoint3:.6f}$',xy=(12,endpoint3),
+        xytext=(11.994,1.15030),color=blue,fontsize=9.5,ha='left',va='center',
         arrowprops=dict(arrowstyle='->',color=blue,lw=.8))
     zoom.text(.42,.035,'Connectors join calculated incidences;\nno additional points are computed in this zoom.',
         transform=zoom.transAxes,color=grey,fontsize=8.8,va='bottom',linespacing=1.3)

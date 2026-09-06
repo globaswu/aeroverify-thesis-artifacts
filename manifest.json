@@ -773,8 +773,8 @@
     },
     {
       "path": "docs/CHAPTER02_FIGURES.md",
-      "size_bytes": 12823,
-      "sha256": "2172f435fcd9259e31abd855a490839c0823b9d18c6c9f3ff6751b20a76b023c",
+      "size_bytes": 13031,
+      "sha256": "566402ff85731846bfc9f1fd84348a716b9109074e43a7b005ddd5681a4d81aa",
       "source": "authored for the curated public release"
     },
     {
@@ -941,14 +941,14 @@
     },
     {
       "path": "data/figures/chapter02/figure_2_16/plot_2_16.py",
-      "size_bytes": 5908,
-      "sha256": "081432b1bda62291b2cfd36ca56e82721ee4764aa997768181f9de9b9140525a",
+      "size_bytes": 6881,
+      "sha256": "f5d8b5f7544f2f80c64c8cbaff001f1b97d58c5934c4c3337c9d25e494cb44f7",
       "source": "standalone figure data and scripts indexed by the current thesis figure number"
     },
     {
       "path": "data/figures/chapter02/figure_2_16/plot_2_16.m",
-      "size_bytes": 6041,
-      "sha256": "afc1e93e109502da73b7ef3d51031c7ea5789b8340e014a8cd288c27a821b4df",
+      "size_bytes": 7027,
+      "sha256": "92fe96390afcc928b9be112c6af64d0ceb3b79d56005aca430028d2d236dd537",
       "source": "standalone figure data and scripts indexed by the current thesis figure number"
     },
     {

@@ -201,12 +201,14 @@ zero or 3 degrees dihedral with W2GJ enabled or disabled. They share Mach
 coordinate dataset. All nine incidences from −4 to 12 degrees are plotted;
 regressions and reference-error statistics use only −2 to 8 degrees. The
 fifth line is reconstructed from Sivells Table I as
-`CL = 0.085*(alpha_deg+1.3)`, not digitized measured points. Panel B displays
-only the W2GJ-on signed difference `CL(3 degrees)-CL(0 degrees)` in units of
-`10^-3`, with a taller view and vertical limits from −0.95 to +0.20 in those
-units. The zero reference remains visible. W2GJ-off results remain in the
-upper panel and CSV; neither their numerical values nor the other curves
-have changed.
+`CL = 0.085*(alpha_deg+1.3)`, not digitized measured points. Panel B shows
+actual lift coefficients for the two W2GJ-on curves in a local view near
+12 degrees, with incidence limits 11.985–12.003 degrees and lift-coefficient
+limits 1.1494–1.1523. Its markers are the original 12-degree solver results:
+`CL=1.151878` for zero dihedral and `CL=1.150984` for 3 degrees dihedral.
+The visible line portions are straight connectors between recorded
+incidences, not additional fine-grid evaluations or extrapolated solutions.
+All nine incidences and the W2GJ-off results remain in the upper panel and CSV.
 The CSV retains independent force-sum checks and physical metadata alongside
 the plotted coefficients; no numerical curve is synthesized by scaling
 another curve.

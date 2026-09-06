@@ -1,4 +1,4 @@
-"""Reproduce the five lift curves and signed dihedral differences from one CSV."""
+"""Reproduce five lift curves and a local W2GJ-on lift-coefficient zoom."""
 from pathlib import Path
 import argparse
 import numpy as np
@@ -60,19 +60,33 @@ def main(output: Path):
         'Reconstructed from slope and zero-lift angle;\nnot individual measured points.',
         transform=ax.transAxes,color=grey,fontsize=9,va='bottom',linespacing=1.35)
 
-    diff=fig.add_axes([.115,lower_bottom,.845,lower_height],sharex=ax)
-    diff.axhline(0,color=ink,lw=.9,zorder=1)
-    diff.plot(alpha,delta_on*1e3,'-o',color=blue,ms=4.2,lw=1.3,label='W2GJ on')
-    diff.set_ylim(-.95,.20);diff.set_yticks(np.arange(-.8,.201,.2))
-    diff.set_xlabel(r'Incidence $\alpha$ (deg)');diff.set_ylabel(r'$\Delta C_L\;(10^{-3})$')
-    diff.grid(True,color='#DCE1E4',lw=.5,zorder=0)
-    diff.set_title(r'B. W2GJ on: $\Delta C_L=C_L(3^\circ)-C_L(0^\circ)$',
+    zoom=fig.add_axes([.115,lower_bottom,.845,lower_height])
+    # Draw only the original nine points and their straight connecting segments.
+    zoom.plot(alpha,data['CL_dihedral0_on'],'-o',color=blue,ms=4.2,lw=1.4,
+              mfc=blue,mec=blue,label='0° / W2GJ on')
+    zoom.plot(alpha,data['CL_dihedral3_on'],'--o',color=blue,ms=6.7,lw=1.4,
+              mfc='white',mec=blue,label='3° / W2GJ on')
+    zoom.set_xlim(11.985,12.003);zoom.set_ylim(1.1494,1.1523)
+    zoom.set_xticks([11.985,11.990,11.995,12.000])
+    zoom.set_yticks([1.1495,1.1500,1.1505,1.1510,1.1515,1.1520])
+    zoom.ticklabel_format(axis='both',style='plain',useOffset=False)
+    zoom.xaxis.set_major_formatter(mpl.ticker.FormatStrFormatter('%.3f'))
+    zoom.yaxis.set_major_formatter(mpl.ticker.FormatStrFormatter('%.4f'))
+    zoom.set_xlabel(r'Incidence $\alpha$ (deg)');zoom.set_ylabel(r'Lift coefficient $C_L$')
+    zoom.grid(True,color='#DCE1E4',lw=.5,zorder=0)
+    zoom.set_title('B. W2GJ on: local lift-curve zoom near 12°',
                    loc='left',pad=10,fontweight='bold')
-    max_index=np.argmax(np.abs(delta_on));max_angle=alpha[max_index]
-    max_signed=delta_on[max_index]
-    diff.annotate(fr'$\Delta C_L={max_signed*1e3:+.3f}\times10^{{-3}}$ at {max_angle:g}°',
-        xy=(max_angle,max_signed*1e3),xytext=(7.0,-.87),color=grey,fontsize=9,
-        ha='left',va='center',arrowprops=dict(arrowstyle='->',color=grey,lw=.8))
+    zoom.legend(loc='upper left',frameon=False,handlelength=2.8,fontsize=9.5)
+    endpoint0=float(data['CL_dihedral0_on'][alpha==12][0])
+    endpoint3=float(data['CL_dihedral3_on'][alpha==12][0])
+    zoom.annotate(fr'0°: $C_L={endpoint0:.6f}$',xy=(12,endpoint0),
+        xytext=(11.995,1.15212),color=blue,fontsize=9.5,ha='left',va='center',
+        arrowprops=dict(arrowstyle='->',color=blue,lw=.8))
+    zoom.annotate(fr'3°: $C_L={endpoint3:.6f}$',xy=(12,endpoint3),
+        xytext=(11.995,1.15030),color=blue,fontsize=9.5,ha='left',va='center',
+        arrowprops=dict(arrowstyle='->',color=blue,lw=.8))
+    zoom.text(.42,.035,'Connectors join calculated incidences;\nno additional points are computed in this zoom.',
+        transform=zoom.transAxes,color=grey,fontsize=8.8,va='bottom',linespacing=1.3)
     fig.text(.115,footer_y(.074),'Fit statistics use −2° ≤ α ≤ 8°; all nine computed incidences are displayed.',
              fontsize=8.8,color=grey)
     fig.text(.115,footer_y(.044),'All numerical curves are rigid benchmarks using the same historical 600-point airfoil. The 0° case follows',

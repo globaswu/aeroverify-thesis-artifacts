@@ -170,8 +170,7 @@ metadata. The figure and reported fits use the six points from −2 to
 Mach 0.17, 3 degrees dihedral, and zero washout; only the W2GJ include differs.
 A fully fixed reference node, rigid aerodynamic interpolation, and an
 unloaded scalar carrier provide a **zero-motion numerical carrier**, not a
-model of the wing's skin or lattice structure. Camber values use the geometric
-dihedral projection without empirical fitting. The half-domain coefficient
+model of the wing's skin or lattice structure. The half-domain coefficient
 reference area is 1.1585009088000002 m². The dashed reference is reconstructed
 from Sivells's experimental Table I slope of 0.085 per degree and zero-lift
 angle of −1.3 degrees, not digitized measurements. At zero incidence,
@@ -180,3 +179,14 @@ contribution within one rigid inviscid discretization. It does not establish
 total-drag accuracy, stall prediction, or mesh convergence; the rounded
 experimental tips are approximated by a straight trapezoid, and the residual
 against the reconstructed experimental lift relation remains visible.
+
+The rigid benchmark prescribes 3 degrees dihedral, whereas the optimization
+campaigns use zero prescribed CAERO1 dihedral. In this benchmark, imported
+mean-camber ordinates are interpreted in global XZ section planes. Projection
+onto the aerodynamic-panel normal gives `W2GJ = -(dz_c/dx) cos(Gamma)`, with
+`Gamma = 3 degrees`, without empirical fitting. If the ordinates instead
+describe displacement along the local panel normal, no additional
+`cos(Gamma)` factor is needed. Sivells's report does not specify the airfoil
+ordinate plane sufficiently to resolve this choice, so the global-XZ
+interpretation is an explicit replication assumption, not a universal
+Nastran rule.

@@ -202,7 +202,11 @@ coordinate dataset. All nine incidences from −4 to 12 degrees are plotted;
 regressions and reference-error statistics use only −2 to 8 degrees. The
 fifth line is reconstructed from Sivells Table I as
 `CL = 0.085*(alpha_deg+1.3)`, not digitized measured points. Panel B displays
-the signed difference `CL(3 degrees)-CL(0 degrees)` in units of `10^-3`.
+only the W2GJ-on signed difference `CL(3 degrees)-CL(0 degrees)` in units of
+`10^-3`, with a taller view and vertical limits from −0.95 to +0.20 in those
+units. The zero reference remains visible. W2GJ-off results remain in the
+upper panel and CSV; neither their numerical values nor the other curves
+have changed.
 The CSV retains independent force-sum checks and physical metadata alongside
 the plotted coefficients; no numerical curve is synthesized by scaling
 another curve.

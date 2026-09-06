@@ -16,13 +16,19 @@ deltaOff=data.CL_dihedral3_off-data.CL_dihedral0_off;
 assert(max(abs(deltaOn-data.delta_CL_3deg_minus_0deg_ON))<1e-12);
 assert(max(abs(deltaOff-data.delta_CL_3deg_minus_0deg_OFF))<1e-12);
 blue=[0 .4353 .6392];orange=[.7882 .4157 0];ink=[.1451 .1647 .1882];grey=[.4 .4275 .4588];
-fig=figure('Visible','off','Color','w','Units','inches','Position',[1 1 8.27 7.6]);
+oldHeight=7.6;newHeight=9.0;
+keepTop=@(y) 1-(1-y)*oldHeight/newHeight;
+upperHeight=.485*oldHeight/newHeight;
+lowerHeight=.185*oldHeight*1.75/newHeight;
+lowerBottom=keepTop(.336)-lowerHeight;
+footerY=@(y) lowerBottom-(.151-y)*oldHeight/newHeight;
+fig=figure('Visible','off','Color','w','Units','inches','Position',[1 1 8.27 newHeight]);
 cleanup=onCleanup(@() close(fig));
 canvas=axes(fig,'Position',[0 0 1 1],'Color','none');
 xlim(canvas,[0 1]);ylim(canvas,[0 1]);axis(canvas,'off');hold(canvas,'on');
-put(canvas,.115,.978,'Effect of dihedral and W2GJ on rigid-wing lift',15,ink,'bold');
-put(canvas,.115,.946,'Four matched rigid DLM cases; Mach 0.17; 5500 aerodynamic boxes',10,grey);
-ax=axes(fig,'Position',[.115 .405 .845 .485]);hold(ax,'on');
+put(canvas,.115,keepTop(.978),'Effect of dihedral and W2GJ on rigid-wing lift',15,ink,'bold');
+put(canvas,.115,keepTop(.946),'Four matched rigid DLM cases; Mach 0.17; 5500 aerodynamic boxes',10,grey);
+ax=axes(fig,'Position',[.115 keepTop(.405) .845 upperHeight]);hold(ax,'on');
 h3on=plot(ax,alpha,data.CL_dihedral3_on,'--o','Color',blue,'LineWidth',1.25, ...
     'MarkerSize',6.7,'MarkerFaceColor','w','MarkerEdgeColor',blue);
 h3off=plot(ax,alpha,data.CL_dihedral3_off,'--s','Color',orange,'LineWidth',1.25, ...
@@ -46,28 +52,25 @@ text(ax,.42,.09, ...
     'Units','normalized','VerticalAlignment','bottom','FontName','Times New Roman', ...
     'FontSize',9,'Color',grey,'Interpreter','tex');
 
-diff=axes(fig,'Position',[.115 .151 .845 .185]);hold(diff,'on');
+diff=axes(fig,'Position',[.115 lowerBottom .845 lowerHeight]);hold(diff,'on');
 yline(diff,0,'Color',ink,'LineWidth',.9);
 hon=plot(diff,alpha,deltaOn*1e3,'-o','Color',blue,'MarkerSize',4.2, ...
     'MarkerFaceColor',blue,'LineWidth',1.3);
-hoff=plot(diff,alpha,deltaOff*1e3,'--s','Color',orange,'MarkerSize',4.5, ...
-    'MarkerFaceColor','w','LineWidth',1.3);
-xlim(diff,[-4.5 12.5]);ylim(diff,[-1.03 .41]);xticks(diff,-4:2:12);yticks(diff,[-1 -.5 0]);
+xlim(diff,[-4.5 12.5]);ylim(diff,[-.95 .20]);xticks(diff,-4:2:12);yticks(diff,-.8:.2:.2);
 xlabel(diff,'Incidence \alpha (deg)');ylabel(diff,'\Delta C_L (10^{-3})');
-panelTitle(diff,'B. Dihedral difference: \Delta C_L=C_L(3°)-C_L(0°)');
-legend(diff,[hon hoff],{'W2GJ on','W2GJ off'},'Location','northeast', ...
-    'Box','off','Orientation','horizontal','FontName','Times New Roman','FontSize',9);
-[maximumOn,maxIndex]=max(abs(deltaOn));maximumOff=max(abs(deltaOff));
-text(diff,.018,.065,sprintf('Max. |\\Delta C_L| at %g°: on %.3f\\times10^{-3}; off %.3f\\times10^{-3}', ...
-    alpha(maxIndex),maximumOn*1e3,maximumOff*1e3), ...
-    'Units','normalized','VerticalAlignment','bottom','FontName','Times New Roman', ...
-    'FontSize',8.5,'Color',grey,'Interpreter','tex');
+panelTitle(diff,'B. W2GJ on: \Delta C_L=C_L(3°)-C_L(0°)');
+[~,maxIndex]=max(abs(deltaOn));maxSigned=deltaOn(maxIndex);
+text(diff,7.0,-.87,sprintf('\\Delta C_L=%+.3f\\times10^{-3} at %g°', ...
+    maxSigned*1e3,alpha(maxIndex)), ...
+    'VerticalAlignment','middle','FontName','Times New Roman', ...
+    'FontSize',9,'Color',grey,'Interpreter','tex');
+plot(diff,[10.8 alpha(maxIndex)],[-.87 maxSigned*1e3],'Color',grey,'LineWidth',.8);
 set([ax diff],'FontName','Times New Roman','FontSize',10,'Box','off', ...
     'XGrid','on','YGrid','on','GridColor',[.86 .88 .895],'GridAlpha',1,'LineWidth',.65);
-put(canvas,.115,.074,'Fit statistics use −2° ≤ α ≤ 8°; all nine computed incidences are displayed.',8.8,grey);
-put(canvas,.115,.044, ...
+put(canvas,.115,footerY(.074),'Fit statistics use −2° ≤ α ≤ 8°; all nine computed incidences are displayed.',8.8,grey);
+put(canvas,.115,footerY(.044), ...
     'All numerical curves are rigid benchmarks using the same historical 600-point airfoil. The 0° case follows',8.6,ink);
-put(canvas,.115,.024, ...
+put(canvas,.115,footerY(.024), ...
     'the optimization geometry/camber convention; these are not full flexible-optimization results.',8.6,ink);
 drawnow;
 [outputFolder,~,extension]=fileparts(outputPath);

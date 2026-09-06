@@ -25,12 +25,18 @@ def main(output: Path):
         'mathtext.fontset':'stix','axes.spines.top':False,'axes.spines.right':False,
         'axes.labelsize':11,'axes.titlesize':11,'legend.fontsize':9.5,'pdf.fonttype':42})
     blue='#006FA3';orange='#C96A00';ink='#252A30';grey='#666D75'
-    fig=plt.figure(figsize=(8.27,7.6),dpi=400,facecolor='white')
+    old_height=7.6;new_height=9.0
+    keep_top=lambda y:1-(1-y)*old_height/new_height
+    upper_height=.485*old_height/new_height
+    lower_height=.185*old_height*1.75/new_height
+    lower_bottom=keep_top(.336)-lower_height
+    footer_y=lambda y:lower_bottom-(.151-y)*old_height/new_height
+    fig=plt.figure(figsize=(8.27,new_height),dpi=400,facecolor='white')
     fig.suptitle('Effect of dihedral and W2GJ on rigid-wing lift',
-                 x=.115,y=.985,ha='left',fontweight='bold',fontsize=15,color=ink)
-    fig.text(.115,.948,'Four matched rigid DLM cases; Mach 0.17; 5500 aerodynamic boxes',
+                 x=.115,y=keep_top(.985),ha='left',fontweight='bold',fontsize=15,color=ink)
+    fig.text(.115,keep_top(.948),'Four matched rigid DLM cases; Mach 0.17; 5500 aerodynamic boxes',
              fontsize=10,color=grey)
-    ax=fig.add_axes([.115,.405,.845,.485])
+    ax=fig.add_axes([.115,keep_top(.405),.845,upper_height])
     handles={}
     specs=[('CL_dihedral3_on',blue,'--','o','white',6.7,'3° / W2GJ on'),
            ('CL_dihedral3_off',orange,'--','s','white',6.7,'3° / W2GJ off'),
@@ -54,25 +60,24 @@ def main(output: Path):
         'Reconstructed from slope and zero-lift angle;\nnot individual measured points.',
         transform=ax.transAxes,color=grey,fontsize=9,va='bottom',linespacing=1.35)
 
-    diff=fig.add_axes([.115,.151,.845,.185],sharex=ax)
+    diff=fig.add_axes([.115,lower_bottom,.845,lower_height],sharex=ax)
     diff.axhline(0,color=ink,lw=.9,zorder=1)
     diff.plot(alpha,delta_on*1e3,'-o',color=blue,ms=4.2,lw=1.3,label='W2GJ on')
-    diff.plot(alpha,delta_off*1e3,'--s',color=orange,mfc='white',ms=4.5,lw=1.3,label='W2GJ off')
-    diff.set_ylim(-1.03,.41);diff.set_yticks([-1,-.5,0])
+    diff.set_ylim(-.95,.20);diff.set_yticks(np.arange(-.8,.201,.2))
     diff.set_xlabel(r'Incidence $\alpha$ (deg)');diff.set_ylabel(r'$\Delta C_L\;(10^{-3})$')
     diff.grid(True,color='#DCE1E4',lw=.5,zorder=0)
-    diff.set_title(r'B. Dihedral difference: $\Delta C_L=C_L(3^\circ)-C_L(0^\circ)$',
+    diff.set_title(r'B. W2GJ on: $\Delta C_L=C_L(3^\circ)-C_L(0^\circ)$',
                    loc='left',pad=10,fontweight='bold')
-    diff.legend(loc='upper right',frameon=False,ncol=2,handlelength=2.3,fontsize=9)
-    maximum_on=np.max(np.abs(delta_on));maximum_off=np.max(np.abs(delta_off))
-    max_angle=alpha[np.argmax(np.abs(delta_on))]
-    diff.text(.018,.065,fr'Max. $|\Delta C_L|$ at {max_angle:g}°: on ${maximum_on*1e3:.3f}\times10^{{-3}}$; off ${maximum_off*1e3:.3f}\times10^{{-3}}$',
-              transform=diff.transAxes,fontsize=8.5,color=grey,va='bottom')
-    fig.text(.115,.074,'Fit statistics use −2° ≤ α ≤ 8°; all nine computed incidences are displayed.',
+    max_index=np.argmax(np.abs(delta_on));max_angle=alpha[max_index]
+    max_signed=delta_on[max_index]
+    diff.annotate(fr'$\Delta C_L={max_signed*1e3:+.3f}\times10^{{-3}}$ at {max_angle:g}°',
+        xy=(max_angle,max_signed*1e3),xytext=(7.0,-.87),color=grey,fontsize=9,
+        ha='left',va='center',arrowprops=dict(arrowstyle='->',color=grey,lw=.8))
+    fig.text(.115,footer_y(.074),'Fit statistics use −2° ≤ α ≤ 8°; all nine computed incidences are displayed.',
              fontsize=8.8,color=grey)
-    fig.text(.115,.044,'All numerical curves are rigid benchmarks using the same historical 600-point airfoil. The 0° case follows',
+    fig.text(.115,footer_y(.044),'All numerical curves are rigid benchmarks using the same historical 600-point airfoil. The 0° case follows',
              fontsize=8.6,color=ink)
-    fig.text(.115,.024,'the optimization geometry/camber convention; these are not full flexible-optimization results.',
+    fig.text(.115,footer_y(.024),'the optimization geometry/camber convention; these are not full flexible-optimization results.',
              fontsize=8.6,color=ink)
     output=output.resolve();output.parent.mkdir(parents=True,exist_ok=True)
     fig.savefig(output,dpi=400,facecolor='white')

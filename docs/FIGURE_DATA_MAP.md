@@ -1,26 +1,30 @@
 # Thesis figure-data index
 
-This index follows the revised thesis numbering. Each of the 61 linked folders
-contains one CSV, one independent Python plotting script, and one independent
-MATLAB plotting script. Either script reads its adjacent CSV alone.
+This index follows the revised thesis numbering. Each of the 63 linked folders
+contains a primary CSV, one independent Python plotting script, and one
+independent MATLAB plotting script. Figure 2.5 additionally includes two CSVs
+for beam connectivity and skin vertices. Either script reads only the CSV
+data in its own folder; all other packages require one CSV.
 
 ## Chapter 2
 
 | Figure | Content |
 |---|---|
 | [2.1](../data/figures/chapter02/figure_2_1) | Linear spanwise strut-diameter profile; nTop screenshot is not regenerated |
-| [2.3](../data/figures/chapter02/figure_2_3) | Actual skin triangles, beam-node relocation, and finite-offset MPC |
-| [2.4](../data/figures/chapter02/figure_2_4) | Lifting-line schematic with the supplied NACA 65-210 profile |
-| [2.7](../data/figures/chapter02/figure_2_7) | FCC case 67: tracked mode and MKAERO1 settings |
-| [2.8](../data/figures/chapter02/figure_2_8) | FCC case 67: nTop mode-shape screenshots and point-cloud reconstruction |
-| [2.9](../data/figures/chapter02/figure_2_9) | FCC case 67: all 20 tracked flutter points |
-| [2.10](../data/figures/chapter02/figure_2_10) | Structural-mesh sensitivity |
-| [2.11](../data/figures/chapter02/figure_2_11) | Mesh-sensitive positive-damping diagnostic |
-| [2.12](../data/figures/chapter02/figure_2_12) | Nastran and lifting-line lift curves against Sivells's experimental linear characteristics |
-| [2.13](../data/figures/chapter02/figure_2_13) | Full-wing CFD total-drag histories and terminal mesh values |
-| [2.14](../data/figures/chapter02/figure_2_14) | NACA 65-210 mean camber and W2GJ at individual aerodynamic-box controls |
-| [2.15](../data/figures/chapter02/figure_2_15) | Matched rigid-wing lift calculation with W2GJ enabled and disabled |
-| [2.16](../data/figures/chapter02/figure_2_16) | Four rigid dihedral/W2GJ cases and the Sivells Table I lift reconstruction |
+| [2.3](../data/figures/chapter02/figure_2_3) | Microscopic single-node repair; all three receiving skin facets and side views |
+| [2.4](../data/figures/chapter02/figure_2_4) | Four contrasting mesh-repair and coupling outcomes in eight panels |
+| [2.5](../data/figures/chapter02/figure_2_5) | Larger lattice patch: 399 beams, 348 nodes, and 31 coordinate repairs |
+| [2.6](../data/figures/chapter02/figure_2_6) | Lifting-line schematic with the supplied NACA 65-210 profile |
+| [2.9](../data/figures/chapter02/figure_2_9) | FCC case 67: tracked mode and MKAERO1 settings |
+| [2.10](../data/figures/chapter02/figure_2_10) | FCC case 67: nTop mode-shape screenshots and point-cloud reconstruction |
+| [2.11](../data/figures/chapter02/figure_2_11) | FCC case 67: all 20 tracked flutter points |
+| [2.12](../data/figures/chapter02/figure_2_12) | Structural-mesh sensitivity |
+| [2.13](../data/figures/chapter02/figure_2_13) | Mesh-sensitive positive-damping diagnostic |
+| [2.14](../data/figures/chapter02/figure_2_14) | Nastran and lifting-line lift curves against Sivells's experimental linear characteristics |
+| [2.15](../data/figures/chapter02/figure_2_15) | Full-wing CFD total-drag histories and terminal mesh values |
+| [2.16](../data/figures/chapter02/figure_2_16) | NACA 65-210 mean camber and W2GJ at individual aerodynamic-box controls |
+| [2.17](../data/figures/chapter02/figure_2_17) | Matched rigid-wing lift calculation with W2GJ enabled and disabled |
+| [2.18](../data/figures/chapter02/figure_2_18) | Four rigid dihedral/W2GJ cases and the Sivells Table I lift reconstruction |
 
 See [Chapter 2 reproduction notes](CHAPTER02_FIGURES.md) for column definitions,
 source scope, and the distinction between a reconstructed experimental line and
@@ -104,7 +108,7 @@ measured data points.
 | [D.5](../data/figures/chapterD/figure_D_5) | Four-input conditional improvement: lattice ratio 1 |
 | [D.6](../data/figures/chapterD/figure_D_6) | Four-input conditional improvement: lattice ratio 2 |
 
-Figure 2.8 displays nTop screenshots in the thesis. The released node data
+Figure 2.10 displays nTop screenshots in the thesis. The released node data
 and scripts reconstruct the mode shape as a point cloud; they do not duplicate
 nTop's surface rendering. The displayed modal amplitude has arbitrary
 normalization.

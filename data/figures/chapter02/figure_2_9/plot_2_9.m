@@ -2,9 +2,7 @@ function plot_2_9(outputFile)
 if nargin < 1, outputFile=fullfile(fileparts(mfilename('fullpath')),'plot_2_9.png'); end
 T=loadSiblingData('figure_2_9.csv');
 
-points=unique(round(numericCol(T,'point'))); fig=figure('Visible','off','Color','w','Position',[100 100 1050 1000]); tl=tiledlayout(fig,5,4,'Padding','compact','TileSpacing','compact');
-for i=1:numel(points), ax=nexttile(tl); m=round(numericCol(T,'point'))==points(i); x=numericCol(T,'velocity_mps'); x=x(m); [x,ord]=sort(x); old=numericCol(T,'four_point_damping_g'); old=old(m); new=numericCol(T,'eighteen_point_damping_g'); new=new(m); plot(ax,x,old(ord),'--','Color',[.6 .6 .6],'LineWidth',.9); hold(ax,'on'); plot(ax,x,new(ord),'-','Color',[.75 .08 .12],'LineWidth',1); yline(ax,0,':'); title(ax,sprintf('Point %d',points(i))); end
-xlabel(tl,'Velocity (m/s)'); ylabel(tl,'Damping, g'); title(tl,'FCC case 67 all-point MKAERO1 sensitivity'); finishPlot(fig,outputFile);
+x=numericCol(T,'velocity_mps'); [x,ord]=sort(x); old=numericCol(T,'four_point_damping_g'); new=numericCol(T,'eighteen_point_damping_g'); fig=figure('Visible','off','Color','w'); ax=axes(fig); plot(ax,x,old(ord),'--','Color',[.6 .6 .6],'LineWidth',1.4,'DisplayName','Four-value MKAERO1'); hold(ax,'on'); plot(ax,x,new(ord),'-','Color',[.75 .08 .12],'LineWidth',1.5,'DisplayName','Revised 18-value MKAERO1'); yline(ax,0,':'); xlabel(ax,'Velocity (m/s)'); ylabel(ax,'Damping, g'); title(ax,'FCC case 67 point-3 MKAERO1 sensitivity'); legend(ax); finishPlot(fig,outputFile);
 end
 
 function T = loadSiblingData(csvName)

@@ -1,173 +1,276 @@
-function plot_2_4(outputPath)
-%PLOT_2_4 Reproduce the complete schematic from the adjacent coordinate CSV.
-% The section outline is data; the planform and angles are illustrative.
-plotDir = fileparts(mfilename('fullpath'));
-if nargin < 1 || isempty(outputPath)
-    outputPath = fullfile(plotDir,'figure_2_4.png');
+function outputPath = plot_2_4(outputPath,savePanels)
+%PLOT_2_4 Reproduce the eight-panel atlas using figure_2_4.csv only.
+% Optional outputPath selects PNG/PDF/SVG. Optional savePanels=true also
+% writes separate a-d/e-h PNGs beside that output. Default: one atlas PNG.
+% Thick orange = lattice beam centre-lines; thin grey = skin-element edges;
+% blue = receiving facets. Dashed proposals are not retained mesh members.
+out=fileparts(mfilename('fullpath'));
+if nargin<1 || isempty(outputPath),outputPath=fullfile(out,'figure_2_4.png');end
+if nargin<2,savePanels=false;end
+outputPath=char(outputPath);
+[outputFolder,outputStem,extension]=fileparts(outputPath);
+if ~any(strcmpi(extension,{'.png','.pdf','.svg'}))
+    error('plot_2_4:OutputFormat','Output must use PNG, PDF or SVG.');
 end
-data = readmatrix(fullfile(plotDir,'figure_2_4.csv'));
-assert(size(data,2)==2 && size(data,1)>=6 && all(isfinite(data),'all'), ...
-    'Expected finite ordered x_over_c,z_over_c coordinates.');
-assert(abs(min(data(:,1)))<1e-12 && abs(max(data(:,1))-1)<1e-12, ...
-    'Section coordinates must span x/c=0 to x/c=1.');
-ink = [0.12 0.14 0.16]; grey = [0.42 0.45 0.48];
-lightGrey = [0.73 0.76 0.78]; blue = [0 0.45 0.70];
-gold = [0.90 0.62 0]; fillColor = [0.90 0.94 0.96];
-paleGold = [0.99 0.96 0.86];
-fig = figure('Visible','off','Color','w','Units','inches', ...
-    'Position',[1 1 7.09 5.90]);
-cleanup = onCleanup(@() close(fig));
-axA = axes(fig,'Position',[0.035 0.5290 0.95 0.4360]);
-hold(axA,'on'); xlim(axA,[-1.17 1.10]); ylim(axA,[-0.79 0.43]);
-axis(axA,'off');
-set(axA,'FontName','Times New Roman','FontSize',9.4);
-span = linspace(-1,1,501);
-chord = 0.28+0.34*(1-abs(span));
-le = 0.25*chord; te = -0.75*chord;
-patch(axA,[span fliplr(span)],[le fliplr(te)],fillColor, ...
-    'EdgeColor',ink,'LineWidth',1.25);
-plot(axA,[-1 1],[0 0],'--','Color',grey,'LineWidth',1);
-plot(axA,[0 0],[-0.49 0.18],':','Color',grey,'LineWidth',0.9);
-N = 10; phi = (1:N)*pi/(2*N+1); stations = cos(phi);
-for side = [-1 1]
-    stationY = side*stations;
-    stationChord = 0.28+0.34*(1-abs(stationY));
-    if side>0, stationColor=blue; else, stationColor=lightGrey; end
-    for k = 1:N
-        plot(axA,[stationY(k) stationY(k)], ...
-            [-0.75 0.25]*stationChord(k),'Color', ...
-            0.46*stationColor+0.54*[1 1 1],'LineWidth',0.55);
-    end
-    if side>0
-        scatter(axA,stationY,zeros(1,N),18,blue,'filled', ...
-            'MarkerEdgeColor','w','LineWidth',0.4);
-    else
-        scatter(axA,stationY,zeros(1,N),16,'w','filled', ...
-            'MarkerEdgeColor',lightGrey,'LineWidth',0.8);
-    end
-end
-highlightY = stations(6); highlightChord = 0.28+0.34*(1-highlightY);
-drawArrow(fig,axA,[highlightY,-0.75*highlightChord], ...
-    [highlightY,0.25*highlightChord],gold,1.7,true);
-label(axA,highlightY+0.045,-0.18,'$c_i=c(y_i)$',ink,9.4,'left');
-drawArrow(fig,axA,[-1.10,0.20],[-1.10,-0.31],ink,1,false);
-label(axA,-1.10,0.24,'$V_\infty$',ink,9.4,'center');
-label(axA,-0.98,0.06,'quarter-chord lifting line',grey,8.2,'left');
-text(axA,0.025,0.17,'root plane','Color',grey,'FontName','Times New Roman', ...
-    'FontSize',8,'Rotation',90,'VerticalAlignment','top');
-dimY = -0.56;
-plot(axA,[0 1],[dimY dimY],'Color',ink,'LineWidth',0.8);
-plot(axA,[0 0],dimY+[-0.035 0.035],'Color',ink,'LineWidth',0.8);
-plot(axA,[1 1],dimY+[-0.035 0.035],'Color',ink,'LineWidth',0.8);
-label(axA,0.50,dimY-0.075,'$s=b/2$',ink,9.4,'center');
-label(axA,0.50,-0.715, ...
-    '$\phi_i=i\pi/(2N+1),\quad y_i=s\cos\phi_i,\quad i=1,\ldots,N,\quad N=10$', ...
-    ink,8.5,'center');
-label(axA,0.55,0.34, ...
-    'filled: implemented half-span stations; open: symmetry mirror',blue,7.9,'center');
-panelTitle(axA,'A. Cosine-spaced planform collocation');
-
-axB = axes(fig,'Position',[0.035 0.2055 0.95 0.2883]);
-hold(axB,'on'); xlim(axB,[-0.38 2.16]);
-halfRange = 0.5*2.54*(0.2883*5.90)/(0.95*7.09);
-ylim(axB,0.03+[-halfRange halfRange]);
-set(axB,'DataAspectRatio',[1 1 1]); axis(axB,'off');
-set(axB,'FontName','Times New Roman','FontSize',9.4);
-alphaGlobal = 11; alphaEffective = 6;
-angleEffective = deg2rad(alphaEffective);
-R = [cos(angleEffective),-sin(angleEffective); ...
-    sin(angleEffective),cos(angleEffective)];
-section = data; section(:,1)=section(:,1)-0.25; section=section*R';
-patch(axB,section(:,1),section(:,2),fillColor, ...
-    'EdgeColor',ink,'LineWidth',1.2);
-localLine = [-0.25 0;0.75 0]*R';
-plot(axB,localLine(:,1),localLine(:,2),'Color',blue,'LineWidth',1.1);
-globalEnd = 0.72*[cosd(alphaGlobal),sind(alphaGlobal)];
-plot(axB,[0 globalEnd(1)],[0 globalEnd(2)],'--','Color',grey,'LineWidth',1);
-drawArrow(fig,axB,[-0.32,-0.12],[0.84,-0.12],ink,1,false);
-label(axB,-0.30,-0.18,'$V_\infty$',ink,9.4,'left');
-t = linspace(0,deg2rad(alphaGlobal),60);
-plot(axB,0.31*cos(t),0.31*sin(t),'Color',grey,'LineWidth',1);
-t = linspace(0,angleEffective,60);
-plot(axB,0.21*cos(t),0.21*sin(t),'Color',blue,'LineWidth',1.2);
-plot(axB,[0.30 0.27],[0.045 0.17],'Color',grey,'LineWidth',0.7);
-label(axB,0.23,0.19,'$\alpha_{\mathrm{global}}$',grey,8.5,'left');
-plot(axB,[0.205 0.205],[0.011 -0.045],'Color',blue,'LineWidth',0.7);
-label(axB,0.18,-0.075,'$\alpha_{\mathrm{eff},i}$',blue,8.5,'left');
-drawArrow(fig,axB,[0.64 0.245],[0.53 0.10],gold,0.9,false);
-label(axB,0.66,0.28,'$s_\theta\theta_i$',gold,9.4,'center');
-text(axB,1.47,0.045, ...
-    '$\alpha_{\mathrm{eff},i}=\alpha_{\mathrm{global}}+s_\theta\theta(y_i),\quad s_\theta=-1$', ...
-    'Interpreter','latex','HorizontalAlignment','center', ...
-    'VerticalAlignment','middle','FontSize',9.2,'Color',ink, ...
-    'BackgroundColor',paleGold,'EdgeColor',gold,'Margin',4,'LineWidth',0.8);
-label(axB,1.47,-0.105, ...
-    {'The section input is torsion-corrected; induced effects are resolved', ...
-    'by the Fourier lifting-line system.'},grey,8.2,'center');
-label(axB,0.25,-0.30, ...
-    'NACA 65-210 from coordinate file; angles illustrative',grey,7.1,'center');
-panelTitle(axB,'B. One-way torsion correction at station i');
-
-flowPosition = [0.035 0.025 0.95 0.1407];
-flowBox(fig,flowPosition,0.015,0.28, ...
-    {'Station inputs: $c_i$, $a_0$, $\alpha_{L=0}$', ...
-    'and $\alpha_{\mathrm{eff},i}$'},ink,fillColor);
-flowBox(fig,flowPosition,0.36,0.28, ...
-    {'Solve the $N=10$ odd Fourier system', ...
-    'for coefficients $A_n$'},ink,[0.96 0.97 0.98]);
-flowBox(fig,flowPosition,0.705,0.28, ...
-    {'Integrated outputs: $C_L$, $C_{D_i}$', ...
-    'and span efficiency $e$'},ink,paleGold);
-for pair = [0.295 0.64;0.36 0.705]
-    annotation(fig,'arrow',flowPosition(1)+flowPosition(3)* ...
-        [pair(1)+0.008 pair(2)-0.008], ...
-        repmat(flowPosition(2)+0.5*flowPosition(4),1,2), ...
-        'Color',blue,'LineWidth',1.2,'HeadLength',6,'HeadWidth',6);
-end
-drawnow;
-[outputFolder,~,extension] = fileparts(outputPath);
-if ~isempty(outputFolder) && ~isfolder(outputFolder), mkdir(outputFolder); end
-if strcmpi(extension,'.pdf')
-    exportgraphics(fig,outputPath,'ContentType','vector','BackgroundColor','white');
+if ~isempty(outputFolder) && ~isfolder(outputFolder),mkdir(outputFolder);end
+data=readtable(fullfile(out,'figure_2_4.csv'),'TextType','string');
+panelA=upper_panels(data);
+panelB=lower_panels(data);
+% Render native figures directly to arrays: no panel image is an input and
+% the atlas neither stretches coordinates nor changes any panel's scale.
+imageA=print(panelA,'-RGBImage','-r220');
+imageB=print(panelB,'-RGBImage','-r220');
+close(panelA);close(panelB);
+width=max(size(imageA,2),size(imageB,2));
+height=size(imageA,1)+size(imageB,1);
+atlas=uint8(255*ones(height,width,3));
+atlas(1:size(imageA,1),1:size(imageA,2),:)=imageA;
+atlas(size(imageA,1)+(1:size(imageB,1)),1:size(imageB,2),:)=imageB;
+if strcmpi(extension,'.png')
+    imwrite(atlas,outputPath);
 else
-    set(fig,'PaperPositionMode','auto','InvertHardcopy','off');
-    print(fig,outputPath,'-dpng','-r300');
+    fig=figure('Visible','off','Color','w','Units','pixels', ...
+        'Position',[80 80 width/2 height/2]);
+    ax=axes(fig,'Position',[0 0 1 1]);image(ax,atlas);axis(ax,'image');axis(ax,'off');
+    set(fig,'PaperUnits','inches','PaperPosition',[0 0 width/220 height/220], ...
+        'PaperSize',[width/220 height/220]);
+    if strcmpi(extension,'.pdf'),device='-dpdf';else,device='-dsvg';end
+    print(fig,outputPath,device,'-r220');close(fig);
 end
-disp(outputPath)
+if savePanels
+    imwrite(imageA,fullfile(outputFolder,[outputStem 'a.png']));
+    imwrite(imageB,fullfile(outputFolder,[outputStem 'b.png']));
 end
-
-function label(ax,x,y,value,color,fontSize,alignment)
-useLatex = ischar(value) && contains(value,'$');
-if useLatex, interpreter='latex'; else, interpreter='none'; end
-text(ax,x,y,value,'Color',color,'FontName','Times New Roman', ...
-    'FontSize',fontSize,'HorizontalAlignment',alignment, ...
-    'VerticalAlignment','middle','Interpreter',interpreter,'Clipping','off');
-end
-
-function panelTitle(ax,value)
-text(ax,0,1.00,value,'Units','normalized','FontName','Times New Roman', ...
-    'FontSize',9.6,'FontWeight','bold','VerticalAlignment','bottom', ...
-    'HorizontalAlignment','left','Interpreter','none','Clipping','off');
+fprintf('Rendered eight panels to %s from one CSV.\n',outputPath);
 end
 
-function drawArrow(fig,ax,startPoint,endPoint,color,width,doubleHead)
-position = ax.Position; limitsX=ax.XLim; limitsY=ax.YLim;
-xx=position(1)+position(3)*([startPoint(1),endPoint(1)]-limitsX(1))/diff(limitsX);
-yy=position(2)+position(4)*([startPoint(2),endPoint(2)]-limitsY(1))/diff(limitsY);
-if doubleHead
-    annotation(fig,'doublearrow',xx,yy,'Color',color,'LineWidth',width, ...
-        'Head1Length',5,'Head1Width',5,'Head2Length',5,'Head2Width',5);
-else
-    annotation(fig,'arrow',xx,yy,'Color',color,'LineWidth',width, ...
-        'HeadLength',5,'HeadWidth',5);
+function fig = upper_panels(data)
+% Static scientific figure contract: two actual classification examples.
+% Top: original/final single-B repair; bottom: rejected proposal/final mesh.
+% Equal metric side-view scales, real neighboring skin facets; no magnification.
+% Orange beam centre-lines, grey skin edges, blue actual receiving facets.
+% A rejected proposal uses dashed orange lines and a cross, not a solid beam.
+% Node and shell-vertex rows come from the single accompanying CSV file.
+[nodes,shells]=upper_tables(data);
+orange=[.78 .38 .12];blue=[.19 .39 .62];grey=[.53 .56 .59];ink=[.17 .19 .21];
+fig=figure('Visible','off','Color','w','Position',[80 80 1400 680]);
+set(fig,'DefaultAxesFontName','Arial','DefaultTextFontName','Arial');
+names=["single_B_A_ordinary_C_beyond","B_rejected_length"];
+titles={'(a) Single-node repair: original','(b) Single-node repair: final', ...
+    '(c) Length guard: proposed correction','(d) Length guard: retained mesh'};
+for row=1:2
+    n=nodes(nodes.example==names(row),:);s=shells(shells.example==names(row),:);
+    n=n([find(n.role=="A"),find(n.role=="B"),find(n.role=="C")],:);
+    old=[n.original_x_m,n.original_y_m,n.original_z_m];
+    final=[n.final_x_m,n.final_y_m,n.final_z_m];
+    proposal=[n.all_proposals_x_m,n.all_proposals_y_m,n.all_proposals_z_m];
+    p=[n.projection_x_m(2),n.projection_y_m(2),n.projection_z_m(2)];
+    st=s(s.shell_element_id==n.selected_shell_element_id(2),:);
+    v=[st.x_m,st.y_m,st.z_m];normal=cross(v(2,:)-v(1,:),v(3,:)-v(1,:));normal=normal/norm(normal);
+    if dot(p-old(2,:),normal)<0,normal=-normal;end
+    x=old(3,:)-old(1,:);x=x-dot(x,normal)*normal;x=x/norm(x);
+    basis=[x(:),normal(:)];
+    originalQ=(old-p)*basis*1000;finalQ=(final-p)*basis*1000;proposedQ=(proposal-p)*basis*1000;
+    % Keep the one-ring facets, but bound the view around the shown beam chain.
+    xmin=min(originalQ(:,1))-.75;xmax=max(originalQ(:,1))+.75;
+    ymin=min(originalQ(:,2))-.7;ymax=.85;
+    for col=1:2
+        panel=(row-1)*2+col;
+        ax=axes(fig,'Position',[.055+.475*(col-1),.56-.45*(row-1),.40,.30]);hold(ax,'on');
+        accepted=n.category=="within_mpc_tolerance" | n.category=="snapped_to_shell_projection";
+        receiving=unique(n.selected_shell_element_id(accepted));
+        for eid=unique(s.shell_element_id).'
+            tri=s(s.shell_element_id==eid,:);v=([tri.x_m,tri.y_m,tri.z_m]-p)*basis*1000;
+            color=grey;width=.55;
+            if ismember(eid,receiving),color=blue;width=1.4;end
+            patch(ax,'Vertices',v,'Faces',[1 2 3],'FaceColor','none','EdgeColor',color,'LineWidth',width);
+        end
+        if row==1 && col==1,q=originalQ;style='-';labelB='B';
+        elseif row==2 && col==1,q=proposedQ;style='--';labelB='B*';
+        else,q=finalQ;style='-';labelB='B';if row==1,labelB='B''';end;end
+        plot(ax,q(:,1),q(:,2),style,'Color',orange,'LineWidth',3);
+        plot(ax,q([1 3],1),q([1 3],2),'o','MarkerFaceColor',ink,'MarkerEdgeColor','w','MarkerSize',7);
+        marker='o';fill='w';if row==1 && col==2,fill=orange;end
+        if row==2 && col==1,marker='x';end
+        plot(ax,q(2,1),q(2,2),marker,'Color',orange,'MarkerEdgeColor',orange,'MarkerFaceColor',fill,'MarkerSize',9,'LineWidth',1.6);
+        text(ax,q(1,1)-.3,q(1,2)-.22,'A','FontSize',12,'FontWeight','bold','Color',ink);
+        text(ax,q(3,1)+.10,q(3,2)-.10,'C','FontSize',12,'FontWeight','bold','Color',ink);
+        text(ax,q(2,1)-.1,q(2,2)-.35,labelB,'FontSize',12,'FontWeight','bold','Color',orange);
+        axis(ax,'equal');xlim(ax,[xmin xmax]);ylim(ax,[ymin ymax]);set(ax,'Visible','off');
+        title(ax,titles{panel},'Visible','on','FontSize',13,'FontWeight','normal');
+        plot(ax,[xmin+.15,xmin+1.15],[ymin+.2,ymin+.2],'-','Color',ink,'LineWidth',1);
+        text(ax,xmin+.65,ymin-.03,'1 mm','FontSize',9,'HorizontalAlignment','center');
+    end
 end
+annotation(fig,'textbox',[.055 .462 .90 .042],'String', ...
+    'B moves 1.701 mm; A is coupled without movement; C is outside repair reach (3.402 > 3.064 mm).', ...
+    'LineStyle','none','FontSize',11,'Interpreter','none');
+annotation(fig,'textbox',[.055 .02 .90 .042],'String', ...
+    'B* is a rejected proposal: AB would lengthen by 81.9%, exceeding the 75% guard. B stays unchanged.', ...
+    'LineStyle','none','FontSize',11,'Interpreter','none');
+set(fig,'PaperPositionMode','auto');
+
+
 end
 
-function flowBox(fig,position,x,width,value,ink,fillColor)
-boxPosition = [position(1)+position(3)*x,position(2)+0.2*position(4), ...
-    position(3)*width,position(4)*0.6];
-annotation(fig,'textbox',boxPosition,'String',value,'Interpreter','latex', ...
-    'FontSize',8.4,'Color',ink,'BackgroundColor',fillColor, ...
-    'EdgeColor',ink,'LineWidth',0.9,'HorizontalAlignment','center', ...
-    'VerticalAlignment','middle','FitBoxToText','off','Margin',2);
+function fig = lower_panels(data)
+% Chart contract: show two distinct, observed near-skin coupling outcomes.
+% Upper row: both adjacent lattice nodes relocate to their own skin facets.
+% Lower row: an 8.189 micrometre gap remains when ordinary MPC coupling is
+% permitted. The lower row is a uniformly magnified, cropped local side view.
+% Reproduction requires only figure_2_4.csv, not a solver or archive.
+% Explicit data-class encoding: thin grey skin edges, blue receiving facets,
+% thick orange beam centre-lines. Open/filled markers denote original/final.
+d=lower_table(data);
+blue=[.19 .39 .62];orange=[.78 .38 .12];ink=[.17 .19 .21];grey=[.56 .60 .63];
+fig=figure('Visible','off','Color','w','Position',[80 80 1400 730]);
+set(fig,'DefaultAxesFontName','Arial','DefaultTextFontName','Arial');
+u=d(d.example=="two_node",:);
+target=u(u.entity=="receiving_vertex" & u.element_id==448671,:);
+p=xyz(u(u.entity=="projection" & u.grid_id==491572,:));
+a=xyz(u(u.entity=="beam_endpoint" & u.grid_id==491584 & u.state=="original",:));
+c=xyz(u(u.entity=="beam_endpoint" & u.grid_id==491564 & u.state=="original",:));
+v=xyz(target);n=cross(v(2,:)-v(1,:),v(3,:)-v(1,:));n=n/norm(n);
+b=unique(xyz(u(u.entity=="beam_endpoint" & u.grid_id==491572 & u.state=="original",:)),'rows');
+if dot(p-b,n)<0,n=-n;end
+t=c-a;t=t-dot(t,n)*n;t=t/norm(t);s=cross(n,t);basis=[t(:),s(:),n(:)];
+assert(norm(basis.'*basis-eye(3),'fro')<1e-12);
+tr=@(rows) (xyz(rows)-p)*basis*1000;
+all=tr(u);xlimTop=[min(all(:,1))-.3,max(all(:,1))+.3];
+ylimTop=[min(all(:,2))-.2,max(all(:,2))+.2];zlimTop=[-3.15,.5];
+% Upper row: oblique rendering of true mesh coordinates.
+for panel=1:2
+    ax=axes(fig,'Position',[.045+(panel-1)*.5 .555 .41 .37]);hold(ax,'on');
+    state="original";if panel==2,state="final";end
+    for eid=unique(u.element_id(u.entity=="context_vertex")).'
+        q=tr(u(u.entity=="context_vertex" & u.element_id==eid,:));
+        patch(ax,'Vertices',q,'Faces',[1 2 3],'FaceColor',[.86 .88 .90], ...
+            'FaceAlpha',.10,'EdgeColor',grey,'LineWidth',.7);
+    end
+    for eid=[448671 449087]
+        q=tr(u(u.entity=="receiving_vertex" & u.element_id==eid,:));
+        patch(ax,'Vertices',q,'Faces',[1 2 3],'FaceColor',blue,'FaceAlpha',.22, ...
+            'EdgeColor',blue,'LineWidth',1.2);
+        centre=mean(q,1);name='T_B';dz=.30;if eid==449087,name='T_C';dz=-.60;end
+        text(ax,centre(1),centre(2),centre(3)+dz,name, ...
+            'Color',blue,'FontSize',12,'HorizontalAlignment','center','Tag','facet_label');
+    end
+    for eid=[829120 829109]
+        q=tr(u(u.entity=="beam_endpoint" & u.element_id==eid & u.state==state,:));
+        plot3(ax,q(:,1),q(:,2),q(:,3),'-','Color',orange,'LineWidth',3.2);
+    end
+    for gid=[491584 491572 491564]
+        q=unique(tr(u(u.entity=="beam_endpoint" & u.grid_id==gid & u.state==state,:)),'rows');
+        fill=ink;if gid~=491584,fill='w';if panel==2,fill=orange;end,end
+        marker='o';if gid==491564,marker='d';end
+        plot3(ax,q(1),q(2),q(3),marker,'MarkerFaceColor',fill,'MarkerEdgeColor',orange,'MarkerSize',8,'LineWidth',1.5);
+        name='A';if gid==491572,name='B';elseif gid==491564,name='C';end
+        if panel==2 && gid~=491584,name=[name ''''];end
+        dz=.20;if gid==491572 && panel==2,dz=-.40;end
+        if gid==491564 && panel==1,dz=-.2;end
+        text(ax,q(1)+.08,q(2),q(3)+dz,name,'Color',ink,'FontSize',14,'FontWeight','bold');
+    end
+    if panel==1
+        q=tr(u(u.entity=="projection",:));
+        plot3(ax,q(:,1),q(:,2),q(:,3),'x','Color',blue,'MarkerSize',7,'LineWidth',1.2);
+    end
+    axis(ax,'equal');xlim(ax,xlimTop);ylim(ax,ylimTop);zlim(ax,zlimTop);
+    view(ax,[10 25]);camproj(ax,'orthographic');camzoom(ax,1.25);set(ax,'Visible','off','Clipping','off');
+    sx=-2.4;sy=0;sz=-2.7;
+    plot3(ax,[sx sx+1],[sy sy],[sz sz],'-','Color',ink,'LineWidth',1.2);
+    text(ax,sx+.5,sy,sz-.27,'1 mm','Color',ink,'FontSize',10,'HorizontalAlignment','center');
+    if panel==1,heading='(e) Two adjacent nodes: before repair';else,heading='(f) Both nodes moved to their receiving facets';end
+    note(fig,[.095+(panel-1)*.5 .948 .40 .04],heading,14,false,ink);
+end
+note(fig,[.055 .485 .89 .043], ...
+    'B correction: 1.298 mm; C correction: 2.597 mm. Two receiving triangles are highlighted; their shared edge remains.',12,true,ink);
+% Lower row: exact orthographic side coordinates in micrometres. Uniform
+% zoom, equal length scales and beam clipping make the tiny offset visible.
+u=d(d.example=="finite_offset",:);
+p=xyz(u(u.entity=="projection",:));
+b=unique(xyz(u(u.entity=="beam_endpoint" & u.grid_id==472299 & u.state=="original",:)),'rows');
+v=xyz(u(u.entity=="receiving_vertex",:));
+n=cross(v(2,:)-v(1,:),v(3,:)-v(1,:));n=n/norm(n);if dot(p-b,n)<0,n=-n;end
+endrows=u(u.entity=="beam_endpoint" & u.grid_id~=472299 & u.state=="original",:);
+w=xyz(endrows);t=w(2,:)-w(1,:);t=t-dot(t,n)*n;t=t/norm(t);
+tr=@(rows) (xyz(rows)-p)*[t(:),n(:)]*1e6;
+assert(abs(norm((b-p)*1e6)-8.1891470257)<1e-6);
+for panel=1:2
+    ax=axes(fig,'Position',[.070+(panel-1)*.5 .105 .365 .295]);hold(ax,'on');
+    state="original";if panel==2,state="final";end
+    % All receiving vertices project to n=0 in this true side view. Its
+    % boundary appears as a line, not as a structural beam.
+    q=tr(u(u.entity=="receiving_vertex",:));
+    plot(ax,q([1:3 1],1),q([1:3 1],2),'-','Color',blue,'LineWidth',1.5);
+    for eid=unique(u.element_id(u.entity=="beam_endpoint")).'
+        q=tr(u(u.entity=="beam_endpoint" & u.element_id==eid & u.state==state,:));
+        plot(ax,q(:,1),q(:,2),'-','Color',orange,'LineWidth',3.2);
+    end
+    q=unique(tr(u(u.entity=="beam_endpoint" & u.grid_id==472299 & u.state==state,:)),'rows');
+    plot(ax,q(1),q(2),'o','MarkerFaceColor','w','MarkerEdgeColor',orange,'MarkerSize',8,'LineWidth',1.5);
+    plot(ax,0,0,'x','Color',blue,'MarkerSize',8,'LineWidth',1.3);
+    text(ax,-3.2,-9,'Q','Color',ink,'FontSize',14,'FontWeight','bold');
+    text(ax,1.0,1.6,'Projection p','Color',blue,'FontSize',11);
+    text(ax,-21,3.7,'Receiving skin element, edge-on','Color',blue,'FontSize',11);
+    text(ax,4.0,-5.8,'Gap: 8.189 μm','Color',ink,'FontSize',11);
+    % Dimension line intentionally omitted: the separated markers and label
+    % show the gap without drawing anything that could be mistaken for a beam.
+    axis(ax,'equal');xlim(ax,[-23 23]);ylim(ax,[-15 7]);
+    plot(ax,[-21 -16],[-13 -13],'-','Color',ink,'LineWidth',1.3);
+    text(ax,-18.5,-14.6,'5 μm','HorizontalAlignment','center','Color',ink,'FontSize',10);
+    set(ax,'Visible','off','Clipping','on');
+    if panel==1,heading='(g) Near-skin node before coupling';else,heading='(h) Ordinary MPC: coordinates unchanged';end
+    title(ax,heading,'Visible','on','FontSize',14,'FontWeight','normal','Color',ink);
+end
+note(fig,[.055 .020 .89 .047], ...
+    'Uniform side-view close-up: the 8.189 μm gap is below the 10 μm coupling tolerance. Beam segments are cropped.',11,false,ink);
+set(findall(fig,'-property','Interpreter'),'Interpreter','none');
+set(findall(fig,'Tag','facet_label'),'Interpreter','tex');
+set(fig,'PaperPositionMode','auto');
+
+end
+
+function q=xyz(rows)
+q=[rows.x_m rows.y_m rows.z_m];
+end
+
+function note(fig,pos,message,size,bold,color)
+weight='normal';if bold,weight='bold';end
+annotation(fig,'textbox',pos,'String',message,'FontName','Arial','FontSize',size, ...
+    'FontWeight',weight,'Color',color,'EdgeColor','none','Interpreter','none');
+end
+
+
+function [nodes,shells]=upper_tables(data)
+names=["single_B_A_ordinary_C_beyond","B_rejected_length"];
+nodes=data(data.entity=="node" & data.state=="original" & ismember(data.example,names),:);
+nodes.category=nodes.classification;
+nodes.selected_shell_element_id=nodes.element_id;
+for state=["original","final","projection","all_proposals"]
+    coords=zeros(height(nodes),3);
+    for i=1:height(nodes)
+        q=data(data.entity=="node" & data.example==nodes.example(i) & ...
+            data.grid_id==nodes.grid_id(i) & data.state==state,:);
+        assert(height(q)==1);
+        coords(i,:)=[q.x_m q.y_m q.z_m];
+    end
+    for k=1:3
+        letters="xyz";letter=extractBetween(letters,k,k);
+        nodes.(char(state+"_"+letter+"_m"))=coords(:,k);
+    end
+end
+shells=data(data.entity=="skin_vertex" & ismember(data.example,names),:);
+shells.shell_element_id=shells.element_id;
+end
+
+function d=lower_table(data)
+keep=ismember(data.example,["two_node","finite_offset"]);
+keep=keep & (data.entity=="beam_endpoint" | data.entity=="skin_vertex" | ...
+    (data.entity=="node" & data.state=="projection"));
+d=data(keep,:);
+receiving=d.entity=="skin_vertex" & ~ismissing(d.receiving_for) & strlength(d.receiving_for)>0;
+context=d.entity=="skin_vertex" & ~receiving;
+d.entity(receiving)="receiving_vertex";
+d.entity(context)="context_vertex";
+d.entity(d.entity=="node")="projection";
 end

@@ -68,13 +68,15 @@ Source folders, transformations, and limitations are recorded in
 ## Figure-level exports
 
 `figures/chapter02` through `figures/chapter06`, plus `figures/chapterC` and
-`figures/chapterD`, contain 61 figure packages under the current thesis
-numbering. Every folder contains exactly one consolidated CSV, one independent
-Python plotting script, and one independent MATLAB plotting script. Each script
-reads only its adjacent CSV. The complete index is
+`figures/chapterD`, contain 63 figure packages under the current thesis
+numbering. Every folder contains a primary CSV, one independent Python plotting
+script, and one independent MATLAB plotting script. Figure 2.5 also includes
+`chunk_beams.csv` and `chunk_shell_vertices.csv` for connectivity and surface
+geometry. Scripts read only their adjacent CSV data; all other packages use
+one CSV. The complete index is
 [`docs/FIGURE_DATA_MAP.md`](../docs/FIGURE_DATA_MAP.md).
 
-Figure 2.8 displays nTop screenshots in the thesis; its CSV and scripts
+Figure 2.10 displays nTop screenshots in the thesis; its CSV and scripts
 reconstruct the mode shape as a point cloud. They do not recreate the exact
 nTop surface rendering or camera settings.
 

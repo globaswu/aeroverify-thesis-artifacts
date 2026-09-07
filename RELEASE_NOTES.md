@@ -6,11 +6,12 @@ source data linked from its captions.
 
 ## Updated content
 
-- 53 self-contained figure folders follow the current numbering in Chapters
-  2–6 and Appendices C–D. Each contains one consolidated CSV and independent
-  Python and MATLAB plotting scripts.
+- 63 self-contained figure folders follow the current numbering in Chapters
+  2–6 and Appendices C–D. Each contains CSV data and independent Python and
+  MATLAB plotting scripts. Figure 2.5 uses three adjacent CSV tables; the
+  other packages use one.
 - The FCC case-67 reduced-frequency and mode-shape diagnostics are now in
-  Chapter 2. Figure 2.8 displays nTop screenshots; the public reconstruction
+  Chapter 2. Figure 2.10 displays nTop screenshots; the public reconstruction
   shows the mode shape as a point cloud.
 - Chapter 3 includes the completed seven-problem, seven-solver comparison.
   The dataset provides all 49 trajectory summaries, 7,350 recorded X/Y/C

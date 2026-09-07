@@ -85,7 +85,7 @@
     {
       "id": "structural-mesh-sensitivity",
       "thesis_refs": [
-        "Chapter 2, Figures 2.10-2.11"
+        "Chapter 2, Figures 2.12-2.13"
       ],
       "reproduction_level": "saved-result reconstruction",
       "entrypoint": "matlab/reproduce_mesh_convergence.m",
@@ -101,7 +101,7 @@
     {
       "id": "fcc-case067-mkaero1",
       "thesis_refs": [
-        "Chapter 2, Figures 2.7-2.9"
+        "Chapter 2, Figures 2.9-2.11"
       ],
       "reproduction_level": "saved-result reconstruction",
       "entrypoint": "matlab/reproduce_case067_flutter.m",
@@ -114,7 +114,7 @@
         "point3_old_max_g": 0.000022834729,
         "point3_new_max_g": -0.0000085449944
       },
-      "limitations": "The public tables support the MKAERO1 comparison, not a fresh SOL 145 run. Figure 2.8 shows nTop screenshots; its CSV/scripts reproduce the modal node field as a point cloud, not an exact nTop rendering."
+      "limitations": "The public tables support the MKAERO1 comparison, not a fresh SOL 145 run. Figure 2.10 shows nTop screenshots; its CSV/scripts reproduce the modal node field as a point cloud, not an exact nTop rendering."
     },
     {
       "id": "harmonized-sol145-topology-reassessment",

@@ -19,7 +19,7 @@ Post hoc audit margins in the released binary-method rows do not change that
 information boundary. One trajectory per solver/problem cannot establish a
 statistical ranking or isolate an effect caused by the constraint information.
 
-The thesis shows nTop screenshots in Figure 2.8. Its CSV supports a point-cloud
+The thesis shows nTop screenshots in Figure 2.10. Its CSV supports a point-cloud
 reconstruction of the mode shape, not nTop's precise shading or camera view.
 
 This is a post-processing and record-consistency result. It establishes that

@@ -1,14 +1,15 @@
 # Chapter 2 figure reproduction
 
-Each figure folder contains one CSV and independent Python and MATLAB scripts.
-Download all three files from a folder. Python requires NumPy and Matplotlib.
+Each figure folder contains a primary CSV and independent Python and MATLAB
+scripts. Figure 2.5 also has two adjacent CSVs for connectivity and skin vertices.
+Download all files in the chosen folder. Python requires NumPy and Matplotlib.
 MATLAB uses built-in table and graphics
 functions. Neither route launches a solver or contacts an external data service.
 
 From the repository root, for example:
 
 ```text
-python scripts/reproduce_thesis_figure.py 2.1 2.3 2.4 2.12 2.13 2.14 2.15 2.16
+python scripts/reproduce_thesis_figure.py 2.1 2.3 2.4 2.5 2.6 2.14 2.15 2.16 2.17 2.18
 ```
 
 The figure-specific script can also be run directly with `--output` to select
@@ -33,36 +34,81 @@ The scripts reproduce **the profile only**. They do not reconstruct the nTop
 screenshot, wing geometry, or beam section properties. The profile is a
 calculation from specified geometry inputs, not a measured structural response.
 
-## Figure 2.3: microscopic shell–lattice coupling
+## Figure 2.3: microscopic single-node repair
 
 [CSV and scripts](../data/figures/chapter02/figure_2_3)
 
-The CSV contains two actual local examples from FCC lattice-sizing case 55.
-This is a different campaign from the four-input case used in Figure 2.1.
-`example` distinguishes guarded snapping (`snap_repair`) and ordinary
-finite-offset coupling (`ordinary_mpc`). `entity` identifies beam nodes,
-projection points, connector triangle vertices, incident beam endpoints, or
-surrounding skin triangles. `state` distinguishes original and final
-coordinates. `grid_id` and `element_id` preserve node and element identity.
+This retained FCC lattice-sizing example contains two beam elements sharing
+node B. It is a different campaign from the four-input case in Figure 2.1.
+B (GRID 573439) receives a 1.002 mm coordinate correction. A (GRID 573197) and
+C (GRID 573730) keep their coordinates because they already lie within the
+ordinary MPC tolerance of their own receiving facets. C is close to the
+turning closure surface; it is not far from all skin elements.
 
-`x_m`, `y_m`, and `z_m` are global coordinates in metres. `local_s_m`,
-`local_t_m`, and `local_n_m` express the same coordinates in an orthonormal
-frame whose origin is the projection on the connector triangle. The local
-`s` direction follows vertices 1 to 2; `n` points from the original beam node
-toward the skin; `t` completes the frame. The scripts use these local columns
-directly and preserve equal coordinate scale. The micrometre inset is a
-uniformly magnified projection, not an exaggerated normal offset.
+The CSV supplies original/final coordinates, beam connectivity, projection
+points, receiving triangles, and surrounding skin geometry. Blue highlights
+all three receiving facets: CTRIA3 625042 for A, 625400 for B, and 625399 for C.
+Thin grey edges denote the skin mesh; thick orange segments denote beam
+centre-lines. Side views reveal the closure near C. Both scripts use rigid
+local coordinate transformations and equal spatial scale, without normal
+exaggeration. This is mesh preprocessing, not deformation under load. No beam
+is added, and unchanged coordinates do not denote constrained supports.
 
-The source is the retained original/final structural mesh and connector
-geometry. Node 491572 moves by 1.298 mm before MPC generation, while node
-472299 stays fixed with an 8.189 micrometre offset. The interpolation weights
-can be reconstructed from the projection and triangle vertices in this CSV.
-The image is a mesh-data rendering, not an nTop screenshot. It illustrates
-two connector operations, not a global validation of all connectors.
-
-## Figure 2.4: NACA 65-210 lifting-line schematic
+## Figure 2.4: contrasting repair and coupling outcomes
 
 [CSV and scripts](../data/figures/chapter02/figure_2_4)
+
+Four examples from the same retained FCC sizing model are shown in eight
+before/after or proposal/retained panels:
+
+- A stays within ordinary coupling tolerance, B is snapped, and C remains
+  beyond the repair reach.
+- A proposed movement is rejected by the incident-beam length-change guard.
+  Dashed proposed segments are not retained structural members.
+- Two adjacent lattice nodes move onto distinct receiving skin triangles.
+- An 8.189 micrometre gap is retained within the 10 micrometre ordinary
+  connection tolerance, with finite-offset MPC coupling and no node movement.
+
+Unlike Figure 2.3, the first example here deliberately has a genuinely
+out-of-reach C node. `example`, `entity`, `state`, and `role` distinguish the
+CSV's geometric records. Original/final states are retained coordinates;
+projection and all-proposals states are calculated configurations. Ordered
+skin vertices and interpolation weights allow projection checks. Reconstructed
+classification reasons are not recovered historical per-node log strings.
+The CSV includes a membership audit against retained moved-node and MPC
+records. The examples illustrate different decisions, not their prevalence
+or mechanical benefit across the optimization campaigns.
+
+## Figure 2.5: multiple repairs within a lattice patch
+
+[CSV and scripts](../data/figures/chapter02/figure_2_5)
+
+The spatial crop contains 399 beam elements, 348 beam nodes, and 713 skin
+triangles. Original/final coordinates show 31 repaired nodes; the other 317
+retain their coordinates. The displayed 75 receiving facets belong to the
+81 visible connected nodes. Surrounding skin edges remain visible for context.
+The before state is already downstream of nTop's length-filtering stage.
+The 31 relocated nodes comprise 29 degree-two nodes and two degree-four
+junctions, not free beam endpoints. Only 60 beams change; 339 remain identical.
+The side viewing direction is rotated by 5 degrees to reduce visual overlap,
+and matched enlargements resolve the near-skin changes. This is not a change
+in model dihedral or a depiction of restored, previously filtered members.
+Both scripts reconstruct the oblique, side, and enlarged views from three adjacent CSVs:
+`figure_2_5.csv` supplies node records, `chunk_beams.csv` supplies element
+connectivity, and `chunk_shell_vertices.csv` supplies ordered skin vertices.
+No other data files are required.
+
+The crop was selected for explanatory density, without using stress or
+performance results. Boundary nodes can have incident members outside the
+illustration. Coordinates and connectivity are retained observations, while
+detailed decision categories are reconstructed from the connector algorithm
+and checked against retained node movement and MPC membership. This larger
+view illustrates coordinated geometric corrections; it does not establish
+strength, accuracy, or optimization improvement.
+
+## Figure 2.6: NACA 65-210 lifting-line schematic
+
+[CSV and scripts](../data/figures/chapter02/figure_2_6)
 
 The figure uses the supplied NACA 65-210 coordinate profile. The drawing
 illustrates lifting-line collocation and the one-way correction for wing
@@ -70,9 +116,9 @@ twist. Its illustrative angles are not additional simulated observations.
 The airfoil outline is not a synthetic symmetric substitute. This schematic
 is distinct from the W2GJ camber prescription on the doublet-lattice surface.
 
-## Figure 2.12: lift-curve comparison
+## Figure 2.14: lift-curve comparison
 
-[CSV and scripts](../data/figures/chapter02/figure_2_12)
+[CSV and scripts](../data/figures/chapter02/figure_2_14)
 
 The CSV contains six retained Nastran and lifting-line lift coefficients
 over incidence angles from −2 to 8 degrees. The experimental reference is
@@ -90,9 +136,9 @@ the lift calculation within this comparison; any zero-lift-angle difference
 must remain visible. The comparison does not establish accuracy of profile,
 parasite, or total drag, or independently validate the induced-drag objective.
 
-## Figure 2.13: full-wing CFD drag diagnostics
+## Figure 2.15: full-wing CFD drag diagnostics
 
-[CSV and scripts](../data/figures/chapter02/figure_2_13)
+[CSV and scripts](../data/figures/chapter02/figure_2_15)
 
 The CSV contains all 75 samples from a three-mesh full-wing CFD campaign:
 25 samples per mesh at iterations 0, 10, ..., 240. The history panel displays
@@ -129,9 +175,9 @@ total-drag comparison was available. The figure documents these CFD results
 and their limitations without treating the terminal iteration ranges or
 small medium-to-fine difference as a validated uncertainty assessment.
 
-## Figure 2.14: mean camber at aerodynamic-box controls
+## Figure 2.16: mean camber at aerodynamic-box controls
 
-[CSV and scripts](../data/figures/chapter02/figure_2_14)
+[CSV and scripts](../data/figures/chapter02/figure_2_16)
 
 The CSV supplies 4001 normalized chordwise samples of the NACA 65-210 upper
 surface, lower surface, mean camber, and numerical camber derivative. These
@@ -159,9 +205,9 @@ line or its ten spanwise collocation stations. Mean camber supplies an
 imposed normal-flow boundary-condition correction. It does not move the
 planar aerodynamic surface or represent aeroelastic displacement.
 
-## Figure 2.15: matched rigid W2GJ on/off comparison
+## Figure 2.17: matched rigid W2GJ on/off comparison
 
-[CSV and scripts](../data/figures/chapter02/figure_2_15)
+[CSV and scripts](../data/figures/chapter02/figure_2_17)
 
 The CSV retains all nine verified incidences from −4 to 12 degrees, the
 on/off lift coefficients, independent force-sum checks, and reference/model
@@ -191,9 +237,9 @@ ordinate plane sufficiently to resolve this choice, so the global-XZ
 interpretation is an explicit replication assumption, not a universal
 Nastran rule.
 
-## Figure 2.16: four rigid dihedral/W2GJ cases
+## Figure 2.18: four rigid dihedral/W2GJ cases
 
-[CSV and scripts](../data/figures/chapter02/figure_2_16)
+[CSV and scripts](../data/figures/chapter02/figure_2_18)
 
 The four numerical curves are actual rigid SOL 144 calculations combining
 zero or 3 degrees dihedral with W2GJ enabled or disabled. They share Mach

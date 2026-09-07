@@ -1,168 +1,75 @@
-"""Reproduce thesis Figure 2.10 from the sibling CSV only."""
-
+from __future__ import annotations
 import argparse
 import csv
+import math
 from pathlib import Path
-
+import numpy as np
+import matplotlib
+matplotlib.use("Agg")
 import matplotlib.pyplot as plt
-
-
+from matplotlib.lines import Line2D
 HERE = Path(__file__).resolve().parent
-DATA_FILE = HERE / "figure_2_10.csv"
-DEFAULT_OUTPUT_FILE = HERE / "plot_2_10.png"
+CSV_FILE = HERE / "figure_2_10.csv"
+INK="#202124"; BLUE="#1769aa"; ORANGE="#e66101"; RED="#b2182b"; PURPLE="#7b3294"; GREY="#9aa0a6"; LIGHT="#d9e8f5"
+plt.rcParams.update({"font.family":"Times New Roman","font.size":9,"axes.titlesize":11,"axes.labelsize":9,"legend.fontsize":8})
+def load_rows():
+    with CSV_FILE.open("r", encoding="utf-8-sig", newline="") as handle:
+        return list(csv.DictReader(handle))
+def select(rows, kind):
+    return [r for r in rows if r.get("record_type", "") == kind]
+def num(rows, name):
+    out=[]
+    for row in rows:
+        value=row.get(name, "")
+        out.append(float(value) if value not in ("", "nan", "NaN") else np.nan)
+    return np.asarray(out, dtype=float)
+def text(rows, name):
+    return np.asarray([row.get(name, "") for row in rows], dtype=str)
+def flag(rows, name):
+    values=text(rows,name)
+    return np.asarray([v.strip().lower() in {"1","true","yes"} for v in values], dtype=bool)
+def gridify(rows, xname, yname, zname):
+    x=num(rows,xname); y=num(rows,yname); z=num(rows,zname)
+    xs=np.unique(x); ys=np.unique(y); image=np.full((len(ys),len(xs)),np.nan)
+    ix=np.searchsorted(xs,x); iy=np.searchsorted(ys,y); image[iy,ix]=z
+    return xs,ys,image
+def observations(ax,x,y,feasible):
+    ax.scatter(x[~feasible],y[~feasible],marker="x",c=RED,s=24,label="Infeasible",zorder=4)
+    ax.scatter(x[feasible],y[feasible],facecolors="white",edgecolors=BLUE,s=25,label="Feasible",zorder=4)
+def pareto_panel(ax,rows,xname,yname,feasname,pfname,casename):
+    x=num(rows,xname); y=num(rows,yname); feas=flag(rows,feasname); pf=flag(rows,pfname)
+    observations(ax,x,y,feas)
+    ax.scatter(x[feas & ~pf],y[feas & ~pf],facecolors="white",edgecolors=BLUE,s=25)
+    order=np.flatnonzero(pf)[np.argsort(x[pf])]
+    ax.plot(x[order],y[order],color=INK,lw=0.9,zorder=2)
+    ax.scatter(x[pf],y[pf],c=INK,s=30,label="Observed Pareto",zorder=5)
+    cases=num(rows,casename)
+    for i in np.flatnonzero(pf): ax.annotate(str(int(cases[i])),(x[i],y[i]),xytext=(3,3),textcoords="offset points",fontsize=6.5)
+def score_panel(ax,grid,points,xname,yname,score,px,py,feasname,pfname,title):
+    xs,ys,z=gridify(grid,xname,yname,score)
+    image=ax.pcolormesh(xs,ys,z,shading="auto",cmap="cividis",vmin=0,vmax=1)
+    if np.nanmin(z)<=0.5<=np.nanmax(z): ax.contour(xs,ys,z,levels=[0.5],colors="white",linewidths=1.0)
+    xp=num(points,px); yp=num(points,py); feas=flag(points,feasname); pf=flag(points,pfname)
+    observations(ax,xp,yp,feas); ax.scatter(xp[pf],yp[pf],s=45,facecolors="none",edgecolors=INK,lw=1.0,zorder=5)
+    ax.set_box_aspect(1); ax.set_title(title)
+    return image
+def parse_output():
+    parser=argparse.ArgumentParser(); parser.add_argument("--output",type=Path,default=HERE/"plot_2_10.png")
+    return parser.parse_args().output
+def finish(fig):
+    out=parse_output(); out.parent.mkdir(parents=True,exist_ok=True); fig.savefig(out,dpi=180,bbox_inches="tight"); plt.close(fig); print(out)
 
-REQUIRED_COLUMNS = {
-    "case_id",
-    "geometry_tolerance_mm",
-    "mesh_edge_length_mm",
-    "two_wing_compliance_Nm",
-    "maximum_vertical_deflection_m",
-    "skin_vm_p9975_MPa",
-    "cbeam_normal_stress_p9975_MPa",
-    "first_modal_frequency_Hz",
-}
-
-
-def plot_metric(axis, data, cases, column, ylabel, colors):
-    for index, case_id in enumerate(cases):
-        rows = sorted(
-            (row for row in data if row["case_id"] == case_id),
-            key=lambda row: row["mesh_edge_length_mm"],
-        )
-        axis.plot(
-            [row["mesh_edge_length_mm"] for row in rows],
-            [row[column] for row in rows],
-            "-o",
-            linewidth=1.4,
-            color=colors[index],
-            markerfacecolor=colors[index],
-            label=f"Case {case_id}",
-        )
-    axis.set_xlabel("Target mesh edge length [mm]")
-    axis.set_ylabel(ylabel)
-    axis.grid(True, alpha=0.35)
-
-
-def parse_args():
-    parser = argparse.ArgumentParser(description=__doc__)
-    parser.add_argument(
-        "--output",
-        type=Path,
-        default=DEFAULT_OUTPUT_FILE,
-        help="Output image file (default: sibling plot_2_10.png)",
-    )
-    return parser.parse_args()
-
-
-def main(output_file=DEFAULT_OUTPUT_FILE):
-    with DATA_FILE.open(newline="", encoding="utf-8") as stream:
-        reader = csv.DictReader(stream)
-        missing = REQUIRED_COLUMNS.difference(reader.fieldnames or [])
-        if missing:
-            raise ValueError(f"Missing required columns: {sorted(missing)}")
-        data = []
-        for source in reader:
-            row = {name: float(source[name]) for name in REQUIRED_COLUMNS}
-            row["case_id"] = int(row["case_id"])
-            data.append(row)
-    if len(data) != 15:
-        raise ValueError(f"Expected 15 plotted observations, found {len(data)}")
-    if not all(row["geometry_tolerance_mm"] == 1.5 for row in data):
-        raise ValueError("Figure 2.10 requires a fixed 1.5 mm geometry tolerance")
-
-    cases = sorted({row["case_id"] for row in data})
-    if cases != [4, 37, 64, 65, 99]:
-        raise ValueError(f"Unexpected case set: {cases}")
-    # MATLAB's lines(5), matching the thesis figure.
-    colors = [
-        (0.0000, 0.4470, 0.7410),
-        (0.8500, 0.3250, 0.0980),
-        (0.9290, 0.6940, 0.1250),
-        (0.4940, 0.1840, 0.5560),
-        (0.4660, 0.6740, 0.1880),
-    ]
-
-    plt.rcParams.update({"font.family": "Times New Roman", "font.size": 9})
-    figure, axes = plt.subplots(2, 2, figsize=(9, 9), constrained_layout=True)
-    figure.suptitle("Aeroelastic mesh-convergence results", fontweight="bold")
-
-    plot_metric(
-        axes[0, 0],
-        data,
-        cases,
-        "two_wing_compliance_Nm",
-        "Two-wing compliance at 10 deg [N m]",
-        colors,
-    )
-    axes[0, 0].set_ylim(0, 350)
-    plot_metric(
-        axes[0, 1],
-        data,
-        cases,
-        "maximum_vertical_deflection_m",
-        "Maximum vertical deflection at 10 deg [m]",
-        colors,
-    )
-    axes[0, 1].set_ylim(0.01, 0.10)
-
-    stress_axis = axes[1, 0]
-    for index, case_id in enumerate(cases):
-        rows = sorted(
-            (row for row in data if row["case_id"] == case_id),
-            key=lambda row: row["mesh_edge_length_mm"],
-        )
-        stress_axis.plot(
-            [row["mesh_edge_length_mm"] for row in rows],
-            [row["skin_vm_p9975_MPa"] for row in rows],
-            "-o",
-            linewidth=1.4,
-            color=colors[index],
-            markerfacecolor=colors[index],
-            label=f"Case {case_id}",
-        )
-        stress_axis.plot(
-            [row["mesh_edge_length_mm"] for row in rows],
-            [row["cbeam_normal_stress_p9975_MPa"] for row in rows],
-            "--s",
-            linewidth=1.2,
-            color=colors[index],
-        )
-    stress_axis.set_xlabel("Target mesh edge length [mm]")
-    stress_axis.set_ylabel("99.75th-percentile stress [MPa]")
-    stress_axis.set_ylim(0, 120)
-    stress_axis.grid(True, alpha=0.35)
-    stress_axis.legend(
-        title="Solid: skin VM; dashed: CBEAM normal",
-        loc="upper center",
-        bbox_to_anchor=(0.5, -0.16),
-        ncol=2,
-        frameon=True,
-        fontsize=8,
-        title_fontsize=8,
-    )
-
-    plot_metric(
-        axes[1, 1],
-        data,
-        cases,
-        "first_modal_frequency_Hz",
-        "First retained modal frequency [Hz]",
-        colors,
-    )
-    axes[1, 1].set_ylim(14, 32)
-    axes[0, 0].legend(loc="best", fontsize=8)
-    axes[0, 1].legend(loc="best", fontsize=8)
-    axes[1, 1].legend(loc="best", fontsize=8)
-    for axis in axes.flat:
-        axis.set_xlim(1.8, 2.5)
-
-    output_file = Path(output_file).expanduser().resolve()
-    output_file.parent.mkdir(parents=True, exist_ok=True)
-    figure.savefig(output_file, dpi=220, facecolor="white")
-    plt.close(figure)
-    print(output_file)
-
+def main():
+    d=load_rows(); xyz=np.column_stack([num(d,"x_m"),num(d,"y_m"),num(d,"z_m")]); disp=np.column_stack([num(d,"ux_mode3"),num(d,"uy_mode3"),num(d,"uz_mode3")]); mag=num(d,"displacement_magnitude"); deformed=xyz+disp
+    stride=max(1,int(math.ceil(len(d)/160000))); take=np.arange(0,len(d),stride); ref=take[::5]
+    fig=plt.figure(figsize=(11.3,7.7),constrained_layout=True)
+    layout=fig.add_gridspec(2,3,width_ratios=[1,1,.045],wspace=.16)
+    axes=[fig.add_subplot(layout[0,0]),fig.add_subplot(layout[0,1],projection="3d"),fig.add_subplot(layout[1,0]),fig.add_subplot(layout[1,1])]
+    color_axis=fig.add_subplot(layout[:,2])
+    for ax,(i,j,title,xl,yl) in zip([axes[0],axes[2],axes[3]],[(0,1,"Top","x (m)","y (m)"),(0,2,"Front","x (m)","z (m)"),(1,2,"Right","y (m)","z (m)")]):
+        ax.scatter(xyz[ref,i],xyz[ref,j],s=.05,c="#dddddd",rasterized=True); sc=ax.scatter(deformed[take,i],deformed[take,j],s=.09,c=mag[take],cmap="turbo",rasterized=True); ax.set_title(title); ax.set_xlabel(xl); ax.set_ylabel(yl); ax.set_aspect("equal",adjustable="datalim")
+    a=axes[1]; a.scatter(xyz[ref,0],xyz[ref,1],xyz[ref,2],s=.03,c="#dddddd",rasterized=True); a.scatter(deformed[take,0],deformed[take,1],deformed[take,2],s=.07,c=mag[take],cmap="turbo",rasterized=True); a.view_init(elev=22,azim=-55); a.set_title("Oblique"); a.set_xlabel("x (m)"); a.set_ylabel("y (m)"); a.set_zlabel("z (m)")
+    fig.colorbar(sc,cax=color_axis,label="Normalized mode-3 displacement magnitude"); fig.suptitle(f"FCC case 67 SOL 103 mode 3 ({num(d,'frequency_hz')[0]:.6f} Hz)"); finish(fig)
 
 if __name__ == "__main__":
-    arguments = parse_args()
-    main(arguments.output)
+    main()

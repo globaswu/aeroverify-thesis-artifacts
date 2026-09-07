@@ -75,8 +75,8 @@ python -m pip install -r requirements-figures.txt
 python scripts/reproduce_thesis_figure.py 5.1
 ```
 
-See [docs/FIGURE_DATA_MAP.md](docs/FIGURE_DATA_MAP.md) for all 61 folders,
-including supplementary figures in Appendices C and D. Figure 2.8 is a special
+See [docs/FIGURE_DATA_MAP.md](docs/FIGURE_DATA_MAP.md) for all 63 folders,
+including supplementary figures in Appendices C and D. Figure 2.10 is a special
 case: the thesis displays nTop screenshots, whereas the scripts reconstruct
 the same modal node field as a point cloud.
 

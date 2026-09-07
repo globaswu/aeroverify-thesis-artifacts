@@ -1,189 +1,129 @@
 function outputPath = plot_2_3(outputPath)
-%PLOT_2_3 Reconstruct two microscopic coupling examples from the adjacent CSV.
-% The CSV supplies all geometry. No solver or external data is required.
-mpcFigureDirectory = fileparts(mfilename('fullpath'));
-if nargin < 1
-    outputPath = fullfile(mpcFigureDirectory,'figure_2_3.png');
+%PLOT_2_3 Original 1.002 mm coordinate repair, all receiving skin facets.
+% Requires only figure_2_3.csv. No solver, archive, or external data dependency.
+% Contract: preserve true oblique/side coordinates and equal scales, reveal
+% the turning skin closure at C, distinguish thin skin edges from thick beams.
+out=fileparts(mfilename('fullpath'));
+if nargin<1 || isempty(outputPath),outputPath=fullfile(out,'figure_2_3.png');end
+outputPath=char(outputPath);
+[outputFolder,~,extension]=fileparts(outputPath);
+if ~any(strcmpi(extension,{'.png','.pdf','.svg'}))
+    error('plot_2_3:OutputFormat','Output must use PNG, PDF or SVG.');
 end
-T = readtable(fullfile(mpcFigureDirectory,'figure_2_3.csv'),'TextType','string');
-mpcCaseNames = ["snap_repair","ordinary_mpc"];
-mpcExamples = cell(1,2);
-mpcBases = {eye(3),eye(3)};
-for idx = 1:2
-    Q = T(T.example==mpcCaseNames(idx),:);
-    O = Q(Q.entity=="beam_node" & Q.state=="original",:);
-    F = Q(Q.entity=="beam_node" & Q.state=="final",:);
-    P = Q(Q.entity=="projection",:);
-    S = Q(Q.entity=="shell_vertex",:);
-    ex.original_xyz_m = xyz(O); ex.final_xyz_m = xyz(F);
-    ex.projection_recalculated_from_source_geometry_m = xyz(P);
-    ex.shell_xyz_m = xyz(S); ex.shell_grid_ids = S.grid_id;
-    ex.beam_grid_id = O.grid_id; ex.shell_element_id = P.element_id;
-    ex.incident_beams = struct('original_xyz_m',{},'final_xyz_m',{});
-    ids = unique(Q.element_id(Q.entity=="beam_endpoint"),'stable');
-    for j = 1:numel(ids)
-        B = Q(Q.entity=="beam_endpoint" & Q.element_id==ids(j),:);
-        ex.incident_beams(j).original_xyz_m = xyz(B(B.state=="original",:));
-        ex.incident_beams(j).final_xyz_m = xyz(B(B.state=="final",:));
-    end
-    ex.local_shell_patch = struct('grid_ids',{},'xyz_m',{});
-    ids = unique(Q.element_id(Q.entity=="context_shell_vertex"),'stable');
-    for j = 1:numel(ids)
-        S2 = Q(Q.entity=="context_shell_vertex" & Q.element_id==ids(j),:);
-        ex.local_shell_patch(j).grid_ids = S2.grid_id;
-        ex.local_shell_patch(j).xyz_m = xyz(S2);
-    end
-    ex.coordinate_change_m = norm(xyz(F)-xyz(O));
-    ex.final_gap_recalculated_m = norm(xyz(F)-xyz(P));
-    ex.weights = [ex.shell_xyz_m(:,1:2).';ones(1,3)]\[0;0;1];
-    assert(abs(sum(ex.weights)-1)<1e-12);
-    mpcExamples{idx} = ex;
-end
-assert(abs(mpcExamples{1}.coordinate_change_m-0.001298153657195304)<1e-12);
-assert(mpcExamples{2}.coordinate_change_m==0);
-assert(abs(mpcExamples{2}.final_gap_recalculated_m-8.189147025740352e-6)<1e-12);
-mpcBlue = [0.10 0.32 0.51];
-mpcGold = [0.71 0.36 0.07];
-mpcInk = [0.17 0.19 0.21];
-mpcFigure = figure('Visible','off','Color','w','Units','centimeters', ...
-    'Position',[2 2 18 14], 'Renderer','opengl');
-set(mpcFigure, 'DefaultAxesFontName','Arial', 'DefaultTextFontName','Arial');
-annotation(mpcFigure, 'textbox',[0.04 0.933 0.92 0.049], ...
-    'String','Microscopic shell-lattice coupling: FCC case 55', ...
-    'LineStyle','none','FontSize',11,'FontWeight','bold','Color',mpcInk);
-annotation(mpcFigure, 'textbox',[0.04 0.895 0.92 0.039], ...
-    'String','Actual skin triangles and incident beam centrelines; geometry shown at equal scale', ...
-    'LineStyle','none','FontSize',8.5,'Color',mpcInk);
-
-mpcAxisPositions = [0.04 0.425 0.43 0.425; 0.54 0.425 0.43 0.425];
-for mpcIndex = 1:2
-    ex = mpcExamples{mpcIndex};
-    origin = ex.projection_recalculated_from_source_geometry_m(:).';
-    basis = mpcBases{mpcIndex};
-    ax = axes(mpcFigure,'Position',mpcAxisPositions(mpcIndex,:));
-    hold(ax,'on');
-    for j = 1:numel(ex.local_shell_patch)
-        tri = ex.local_shell_patch(j);
-        if ~any(ismember(tri.grid_ids, ex.shell_grid_ids))
-            continue;
+if ~isempty(outputFolder) && ~isfolder(outputFolder),mkdir(outputFolder);end
+d=readtable(fullfile(out,'figure_2_3.csv'),'TextType','string');
+v=xyz(d(d.entity=="receiving_vertex" & d.receiver=="B",:));
+a=xyz(d(d.entity=="beam_node" & d.receiver=="A" & d.state=="original",:));
+b=xyz(d(d.entity=="beam_node" & d.receiver=="B" & d.state=="original",:));
+c=xyz(d(d.entity=="beam_node" & d.receiver=="C" & d.state=="original",:));
+p=xyz(d(d.entity=="projection" & d.receiver=="B",:));
+n=cross(v(2,:)-v(1,:),v(3,:)-v(1,:));n=n/norm(n);if dot(p-b,n)<0,n=-n;end
+t=c-a;t=t-dot(t,n)*n;t=t/norm(t);s=cross(n,t);basis=[t(:),s(:),n(:)];
+assert(norm(basis.'*basis-eye(3),'fro')<1e-12);
+tr=@(rows) (xyz(rows)-p)*basis*1000;
+q=tr(d);xl=[min(q(:,1))-.7,max(q(:,1))+.9];
+yl=[min(q(:,2))-.3,max(q(:,2))+.3];zl=[min(q(:,3))-.7,max(q(:,3))+.7];
+blue=[.19 .39 .62];orange=[.78 .38 .12];ink=[.17 .19 .21];grey=[.50 .55 .59];
+fig=figure('Visible','off','Color','w','Position',[80 80 1400 1030]);
+set(fig,'DefaultAxesFontName','Arial','DefaultTextFontName','Arial');
+note(fig,[.045 .950 .91 .042],'Single-node repair at the skin mesh',22,true,ink);
+note(fig,[.045 .902 .91 .038], ...
+    'A and C are already close to their respective skin facets. Only B is relocated; all three receiving facets are shown.',12,false,ink);
+headings={'(a) Oblique view - before repair','(b) Oblique view - after repair', ...
+    '(c) Side view - before repair','(d) Side view - after repair'};
+positions=[.035 .520 .445 .33;.525 .520 .445 .33;.035 .238 .445 .22;.525 .238 .445 .22];
+for panel=1:4
+    before=mod(panel,2)==1;side=panel>2;
+    state="original";if ~before,state="final";end
+    ax=axes(fig,'Position',positions(panel,:));hold(ax,'on');
+    for entity=["context_vertex","receiving_vertex"]
+        for eid=unique(d.element_id(d.entity==entity)).'
+            tri=d(d.entity==entity & d.element_id==eid,:);verts=tr(tri);
+            if side,verts=verts(:,[1 3]);end
+            edge=grey;face=[.86 .88 .90];alpha=.10;width=.75;
+            if entity=="receiving_vertex",edge=blue;face=blue;alpha=.23;width=1.35;end
+            patch(ax,'Vertices',verts,'Faces',[1 2 3],'FaceColor',face,'FaceAlpha',alpha,'EdgeColor',edge,'LineWidth',width);
         end
-        q = (tri.xyz_m - origin) * basis * 1000;
-        patch(ax,'Faces',[1 2 3],'Vertices',q, ...
-            'FaceColor',[0.79 0.85 0.90],'FaceAlpha',0.30, ...
-            'EdgeColor',[0.63 0.69 0.74],'LineWidth',0.55);
     end
-    q = (ex.shell_xyz_m - origin) * basis * 1000;
-    patch(ax,'Faces',[1 2 3],'Vertices',q,'FaceColor',[0.40 0.62 0.77], ...
-        'FaceAlpha',0.33,'EdgeColor',mpcBlue,'LineWidth',1.1);
-    for j = 1:3
-        plot3(ax,q(j,1),q(j,2),q(j,3),'o','MarkerSize',3.4, ...
-            'MarkerFaceColor',mpcBlue,'MarkerEdgeColor',mpcBlue);
-        text(ax,q(j,1)+0.08,q(j,2)+0.04,q(j,3)+0.13, ...
-            sprintf('i=%d',j),'FontSize',8.5,'Color',mpcBlue);
-    end
-    for j = 1:numel(ex.incident_beams)
-        beam = ex.incident_beams(j);
-        qb = (beam.original_xyz_m - origin) * basis * 1000;
-        qf = (beam.final_xyz_m - origin) * basis * 1000;
-        if mpcIndex == 1
-            plot3(ax,qb(:,1),qb(:,2),qb(:,3),'--','Color',mpcGold,'LineWidth',1.5);
+    for eid=[936457 936828]
+        verts=tr(d(d.entity=="beam_endpoint" & d.element_id==eid & d.state==state,:));
+        if side
+            plot(ax,verts(:,1),verts(:,3),'-','Color',orange,'LineWidth',3.4);
+        else
+            plot3(ax,verts(:,1),verts(:,2),verts(:,3),'-','Color',orange,'LineWidth',3.4);
         end
-        plot3(ax,qf(:,1),qf(:,2),qf(:,3),'-','Color',mpcInk,'LineWidth',1.8);
     end
-    b0 = (ex.original_xyz_m(:).' - origin) * basis * 1000;
-    bf = (ex.final_xyz_m(:).' - origin) * basis * 1000;
-    plot3(ax,0,0,0,'x','MarkerSize',8,'LineWidth',1.4,'Color',mpcBlue);
-    if mpcIndex == 1
-        plot3(ax,b0(1),b0(2),b0(3),'o','MarkerSize',6,'LineWidth',1.2, ...
-            'MarkerFaceColor','w','MarkerEdgeColor',mpcGold);
-        plot3(ax,bf(1),bf(2),bf(3),'s','MarkerSize',5,'LineWidth',1.1, ...
-            'MarkerFaceColor',mpcInk,'MarkerEdgeColor',mpcInk);
-        quiver3(ax,b0(1),b0(2),b0(3),-b0(1),-b0(2),-b0(3),0, ...
-            'Color',mpcGold,'LineWidth',1.2,'MaxHeadSize',0.30);
-        text(ax,b0(1)+0.18,b0(2)-0.30,b0(3)-0.12,'b_0', ...
-            'FontSize',10,'Color',mpcGold);
-        text(ax,0.22,-0.20,0.22,'b_1 = p','FontSize',9,'Color',mpcInk);
-        text(ax,0.27,0.10,-0.72,'1.298 mm','FontSize',8.5,'Color',mpcGold);
-        panelTitle = '(a) Guarded mesh repair: node relocation';
+    for name=["A","B","C"]
+        node=tr(d(d.entity=="beam_node" & d.receiver==name & d.state==state,:));
+        fill=ink;edge=ink;sz=8;
+        if name=="B",fill='w';edge=orange;sz=10;if ~before,fill=orange;end,end
+        label=char(name);if name=="B" && ~before,label=['B' char(8242)];end
+        offset=[-.25 0 .28];
+        if name=="B",offset=[-.12 0 -.40];elseif name=="C",offset=[.32 0 -.05];end
+        if name=="C" && side,offset(1)=.62;end
+        if name=="B" && ~before && ~side,offset(3)=-.70;end
+        if side
+            plot(ax,node(1),node(3),'o','MarkerFaceColor',fill,'MarkerEdgeColor',edge,'MarkerSize',sz,'LineWidth',1.6);
+            text(ax,node(1)+offset(1),node(3)+offset(3),label,'Color',ink,'FontSize',14,'FontWeight','bold');
+        else
+            plot3(ax,node(1),node(2),node(3),'o','MarkerFaceColor',fill,'MarkerEdgeColor',edge,'MarkerSize',sz,'LineWidth',1.6);
+            text(ax,node(1)+offset(1),node(2),node(3)+offset(3),label,'Color',ink,'FontSize',14,'FontWeight','bold');
+        end
+    end
+    if side
+        if before
+            plot(ax,0,0,'x','Color',blue,'MarkerSize',8,'LineWidth',1.3);
+            text(ax,-.35,.25,'Projection of B','Color',blue,'FontSize',10);
+        end
+        % Actual closure facet projects downward from the upper skin at C.
+        closure=tr(d(d.entity=="receiving_vertex" & d.receiver=="C",:));
+        k=mean(closure,1);
+        text(ax,k(1)+.9,k(3)+.45,'Skin closure','Color',blue,'FontSize',11);
+        upper=tr(d(d.entity=="receiving_vertex" & d.receiver=="A",:));
+        k=mean(upper,1);
+        text(ax,k(1)-2.0,k(3)+.42,'Upper skin','Color',blue,'FontSize',11);
+        axis(ax,'equal');xlim(ax,xl);ylim(ax,zl);
+        sx=xl(1)+.25;sz=zl(1)+.25;
+        plot(ax,[sx sx+1],[sz sz],'-','Color',ink,'LineWidth',1.3);
+        text(ax,sx+.5,sz-.25,'1 mm','Color',ink,'FontSize',10,'HorizontalAlignment','center');
     else
-        plot3(ax,bf(1),bf(2),bf(3),'o','MarkerSize',7,'LineWidth',1.3, ...
-            'MarkerFaceColor','none','MarkerEdgeColor',mpcGold);
-        text(ax,0.23,-0.16,0.20,'b, p','FontSize',9,'Color',mpcInk);
-        panelTitle = '(b) Ordinary MPC: node position retained';
+        axis(ax,'equal');xlim(ax,xl);ylim(ax,yl);zlim(ax,zl);
+        view(ax,[10 28]);camproj(ax,'orthographic');
     end
-    axis(ax,'equal');
-    xlim(ax,[-3 3]); ylim(ax,[-2.8 3.2]); zlim(ax,[-3 0.55]);
-    view(ax,[-32 25]);
-    set(ax,'XTick',[-2 0 2],'YTick',[-2 0 2],'ZTick',[-2 0], ...
-        'FontSize',7,'Box','off','LineWidth',0.6,'XColor',[0.45 0.47 0.49], ...
-        'YColor',[0.45 0.47 0.49],'ZColor',[0.45 0.47 0.49], ...
-        'TickLength',[0.012 0.012]);
-    xlabel(ax,'s (mm)','FontSize',8); ylabel(ax,'t (mm)','FontSize',8);
-    zlabel(ax,'n (mm)','FontSize',8);
-    title(ax,panelTitle,'FontSize',9,'FontWeight','bold', ...
-        'Units','normalized','Position',[0.5 1.065 0],'Color',mpcInk);
+    set(ax,'Visible','off','Clipping','off');
+    title(ax,headings{panel},'Visible','on','FontSize',14,'FontWeight','normal','Color',ink);
+end
+annotation(fig,'line',[.065 .105],[.180 .180],'Color',grey,'LineWidth',.9);
+note(fig,[.111 .163 .27 .034],'Skin-element edges',11,false,ink);
+annotation(fig,'line',[.380 .420],[.180 .180],'Color',orange,'LineWidth',3.4);
+note(fig,[.426 .163 .27 .034],'Beam centre-lines',11,false,ink);
+annotation(fig,'rectangle',[.725 .170 .025 .021],'FaceColor',blue*.25+.75,'EdgeColor',blue,'LineWidth',1.1);
+note(fig,[.757 .163 .23 .034],'Receiving skin elements',11,false,ink);
+note(fig,[.045 .109 .91 .036], ...
+    'B coordinate correction: 1.002 mm. A and C retain their coordinates and are MPC-coupled to the skin.',12,true,ink);
+note(fig,[.045 .061 .91 .034], ...
+    'C is close to the turning closure facet, not far from the skin. Equal length scales; no added beam or load-induced deformation.',10,false,ink);
+note(fig,[.045 .023 .91 .030], ...
+    'Source data: accompanying CSV. All shown skin triangles form one edge-connected patch; blue facets receive A, B and C.',9,false,grey);
+set(findall(fig,'-property','Interpreter'),'Interpreter','none');
+set(fig,'PaperPositionMode','auto');
+switch lower(extension)
+    case '.png',print(fig,outputPath,'-dpng','-r220');
+    case '.pdf'
+        set(fig,'PaperUnits','inches');paper=get(fig,'PaperPosition');
+        set(fig,'PaperSize',paper(3:4),'PaperPosition',[0 0 paper(3:4)]);
+        print(fig,outputPath,'-dpdf','-r220');
+    case '.svg',print(fig,outputPath,'-dsvg','-r220');
+end
+close(fig);
+fprintf('Rendered 3 receiving facets and an edge-connected surrounding skin patch from CSV only.\n');
 end
 
-% The small offset is resolved with a uniformly magnified orthographic inset.
-% This is an s-n projection of the retained geometry, not a distorted 3-D gap.
-ex = mpcExamples{2};
-origin = ex.projection_recalculated_from_source_geometry_m(:).';
-basis = mpcBases{2};
-mpcInset = axes(mpcFigure,'Position',[0.535 0.105 0.20 0.200]);
-hold(mpcInset,'on');
-plot(mpcInset,[-7 7],[0 0],'-','Color',mpcBlue,'LineWidth',1.4);
-for j = 1:numel(ex.incident_beams)
-    qb = (ex.incident_beams(j).final_xyz_m - origin) * basis * 1e6;
-    plot(mpcInset,qb(:,1),qb(:,3),'-','Color',mpcInk,'LineWidth',1.6);
+function q=xyz(rows)
+q=[rows.x_m rows.y_m rows.z_m];
 end
-b = (ex.final_xyz_m(:).' - origin) * basis * 1e6;
-plot(mpcInset,0,0,'x','MarkerSize',6,'LineWidth',1.3,'Color',mpcBlue);
-plot(mpcInset,b(1),b(3),'o','MarkerSize',5,'MarkerFaceColor','w', ...
-    'MarkerEdgeColor',mpcGold,'LineWidth',1.2);
-quiver(mpcInset,0,0,b(1),b(3),0,'Color',mpcGold,'LineWidth',1.2,'MaxHeadSize',0.20);
-text(mpcInset,0.7,1.0,'p','FontSize',9,'Color',mpcBlue);
-text(mpcInset,b(1)+0.9,b(3)+0.1,'b','FontSize',9,'Color',mpcGold);
-text(mpcInset,-2.1,-4.2,'r','FontSize',10,'FontAngle','italic','Color',mpcGold);
-axis(mpcInset,'equal'); xlim(mpcInset,[-6 6]); ylim(mpcInset,[-11 3]);
-set(mpcInset,'XTick',[-5 0 5],'YTick',[-10 -5 0], ...
-    'FontSize',7,'Box','off','LineWidth',0.6,'TickLength',[0.02 0.02]);
-xlabel(mpcInset,'s (\mum)','FontSize',7.5);
-ylabel(mpcInset,'n (\mum)','FontSize',7.5);
-title(mpcInset,'Offset detail (s-n)', ...
-    'FontSize',8,'FontWeight','normal','Units','normalized','Position',[0.5 1.08 0]);
-
-annotation(mpcFigure,'textbox',[0.055 0.327 0.42 0.053], ...
-    'String','GRID 491572  |  shell CTRIA3 448671', ...
-    'LineStyle','none','FontSize',8,'Color',mpcInk);
-annotation(mpcFigure,'textbox',[0.055 0.211 0.42 0.11], ...
-    'String',{'Dashed: original incident beams', ...
-    'Solid: final incident beams', ...
-    'Original b_0 moves onto p before MPC generation.'}, ...
-    'LineStyle','none','FontSize',8.1,'Color',mpcInk);
-annotation(mpcFigure,'textbox',[0.055 0.090 0.42 0.115], ...
-    'String',{'N_i = [0.12197, 0.19814, 0.67989]', ...
-    'Final ||r|| < 0.1 nm (deck rounding).', ...
-    'Node IDs and graph connections are retained.'}, ...
-    'LineStyle','none','FontSize',7.8,'Color',mpcInk);
-annotation(mpcFigure,'textbox',[0.54 0.352 0.42 0.030], ...
-    'String','GRID 472299  |  shell CTRIA3 453875', ...
-    'LineStyle','none','FontSize',8,'Color',mpcInk);
-annotation(mpcFigure,'textbox',[0.755 0.185 0.22 0.164], ...
-    'String',{'r = x_b - x_p', '||r|| = 8.189 \mum', ...
-    'Coordinate change: 0', 'p = \Sigma_i N_i x_i'}, ...
-    'LineStyle','none','FontSize',8.1,'Color',mpcInk);
-annotation(mpcFigure,'textbox',[0.755 0.091 0.22 0.088], ...
-    'String',{'N_i = [0.68198,', '0.16393, 0.15409]'}, ...
-    'LineStyle','none','FontSize',7.8,'Color',mpcInk);
-drawnow;
-[outputFolder,~,~] = fileparts(outputPath);
-if ~isempty(outputFolder) && ~isfolder(outputFolder), mkdir(outputFolder); end
-exportgraphics(mpcFigure,outputPath,'Resolution',300,'BackgroundColor','white');
-close(mpcFigure);
-fprintf('MPC figure: %s\n',outputPath);
+function note(fig,pos,message,size,bold,color)
+weight='normal';if bold,weight='bold';end
+annotation(fig,'textbox',pos,'String',message,'FontName','Arial','FontSize',size, ...
+    'FontWeight',weight,'Color',color,'EdgeColor','none','Interpreter','none');
 end
-
-function q = xyz(T)
-q = T{:,{'local_s_m','local_t_m','local_n_m'}};
-end
-

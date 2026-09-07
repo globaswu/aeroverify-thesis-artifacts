@@ -1,109 +1,136 @@
-"""Reproduce five lift curves and a local W2GJ-on lift-coefficient zoom."""
+"""Draw the complete W2GJ box-detail diagram from one adjacent CSV."""
 from pathlib import Path
 import argparse
 import numpy as np
 import matplotlib as mpl
 import matplotlib.pyplot as plt
+from matplotlib.patches import Rectangle
 
 
 def main(output: Path):
-    folder=Path(__file__).resolve().parent
-    data=np.genfromtxt(folder/'figure_2_16.csv',delimiter=',',names=True,dtype=None,encoding='utf-8')
-    alpha=data['alpha_deg'].astype(float)
-    assert np.array_equal(alpha,np.arange(-4,13,2)), 'Expected nine verified incidence values.'
-    fields=['CL_dihedral0_on','CL_dihedral3_on','CL_dihedral0_off','CL_dihedral3_off']
-    for name in fields:
-        assert np.all(np.isfinite(data[name])), f'Non-finite lift coefficients: {name}'
-    reference=data['CL_Sivells_TableI_linear_reference']
-    assert np.max(np.abs(reference-.085*(alpha+1.3)))<1e-12
-    delta_on=data['CL_dihedral3_on']-data['CL_dihedral0_on']
-    delta_off=data['CL_dihedral3_off']-data['CL_dihedral0_off']
-    assert np.max(np.abs(delta_on-data['delta_CL_3deg_minus_0deg_ON']))<1e-12
-    assert np.max(np.abs(delta_off-data['delta_CL_3deg_minus_0deg_OFF']))<1e-12
-    assert np.all(data['aerodynamic_boxes']==5500) and np.allclose(data['Mach'],.17)
-    mpl.rcParams.update({'font.family':'Times New Roman','font.size':10,
-        'mathtext.fontset':'stix','axes.spines.top':False,'axes.spines.right':False,
-        'axes.labelsize':11,'axes.titlesize':11,'legend.fontsize':9.5,'pdf.fonttype':42})
-    blue='#006FA3';orange='#C96A00';ink='#252A30';grey='#666D75'
-    old_height=7.6;new_height=9.0
-    keep_top=lambda y:1-(1-y)*old_height/new_height
-    upper_height=.485*old_height/new_height
-    lower_height=.185*old_height*1.75/new_height
-    lower_bottom=keep_top(.336)-lower_height
-    footer_y=lambda y:lower_bottom-(.151-y)*old_height/new_height
-    fig=plt.figure(figsize=(8.27,new_height),dpi=400,facecolor='white')
-    fig.suptitle('Effect of dihedral and W2GJ on rigid-wing lift',
-                 x=.115,y=keep_top(.985),ha='left',fontweight='bold',fontsize=15,color=ink)
-    fig.text(.115,keep_top(.948),'Four matched rigid DLM cases; Mach 0.17; 5500 aerodynamic boxes',
+    folder = Path(__file__).resolve().parent
+    data = np.genfromtxt(folder/'figure_2_16.csv',delimiter=',',names=True)
+    assert len(data)==4001 and np.all(np.isfinite(data['x_over_c']))
+    controls = data[data['box_j_zero_based']>=0]
+    assert len(controls)==50
+    assert np.max(np.abs(controls['control_x_over_c']-(controls['box_j_zero_based']+.75)/50))<1e-12
+    assert np.max(np.abs(controls['control_W2GJ']+controls['control_dzc_dx']))<1e-12
+    assert np.max(np.abs(data['z_camber_over_c']-.5*(data['z_upper_over_c']+data['z_lower_over_c'])))<1e-12
+    selected = controls[(controls['box_j_zero_based']>=35)&(controls['box_j_zero_based']<=39)]
+    xstar=selected['control_x_over_c']; zstar=selected['control_z_camber_over_c']
+    slopes=selected['control_dzc_dx']; w2gj=selected['control_W2GJ']
+    assert np.max(np.abs(slopes+w2gj))<1e-12
+    M,N=110,50
+    mpl.rcParams.update({'font.family':'Times New Roman','font.size':9,
+        'mathtext.fontset':'stix','axes.labelsize':9,'axes.titlesize':10,
+        'axes.spines.top':False,'axes.spines.right':False,'pdf.fonttype':42})
+    ink='#252A30'; grey='#687079'; blue='#006FA3'; gold='#B98200'; pale='#FFF3D2'
+    fig=plt.figure(figsize=(8.27,10.4),dpi=400,facecolor='white')
+    fig.suptitle('W2GJ at individual aerodynamic-box control points',
+                 x=.075,y=.982,ha='left',fontsize=15,fontweight='bold',color=ink)
+    fig.text(.075,.951,'NACA 65-210 mean-camber input to a planar lifting surface',
              fontsize=10,color=grey)
-    ax=fig.add_axes([.115,keep_top(.405),.845,upper_height])
-    handles={}
-    specs=[('CL_dihedral3_on',blue,'--','o','white',6.7,'dihedral 3° / W2GJ On'),
-           ('CL_dihedral3_off',orange,'--','s','white',6.7,'dihedral 3° / W2GJ Off'),
-           ('CL_dihedral0_on',blue,'-','o',blue,3.8,'dihedral 0° / W2GJ On (optimization convention)'),
-           ('CL_dihedral0_off',orange,'-','s',orange,3.8,'dihedral 0° / W2GJ Off')]
-    for field,color,style,marker,face,size,label in specs:
-        handles[field],=ax.plot(alpha,data[field],color=color,ls=style,lw=1.25,
-            marker=marker,ms=size,mfc=face,mec=color,mew=1.0,label=label,zorder=3)
-    paper,=ax.plot(alpha,reference,color=ink,lw=1.45,ls='-.',
-        label='Sivells Table I reconstruction',zorder=2)
-    ax.set_xlim(-4.5,12.5);ax.set_ylim(-.42,1.27)
-    ax.set_xticks(np.arange(-4,13,2));ax.set_yticks(np.arange(-.4,1.21,.2))
-    ax.tick_params(axis='x',labelbottom=False)
-    ax.set_ylabel(r'Lift coefficient $C_L$')
-    ax.grid(True,color='#DCE1E4',lw=.5,zorder=0)
-    ax.set_title('A. Lift curves',loc='left',pad=9,fontweight='bold')
-    ax.legend(handles=[handles['CL_dihedral0_on'],handles['CL_dihedral3_on'],
-        handles['CL_dihedral0_off'],handles['CL_dihedral3_off'],paper],
-        loc='upper left',bbox_to_anchor=(.008,.99),frameon=False,handlelength=3.1,labelspacing=.55)
-    ax.text(.42,.07,r'Table I line: $C_L=0.085(\alpha_{\mathrm{deg}}+1.3)$'+'\n'+
-        'Reconstructed from slope and zero-lift angle;\nnot individual measured points.',
-        transform=ax.transAxes,color=grey,fontsize=9,va='bottom',linespacing=1.35)
 
-    zoom=fig.add_axes([.115,lower_bottom,.845,lower_height])
-    # Draw only the original nine points and their straight connecting segments.
-    zoom.plot(alpha,data['CL_dihedral0_on'],'-o',color=blue,ms=4.2,lw=1.4,
-              mfc=blue,mec=blue,label='dihedral 0° / W2GJ On')
-    zoom.plot(alpha,data['CL_dihedral3_on'],'--o',color=blue,ms=6.7,lw=1.4,
-              mfc='white',mec=blue,label='dihedral 3° / W2GJ On')
-    zoom.set_xlim(11.985,12.003);zoom.set_ylim(1.1494,1.1523)
-    zoom.set_xticks([11.985,11.990,11.995,12.000])
-    zoom.set_yticks([1.1495,1.1500,1.1505,1.1510,1.1515,1.1520])
-    zoom.ticklabel_format(axis='both',style='plain',useOffset=False)
-    zoom.xaxis.set_major_formatter(mpl.ticker.FormatStrFormatter('%.3f'))
-    zoom.yaxis.set_major_formatter(mpl.ticker.FormatStrFormatter('%.4f'))
-    zoom.set_xlabel(r'Incidence $\alpha$ (deg)');zoom.set_ylabel(r'Lift coefficient $C_L$')
-    zoom.grid(True,color='#DCE1E4',lw=.5,zorder=0)
-    zoom.set_title('B. W2GJ on: local lift-curve zoom near 12°',
-                   loc='left',pad=10,fontweight='bold')
-    zoom.legend(loc='upper left',frameon=False,handlelength=2.8,fontsize=9.5)
-    endpoint0=float(data['CL_dihedral0_on'][alpha==12][0])
-    endpoint3=float(data['CL_dihedral3_on'][alpha==12][0])
-    zoom.annotate(fr'dihedral 0°: $C_L={endpoint0:.6f}$',xy=(12,endpoint0),
-        xytext=(11.994,1.15212),color=blue,fontsize=9.5,ha='left',va='center',
-        arrowprops=dict(arrowstyle='->',color=blue,lw=.8))
-    zoom.annotate(fr'dihedral 3°: $C_L={endpoint3:.6f}$',xy=(12,endpoint3),
-        xytext=(11.994,1.15030),color=blue,fontsize=9.5,ha='left',va='center',
-        arrowprops=dict(arrowstyle='->',color=blue,lw=.8))
-    zoom.text(.42,.035,'Connectors join calculated incidences;\nno additional points are computed in this zoom.',
-        transform=zoom.transAxes,color=grey,fontsize=8.8,va='bottom',linespacing=1.3)
-    fig.text(.115,footer_y(.074),'Fit statistics use −2° ≤ α ≤ 8°; all nine computed incidences are displayed.',
-             fontsize=8.8,color=grey)
-    fig.text(.115,footer_y(.044),'All numerical curves are rigid benchmarks using the same historical 600-point airfoil. The 0° case follows',
-             fontsize=8.6,color=ink)
-    fig.text(.115,footer_y(.024),'the optimization geometry/camber convention; these are not full flexible-optimization results.',
-             fontsize=8.6,color=ink)
+    grid=fig.add_axes([.075,.655,.325,.325*8.27/10.4])
+    grid.set_xlim(0,1);grid.set_ylim(0,1)
+    grid.set_aspect('equal',adjustable='box')
+    for i in range(N+1): grid.axvline(i/N,color='#C3CBD0',lw=.28,zorder=0)
+    for i in range(M+1): grid.axhline(i/M,color='#C3CBD0',lw=.28,zorder=0)
+    grid.add_patch(Rectangle((.7,0),.1,1,facecolor=pale,alpha=.7,edgecolor=gold,lw=.8,zorder=1))
+    for j in range(35,40):
+        grid.add_patch(Rectangle((j/N,55/M),1/N,1/M,facecolor=gold,edgecolor='white',lw=.4,zorder=3))
+    grid.set_xticks([0,.2,.4,.6,.8,1]);grid.set_yticks([0,.5,1])
+    grid.set_xlabel(r'Local chord coordinate $\xi=x/c$')
+    grid.set_ylabel(r'Normalized span coordinate $\eta=y/s$')
+    grid.set_title('A. Planar aerodynamic-box grid',loc='left',pad=12,fontweight='bold')
+    grid.annotate('five adjacent chord panels',xy=(.75,.51),xytext=(.13,.77),
+        color=ink,fontsize=8.5,ha='left',va='center',
+        bbox=dict(fc='white',ec='none',pad=2),
+        arrowprops=dict(arrowstyle='->',color=gold,lw=1.1))
+    fig.text(.445,.885,r'$M=N_{\mathrm{span}}=110$'+'\n'+r'$N=N_{\mathrm{chord}}=50$',
+             fontsize=12,color=ink,linespacing=1.7)
+    fig.text(.445,.827,'50 chordwise values repeat\nacross 110 spanwise strips.\nChordwise index varies fastest.',
+             fontsize=9,color=ink,linespacing=1.45)
+    fig.text(.445,.758,r'Planar CAERO1 surface: $z=0$'+'\n'+
+             'Grid shown in local coordinates.',
+             fontsize=9,color=grey,linespacing=1.3)
+    fig.text(.445,.718,r'For every box $j=0,\ldots,N-1$:',fontsize=9,color=ink)
+    fig.text(.445,.676,r'$\xi_j^{*}=\dfrac{j+0.75}{N}$',fontsize=12,color=ink)
+    fig.text(.445,.624,r'$\mathrm{W2GJ}_{j}=-\left.\dfrac{\mathrm{d}\zeta_c}{\mathrm{d}\xi}\right|_{\xi_j^{*}}$',
+             fontsize=12,color=ink)
+
+    left=.7;right=.8
+    mask=(data['x_over_c']>=left)&(data['x_over_c']<=right)
+    xx=data['x_over_c'][mask];zu=data['z_upper_over_c'][mask]
+    zl=data['z_lower_over_c'][mask];zc=data['z_camber_over_c'][mask]
+    ax=fig.add_axes([.075,.313,.405,.255])
+    ax.fill_between(xx,zl,zu,color='#EDF1F3',zorder=0)
+    ax.plot(xx,zu,color=ink,lw=1.1,label='Upper/lower section')
+    ax.plot(xx,zl,color=ink,lw=1.1)
+    ax.plot(xx,zc,'--',color=gold,lw=1.2,label='Mean camber')
+    ax.axhline(0,color=blue,lw=1.0,label='Planar aerodynamic surface')
+    for j in range(35,41): ax.axvline(j/N,color='#A5ADB3',ls=':',lw=.6)
+    for x,z,s in zip(xstar,zstar,slopes):
+        ax.plot([x,x],[0,z],':',color=gold,lw=.8)
+        delta=np.array([-.007,.007]); ax.plot(x+delta,z+s*delta,color=gold,lw=1.5)
+    ax.scatter(xstar,np.zeros(5),s=20,c=blue,zorder=5)
+    ax.scatter(xstar,zstar,s=22,facecolor='white',edgecolor=gold,zorder=5)
+    ax.set_xlim(left,right);ax.set_ylim(-.030,.050);ax.set_aspect('equal',adjustable='box')
+    ax.set_xticks(np.arange(.7,.801,.02));ax.set_yticks([-.02,0,.02,.04])
+    ax.set_xlabel(r'$\xi=x/c$');ax.set_ylabel(r'$\zeta=z/c$')
+    ax.set_title('B. Source section and control locations\nEqual chordwise/vertical geometric scales',
+                 loc='left',pad=12,fontweight='bold',fontsize=9.5)
+    ax.text(.703,.034,'upper surface',color=grey,fontsize=8)
+    ax.text(.703,-.028,'lower surface',color=grey,fontsize=8)
+    ax.text(.703,.003,'planar control points',color=blue,fontsize=8)
+    for j in range(35,40):ax.text((j+.5)/N,.047,f'$j={j}$',ha='center',fontsize=7.7,color=ink)
+
+    detail_position=[.575,.355,.375,.185]
+    detail=fig.add_axes(detail_position)
+    detail.set_xlim(left,right);detail.set_ylim(.00865,.01035)
+    for j in range(35,41):detail.axvline(j/N,color='#A5ADB3',ls=':',lw=.6)
+    detail.plot(xx,zc,'--',color=gold,lw=1.1)
+    for j,x,z,s in zip(range(35,40),xstar,zstar,slopes):
+        delta=np.array([-.0075,.0075])
+        detail.plot(x+delta,z+s*delta,color=gold,lw=1.9)
+        detail.annotate(str(j),xy=(x,z),xytext=(-2,10),textcoords='offset points',
+                        ha='center',fontsize=8,color=ink)
+    detail.scatter(xstar,zstar,s=24,facecolor='white',edgecolor=gold,zorder=5)
+    detail.set_xticks(np.arange(.7,.801,.02))
+    detail.set_yticks([.009,.0095,.01])
+    detail.ticklabel_format(axis='y',style='plain',useOffset=False)
+    detail.set_xlabel(r'$\xi=x/c$');detail.set_ylabel(r'Mean camber $\zeta_c=z_c/c$')
+    magnification=(detail_position[3]*10.4/(.01035-.00865))/(detail_position[2]*8.27/(right-left))
+    detail.set_title(f'C. Mean-camber tangents\nVertical scale magnified ×{magnification:.1f}',
+                     loc='left',pad=14,fontweight='bold',fontsize=9.5)
+    fig.text(.575,.308,'Open circles: mean-camber samples\nSolid gold segments: local tangents\nBlue circles in B: planar application points',
+             fontsize=8.3,color=grey,linespacing=1.4,va='top')
+    fig.text(.075,.260,r'$\zeta_c=(\zeta_{\mathrm{upper}}+\zeta_{\mathrm{lower}})/2$;  '+
+             r'$\mathrm{d}\zeta_c/\mathrm{d}\xi=\mathrm{d}z_c/\mathrm{d}x$.',fontsize=10,color=ink)
+
+    table_ax=fig.add_axes([.075,.111,.875,.117]);table_ax.set_axis_off()
+    row_labels=[r'Box index $j$',r'Control $\xi_j^{*}$',r'Slope $\mathrm{d}z_c/\mathrm{d}x$',r'$\mathrm{W2GJ}_{j}$']
+    table_rows=[[row_labels[0]]+[str(j) for j in range(35,40)],
+                [row_labels[1]]+[f'{x:.3f}' for x in xstar],
+                [row_labels[2]]+[f'{s:+.7f}' for s in slopes],
+                [row_labels[3]]+[f'{w:+.7f}' for w in w2gj]]
+    tab=table_ax.table(cellText=table_rows,cellLoc='center',colWidths=[.25]+[.15]*5,
+                       bbox=[0,0,1,1])
+    tab.auto_set_font_size(False);tab.set_fontsize(9)
+    for (r,c),cell in tab.get_celld().items():
+        cell.set_edgecolor('#D2D7DB');cell.set_linewidth(.6)
+        cell.set_facecolor('#F1F4F5' if r==0 else 'white')
+        if c==0:cell.set_text_props(ha='left',color=ink)
+        elif r==3:cell.set_text_props(color=blue)
+    fig.text(.075,.238,'Calculated values for the five selected chordwise boxes',fontsize=10,fontweight='bold',color=ink)
+    fig.text(.075,.070,'Mean camber supplies a normal-flow boundary-condition correction; it does not deform the planar surface.',
+             fontsize=8.7,color=ink)
+    fig.text(.075,.044,'These box control points are separate from the quarter-chord lifting line and its ten spanwise stations.',
+             fontsize=8.7,color=grey)
     output=output.resolve();output.parent.mkdir(parents=True,exist_ok=True)
     fig.savefig(output,dpi=400,facecolor='white')
     plt.close(fig)
     print(output)
-    use=(alpha>=-2)&(alpha<=8)
-    assert np.count_nonzero(use)==6
-    for name in fields:
-        slope,intercept=np.polyfit(alpha[use],data[name][use],1)
-        rmse=np.sqrt(np.mean((data[name][use]-reference[use])**2))
-        print(f"{name}: fit -2..8 deg; slope={slope:.12g}/deg; "
-              f"fitted alpha0={-intercept/slope:.12g} deg; reference RMSE={rmse:.12g}")
 
 
 if __name__=='__main__':

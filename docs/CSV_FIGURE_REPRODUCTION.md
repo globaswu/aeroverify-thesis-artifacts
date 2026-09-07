@@ -9,9 +9,13 @@ data/figures/chapter05/figure_5_1/
 `-- plot_5_1.m
 ```
 
-The Python and MATLAB scripts resolve their own folder and read only the single
-CSV beside them. They do not read MAT files, Nastran decks or results, nTop
-projects, other CSV files, network locations, or private paths.
+The Python and MATLAB scripts resolve their own folder and read only the CSV
+data beside them. Figure 2.5 is the sole three-table exception: its primary
+`figure_2_5.csv` contains nodes, `chunk_beams.csv` contains connectivity, and
+`chunk_shell_vertices.csv` contains skin geometry. Keep all three beside its
+scripts. Every other package uses one CSV. Scripts do not read MAT files,
+Nastran decks or results, nTop projects, data outside their figure folder,
+network locations, or private paths.
 
 ## Reproduce one figure
 
@@ -53,9 +57,9 @@ where a figure requires more than one data grain.
 
 ## Scope
 
-The [figure index](FIGURE_DATA_MAP.md) lists all 53 packages under the current
+The [figure index](FIGURE_DATA_MAP.md) lists all 63 packages under the current
 thesis numbering, including the supplementary figures in Appendices C and D.
-Figure 2.8 contains all 531,682 recovered mode-shape nodes in one CSV. The
+Figure 2.10 contains all 531,682 recovered mode-shape nodes in one CSV. The
 thesis image consists of nTop screenshots; its scripts provide a portable
 point-cloud reconstruction from the reference coordinates and mode-3
 displacements. nTop surface shading and camera settings are not reproduced.

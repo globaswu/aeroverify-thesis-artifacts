@@ -13,11 +13,11 @@ All thesis-artifact links below resolve through the stable `thesis` tag.
 | Four-input campaign | [`matlab/reproduce_multiinput.m`](../matlab/reproduce_multiinput.m) | [`data/multiinput`](../data/multiinput) |
 | Structural-mesh sensitivity | [`matlab/reproduce_mesh_convergence.m`](../matlab/reproduce_mesh_convergence.m) | [`data/mesh_convergence`](../data/mesh_convergence) |
 | FCC case-67 MKAERO1 diagnostic | [`matlab/reproduce_case067_flutter.m`](../matlab/reproduce_case067_flutter.m) | [`data/diagnostics/fcc_case067`](../data/diagnostics/fcc_case067) |
-| nTop mode-shape screenshots in Figure 2.8 | [point-cloud plotting scripts](../data/figures/chapter02/figure_2_8) | [reference nodes and modal displacements](../data/figures/chapter02/figure_2_8/figure_2_8.csv) |
+| nTop mode-shape screenshots in Figure 2.10 | [point-cloud plotting scripts](../data/figures/chapter02/figure_2_10) | [reference nodes and modal displacements](../data/figures/chapter02/figure_2_10/figure_2_10.csv) |
 | Harmonized topology SOL 145 reassessment | [`matlab/reproduce_flutter_reassessment.m`](../matlab/reproduce_flutter_reassessment.m) | [`data/flutter/harmonized_sol145_results.csv`](../data/flutter/harmonized_sol145_results.csv) |
 | Exact-trim and representative physics | [`matlab/reproduce_representative_physics.m`](../matlab/reproduce_representative_physics.m) | [`data/representative_physics`](../data/representative_physics) |
 | New coupled evaluations | [`docs/FULL_SOLVER_WORKFLOW.md`](FULL_SOLVER_WORKFLOW.md) | external licensed assets required |
 
 The thesis captions and appendices link to the corresponding public data and
 scripts. The [figure index](FIGURE_DATA_MAP.md) is the numbering crosswalk for
-all 53 packages in the revised manuscript.
+all 63 packages in the revised manuscript.

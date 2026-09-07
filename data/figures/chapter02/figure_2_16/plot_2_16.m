@@ -1,91 +1,136 @@
 function plot_2_16(outputPath)
-%PLOT_2_16 Reproduce five lift curves and a local CL zoom.
-% The only input is the adjacent figure_2_16.csv.
-folder=fileparts(mfilename('fullpath'));
-if nargin<1 || isempty(outputPath),outputPath=fullfile(folder,'figure_2_16.png');end
-data=readtable(fullfile(folder,'figure_2_16.csv'));
-alpha=data.alpha_deg;
-assert(isequal(alpha,(-4:2:12)'), 'Expected nine verified incidence values.');
-assert(all(data.aerodynamic_boxes==5500) && all(abs(data.Mach-.17)<1e-12));
-values=[data.CL_dihedral0_on,data.CL_dihedral3_on,data.CL_dihedral0_off,data.CL_dihedral3_off];
-assert(all(isfinite(values),'all'));
-reference=data.CL_Sivells_TableI_linear_reference;
-assert(max(abs(reference-.085*(alpha+1.3)))<1e-12);
-deltaOn=data.CL_dihedral3_on-data.CL_dihedral0_on;
-deltaOff=data.CL_dihedral3_off-data.CL_dihedral0_off;
-assert(max(abs(deltaOn-data.delta_CL_3deg_minus_0deg_ON))<1e-12);
-assert(max(abs(deltaOff-data.delta_CL_3deg_minus_0deg_OFF))<1e-12);
-blue=[0 .4353 .6392];orange=[.7882 .4157 0];ink=[.1451 .1647 .1882];grey=[.4 .4275 .4588];
-oldHeight=7.6;newHeight=9.0;
-keepTop=@(y) 1-(1-y)*oldHeight/newHeight;
-upperHeight=.485*oldHeight/newHeight;
-lowerHeight=.185*oldHeight*1.75/newHeight;
-lowerBottom=keepTop(.336)-lowerHeight;
-footerY=@(y) lowerBottom-(.151-y)*oldHeight/newHeight;
-fig=figure('Visible','off','Color','w','Units','inches','Position',[1 1 8.27 newHeight]);
+%PLOT_2_16 Reproduce the full box-detail diagram from one CSV.
+folder = fileparts(mfilename('fullpath'));
+if nargin<1 || isempty(outputPath)
+    outputPath = fullfile(folder,'figure_2_16.png');
+end
+data = readtable(fullfile(folder,'figure_2_16.csv'));
+controls = data(data.box_j_zero_based>=0,:);
+selected = controls(controls.box_j_zero_based>=35 & controls.box_j_zero_based<=39,:);
+assert(height(data)==4001 && height(controls)==50 && height(selected)==5);
+assert(max(abs(controls.control_x_over_c-(controls.box_j_zero_based+.75)/50))<1e-12);
+assert(max(abs(controls.control_W2GJ+controls.control_dzc_dx))<1e-12);
+assert(max(abs(data.z_camber_over_c-.5*(data.z_upper_over_c+data.z_lower_over_c)))<1e-12);
+assert(max(abs(selected.control_W2GJ+selected.control_dzc_dx))<1e-12);
+N=50; M=110;
+ink=[.145 .165 .188]; grey=[.408 .439 .475];
+blue=[0 .435 .639]; gold=[.725 .510 0]; pale=[1 .953 .824];
+fig=figure('Visible','off','Color','w','Units','inches','Position',[1 1 8.27 10.4]);
 cleanup=onCleanup(@() close(fig));
 canvas=axes(fig,'Position',[0 0 1 1],'Color','none');
 xlim(canvas,[0 1]);ylim(canvas,[0 1]);axis(canvas,'off');hold(canvas,'on');
-put(canvas,.115,keepTop(.978),'Effect of dihedral and W2GJ on rigid-wing lift',15,ink,'bold');
-put(canvas,.115,keepTop(.946),'Four matched rigid DLM cases; Mach 0.17; 5500 aerodynamic boxes',10,grey);
-ax=axes(fig,'Position',[.115 keepTop(.405) .845 upperHeight]);hold(ax,'on');
-h3on=plot(ax,alpha,data.CL_dihedral3_on,'--o','Color',blue,'LineWidth',1.25, ...
-    'MarkerSize',6.7,'MarkerFaceColor','w','MarkerEdgeColor',blue);
-h3off=plot(ax,alpha,data.CL_dihedral3_off,'--s','Color',orange,'LineWidth',1.25, ...
-    'MarkerSize',6.7,'MarkerFaceColor','w','MarkerEdgeColor',orange);
-h0on=plot(ax,alpha,data.CL_dihedral0_on,'-o','Color',blue,'LineWidth',1.25, ...
-    'MarkerSize',3.8,'MarkerFaceColor',blue,'MarkerEdgeColor',blue);
-h0off=plot(ax,alpha,data.CL_dihedral0_off,'-s','Color',orange,'LineWidth',1.25, ...
-    'MarkerSize',3.8,'MarkerFaceColor',orange,'MarkerEdgeColor',orange);
-hpaper=plot(ax,alpha,reference,'-.','Color',ink,'LineWidth',1.45);
-xlim(ax,[-4.5 12.5]);ylim(ax,[-.42 1.27]);xticks(ax,-4:2:12);yticks(ax,-.4:.2:1.2);
-set(ax,'XTickLabel',[]);ylabel(ax,'Lift coefficient C_L');
-panelTitle(ax,'A. Lift curves');
-legend(ax,[h0on h3on h0off h3off hpaper], ...
-    {'dihedral 0° / W2GJ On (optimization convention)','dihedral 3° / W2GJ On', ...
-    'dihedral 0° / W2GJ Off','dihedral 3° / W2GJ Off','Sivells Table I reconstruction'}, ...
-    'Location','northwest','Box','off','FontName','Times New Roman','FontSize',9.5);
-text(ax,.42,.09, ...
-    {'Table I line: C_L=0.085(\alpha_{deg}+1.3)', ...
-    'Reconstructed from slope and zero-lift angle;', ...
-    'not individual measured points.'}, ...
-    'Units','normalized','VerticalAlignment','bottom','FontName','Times New Roman', ...
-    'FontSize',9,'Color',grey,'Interpreter','tex');
+put(canvas,.075,.977,'W2GJ at individual aerodynamic-box control points',15,ink,'bold');
+put(canvas,.075,.950,'NACA 65-210 mean-camber input to a planar lifting surface',10,grey);
 
-zoom=axes(fig,'Position',[.115 lowerBottom .845 lowerHeight]);hold(zoom,'on');
-% Plot the nine original incidences and straight segments, then clip the axes.
-hz0=plot(zoom,alpha,data.CL_dihedral0_on,'-o','Color',blue,'MarkerSize',4.2, ...
-    'MarkerFaceColor',blue,'MarkerEdgeColor',blue,'LineWidth',1.4);
-hz3=plot(zoom,alpha,data.CL_dihedral3_on,'--o','Color',blue,'MarkerSize',6.7, ...
-    'MarkerFaceColor','w','MarkerEdgeColor',blue,'LineWidth',1.4);
-xlim(zoom,[11.985 12.003]);ylim(zoom,[1.1494 1.1523]);
-xticks(zoom,[11.985 11.990 11.995 12.000]);
-yticks(zoom,[1.1495 1.1500 1.1505 1.1510 1.1515 1.1520]);
-zoom.XAxis.Exponent=0;zoom.YAxis.Exponent=0;
-xtickformat(zoom,'%.3f');ytickformat(zoom,'%.4f');
-xlabel(zoom,'Incidence \alpha (deg)');ylabel(zoom,'Lift coefficient C_L');
-panelTitle(zoom,'B. W2GJ on: local lift-curve zoom near 12°');
-legend(zoom,[hz0 hz3],{'dihedral 0° / W2GJ On','dihedral 3° / W2GJ On'}, ...
-    'Location','northwest','Box','off','FontName','Times New Roman','FontSize',9.5, ...
-    'AutoUpdate','off');
-endpoint0=data.CL_dihedral0_on(alpha==12);endpoint3=data.CL_dihedral3_on(alpha==12);
-text(zoom,11.994,1.15212,sprintf('dihedral 0°: C_L=%.6f',endpoint0), ...
-    'FontName','Times New Roman','FontSize',9.5,'Color',blue,'VerticalAlignment','middle');
-plot(zoom,[11.9994 12],[1.15210 endpoint0],'Color',blue,'LineWidth',.8);
-text(zoom,11.994,1.15030,sprintf('dihedral 3°: C_L=%.6f',endpoint3), ...
-    'FontName','Times New Roman','FontSize',9.5,'Color',blue,'VerticalAlignment','middle');
-plot(zoom,[11.9994 12],[1.15040 endpoint3],'Color',blue,'LineWidth',.8);
-text(zoom,.42,.035,{'Connectors join calculated incidences;', ...
-    'no additional points are computed in this zoom.'}, ...
-    'Units','normalized','FontName','Times New Roman','FontSize',8.8, ...
-    'Color',grey,'VerticalAlignment','bottom','Interpreter','none');
-set([ax zoom],'FontName','Times New Roman','FontSize',10,'Box','off', ...
-    'XGrid','on','YGrid','on','GridColor',[.86 .88 .895],'GridAlpha',1,'LineWidth',.65);
-put(canvas,.115,footerY(.074),'Fit statistics use −2° ≤ α ≤ 8°; all nine computed incidences are displayed.',8.8,grey);
-put(canvas,.115,footerY(.044), ...
-    'All numerical curves are rigid benchmarks using the same historical 600-point airfoil. The 0° case follows',8.6,ink);
-put(canvas,.115,footerY(.024), ...
-    'the optimization geometry/camber convention; these are not full flexible-optimization results.',8.6,ink);
+grid=axes(fig,'Position',[.075 .655 .325 .325*8.27/10.4]);hold(grid,'on');
+plot(grid,repmat((0:N)/N,2,1),[zeros(1,N+1);ones(1,N+1)], ...
+    'Color',[.76 .8 .82],'LineWidth',.28);
+plot(grid,[zeros(1,M+1);ones(1,M+1)],repmat((0:M)/M,2,1), ...
+    'Color',[.76 .8 .82],'LineWidth',.28);
+patch(grid,[.7 .8 .8 .7],[0 0 1 1],pale,'FaceAlpha',.7,'EdgeColor',gold,'LineWidth',.8);
+for j=35:39
+    rectangle(grid,'Position',[j/N 55/M 1/N 1/M], ...
+        'FaceColor',gold,'EdgeColor','w','LineWidth',.4);
+end
+plot(grid,[.32 .75],[.75 .51],'Color',gold,'LineWidth',1.1);
+text(grid,.10,.78,'five adjacent chord panels','FontName','Times New Roman', ...
+    'FontSize',8.5,'Color',ink,'BackgroundColor','w');
+xlim(grid,[0 1]);ylim(grid,[0 1]);axis(grid,'square');
+xticks(grid,0:.2:1);yticks(grid,[0 .5 1]);
+xlabel(grid,'Local chord coordinate \xi=x/c');
+ylabel(grid,'Normalized span coordinate \eta=y/s');
+panelTitle(grid,'A. Planar aerodynamic-box grid');
+put(canvas,.445,.899,'$M=N_{\mathrm{span}}=110$',12,ink);
+put(canvas,.445,.873,'$N=N_{\mathrm{chord}}=50$',12,ink);
+put(canvas,.445,.836,'50 chordwise values repeat',9,ink);
+put(canvas,.445,.818,'across 110 spanwise strips.',9,ink);
+put(canvas,.445,.800,'Chordwise index varies fastest.',9,ink);
+put(canvas,.445,.769,'Planar CAERO1 surface: z=0',9,grey);
+put(canvas,.445,.751,'Grid shown in local coordinates.',9,grey);
+put(canvas,.445,.718,'For every box $j=0,\ldots,N-1$:',9,ink);
+put(canvas,.445,.676,'$\xi_j^*=\frac{j+0.75}{N}$',12,ink);
+put(canvas,.445,.624, ...
+    '$\mathrm{W2GJ}_j=-\left.\frac{\mathrm{d}\zeta_c}{\mathrm{d}\xi}\right|_{\xi_j^*}$',12,ink);
+
+mask=data.x_over_c>=.7 & data.x_over_c<=.8;
+x=data.x_over_c(mask);zu=data.z_upper_over_c(mask);
+zl=data.z_lower_over_c(mask);zc=data.z_camber_over_c(mask);
+xs=selected.control_x_over_c; zs=selected.control_z_camber_over_c;
+slopes=selected.control_dzc_dx;
+ax=axes(fig,'Position',[.075 .313 .405 .255]);hold(ax,'on');
+patch(ax,[x;flipud(x)],[zu;flipud(zl)],[.929 .945 .953],'EdgeColor','none');
+plot(ax,x,zu,'Color',ink,'LineWidth',1.1);plot(ax,x,zl,'Color',ink,'LineWidth',1.1);
+plot(ax,x,zc,'--','Color',gold,'LineWidth',1.2);
+plot(ax,[.7 .8],[0 0],'Color',blue,'LineWidth',1);
+for j=35:40, xline(ax,j/N,':','Color',[.65 .68 .70],'LineWidth',.6); end
+for k=1:5
+    plot(ax,[xs(k) xs(k)],[0 zs(k)],':','Color',gold,'LineWidth',.8);
+    d=[-.007 .007];plot(ax,xs(k)+d,zs(k)+slopes(k)*d,'Color',gold,'LineWidth',1.5);
+end
+scatter(ax,xs,zeros(5,1),20,blue,'filled');
+scatter(ax,xs,zs,22,'w','filled','MarkerEdgeColor',gold);
+xlim(ax,[.7 .8]);ylim(ax,[-.03 .05]);daspect(ax,[1 1 1]);
+xticks(ax,.7:.02:.8);yticks(ax,[-.02 0 .02 .04]);
+xlabel(ax,'\xi=x/c');ylabel(ax,'\zeta=z/c');
+panelTitle(ax,{'B. Source section and control locations', ...
+    'Equal chordwise/vertical geometric scales'});
+text(ax,.703,.034,'upper surface','FontSize',8,'Color',grey,'FontName','Times New Roman');
+text(ax,.703,-.028,'lower surface','FontSize',8,'Color',grey,'FontName','Times New Roman');
+text(ax,.703,.003,'planar control points','FontSize',8,'Color',blue,'FontName','Times New Roman');
+for j=35:39
+    text(ax,(j+.5)/N,.047,sprintf('j=%d',j),'HorizontalAlignment','center', ...
+        'FontSize',7.7,'Color',ink,'FontName','Times New Roman');
+end
+
+detailPos=[.575 .355 .375 .185];
+detail=axes(fig,'Position',detailPos);hold(detail,'on');
+for j=35:40,xline(detail,j/N,':','Color',[.65 .68 .70],'LineWidth',.6);end
+plot(detail,x,zc,'--','Color',gold,'LineWidth',1.1);
+for k=1:5
+    d=[-.0075 .0075];plot(detail,xs(k)+d,zs(k)+slopes(k)*d,'Color',gold,'LineWidth',1.9);
+    text(detail,xs(k),zs(k)+.00012,sprintf('%d',selected.box_j_zero_based(k)), ...
+        'HorizontalAlignment','center','FontSize',8,'Color',ink,'FontName','Times New Roman');
+end
+scatter(detail,xs,zs,24,'w','filled','MarkerEdgeColor',gold);
+xlim(detail,[.7 .8]);ylim(detail,[.00865 .01035]);
+xticks(detail,.7:.02:.8);yticks(detail,[.009 .0095 .01]);
+detail.YAxis.Exponent=0;ytickformat(detail,'%.4f');
+xlabel(detail,'\xi=x/c');ylabel(detail,'Mean camber \zeta_c=z_c/c');
+magnification=(detailPos(4)*10.4/(.01035-.00865))/(detailPos(3)*8.27/.1);
+panelTitle(detail,{'C. Mean-camber tangents', ...
+    sprintf('Vertical scale magnified x%.1f',magnification)});
+put(canvas,.575,.297,'Open circles: mean-camber samples',8.3,grey);
+put(canvas,.575,.282,'Solid gold segments: local tangents',8.3,grey);
+put(canvas,.575,.267,'Blue circles in B: planar application points',8.3,grey);
+put(canvas,.075,.260, ...
+    '$\zeta_c=(\zeta_{\mathrm{upper}}+\zeta_{\mathrm{lower}})/2;\quad\mathrm{d}\zeta_c/\mathrm{d}\xi=\mathrm{d}z_c/\mathrm{d}x.$',10,ink);
+put(canvas,.075,.238,'Calculated values for the five selected chordwise boxes',10,ink,'bold');
+
+tableAx=axes(fig,'Position',[.075 .111 .875 .117]);
+hold(tableAx,'on');axis(tableAx,'off');xlim(tableAx,[0 1]);ylim(tableAx,[0 1]);
+patch(tableAx,[0 1 1 0],[.75 .75 1 1],[.945 .957 .961],'EdgeColor','none');
+for y=0:.25:1,plot(tableAx,[0 1],[y y],'Color',[.82 .84 .86],'LineWidth',.6);end
+edges=[0 .25 .40 .55 .70 .85 1];
+for e=edges,plot(tableAx,[e e],[0 1],'Color',[.82 .84 .86],'LineWidth',.6);end
+names={'Box index $j$','Control $\xi_j^*$','Slope $\mathrm{d}z_c/\mathrm{d}x$','$\mathrm{W2GJ}_j$'};
+for r=1:4
+    put(tableAx,.02,1-(r-.5)*.25,names{r},9,ink);
+    for k=1:5
+        if r==1,v=sprintf('%d',selected.box_j_zero_based(k));
+        elseif r==2,v=sprintf('%.3f',xs(k));
+        elseif r==3,v=sprintf('%+.7f',slopes(k));
+        else,v=sprintf('%+.7f',selected.control_W2GJ(k));end
+        if r==4,color=blue;else,color=ink;end
+        text(tableAx,(edges(k+1)+edges(k+2))/2,1-(r-.5)*.25,v, ...
+            'FontName','Times New Roman','FontSize',9,'Color',color, ...
+            'HorizontalAlignment','center','VerticalAlignment','middle');
+    end
+end
+put(canvas,.075,.070, ...
+    'Mean camber supplies a normal-flow boundary-condition correction; it does not deform the planar surface.',8.7,ink);
+put(canvas,.075,.044, ...
+    'These box control points are separate from the quarter-chord lifting line and its ten spanwise stations.',8.7,grey);
+set([grid ax detail],'FontName','Times New Roman','FontSize',9,'Box','off');
 drawnow;
 [outputFolder,~,extension]=fileparts(outputPath);
 if ~isempty(outputFolder) && ~isfolder(outputFolder),mkdir(outputFolder);end
@@ -96,26 +141,17 @@ else
     print(fig,outputPath,'-dpng','-r400');
 end
 disp(outputPath)
-use=alpha>=-2 & alpha<=8;
-assert(nnz(use)==6);
-fields=["CL_dihedral0_on","CL_dihedral3_on","CL_dihedral0_off","CL_dihedral3_off"];
-for k=1:numel(fields)
-    y=data.(fields(k));
-    fitted=polyfit(alpha(use),y(use),1);
-    rmse=sqrt(mean((y(use)-reference(use)).^2));
-    fprintf('%s: fit -2..8 deg; slope=%.12g/deg; fitted alpha0=%.12g deg; reference RMSE=%.12g\n', ...
-        fields(k),fitted(1),-fitted(2)/fitted(1),rmse);
-end
 end
 
 function put(ax,x,y,value,fontSize,color,weight)
 if nargin<7,weight='normal';end
+if contains(value,'$'),interpreter='latex';else,interpreter='none';end
 text(ax,x,y,value,'FontName','Times New Roman','FontSize',fontSize,'Color',color, ...
-    'FontWeight',weight,'VerticalAlignment','middle','Interpreter','none','Clipping','off');
+    'FontWeight',weight,'VerticalAlignment','middle','Interpreter',interpreter,'Clipping','off');
 end
 
 function panelTitle(ax,value)
-text(ax,0,1.04,value,'Units','normalized','FontName','Times New Roman', ...
-    'FontSize',11,'FontWeight','bold','VerticalAlignment','bottom', ...
-    'Interpreter','tex','Clipping','off');
+text(ax,0,1.055,value,'Units','normalized','FontName','Times New Roman', ...
+    'FontSize',9.5,'FontWeight','bold','VerticalAlignment','bottom', ...
+    'Interpreter','none','Clipping','off');
 end

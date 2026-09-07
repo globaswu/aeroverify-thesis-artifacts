@@ -20,9 +20,11 @@ scripts, and MATLAB analysis code for inspecting the reported results.
 - Machine-readable experiment register: [experiments.json](experiments.json)
 
 The [figure index](docs/FIGURE_DATA_MAP.md) follows the revised thesis
-numbering and covers 61 data-based figures in Chapters 2–6 and Appendices C–D.
-Each figure folder contains one CSV and independent Python and MATLAB scripts
-that read that CSV alone. Figure 2.8 displays nTop screenshots in the thesis;
+numbering and covers 63 data-based figures in Chapters 2–6 and Appendices C–D.
+Each figure folder contains a primary CSV and independent Python and MATLAB
+scripts. Figure 2.5 also includes two adjacent CSVs for beam connectivity and
+skin vertices; all other packages use one CSV. No script needs data outside
+its figure folder. Figure 2.10 displays nTop screenshots in the thesis;
 its scripts reconstruct the mode shape as a point cloud rather than duplicating
 the nTop rendering.
 
@@ -150,7 +152,7 @@ downloading the release archive.
 |   |-- diagnostics/fcc_case067/
 |   |-- flutter/
 |   |-- benchmarks/seven_solver_comparison/
-|   |-- figures/              one CSV and two plotting scripts per figure
+|   |-- figures/              standalone CSV data and two scripts per figure
 |   `-- representative_physics/
 |-- experiments/              study-specific guides
 |-- matlab/                    executable public workflows

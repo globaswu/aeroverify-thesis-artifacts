@@ -1,117 +1,168 @@
-"""Reproduce the lift comparison from the adjacent CSV; no solver is called.
+"""Reproduce thesis Figure 2.12 from the sibling CSV only."""
 
-Requirements: Python 3 and Matplotlib. Run: python plot_2_12.py
-The Sivells series is a linear reconstruction from Table I's reported
-experimental slope and zero-lift angle, not a set of measured point values.
-"""
-from __future__ import annotations
-
-import csv
 import argparse
+import csv
 from pathlib import Path
 
-import matplotlib
-matplotlib.use("Agg")
 import matplotlib.pyplot as plt
-from matplotlib import font_manager
+
 
 HERE = Path(__file__).resolve().parent
-DATA = HERE / "figure_2_12.csv"
+DATA_FILE = HERE / "figure_2_12.csv"
+DEFAULT_OUTPUT_FILE = HERE / "plot_2_12.png"
+
+REQUIRED_COLUMNS = {
+    "case_id",
+    "geometry_tolerance_mm",
+    "mesh_edge_length_mm",
+    "two_wing_compliance_Nm",
+    "maximum_vertical_deflection_m",
+    "skin_vm_p9975_MPa",
+    "cbeam_normal_stress_p9975_MPa",
+    "first_modal_frequency_Hz",
+}
 
 
+def plot_metric(axis, data, cases, column, ylabel, colors):
+    for index, case_id in enumerate(cases):
+        rows = sorted(
+            (row for row in data if row["case_id"] == case_id),
+            key=lambda row: row["mesh_edge_length_mm"],
+        )
+        axis.plot(
+            [row["mesh_edge_length_mm"] for row in rows],
+            [row[column] for row in rows],
+            "-o",
+            linewidth=1.4,
+            color=colors[index],
+            markerfacecolor=colors[index],
+            label=f"Case {case_id}",
+        )
+    axis.set_xlabel("Target mesh edge length [mm]")
+    axis.set_ylabel(ylabel)
+    axis.grid(True, alpha=0.35)
 
-def ols(xs: list[float], ys: list[float]) -> tuple[float, float]:
-    xbar, ybar = sum(xs) / len(xs), sum(ys) / len(ys)
-    slope = sum((x-xbar)*(y-ybar) for x, y in zip(xs, ys)) / sum(
-        (x-xbar)**2 for x in xs)
-    return slope, ybar - slope*xbar
 
-
-def zero_crossing(xs: list[float], ys: list[float]) -> float:
-    for k in range(len(xs)-1):
-        if ys[k] <= 0 <= ys[k+1]:
-            return xs[k] - ys[k]*(xs[k+1]-xs[k])/(ys[k+1]-ys[k])
-    raise ValueError("No bracketed zero-lift crossing in the input CSV")
-
-
-def main() -> None:
+def parse_args():
     parser = argparse.ArgumentParser(description=__doc__)
-    parser.add_argument('--output', type=Path, default=HERE / 'figure_2_12.png')
-    args = parser.parse_args()
-    with DATA.open(newline="", encoding="utf-8-sig") as stream:
-        rows = [{key: float(value) for key, value in r.items()}
-                for r in csv.DictReader(stream)]
-    alpha = [r["alpha_deg"] for r in rows]
-    if alpha != [-2, 0, 2, 4, 6, 8]:
-        raise ValueError("Expected the six retained samples from -2 to 8 degrees")
-    slopes = {r["reference_slope_per_deg"] for r in rows}
-    zeros = {r["reference_zero_lift_deg"] for r in rows}
-    if len(slopes) != 1 or len(zeros) != 1:
-        raise ValueError("Reference parameters must be constant across CSV rows")
-    reference_slope, reference_zero = slopes.pop(), zeros.pop()
-    nastran = [r["CL_Nastran"] for r in rows]
-    llt = [r["CL_LLT"] for r in rows]
-    dense_alpha = [alpha[0] + (alpha[-1]-alpha[0])*k/500 for k in range(501)]
-    reference = [reference_slope*(a-reference_zero) for a in dense_alpha]
+    parser.add_argument(
+        "--output",
+        type=Path,
+        default=DEFAULT_OUTPUT_FILE,
+        help="Output image file (default: sibling plot_2_12.png)",
+    )
+    return parser.parse_args()
 
-    available_fonts = {f.name for f in font_manager.fontManager.ttflist}
-    family = "Times New Roman" if "Times New Roman" in available_fonts else "DejaVu Serif"
-    plt.rcParams.update({
-        "font.family": family, "font.size": 10.5, "mathtext.fontset": "stix",
-        "axes.labelsize": 11, "axes.titlesize": 12, "axes.linewidth": 0.8,
-        "xtick.labelsize": 10, "ytick.labelsize": 10, "legend.fontsize": 9.5,
-        "svg.fonttype": "none", "savefig.facecolor": "white",
-    })
-    fig, ax = plt.subplots(figsize=(7.087, 4.75), facecolor="white")
-    fig.subplots_adjust(left=0.12, right=0.975, bottom=0.145, top=0.83)
-    ax.plot(dense_alpha, reference, color="#333333", linewidth=1.55,
-            linestyle=(0, (5, 3)), label="Sivells (1947), Table I: linear reconstruction", zorder=2)
-    ax.plot(alpha, nastran, color="#2166AC", linewidth=1.55, marker="s",
-            markersize=5.6, markerfacecolor="white", markeredgewidth=1.2,
-            label="Nastran SOL 144", zorder=4)
-    ax.plot(alpha, llt, color="#C66B18", linewidth=1.55, marker="^",
-            markersize=6.0, markerfacecolor="white", markeredgewidth=1.2,
-            linestyle="-.", label="Lifting-line calculation", zorder=3)
-    ax.set_xlim(-2.25, 8.25)
-    ax.set_ylim(-0.12, 0.94)
-    ax.set_xticks(alpha)
-    ax.set_yticks([0, 0.2, 0.4, 0.6, 0.8])
-    ax.set_xlabel(r"Root-chord incidence, $\alpha$ (deg)", labelpad=7)
-    ax.set_ylabel(r"Wing lift coefficient, $C_L$", labelpad=7)
-    ax.grid(True, color="#E0E0E0", linewidth=0.6)
-    ax.set_axisbelow(True)
-    ax.axhline(0, color="#A8A8A8", linewidth=0.7, zorder=1)
-    ax.tick_params(direction="out", length=3.5, width=0.8)
-    for spine in ax.spines.values():
-        spine.set_color("#555555")
-    ax.legend(loc="upper left", frameon=True, facecolor="white", framealpha=0.97,
-              edgecolor="none", borderpad=0.55, labelspacing=0.65, handlelength=2.9)
-    fig.text(0.12, 0.94, "Lift comparison for the NACA 65-210 wing", fontsize=12.5,
-             color="#202020", ha="left", va="center")
-    fig.text(0.12, 0.886, "Retained calculations and a linear reference from experimental parameters",
-             fontsize=9.8, color="#505050", ha="left", va="center")
-    args.output.parent.mkdir(parents=True, exist_ok=True)
-    fig.savefig(args.output, dpi=600)
-    plt.close(fig)
 
-    metrics = []
-    for name, values in [("Nastran SOL 144", nastran), ("Lifting-line calculation", llt)]:
-        slope, intercept = ols(alpha, values)
-        metrics.append({
-            "series": name, "n": len(alpha), "alpha_min_deg": min(alpha),
-            "alpha_max_deg": max(alpha), "slope_per_deg": slope,
-            "fitted_CL_at_zero": intercept, "fitted_zero_lift_deg": -intercept/slope,
-            "sampled_model_CL_at_zero": values[alpha.index(0)],
-            "bracketed_zero_lift_deg": zero_crossing(alpha, values),
-            "reference_slope_per_deg": reference_slope,
-            "reference_zero_lift_deg": reference_zero,
-            "slope_difference_percent": 100*(slope/reference_slope - 1),
-            "fitted_zero_lift_difference_deg": -intercept/slope-reference_zero,
-        })
-    for row in metrics:
-        print(row)
-    print(args.output)
+def main(output_file=DEFAULT_OUTPUT_FILE):
+    with DATA_FILE.open(newline="", encoding="utf-8") as stream:
+        reader = csv.DictReader(stream)
+        missing = REQUIRED_COLUMNS.difference(reader.fieldnames or [])
+        if missing:
+            raise ValueError(f"Missing required columns: {sorted(missing)}")
+        data = []
+        for source in reader:
+            row = {name: float(source[name]) for name in REQUIRED_COLUMNS}
+            row["case_id"] = int(row["case_id"])
+            data.append(row)
+    if len(data) != 15:
+        raise ValueError(f"Expected 15 plotted observations, found {len(data)}")
+    if not all(row["geometry_tolerance_mm"] == 1.5 for row in data):
+        raise ValueError("Figure 2.12 requires a fixed 1.5 mm geometry tolerance")
+
+    cases = sorted({row["case_id"] for row in data})
+    if cases != [4, 37, 64, 65, 99]:
+        raise ValueError(f"Unexpected case set: {cases}")
+    # MATLAB's lines(5), matching the thesis figure.
+    colors = [
+        (0.0000, 0.4470, 0.7410),
+        (0.8500, 0.3250, 0.0980),
+        (0.9290, 0.6940, 0.1250),
+        (0.4940, 0.1840, 0.5560),
+        (0.4660, 0.6740, 0.1880),
+    ]
+
+    plt.rcParams.update({"font.family": "Times New Roman", "font.size": 9})
+    figure, axes = plt.subplots(2, 2, figsize=(9, 9), constrained_layout=True)
+    figure.suptitle("Aeroelastic mesh-convergence results", fontweight="bold")
+
+    plot_metric(
+        axes[0, 0],
+        data,
+        cases,
+        "two_wing_compliance_Nm",
+        "Two-wing compliance at 10 deg [N m]",
+        colors,
+    )
+    axes[0, 0].set_ylim(0, 350)
+    plot_metric(
+        axes[0, 1],
+        data,
+        cases,
+        "maximum_vertical_deflection_m",
+        "Maximum vertical deflection at 10 deg [m]",
+        colors,
+    )
+    axes[0, 1].set_ylim(0.01, 0.10)
+
+    stress_axis = axes[1, 0]
+    for index, case_id in enumerate(cases):
+        rows = sorted(
+            (row for row in data if row["case_id"] == case_id),
+            key=lambda row: row["mesh_edge_length_mm"],
+        )
+        stress_axis.plot(
+            [row["mesh_edge_length_mm"] for row in rows],
+            [row["skin_vm_p9975_MPa"] for row in rows],
+            "-o",
+            linewidth=1.4,
+            color=colors[index],
+            markerfacecolor=colors[index],
+            label=f"Case {case_id}",
+        )
+        stress_axis.plot(
+            [row["mesh_edge_length_mm"] for row in rows],
+            [row["cbeam_normal_stress_p9975_MPa"] for row in rows],
+            "--s",
+            linewidth=1.2,
+            color=colors[index],
+        )
+    stress_axis.set_xlabel("Target mesh edge length [mm]")
+    stress_axis.set_ylabel("99.75th-percentile stress [MPa]")
+    stress_axis.set_ylim(0, 120)
+    stress_axis.grid(True, alpha=0.35)
+    stress_axis.legend(
+        title="Solid: skin VM; dashed: CBEAM normal",
+        loc="upper center",
+        bbox_to_anchor=(0.5, -0.16),
+        ncol=2,
+        frameon=True,
+        fontsize=8,
+        title_fontsize=8,
+    )
+
+    plot_metric(
+        axes[1, 1],
+        data,
+        cases,
+        "first_modal_frequency_Hz",
+        "First retained modal frequency [Hz]",
+        colors,
+    )
+    axes[1, 1].set_ylim(14, 32)
+    axes[0, 0].legend(loc="best", fontsize=8)
+    axes[0, 1].legend(loc="best", fontsize=8)
+    axes[1, 1].legend(loc="best", fontsize=8)
+    for axis in axes.flat:
+        axis.set_xlim(1.8, 2.5)
+
+    output_file = Path(output_file).expanduser().resolve()
+    output_file.parent.mkdir(parents=True, exist_ok=True)
+    figure.savefig(output_file, dpi=220, facecolor="white")
+    plt.close(figure)
+    print(output_file)
 
 
 if __name__ == "__main__":
-    main()
+    arguments = parse_args()
+    main(arguments.output)

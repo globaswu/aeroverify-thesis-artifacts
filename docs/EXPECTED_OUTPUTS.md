@@ -31,11 +31,12 @@ The tests fail if any expected output is missing or empty.
 ## Per-figure packages
 
 Every folder indexed in `docs/FIGURE_DATA_MAP.md` contains `figure_C_N.csv`,
-`plot_C_N.py`, and `plot_C_N.m`. Running either script produces one PNG by
+`plot_C_N.py`, and `plot_C_N.m`. Figure 2.5 also requires the adjacent
+`chunk_beams.csv` and `chunk_shell_vertices.csv`. Running either script produces one PNG by
 default; an explicit PDF or SVG output path may also be supplied. The optional
-Python dispatcher can reproduce one requested figure or all 53 packages listed
+Python dispatcher can reproduce one requested figure or all 63 packages listed
 in the [figure index](FIGURE_DATA_MAP.md), including Appendix C and D figures.
-Figure 2.8 produces a modal point cloud corresponding to the nTop screenshots
+Figure 2.10 produces a modal point cloud corresponding to the nTop screenshots
 shown in the thesis. The rendered appearance is not an exact screenshot copy.
 
 The benchmark packages for Figures 3.7 and 3.8 plot seven constrained solvers'

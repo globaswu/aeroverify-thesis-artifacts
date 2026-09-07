@@ -1,349 +1,198 @@
+"""Reproduce Figure 2.4 from figure_2_4.csv only (NumPy and Matplotlib).
+
+Static figure contract: compare four observed/reconstructed mesh-preparation
+behaviours. Orange = beam centre-lines; grey = skin edges; blue = receiving
+facets. Open/filled and dashed/solid distinguish states without colour alone.
+Geometry uses orthonormal local bases, equal length scales and explicit units.
+This is local postprocessing, not a solver run; no other data source is opened.
+"""
+import argparse
+import csv
 from pathlib import Path
-
-import matplotlib as mpl
-import matplotlib.pyplot as plt
-from matplotlib.patches import Arc, FancyArrowPatch, FancyBboxPatch, Polygon
 import numpy as np
+import matplotlib
+matplotlib.use("Agg")
+import matplotlib.pyplot as plt
+from mpl_toolkits.mplot3d.art3d import Poly3DCollection
+
+OUT=Path(__file__).resolve().parent
+BLUE="#31639e"; ORANGE="#c7611f"; GREY="#929aA1"; INK="#2c3035"
+plt.rcParams.update({"font.family":"DejaVu Sans","font.size":11,"text.color":INK,
+                     "axes.titlecolor":INK,"figure.facecolor":"white"})
 
 
-def load_airfoil_data(script_dir: Path) -> np.ndarray:
-    """Load the ordered normalized section outline from the adjacent CSV."""
-    data = np.loadtxt(script_dir / "figure_2_4.csv", delimiter=",", skiprows=1)
-    if data.ndim != 2 or data.shape[1] != 2 or len(data) < 6:
-        raise ValueError("Expected ordered x_over_c,z_over_c coordinates.")
-    if not np.all(np.isfinite(data)):
-        raise ValueError("Airfoil coordinates must be finite.")
-    if not (np.isclose(data[:, 0].min(), 0.0) and np.isclose(data[:, 0].max(), 1.0)):
-        raise ValueError("Airfoil coordinates must span x/c=0 to x/c=1.")
-    return data
+def subset(rows,**conditions):
+    return [r for r in rows if all(r[k]==str(v) for k,v in conditions.items())]
 
 
-def rotated_airfoil(alpha_deg: float, foil: np.ndarray) -> np.ndarray:
-    """Rotate the repository profile about x/c=0.25 without changing geometry."""
-    outline = foil.copy()
-    outline[:, 0] -= 0.25
-    angle = np.deg2rad(alpha_deg)
-    rotation = np.array(
-        [[np.cos(angle), -np.sin(angle)], [np.sin(angle), np.cos(angle)]]
-    )
-    return outline @ rotation.T
+def xyz(rows):
+    return np.asarray([[float(r[c]) for c in ["x_m","y_m","z_m"]] for r in rows])
 
 
-def add_flow_box(ax, x, width, text, edge, fill):
-    box = FancyBboxPatch(
-        (x, 0.20),
-        width,
-        0.60,
-        boxstyle="round,pad=0.012,rounding_size=0.018",
-        linewidth=0.9,
-        edgecolor=edge,
-        facecolor=fill,
-        transform=ax.transAxes,
-    )
-    ax.add_patch(box)
-    ax.text(
-        x + width / 2,
-        0.50,
-        text,
-        ha="center",
-        va="center",
-        fontsize=8.4,
-        color=edge,
-        transform=ax.transAxes,
-    )
+def one(rows,role,state):
+    return subset(rows,entity="node",role=role,state=state)[0]
 
 
-def main(output_path: Path) -> None:
-    script_dir = Path(__file__).resolve().parent
-    foil = load_airfoil_data(script_dir)
-
-    mpl.rcParams.update(
-        {
-            "font.family": "Times New Roman",
-            "font.size": 9.4,
-            "mathtext.fontset": "custom",
-            "mathtext.rm": "Times New Roman",
-            "mathtext.it": "Times New Roman:italic",
-            "mathtext.bf": "Times New Roman:bold",
-            "axes.unicode_minus": False,
-            "pdf.fonttype": 42,
-            "ps.fonttype": 42,
-        }
-    )
-
-    ink = (0.12, 0.14, 0.16)
-    grey = (0.42, 0.45, 0.48)
-    light_grey = (0.73, 0.76, 0.78)
-    blue = (0.00, 0.45, 0.70)
-    gold = (0.90, 0.62, 0.00)
-    fill_color = (0.90, 0.94, 0.96)
-    pale_gold = (0.99, 0.96, 0.86)
-
-    fig = plt.figure(figsize=(7.09, 5.90), dpi=300, facecolor="white")
-    grid = fig.add_gridspec(
-        3,
-        1,
-        height_ratios=[3.10, 2.05, 1.00],
-        left=0.035,
-        right=0.985,
-        bottom=0.025,
-        top=0.965,
-        hspace=0.12,
-    )
-    planform_ax = fig.add_subplot(grid[0, 0])
-    section_ax = fig.add_subplot(grid[1, 0])
-    flow_ax = fig.add_subplot(grid[2, 0])
-
-    # Panel A: implemented half-span collocation shown on the symmetric planform.
-    span_coordinate = np.linspace(-1.0, 1.0, 501)
-    chord = 0.28 + 0.34 * (1.0 - np.abs(span_coordinate))
-    leading_edge = 0.25 * chord
-    trailing_edge = -0.75 * chord
-    planform_ax.fill_between(
-        span_coordinate, trailing_edge, leading_edge, color=fill_color, linewidth=0
-    )
-    planform_ax.plot(span_coordinate, leading_edge, color=ink, linewidth=1.25)
-    planform_ax.plot(span_coordinate, trailing_edge, color=ink, linewidth=1.25)
-    planform_ax.plot(
-        [-1.0, -1.0],
-        [trailing_edge[0], leading_edge[0]],
-        color=ink,
-        linewidth=1.25,
-    )
-    planform_ax.plot(
-        [1.0, 1.0],
-        [trailing_edge[-1], leading_edge[-1]],
-        color=ink,
-        linewidth=1.25,
-    )
-    planform_ax.plot([-1.0, 1.0], [0.0, 0.0], "--", color=grey, linewidth=1.0)
-    planform_ax.plot([0.0, 0.0], [-0.49, 0.18], ":", color=grey, linewidth=0.9)
-
-    station_count = 10
-    phi = np.arange(1, station_count + 1) * np.pi / (2 * station_count + 1)
-    half_span_stations = np.cos(phi)
-    for side in (-1.0, 1.0):
-        station_span = side * half_span_stations
-        station_chord = 0.28 + 0.34 * (1.0 - np.abs(station_span))
-        for station, local_chord in zip(station_span, station_chord):
-            station_color = blue if side > 0 else light_grey
-            planform_ax.plot(
-                [station, station],
-                [-0.75 * local_chord, 0.25 * local_chord],
-                color=station_color,
-                alpha=0.46 if side > 0 else 0.32,
-                linewidth=0.55,
-            )
-        if side > 0:
-            planform_ax.scatter(
-                station_span,
-                np.zeros_like(station_span),
-                s=18,
-                color=blue,
-                edgecolor="white",
-                linewidth=0.4,
-                zorder=4,
-            )
-        else:
-            planform_ax.scatter(
-                station_span,
-                np.zeros_like(station_span),
-                s=16,
-                facecolor="white",
-                edgecolor=light_grey,
-                linewidth=0.8,
-                zorder=4,
-            )
-
-    highlight_index = 5
-    highlighted_span = half_span_stations[highlight_index]
-    highlighted_chord = 0.28 + 0.34 * (1.0 - highlighted_span)
-    local_chord_arrow = FancyArrowPatch(
-        (highlighted_span, -0.75 * highlighted_chord),
-        (highlighted_span, 0.25 * highlighted_chord),
-        arrowstyle="<->",
-        mutation_scale=8,
-        color=gold,
-        linewidth=1.7,
-    )
-    planform_ax.add_patch(local_chord_arrow)
-    planform_ax.text(
-        highlighted_span + 0.045,
-        -0.18,
-        r"$c_i=c(y_i)$",
-        color=ink,
-        va="center",
-        ha="left",
-    )
-
-    planform_ax.annotate(
-        "",
-        xy=(-1.10, -0.31),
-        xytext=(-1.10, 0.20),
-        arrowprops={"arrowstyle": "-|>", "color": ink, "lw": 1.0},
-    )
-    planform_ax.text(-1.10, 0.24, r"$V_\infty$", ha="center", color=ink)
-    planform_ax.text(-0.98, 0.035, "quarter-chord lifting line", color=grey, fontsize=8.2)
-    planform_ax.text(0.025, 0.17, "root plane", color=grey, fontsize=8.0, rotation=90, va="top")
-
-    dimension_y = -0.56
-    planform_ax.plot([0.0, 1.0], [dimension_y, dimension_y], color=ink, linewidth=0.8)
-    planform_ax.plot([0.0, 0.0], [dimension_y - 0.035, dimension_y + 0.035], color=ink, linewidth=0.8)
-    planform_ax.plot([1.0, 1.0], [dimension_y - 0.035, dimension_y + 0.035], color=ink, linewidth=0.8)
-    planform_ax.text(0.50, dimension_y - 0.055, r"$s=b/2$", ha="center", va="top")
-    planform_ax.text(
-        0.50,
-        -0.70,
-        r"$\phi_i=i\pi/(2N+1),\quad y_i=s\cos\phi_i,\quad i=1,\ldots,N,\quad N=10$",
-        ha="center",
-        va="top",
-        fontsize=8.5,
-    )
-    planform_ax.text(
-        0.55,
-        0.34,
-        "filled: implemented half-span stations; open: symmetry mirror",
-        color=blue,
-        fontsize=7.9,
-        ha="center",
-    )
-    planform_ax.set_title(
-        "A. Cosine-spaced planform collocation",
-        loc="left",
-        fontweight="bold",
-        fontsize=9.6,
-        pad=5,
-    )
-    planform_ax.set_xlim(-1.17, 1.10)
-    planform_ax.set_ylim(-0.79, 0.43)
-    planform_ax.set_axis_off()
-
-    # Panel B: local section angle supplied to the Fourier system.
-    alpha_global = 11.0
-    alpha_effective = 6.0
-    section = rotated_airfoil(alpha_effective, foil)
-    section_ax.add_patch(
-        Polygon(section, closed=True, facecolor=fill_color, edgecolor=ink, linewidth=1.2)
-    )
-    chord_start = np.array([-0.25, 0.0])
-    chord_end = np.array([0.75, 0.0])
-    angle_eff_rad = np.deg2rad(alpha_effective)
-    rotation_eff = np.array(
-        [[np.cos(angle_eff_rad), -np.sin(angle_eff_rad)], [np.sin(angle_eff_rad), np.cos(angle_eff_rad)]]
-    )
-    local_line = np.vstack([chord_start, chord_end]) @ rotation_eff.T
-    section_ax.plot(local_line[:, 0], local_line[:, 1], color=blue, linewidth=1.1)
-
-    angle_global_rad = np.deg2rad(alpha_global)
-    global_end = np.array([0.72 * np.cos(angle_global_rad), 0.72 * np.sin(angle_global_rad)])
-    section_ax.plot([0.0, global_end[0]], [0.0, global_end[1]], "--", color=grey, linewidth=1.0)
-    section_ax.annotate(
-        "",
-        xy=(0.84, -0.12),
-        xytext=(-0.32, -0.12),
-        arrowprops={"arrowstyle": "-|>", "color": ink, "lw": 1.0},
-    )
-    section_ax.text(-0.30, -0.18, r"$V_\infty$", color=ink, ha="left", va="top")
-
-    section_ax.add_patch(
-        Arc((0.0, 0.0), 0.62, 0.62, theta1=0, theta2=alpha_global, color=grey, linewidth=1.0)
-    )
-    section_ax.add_patch(
-        Arc((0.0, 0.0), 0.42, 0.42, theta1=0, theta2=alpha_effective, color=blue, linewidth=1.2)
-    )
-    section_ax.annotate(r"$\alpha_{\mathrm{global}}$", xy=(0.30, 0.045),
-                        xytext=(0.23, 0.19), color=grey, fontsize=8.5,
-                        arrowprops={"arrowstyle": "-", "color": grey, "lw": 0.7})
-    section_ax.annotate(r"$\alpha_{\mathrm{eff},i}$", xy=(0.205, 0.011),
-                        xytext=(0.18, -0.075), color=blue, fontsize=8.5,
-                        arrowprops={"arrowstyle": "-", "color": blue, "lw": 0.7})
-    section_ax.annotate(
-        r"$s_\theta\theta_i$",
-        xy=(0.53, 0.10),
-        xytext=(0.66, 0.28),
-        ha="center",
-        color=gold,
-        arrowprops={"arrowstyle": "->", "color": gold, "lw": 0.9},
-    )
-    section_ax.text(
-        1.47,
-        0.045,
-        r"$\alpha_{\mathrm{eff},i}=\alpha_{\mathrm{global}}+s_\theta\theta(y_i),\qquad s_\theta=-1$",
-        ha="center",
-        va="center",
-        fontsize=9.2,
-        bbox={"boxstyle": "round,pad=0.25", "facecolor": pale_gold, "edgecolor": gold, "linewidth": 0.8},
-    )
-    section_ax.text(
-        1.47,
-        -0.105,
-        "The section input is torsion-corrected; induced effects are resolved\nby the Fourier lifting-line system.",
-        ha="center",
-        va="center",
-        color=grey,
-        fontsize=8.2,
-    )
-    section_ax.set_title(
-        "B. One-way torsion correction at station $i$",
-        loc="left",
-        fontweight="bold",
-        fontsize=9.6,
-        pad=5,
-    )
-    section_ax.set_xlim(-0.38, 2.16)
-    section_ax.set_ylim(-0.36, 0.42, auto=True)
-    section_ax.text(0.25, -0.30, "NACA 65-210 from coordinate file; angles illustrative",
-                    ha="center", va="center", color=grey, fontsize=7.1)
-    section_ax.set_aspect("equal", adjustable="datalim")
-    section_ax.set_axis_off()
-
-    # Compact evidence flow, aligned on the fixed figure canvas.
-    flow_ax.set_axis_off()
-    add_flow_box(
-        flow_ax,
-        0.015,
-        0.28,
-        r"Station inputs: $c_i$, $a_0$, $\alpha_{L=0}$" + "\n" + r"and $\alpha_{\mathrm{eff},i}$",
-        ink,
-        fill_color,
-    )
-    add_flow_box(
-        flow_ax,
-        0.36,
-        0.28,
-        r"Solve the $N=10$ odd Fourier system" + "\n" + r"for coefficients $A_n$",
-        ink,
-        (0.96, 0.97, 0.98),
-    )
-    add_flow_box(
-        flow_ax,
-        0.705,
-        0.28,
-        r"Integrated outputs: $C_L$, $C_{D_i}$" + "\n" + r"and span efficiency $e$",
-        ink,
-        pale_gold,
-    )
-    for start, end in ((0.295, 0.36), (0.64, 0.705)):
-        flow_ax.annotate(
-            "",
-            xy=(end - 0.008, 0.50),
-            xytext=(start + 0.008, 0.50),
-            xycoords=flow_ax.transAxes,
-            arrowprops={"arrowstyle": "-|>", "color": blue, "lw": 1.2},
-        )
-
-    output_path = output_path.resolve()
-    output_path.parent.mkdir(parents=True, exist_ok=True)
-    fig.savefig(output_path, dpi=300, facecolor="white")
-    plt.close(fig)
-    print(output_path)
+def point(rows,role,state):
+    return xyz([one(rows,role,state)])[0]
 
 
-if __name__ == "__main__":
-    import argparse
-    parser = argparse.ArgumentParser(description="Reproduce Figure 2.4 from its adjacent CSV.")
-    parser.add_argument("--output", type=Path, default=Path(__file__).with_name("figure_2_4.png"))
-    arguments = parser.parse_args()
-    main(arguments.output)
+def grouped(rows,entity):
+    chosen=subset(rows,entity=entity)
+    return [sorted(subset(chosen,element_id=e),key=lambda r:int(r["vertex_index"]))
+            for e in sorted({r["element_id"] for r in chosen},key=int)]
 
 
+def basis(rows,role="B",direction=None):
+    r=one(rows,role,"original");p=point(rows,role,"projection")
+    v=xyz(subset(rows,entity="skin_vertex",element_id=r["element_id"]))
+    n=np.cross(v[1]-v[0],v[2]-v[0]);n/=np.linalg.norm(n)
+    if np.dot(p-point(rows,role,"original"),n)<0:n=-n
+    if direction is None:direction=point(rows,"C","original")-point(rows,"A","original")
+    t=direction-np.dot(direction,n)*n;t/=np.linalg.norm(t)
+    b=np.column_stack([t,np.cross(n,t),n])
+    assert np.allclose(b.T@b,np.eye(3),atol=1e-12)
+    return p,b
+
+
+def label(ax,q,text,offset=(0.,-.3),color=INK):
+    ax.text(q[0]+offset[0],q[1]+offset[1],text,color=color,fontsize=12,weight="bold")
+
+
+def upper(data):
+    fig=plt.figure(figsize=(14,6.8))
+    axes=np.array([[fig.add_axes([.055+.475*c,.56-.45*r,.4,.30]) for c in range(2)] for r in range(2)])
+    names=["single_B_A_ordinary_C_beyond","B_rejected_length"]
+    titles=["(a) Single-node repair: original","(b) Single-node repair: final",
+            "(c) Length guard: proposed correction","(d) Length guard: retained mesh"]
+    for row,name in enumerate(names):
+        d=subset(data,example=name);p,b=basis(d)
+        transform=lambda a:(a-p)@b[:,[0,2]]*1000
+        old=transform(np.array([point(d,r,"original") for r in "ABC"]))
+        bounds=[old[:,0].min()-.75,old[:,0].max()+.75,old[:,1].min()-.7,.85]
+        for col in range(2):
+            ax=axes[row,col]
+            for face in grouped(d,"skin_vertex"):
+                q=transform(xyz(face));q=np.vstack([q,q[0]])
+                receiving=any(r and "proposed_not_receiving" not in r for r in face[0]["receiving_for"].split(";"))
+                ax.plot(*q.T,color=BLUE if receiving else GREY,lw=1.4 if receiving else .55,zorder=1)
+            state="original" if row==0 and col==0 else "final"
+            proposal=row==1 and col==0
+            if proposal:state="all_proposals"
+            q=transform(np.array([point(d,r,state) for r in "ABC"]))
+            ax.plot(*q.T,"--" if proposal else "-",color=ORANGE,lw=3,zorder=3)
+            ax.scatter(q[[0,2],0],q[[0,2],1],s=50,c=INK,edgecolor="white",zorder=4)
+            if proposal:ax.scatter(q[1,0],q[1,1],s=70,marker="x",color=ORANGE,linewidth=1.5,zorder=5)
+            else:ax.scatter(q[1,0],q[1,1],s=70,marker="o",facecolor=ORANGE if row==0 and col==1 else "white",edgecolor=ORANGE,linewidth=1.5,zorder=5)
+            label(ax,q[0],"A",(-.3,-.22));label(ax,q[2],"C",(.1,-.1))
+            label(ax,q[1],"B*" if proposal else ("B'" if row==0 and col==1 else "B"),(.12,-.4) if proposal else (-.42,-.12),ORANGE)
+            ax.set_aspect("equal");ax.set_xlim(bounds[:2]);ax.set_ylim(bounds[2:]);ax.axis("off")
+            ax.set_title(titles[row*2+col],fontsize=13,pad=15)
+            x,y=bounds[0]+.15,bounds[2]+.2
+            ax.plot([x,x+1],[y,y],color=INK,lw=1)
+            ax.text(x+.5,y-.25,"1 mm",ha="center",fontsize=9)
+    d=subset(data,example=names[0]);br=one(d,"B","original");cr=one(d,"C","original")
+    note=f"B moves {float(br['coordinate_correction_m'])*1e3:.3f} mm; A remains coupled; C is outside repair reach ({float(cr['projection_distance_m'])*1e3:.3f} > {float(cr['snap_tolerance_m'])*1e3:.3f} mm)."
+    fig.text(.055,.475,note,fontsize=11)
+    d=subset(data,example=names[1]);ids={one(d,r,"original")["grid_id"] for r in "AB"}
+    members=grouped(subset(d,state="all_proposals"),"beam_endpoint")
+    ab=next(e for e in members if {r["grid_id"] for r in e}==ids)
+    guard=float(next(r["value"] for r in data if r["metric"]=="snap_max_beam_length_change_fraction"))
+    fig.text(.06,.025,f"B* is rejected: AB would lengthen by {float(ab[0]['fractional_length_change'])*100:.1f}%, exceeding the {guard*100:.0f}% guard. B remains unchanged.",fontsize=11)
+    return fig
+
+
+def lower(data):
+    fig=plt.figure(figsize=(14,7.3))
+    d=subset(data,example="two_node");p,b=basis(d)
+    trans=lambda a:(a-p)@b*1000
+    allq=trans(xyz([r for r in d if r["x_m"]]));limits=[(allq[:,0].min()-.3,allq[:,0].max()+.3),
+        (allq[:,1].min()-.2,allq[:,1].max()+.2),(-3.15,.5)]
+    for col,state in enumerate(["original","final"]):
+        ax=fig.add_axes([.04+col*.5,.52,.42,.40],projection="3d",computed_zorder=False)
+        for face in grouped(d,"skin_vertex"):
+            receiving=bool(face[0]["receiving_for"]);q=trans(xyz(face))
+            poly=Poly3DCollection([q],facecolor=BLUE if receiving else "#dce0e4",
+                edgecolor=BLUE if receiving else GREY,alpha=.22 if receiving else .1,
+                linewidth=1.2 if receiving else .7,zorder=1)
+            ax.add_collection3d(poly)
+            if receiving:
+                centre=q.mean(axis=0);role=face[0]["receiving_for"]
+                centre[2]+=.30 if role=="B" else -.60
+                ax.text(*centre,"$T_"+role+"$",color=BLUE,fontsize=11,ha="center",zorder=5)
+        for beam in grouped(subset(d,state=state),"beam_endpoint"):
+            q=trans(xyz(beam));ax.plot(*q.T,color=ORANGE,lw=3.2,zorder=3)
+        for role in "ABC":
+            q=trans(point(d,role,state));marker="d" if role=="C" else "o"
+            fill=INK if role=="A" else (ORANGE if state=="final" else "white")
+            ax.scatter(*q,c=fill,edgecolor=ORANGE,s=45,marker=marker,depthshade=False,zorder=4)
+            dz=-.4 if role=="B" and state=="final" else .2
+            if role=="C" and state=="original":dz=-.2
+            ax.text(q[0]+.08,q[1],q[2]+dz,role+("'" if state=="final" and role!="A" else ""),fontsize=12,weight="bold",zorder=5)
+        if state=="original":
+            q=trans(np.array([point(d,r,"projection") for r in "BC"]))
+            ax.scatter(*q.T,c=BLUE,marker="x",s=30,depthshade=False,zorder=4)
+        ax.set_xlim(limits[0]);ax.set_ylim(limits[1]);ax.set_zlim(limits[2])
+        ax.set_box_aspect([hi-lo for lo,hi in limits],zoom=1.65);ax.set_proj_type("ortho")
+        ax.view_init(elev=25,azim=-80);ax.set_axis_off()
+        ax.plot([-2.4,-1.4],[0,0],[-2.7,-2.7],color=INK,lw=1.2)
+        ax.text(-1.9,0,-2.97,"1 mm",fontsize=9,ha="center")
+        ax.set_title("(e) Two adjacent nodes: before repair" if col==0 else "(f) Both nodes moved to their receiving facets",fontsize=13,pad=0)
+    corrections=[float(one(d,r,"original")["coordinate_correction_m"])*1000 for r in "BC"]
+    fig.text(.055,.475,f"B correction: {corrections[0]:.3f} mm; C correction: {corrections[1]:.3f} mm. Two receiving triangles are highlighted.",fontsize=11)
+    d=subset(data,example="finite_offset");r=one(d,"Q","original");gid=r["grid_id"]
+    ends=subset(d,entity="beam_endpoint",state="original")
+    other=xyz([e for e in ends if e["grid_id"]!=gid]);p,b=basis(d,"Q",other[1]-other[0])
+    transform=lambda a:(a-p)@b[:,[0,2]]*1e6
+    gap=float(r["projection_distance_m"])*1e6
+    for col,state in enumerate(["original","final"]):
+        ax=fig.add_axes([.07+.5*col,.105,.365,.29])
+        for face in grouped(d,"skin_vertex"):
+            q=transform(xyz(face));q=np.vstack([q,q[0]]);ax.plot(*q.T,color=BLUE,lw=1.5)
+        for beam in grouped(subset(d,state=state),"beam_endpoint"):
+            ax.plot(*transform(xyz(beam)).T,color=ORANGE,lw=3.2)
+        q=transform(point(d,"Q",state));ax.scatter(*q,facecolor="white",edgecolor=ORANGE,s=60,zorder=5)
+        ax.scatter(0,0,c=BLUE,marker="x",s=45,zorder=5)
+        ax.text(-3.2,-9,"Q",fontsize=13,weight="bold");ax.text(1,1.6,"Projection p",color=BLUE,fontsize=10)
+        ax.text(-21,3.7,"Receiving skin element, edge-on",color=BLUE,fontsize=10)
+        ax.text(4,-5.8,f"Gap: {gap:.3f} μm",fontsize=10)
+        ax.plot([-21,-16],[-13,-13],color=INK,lw=1.3);ax.text(-18.5,-14.6,"5 μm",ha="center",fontsize=9)
+        ax.set_aspect("equal");ax.set_xlim(-23,23);ax.set_ylim(-15,7);ax.axis("off")
+        ax.set_title("(g) Near-skin node before coupling" if col==0 else "(h) Ordinary MPC: coordinates unchanged",fontsize=13,pad=15)
+    fig.text(.055,.025,f"Uniform side-view crop: the {gap:.3f} μm gap remains below the 10 μm coupling tolerance. Beam segments are cropped.",fontsize=10)
+    return fig
+
+
+if __name__=="__main__":
+    parser=argparse.ArgumentParser(description=__doc__)
+    parser.add_argument("--output",type=Path,default=OUT/"figure_2_4.png",
+                        help="Single stacked-atlas output: PNG, PDF or SVG.")
+    parser.add_argument("--panels",action="store_true",
+                        help="Also save separate a-d and e-h panel PNGs beside the output.")
+    args=parser.parse_args()
+    with (OUT/"figure_2_4.csv").open(newline="",encoding="utf-8") as f:DATA=list(csv.DictReader(f))
+    for metric in ["move_classification_mismatch_count","mpc_classification_mismatch_count"]:
+        assert float(next(r["value"] for r in DATA if r["metric"]==metric))==0
+    panels=[upper(DATA),lower(DATA)]
+    rendered=[]
+    for panel in panels:
+        panel.set_dpi(220);panel.canvas.draw()
+        rendered.append(np.asarray(panel.canvas.buffer_rgba()).copy())
+    # Keep both source figures' geometry and scale intact: stack their native
+    # raster canvases without stretching. PDF/SVG embed this same HD bitmap.
+    width=max(image.shape[1] for image in rendered)
+    height=sum(image.shape[0] for image in rendered)
+    atlas=np.full((height,width,4),255,dtype=np.uint8)
+    top=0
+    for raster in rendered:
+        atlas[top:top+raster.shape[0],:raster.shape[1]]=raster
+        top+=raster.shape[0]
+    composite=plt.figure(figsize=(width/220,height/220),dpi=220)
+    ax=composite.add_axes([0,0,1,1]);ax.imshow(atlas);ax.axis("off")
+    args.output.parent.mkdir(parents=True,exist_ok=True)
+    composite.savefig(args.output,dpi=220,pad_inches=0)
+    if args.panels:
+        for suffix,panel in zip(["a","b"],panels):
+            panel.savefig(args.output.with_name(args.output.stem+suffix+".png"),dpi=220)
+    for panel in panels+[composite]:plt.close(panel)
+    print(f"Rendered {args.output.name} from figure_2_4.csv only.")

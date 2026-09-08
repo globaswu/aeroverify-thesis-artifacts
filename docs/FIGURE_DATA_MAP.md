@@ -1,6 +1,6 @@
 # Thesis figure-data index
 
-This index uses current printed figure numbers. Its 66 packages comprise 63
+This index uses current printed figure numbers. Its 67 packages comprise 64
 CSV plots/reconstructions and three nTop screenshot compositions. Stable package
 paths are retained even when printed numbers change: the number in an older
 folder or script is a package identifier, not necessarily the current caption.
@@ -88,13 +88,14 @@ measured data points.
 |---|---|
 | [6.1](../data/figures/chapter06/figure_6_1) | Four-input observed Pareto front |
 | [6.2](../data/figures/chapter06/representative_lattices) | Representative four-input lattice wings — nTop screenshots and composition recipe |
-| [6.3](../data/figures/chapter06/figure_6_2) | Four-input feasibility mechanisms |
-| [6.4](../data/figures/chapter06/figure_6_3) | Pairwise design-space views |
-| [6.5](../data/figures/chapter06/figure_6_4) | Representative static-response decomposition |
-| [6.6](../data/figures/chapter06/figure_6_5) | Representative dynamic-response decomposition |
-| [6.7](../data/figures/chapter06/figure_6_6) | Parallel-coordinate design comparison |
-| [6.8](../data/figures/chapter06/figure_6_7) | Mass and compliance |
-| [6.9](../data/figures/chapter06/figure_6_8) | Optimization progress |
+| [6.3](../data/figures/chapter06/selected_material_distribution) | Selected nominal member grading and skin/lattice mass allocation |
+| [6.4](../data/figures/chapter06/figure_6_2) | Four-input feasibility mechanisms |
+| [6.5](../data/figures/chapter06/figure_6_3) | Pairwise design-space views |
+| [6.6](../data/figures/chapter06/figure_6_4) | Representative static-response decomposition |
+| [6.7](../data/figures/chapter06/figure_6_5) | Representative dynamic-response decomposition |
+| [6.8](../data/figures/chapter06/figure_6_6) | Parallel-coordinate design comparison |
+| [6.9](../data/figures/chapter06/figure_6_7) | Mass and compliance |
+| [6.10](../data/figures/chapter06/figure_6_8) | Optimization progress |
 
 ## Appendix C
 
@@ -129,6 +130,10 @@ contains the full evaluated X/Y/C records, observed Pareto points, empirical GA
 reference fronts, and [hypervolume-ratio table](../data/benchmarks/seven_solver_comparison/hv_ratio_table.csv)
 used in Chapter 3. Figures 3.7 and 3.8 each consolidate their required rows into
 one CSV.
+
+The [structural-outcome bundle](../data/structural_outcomes/README.md) supplies
+the selected wing dimensions, component-mass tables, load-lever calculations,
+and matched-corner comparisons. Its recalculation script uses only included CSVs.
 
 The linked records support plot reproduction. Native MSC Nastran OP2/F06
 outputs and proprietary nTop projects are not included.

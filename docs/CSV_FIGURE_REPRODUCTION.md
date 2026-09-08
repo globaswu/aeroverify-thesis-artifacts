@@ -80,8 +80,8 @@ where a figure requires more than one data grain.
 
 ## Scope
 
-The [figure index](FIGURE_DATA_MAP.md) maps 66 packages to current thesis
-numbering: 63 CSV plots/reconstructions and three screenshot compositions,
+The [figure index](FIGURE_DATA_MAP.md) maps 67 packages to current thesis
+numbering: 64 CSV plots/reconstructions and three screenshot compositions,
 including the supplementary numerical figures in Appendices C and D.
 Figure 2.10 contains all 531,682 recovered mode-shape nodes in one CSV. The
 thesis image consists of nTop screenshots; its scripts provide a portable

@@ -1,0 +1,30 @@
+IncludedFile,ColumnGroup,ExistingPublicPath,RowSelector,Relationship
+source_topology.csv,"CellSize_m;RootRatio;WingMassTotal_kg;Ctrim_Nm;C_signed_recorded;Feasible;FamilyPareto",data/fcc/evaluations_cases001_071.csv,"case_id in 26 40 61 70",Direct selected FCC scalar records
+source_topology.csv,"CellSize_m;RootRatio;WingMassTotal_kg;Ctrim_Nm;C_signed_recorded;Feasible;FamilyPareto",data/bcc/evaluations_cases001_071.csv,"case_id in 17 58",Direct selected BCC scalar records
+source_topology.csv,"CellSize_m;RootRatio;WingMassTotal_kg;Ctrim_Nm;C_signed_recorded;Feasible;FamilyPareto",data/sc/evaluations_cases001_071.csv,"case_id in 53 70",Direct selected SC scalar records
+source_topology.csv,"SkinMassHalf_kg;LatticeMassHalf_kg;PooledPareto;Origin;FlutterBasis",data/figures/chapter05/figure_5_1/figure_5_1.csv,"topology and case_id matching included cases",Direct selected component and membership records
+source_topology.csv,"ScreenSkinVM_MPa;ScreenBeamNormal_MPa",data/figures/chapter05/figure_5_4/figure_5_4.csv,"case_id in 26 40 61 70",FCC screening maxima
+source_topology.csv,"ScreenSkinVM_MPa;ScreenBeamNormal_MPa",data/figures/chapter05/figure_5_7/figure_5_7.csv,"case in 17 58",BCC screening maxima
+source_topology.csv,"ScreenSkinVM_MPa;ScreenBeamNormal_MPa",data/figures/chapter05/figure_5_10/figure_5_10.csv,"case in 53 70",SC screening maxima
+source_topology.csv,SelectionSource,data/fcc/continuation_cases052_071.csv,"case_id in 61 70",Saved continuation selection source
+source_topology.csv,SelectionSource,data/bcc/continuation_cases052_071.csv,case_id equals 58,Saved continuation selection source
+source_topology.csv,SelectionSource,data/sc/continuation_cases052_071.csv,"case_id in 53 70",Saved continuation selection source
+source_planform.csv,"AR;TaperRatio;WingMassTotal_kg;CDitrim;Ctrim_Nm;C_signed_recorded;Feasible;Pareto;ScreenSkinVM_MPa;ScreenBeamNormal_MPa",data/planform/evaluations_cases001_050.csv,"case in 45 47 20",Direct scalars; two-wing total mass is twice published modeled_half_wing_mass_kg
+source_planform.csv,"FullWingArea_m2;RecordedSemispan_m;RecordedRootChord_m",data/figures/chapter04/figure_4_1/figure_4_1.csv,"case_id in 45 47 20 and point_order equals 1",Published geometric reconstruction scalars
+source_planform.csv,"CellSize_m;RootRatio",data/fcc/evaluations_cases001_071.csv,case_id equals 40,Prescribed FCC40 reference sizing
+source_planform.csv,"SkinMassHalf_kg;LatticeMassHalf_kg;TrimStrainEnergyHalf_Nm",,cases 45 47 20,New scalar export from retained evaluated outputs; native outputs are not included or claimed public
+source_planform.csv,"SelectionSource;FlutterBasis;campaign-period context",data/planform/evaluations_cases001_050.csv,"case in 45 47 20",Published campaign period and selections for continuation cases45/47; does not supply original adaptive selection source for case20
+source_planform.csv,"Origin;SelectionSource",,case20 only,New metadata export from original evaluated campaign record identifying an earlier adaptive epsilon-endpoint challenger
+source_coupled_designs.csv,"AR;TaperRatio;RootRatio;TipRootRatio;WingMassTotal_kg;CDitrim;Ctrim_Nm;ScreenSkinVM_MPa;ScreenBeamNormal_MPa;StressLimit_MPa;Feasible;Pareto;Origin",data/multiinput/evaluations_cases001_100.csv,"Case in 1 through 16 and 37 64 99",Direct selected evaluated scalars including all initial corners
+source_coupled_components.csv,All component and energy columns,data/representative_physics/mass_compliance_check_cases004_037_064_065_099.csv,"Case in 4 37 64 99",Direct retained implicit mass and energy scalars; diagnostic deck masses remain separate
+source_coupled_trim.csv,All trim response columns,data/representative_physics/representative_physics_cases004_037_064_065_099.csv,"Case in 4 37 64 99",Direct retained LLT moment and SOL144 trim response scalars
+source_coupled_llt_samples.csv,"NormalizedSemispan;LiftPerUnitSpan_N_m",data/figures/chapter06/figure_6_4/figure_6_4.csv,"record_type equals llt and case_id in 4 37 64 99",Complete 401-point profiles; renamed numeric columns only
+source_coupled_designs.csv,CellSize_m,data/representative_physics/representative_physics_cases004_037_064_065_099.csv,"Case in 4 37 64 99",Common prescribed FCC40 cell size
+source_coupled_designs.csv,FullWingArea_m2,data/figures/chapter04/figure_4_1/figure_4_1.csv,Common fixed full-wing area,Prescribed area shared with fixed-area planform experiment
+source_topology.csv,"TipRootRatio;SkinThickness_m;RecordedSemispan_m;RecordedRootChord_m;TaperRatio",,Selected topology campaign configuration,New numeric configuration metadata from retained evaluated input records; definitions alone do not supply these historical values
+source_topology.csv,"AR;FullWingArea_m2",,Selected topology campaign reference geometry,Calculated from included reference semispan root chord and taper; AR equals full-span squared divided by full-wing area
+source_planform.csv,TipRootRatio,data/figures/chapter04/figure_4_2/figure_4_2.csv,topology equals FCC and case_id equals 40,Value0.5 has legacy header t2_over_a; interpreted explicitly as t2/t1 under the verified input convention
+source_planform.csv,SkinThickness_m,,Selected planform campaign configuration,New numeric configuration metadata from retained evaluated input records
+source_topology.csv and source_planform.csv,StressLimit_MPa,data/fcc/continuation_cases052_071.csv,stress_limit_MPa equals 220,Common declared numerical screening threshold
+source_topology.csv and source_planform.csv,Member-ratio and geometry definitions,docs/FULL_SOLVER_WORKFLOW.md,Optimization input definitions and equations,Definition reference only; historical numeric configuration provenance is listed separately
+source_coupled_designs.csv,"SkinThickness_m;MeshControls;FlutterBasis",,Selected campaign configuration labels,Audited accepted-campaign configuration metadata; native solver settings and outputs are not included

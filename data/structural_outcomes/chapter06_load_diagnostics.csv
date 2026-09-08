@@ -1,0 +1,5 @@
+Case,HalfWingLLTLift_N,RootLLTAeroMoment_Nm,LiftCentroid_m,LiftCentroidOverSemispan,MaxAbsTrimVerticalDisplacementOverSemispan,MomentScope
+4,3458.545711974189,2624.5285384372023,0.758853216642634,0.40657253767850277,0.0031069298809687598,LLT aerodynamic integral; not a finite element internal resultant
+37,3116.4913753365013,2491.54340174005,0.7994706551918588,0.4057422459867193,0.0045450604249764924,LLT aerodynamic integral; not a finite element internal resultant
+64,3120.471833085998,2634.1646629284733,0.8441558853371895,0.4048866917607306,0.005953322776219913,LLT aerodynamic integral; not a finite element internal resultant
+99,3140.606858951187,3176.1244884400858,1.0113091612812564,0.40251595384554284,0.014723896295147079,LLT aerodynamic integral; not a finite element internal resultant

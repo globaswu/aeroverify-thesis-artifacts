@@ -46,6 +46,16 @@ def load_registry() -> dict[str, dict]:
             scripts = (f"plot_{chapter}_{number}.py", f"plot_{chapter}_{number}.m")
             extra = ("chunk_beams.csv", "chunk_shell_vertices.csv") if relative == "chapter02/figure_2_5" else ()
             inputs = (primary, *extra)
+        elif kind == "named_csv_plot":
+            legacy_id = None
+            primary = record.get("csv", "")
+            if not re.fullmatch(r"[a-zA-Z0-9_]+\.csv", primary):
+                raise ValueError(f"Unsafe named CSV input: {relative}")
+            matlab = record.get("matlab", "")
+            if not re.fullmatch(r"plot_[a-zA-Z0-9_]+\.m", matlab):
+                raise ValueError(f"Unsafe named MATLAB script: {relative}")
+            scripts = ("plot.py", matlab)
+            inputs = (primary,)
         elif kind == "screenshot_composition":
             legacy_id = None
             primary = "layout.csv"

@@ -11,8 +11,8 @@
     },
     {
       "path": ".github/workflows/verify.yml",
-      "size_bytes": 760,
-      "sha256": "7133628f10c44b25d72f0c59df053211bebea68515d31209793472696f1dc59d",
+      "size_bytes": 965,
+      "sha256": "69adc6e2d648a577760fa828d0b699eec0607b45f19afa3a9a22abb31285a39e",
       "source": "authored for the curated public release"
     },
     {
@@ -1234,6 +1234,30 @@
       "source": "standalone figure data and scripts indexed by the current thesis figure number"
     },
     {
+      "path": "data/figures/chapter06/selected_material_distribution/plot_material_distribution.m",
+      "size_bytes": 5501,
+      "sha256": "a8ed5cfd2d7fbcd5bd6c53dd516a54a0973687140014f619596e2201177490d2",
+      "source": "standalone figure data and scripts indexed by the current thesis figure number"
+    },
+    {
+      "path": "data/figures/chapter06/selected_material_distribution/plot.py",
+      "size_bytes": 4225,
+      "sha256": "5007829c06ac1392e8582f475ef5993dc6e2161d6bf1aee84c5e52b6c9b70ec7",
+      "source": "standalone figure data and scripts indexed by the current thesis figure number"
+    },
+    {
+      "path": "data/figures/chapter06/selected_material_distribution/README.md",
+      "size_bytes": 3614,
+      "sha256": "b6a3e120cd571e12d7743654b256bd138f17c3d01d641405a94eabc6b57eda04",
+      "source": "standalone figure data and scripts indexed by the current thesis figure number"
+    },
+    {
+      "path": "data/figures/chapter06/selected_material_distribution/selected_material_distribution.csv",
+      "size_bytes": 680,
+      "sha256": "6383c8add72101da893b262f763e43142f01aa689e071e6d47965794cd24c772",
+      "source": "standalone figure data and scripts indexed by the current thesis figure number"
+    },
+    {
       "path": "data/figures/chapterC/figure_C_1/figure_C_1.csv",
       "size_bytes": 20547782,
       "sha256": "589cff2a7f4870be0aa1d562d4be774bea2375f3b45e4f8966b7c7008e53c1ed",
@@ -1582,6 +1606,102 @@
       "source": "finalized SC public export"
     },
     {
+      "path": "data/structural_outcomes/chapter05_planform_outcomes.csv",
+      "size_bytes": 1843,
+      "sha256": "6eea30679cdfc318a599b2b8186d1c296b0d41194a21f88c227df5e11dfe7103",
+      "source": "selected evaluated wing records and reproducible component, geometry and load calculations"
+    },
+    {
+      "path": "data/structural_outcomes/chapter05_topology_outcomes.csv",
+      "size_bytes": 3664,
+      "sha256": "07f51abd6e39e73757712080c212360e3daae3620cd39c4639d34579c09825b5",
+      "source": "selected evaluated wing records and reproducible component, geometry and load calculations"
+    },
+    {
+      "path": "data/structural_outcomes/chapter06_corner_pairs.csv",
+      "size_bytes": 11824,
+      "sha256": "7ea020e016111e49b34e6c2e20bf752fe4fbb41a8243882d7f24e0c6b81173a2",
+      "source": "selected evaluated wing records and reproducible component, geometry and load calculations"
+    },
+    {
+      "path": "data/structural_outcomes/chapter06_corner_summary.csv",
+      "size_bytes": 1366,
+      "sha256": "5d952cd49061789c465f9c8e92292c93f6c998c35e3f1a1a74f667eef0af5c23",
+      "source": "selected evaluated wing records and reproducible component, geometry and load calculations"
+    },
+    {
+      "path": "data/structural_outcomes/chapter06_load_diagnostics.csv",
+      "size_bytes": 800,
+      "sha256": "0a67a24e49fb5795c9c8328728d16d8bb2afd116d955ca4cb398565dfe488ea4",
+      "source": "selected evaluated wing records and reproducible component, geometry and load calculations"
+    },
+    {
+      "path": "data/structural_outcomes/chapter06_representative_outcomes.csv",
+      "size_bytes": 3178,
+      "sha256": "3c85daa8b94788a107153aa70c266d6c17f431f1364000a641d9b510076c0564",
+      "source": "selected evaluated wing records and reproducible component, geometry and load calculations"
+    },
+    {
+      "path": "data/structural_outcomes/design_comparisons.csv",
+      "size_bytes": 19645,
+      "sha256": "9963352a544ccb524b2f11fcd4864bdf8194ea115ba905da84b9b1ca400b5b69",
+      "source": "selected evaluated wing records and reproducible component, geometry and load calculations"
+    },
+    {
+      "path": "data/structural_outcomes/README.md",
+      "size_bytes": 7062,
+      "sha256": "16656724bd3ca926e259eec0deb0131c2b32990b9c6efae91f4439304d7719f2",
+      "source": "selected evaluated wing records and reproducible component, geometry and load calculations"
+    },
+    {
+      "path": "data/structural_outcomes/recalculate.py",
+      "size_bytes": 10358,
+      "sha256": "09b2e9835646330cfb37e82cbae7c62f708a0edc9543d56724c94fedfb17f4ac",
+      "source": "selected evaluated wing records and reproducible component, geometry and load calculations"
+    },
+    {
+      "path": "data/structural_outcomes/source_coupled_components.csv",
+      "size_bytes": 455,
+      "sha256": "c3fca480a8a34f5f53f944b493558657f62d447cd1d8e540995c300e375e1c67",
+      "source": "selected evaluated wing records and reproducible component, geometry and load calculations"
+    },
+    {
+      "path": "data/structural_outcomes/source_coupled_designs.csv",
+      "size_bytes": 4195,
+      "sha256": "000c8a884dca229cb6fddcc218fa4d31bc76efb11ccbc20ea9eb6593d56946f2",
+      "source": "selected evaluated wing records and reproducible component, geometry and load calculations"
+    },
+    {
+      "path": "data/structural_outcomes/source_coupled_llt_samples.csv",
+      "size_bytes": 41446,
+      "sha256": "037be9806a65a6d382aec938d55f50f73b84bab762c8f34071b15d9c87f6e224",
+      "source": "selected evaluated wing records and reproducible component, geometry and load calculations"
+    },
+    {
+      "path": "data/structural_outcomes/source_coupled_trim.csv",
+      "size_bytes": 551,
+      "sha256": "10f7df0686a83925d2bd4b8e4478f3c930458cecdae49686f2fb6dc4a697d306",
+      "source": "selected evaluated wing records and reproducible component, geometry and load calculations"
+    },
+    {
+      "path": "data/structural_outcomes/source_planform.csv",
+      "size_bytes": 1400,
+      "sha256": "51ce5c40db974d42358ab9b601cf247578fd09fa9e33f333cf429a2b33ea4e9d",
+      "source": "selected evaluated wing records and reproducible component, geometry and load calculations"
+    },
+    {
+      "path": "data/structural_outcomes/source_provenance.csv",
+      "size_bytes": 5889,
+      "sha256": "f9547593c423d630f2f82cb7552e0f5508474ec4072b2703fe2364e1dbf940f5",
+      "source": "selected evaluated wing records and reproducible component, geometry and load calculations"
+    },
+    {
+      "path": "data/structural_outcomes/source_topology.csv",
+      "size_bytes": 2496,
+      "sha256": "446cb079a85012047422ff3050abd95e812ef443d0cb686a981325f347464c6a",
+      "source": "selected evaluated wing records and reproducible component, geometry and load calculations"
+    },
+    {
       "path": "data/tables/chapter05/bcc_localized_stress_cases002_008_027_029_051_054.csv",
       "size_bytes": 2820,
       "sha256": "544e1621ee535a5134950f50dba3008cf23d7faac4d93c95d4801d4b6ca65541",
@@ -1608,7 +1728,7 @@
     {
       "path": "docs/CSV_FIGURE_REPRODUCTION.md",
       "size_bytes": 4786,
-      "sha256": "7f2bf634a5693083d21b0decc851df064627967ae192dfa867fb4ac5c529b84c",
+      "sha256": "e967d5957cc5bdafa8f6dcc7a67e098385a9ea673badb45a73b4f185baead02c",
       "source": "authored for the curated public release"
     },
     {
@@ -1620,13 +1740,13 @@
     {
       "path": "docs/EXPECTED_OUTPUTS.md",
       "size_bytes": 2615,
-      "sha256": "0d728714eb3c45120d1bf19c4e53b5617b71a8b95bbf3d0b0bc07abdc9d61ce8",
+      "sha256": "8112f396bc384775e7c3c743c9680ccb27562f8b1c201850fa8827ae6069f176",
       "source": "authored for the curated public release"
     },
     {
       "path": "docs/FIGURE_DATA_MAP.md",
-      "size_bytes": 8327,
-      "sha256": "68acc03d0a6153ed649c374577e1a94978f6575c09ff13a5883202ff694716e5",
+      "size_bytes": 8704,
+      "sha256": "8bd219a267f0d7ba598d3b58e17c3599228b464d13a1e6555f22e7307cde3fba",
       "source": "authored for the curated public release"
     },
     {
@@ -1662,7 +1782,7 @@
     {
       "path": "docs/FILE_CROSSWALK.md",
       "size_bytes": 3169,
-      "sha256": "3954c1815e0c2da8e5dacb461a6a59a3548368c8ed28e1032b4fd3a5827277a4",
+      "sha256": "3479c58055b16fc5eaea95cb27f408b130a09594f4461c23ee8360e1558cf9da",
       "source": "authored for the curated public release"
     },
     {
@@ -1745,8 +1865,8 @@
     },
     {
       "path": "figure_registry.json",
-      "size_bytes": 5862,
-      "sha256": "84783ab09332e0394e2a9146a4562c0781f0860cf6e6ac79c957716454642115",
+      "size_bytes": 6045,
+      "sha256": "cdd23ad9e4a22596b1969cdb8243dabc5652cc038a22927843776df633dc1fd0",
       "source": "authored for the curated public release"
     },
     {
@@ -2027,8 +2147,8 @@
     },
     {
       "path": "README.md",
-      "size_bytes": 9615,
-      "sha256": "e55b0497ed65a4d5cac60e5b5c3aa9741a93c0205905dc9d399b31b249abd2fe",
+      "size_bytes": 9880,
+      "sha256": "919cc31ddd4fb02cab63e5868d09762fc9025449d90191234176b6295299eb19",
       "source": "authored for the curated public release"
     },
     {
@@ -2045,8 +2165,8 @@
     },
     {
       "path": "scripts/figure_packages.py",
-      "size_bytes": 3684,
-      "sha256": "27d973161a5286e0b9817c1853299cf2ee4fd57150a60f23824418a6dd0d6255",
+      "size_bytes": 4196,
+      "sha256": "f54287c1d53a2f07ac9e96f97b188a90ca1ba84bc830141f3a5858f9c8429ed9",
       "source": "authored for the curated public release"
     },
     {
@@ -2057,8 +2177,8 @@
     },
     {
       "path": "scripts/test_figure_registry.py",
-      "size_bytes": 7230,
-      "sha256": "50ef4d90368aef45fe54bb85a36e397ef1e94aedf902391de1964f85c7248b29",
+      "size_bytes": 8478,
+      "sha256": "060a0888218729bd252494bc74c841fc016119a08d6333cd3e5e51bf22caf583",
       "source": "authored for the curated public release"
     },
     {
@@ -2093,8 +2213,8 @@
     },
     {
       "path": "tools/update_manifest.ps1",
-      "size_bytes": 4315,
-      "sha256": "c43385232caeb8bee6f26d68b5de3fc5f73195a319512f6e9429a6cfb1c70306",
+      "size_bytes": 4456,
+      "sha256": "6be39ea3ebf9713e11d413c5a57ca413e32d4e3e4e58613803c5377d5e7c829c",
       "source": "authored for the curated public release"
     },
     {

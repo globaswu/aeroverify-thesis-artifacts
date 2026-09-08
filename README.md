@@ -28,12 +28,14 @@ keep their older package meanings.
 - Start here: [QUICKSTART.md](QUICKSTART.md)
 - Thesis-to-file crosswalk: [docs/FILE_CROSSWALK.md](docs/FILE_CROSSWALK.md)
 - Figure-to-data index: [docs/FIGURE_DATA_MAP.md](docs/FIGURE_DATA_MAP.md)
+- Selected wing dimensions, component masses, and load-lever comparisons: [structural outcome calculations](data/structural_outcomes/README.md)
 - Reproduce every quantitative figure: [docs/CSV_FIGURE_REPRODUCTION.md](docs/CSV_FIGURE_REPRODUCTION.md)
 - View or plot FCC/BCC/SC data: [step-by-step lattice-sizing guide](experiments/lattice_sizing/README.md)
 - Machine-readable experiment register: [experiments.json](experiments.json)
 
 The index maps current numbering to 63 unchanged CSV plot/reconstruction
-packages and three screenshot-composition packages. The machine-readable
+packages, one new [member-grading and material-allocation plot](data/figures/chapter06/selected_material_distribution/README.md),
+and three screenshot-composition packages. The machine-readable
 crosswalk is [figure_registry.json](figure_registry.json). Numerical packages
 use one CSV, except Figure 2.5's three geometry tables. Screenshot packages
 contain the actual cropped PNG inputs, layout CSV, and independent Python/MATLAB

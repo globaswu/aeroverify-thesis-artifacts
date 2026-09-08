@@ -23,3 +23,7 @@ jobs:
           python -m pip install "Pillow>=9"
           python scripts/test_figure_registry.py
           python scripts/verify_figure_packages.py
+      - name: Recalculate selected structural outcomes from included CSVs
+        run: |
+          python data/structural_outcomes/recalculate.py
+          git diff --exit-code -- data/structural_outcomes

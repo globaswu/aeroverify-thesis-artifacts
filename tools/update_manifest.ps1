@@ -43,6 +43,7 @@ function Get-SourceDescription {
         '^data/diagnostics/fcc_case067/' { return 'aeroverify/artifacts/case067_sol145_mkaero_diagnostic_20260805' }
         '^data/flutter/' { return 'sanitized projection of the guarded final SOL 145 rerun ledger' }
         '^data/representative_physics/' { return 'aeroverify/artifacts/thesis_representative_physics' }
+        '^data/structural_outcomes/' { return 'selected evaluated wing records and reproducible component, geometry and load calculations' }
         '^data/benchmarks/seven_solver_comparison/' { return 'completed seven-problem seven-solver comparison, 150 observations per trajectory' }
         '^data/figures/' { return 'standalone figure data and scripts indexed by the current thesis figure number' }
         '^data/tables/chapter05/' { return 'completed topology comparison and selected localized stress observations' }

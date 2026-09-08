@@ -36,7 +36,7 @@ the current caption. Figure 2.5 also uses its two adjacent geometry CSVs.
 Three screenshot packages instead contain `layout.csv`, declared PNG inputs,
 `compose.py`, and `compose_figure.m`. Their result is image composition, not geometry
 or numerical-simulation regeneration. All scripts support one chosen PNG/PDF/SVG
-output. `--current --all` runs the 66 current-number entries in the
+output. `--current --all` runs the 67 current-number entries in the
 [figure index](FIGURE_DATA_MAP.md); legacy `--all` runs only the 63 old packages.
 Current-number outputs use `thesis_current_figure_C_N`, keeping them distinct
 from legacy `thesis_figure_C_N` outputs.

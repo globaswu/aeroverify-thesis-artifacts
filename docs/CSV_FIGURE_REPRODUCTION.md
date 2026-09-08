@@ -1,6 +1,6 @@
 # Self-contained thesis figure packages
 
-The 63 numerical figure packages retain stable folders, for example:
+The 63 original numerical figure packages retain stable folders, for example:
 
 ```text
 data/figures/chapter05/figure_5_1/
@@ -10,10 +10,12 @@ data/figures/chapter05/figure_5_1/
 ```
 
 The Python and MATLAB scripts resolve their own folder and read only the CSV
-data beside them. Figure 2.5 is the sole three-table exception: its primary
+data beside them. Figure 2.5 uses three tables: its primary
 `figure_2_5.csv` contains nodes, `chunk_beams.csv` contains connectivity, and
 `chunk_shell_vertices.csv` contains skin geometry. Keep all three beside its
-scripts. Every other numerical package uses one CSV. Scripts do not read MAT files,
+scripts. The newer Figure 6.5 skin-stress package uses five CSVs: a case table
+and separate vertex and triangle-stress tables for each wing. The other numerical
+packages use one CSV. Scripts do not read MAT files,
 Nastran decks or results, nTop projects, data outside their figure folder,
 network locations, or private paths.
 
@@ -60,6 +62,12 @@ selects the newly inserted topology screenshot montage.
 
 ## Screenshot compositions
 
+The skin-stress package for Figure 6.5 is different from a screenshot composition.
+It reconstructs the raw skin surface directly from the complete mesh and both
+centroid fiber stresses. The nTop views use the same stress observations as scalar
+point maps; the Python/MATLAB scripts render the finite element surface without
+requiring nTop or reproducing its viewport styling.
+
 The three descriptive montage folders use `layout.csv`, declared local PNG
 crops, `compose.py`, and `compose_figure.m`. Their CSV records panel placement and
 annotations, not the numerical geometry needed to regenerate an nTop view.
@@ -80,8 +88,8 @@ where a figure requires more than one data grain.
 
 ## Scope
 
-The [figure index](FIGURE_DATA_MAP.md) maps 67 packages to current thesis
-numbering: 64 CSV plots/reconstructions and three screenshot compositions,
+The [figure index](FIGURE_DATA_MAP.md) maps 68 packages to current thesis
+numbering: 65 CSV plots/reconstructions and three screenshot compositions,
 including the supplementary numerical figures in Appendices C and D.
 Figure 2.10 contains all 531,682 recovered mode-shape nodes in one CSV. The
 thesis image consists of nTop screenshots; its scripts provide a portable

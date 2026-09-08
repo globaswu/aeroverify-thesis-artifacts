@@ -55,7 +55,13 @@ def load_registry() -> dict[str, dict]:
             if not re.fullmatch(r"plot_[a-zA-Z0-9_]+\.m", matlab):
                 raise ValueError(f"Unsafe named MATLAB script: {relative}")
             scripts = ("plot.py", matlab)
-            inputs = (primary,)
+            extra = record.get("extra_csv", [])
+            if not isinstance(extra, list) or any(not isinstance(item, str) or
+                    not re.fullmatch(r"[a-zA-Z0-9_]+\.csv", item) for item in extra):
+                raise ValueError(f"Unsafe supplementary CSV input: {relative}")
+            inputs = (primary, *extra)
+            if len(inputs) != len(set(inputs)):
+                raise ValueError(f"Duplicate CSV input: {relative}")
         elif kind == "screenshot_composition":
             legacy_id = None
             primary = "layout.csv"

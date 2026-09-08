@@ -34,10 +34,12 @@ keep their older package meanings.
 - Machine-readable experiment register: [experiments.json](experiments.json)
 
 The index maps current numbering to 63 unchanged CSV plot/reconstruction
-packages, one new [member-grading and material-allocation plot](data/figures/chapter06/selected_material_distribution/README.md),
+packages, a [member-grading and material-allocation plot](data/figures/chapter06/selected_material_distribution/README.md),
+a [raw skin-stress surface reconstruction](data/figures/chapter06/skin_stress_comparison/README.md),
 and three screenshot-composition packages. The machine-readable
 crosswalk is [figure_registry.json](figure_registry.json). Numerical packages
-use one CSV, except Figure 2.5's three geometry tables. Screenshot packages
+usually use one CSV; Figure 2.5 has three geometry tables and Figure 6.5 has
+a case table plus separate vertex and triangle-stress tables for both wings. Screenshot packages
 contain the actual cropped PNG inputs, layout CSV, and independent Python/MATLAB
 composers; they reconstruct the montage, not the nTop model or its original
 viewport rendering. No script needs data outside its own package.

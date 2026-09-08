@@ -1258,6 +1258,54 @@
       "source": "standalone figure data and scripts indexed by the current thesis figure number"
     },
     {
+      "path": "data/figures/chapter06/skin_stress_comparison/case_37_triangles.csv",
+      "size_bytes": 27036749,
+      "sha256": "b584d77e1bd7721a4e292964ac2ecbed38de8db28692f8748e9ee06b737f7ebc",
+      "source": "standalone figure data and scripts indexed by the current thesis figure number"
+    },
+    {
+      "path": "data/figures/chapter06/skin_stress_comparison/case_37_vertices.csv",
+      "size_bytes": 14442669,
+      "sha256": "bcf625cf063532e9c38d5b307cce08001e6a2de625bccaca18ec46dae2d314e5",
+      "source": "standalone figure data and scripts indexed by the current thesis figure number"
+    },
+    {
+      "path": "data/figures/chapter06/skin_stress_comparison/case_99_triangles.csv",
+      "size_bytes": 41615326,
+      "sha256": "0d2fbdcbd30e303f42ad9d46f0e930949282dfd0ec97124cf350ccf4e5f79135",
+      "source": "standalone figure data and scripts indexed by the current thesis figure number"
+    },
+    {
+      "path": "data/figures/chapter06/skin_stress_comparison/case_99_vertices.csv",
+      "size_bytes": 21804152,
+      "sha256": "087ff7cb25d901266611476d22e1213c5cc83a85c2a1d366aac4617aa26cbfab",
+      "source": "standalone figure data and scripts indexed by the current thesis figure number"
+    },
+    {
+      "path": "data/figures/chapter06/skin_stress_comparison/cases.csv",
+      "size_bytes": 517,
+      "sha256": "f78db88b7c98dfd0eaab4ad45f724d18095e98f7041a7eee28986f90621b783a",
+      "source": "standalone figure data and scripts indexed by the current thesis figure number"
+    },
+    {
+      "path": "data/figures/chapter06/skin_stress_comparison/plot_skin_stress.m",
+      "size_bytes": 7618,
+      "sha256": "0451accc135b95baa7edfbc1d8f28b5c03c8e19c73787d18c275bb4a0dfd081d",
+      "source": "standalone figure data and scripts indexed by the current thesis figure number"
+    },
+    {
+      "path": "data/figures/chapter06/skin_stress_comparison/plot.py",
+      "size_bytes": 8167,
+      "sha256": "834387d67e67a47600fedb75689dceebe81b4ce3ecc07bdde73c98103a7d6f7a",
+      "source": "standalone figure data and scripts indexed by the current thesis figure number"
+    },
+    {
+      "path": "data/figures/chapter06/skin_stress_comparison/README.md",
+      "size_bytes": 7772,
+      "sha256": "7f553621308d5298c4b14ad17b1468c63be3a58dede83918590dcdb93708244e",
+      "source": "standalone figure data and scripts indexed by the current thesis figure number"
+    },
+    {
       "path": "data/figures/chapterC/figure_C_1/figure_C_1.csv",
       "size_bytes": 20547782,
       "sha256": "589cff2a7f4870be0aa1d562d4be774bea2375f3b45e4f8966b7c7008e53c1ed",
@@ -1727,8 +1775,8 @@
     },
     {
       "path": "docs/CSV_FIGURE_REPRODUCTION.md",
-      "size_bytes": 4786,
-      "sha256": "e967d5957cc5bdafa8f6dcc7a67e098385a9ea673badb45a73b4f185baead02c",
+      "size_bytes": 5286,
+      "sha256": "6ea5edcb781b50f91607736bb4592f2dd14fcf2dc7a600157efe849b4ea7c09b",
       "source": "authored for the curated public release"
     },
     {
@@ -1739,14 +1787,14 @@
     },
     {
       "path": "docs/EXPECTED_OUTPUTS.md",
-      "size_bytes": 2615,
-      "sha256": "8112f396bc384775e7c3c743c9680ccb27562f8b1c201850fa8827ae6069f176",
+      "size_bytes": 2624,
+      "sha256": "05f7e1e2399c10d04a2b0c2d88d37911d61a0206385abbc5f12d0041ee014124",
       "source": "authored for the curated public release"
     },
     {
       "path": "docs/FIGURE_DATA_MAP.md",
-      "size_bytes": 8704,
-      "sha256": "8bd219a267f0d7ba598d3b58e17c3599228b464d13a1e6555f22e7307cde3fba",
+      "size_bytes": 8859,
+      "sha256": "5913af03368304b00511e766288cc86762d4580cf36305246591a71d0201a23b",
       "source": "authored for the curated public release"
     },
     {
@@ -1782,7 +1830,7 @@
     {
       "path": "docs/FILE_CROSSWALK.md",
       "size_bytes": 3169,
-      "sha256": "3479c58055b16fc5eaea95cb27f408b130a09594f4461c23ee8360e1558cf9da",
+      "sha256": "30f6c454721eaaa240457cc49aed120fa3a274406b10f5c3b7eff1e65c2a4451",
       "source": "authored for the curated public release"
     },
     {
@@ -1865,8 +1913,8 @@
     },
     {
       "path": "figure_registry.json",
-      "size_bytes": 6045,
-      "sha256": "cdd23ad9e4a22596b1969cdb8243dabc5652cc038a22927843776df633dc1fd0",
+      "size_bytes": 6293,
+      "sha256": "f0f74261b00b0a290c61a5845f97a4d42fd11d221ef52fa42096265073fb1d83",
       "source": "authored for the curated public release"
     },
     {
@@ -2147,8 +2195,8 @@
     },
     {
       "path": "README.md",
-      "size_bytes": 9880,
-      "sha256": "919cc31ddd4fb02cab63e5868d09762fc9025449d90191234176b6295299eb19",
+      "size_bytes": 10073,
+      "sha256": "4eb528082f954a9b5c8052986925b9c0954886eb4471cfdc2036f44789806c06",
       "source": "authored for the curated public release"
     },
     {
@@ -2165,8 +2213,8 @@
     },
     {
       "path": "scripts/figure_packages.py",
-      "size_bytes": 4196,
-      "sha256": "f54287c1d53a2f07ac9e96f97b188a90ca1ba84bc830141f3a5858f9c8429ed9",
+      "size_bytes": 4613,
+      "sha256": "983c664eafc99d0c93b77560f1e1b8a611481b8055b5e170b96229d3af76ad93",
       "source": "authored for the curated public release"
     },
     {
@@ -2177,8 +2225,8 @@
     },
     {
       "path": "scripts/test_figure_registry.py",
-      "size_bytes": 8478,
-      "sha256": "060a0888218729bd252494bc74c841fc016119a08d6333cd3e5e51bf22caf583",
+      "size_bytes": 9112,
+      "sha256": "fde8f0a9c64a4737af7228f700ff5663f1af02905c803975500752aa6c6665b7",
       "source": "authored for the curated public release"
     },
     {

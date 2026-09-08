@@ -1,6 +1,6 @@
 # Thesis figure-data index
 
-This index uses current printed figure numbers. Its 67 packages comprise 64
+This index uses current printed figure numbers. Its 68 packages comprise 65
 CSV plots/reconstructions and three nTop screenshot compositions. Stable package
 paths are retained even when printed numbers change: the number in an older
 folder or script is a package identifier, not necessarily the current caption.
@@ -90,12 +90,13 @@ measured data points.
 | [6.2](../data/figures/chapter06/representative_lattices) | Representative four-input lattice wings — nTop screenshots and composition recipe |
 | [6.3](../data/figures/chapter06/selected_material_distribution) | Selected nominal member grading and skin/lattice mass allocation |
 | [6.4](../data/figures/chapter06/figure_6_2) | Four-input feasibility mechanisms |
-| [6.5](../data/figures/chapter06/figure_6_3) | Pairwise design-space views |
-| [6.6](../data/figures/chapter06/figure_6_4) | Representative static-response decomposition |
-| [6.7](../data/figures/chapter06/figure_6_5) | Representative dynamic-response decomposition |
-| [6.8](../data/figures/chapter06/figure_6_6) | Parallel-coordinate design comparison |
-| [6.9](../data/figures/chapter06/figure_6_7) | Mass and compliance |
-| [6.10](../data/figures/chapter06/figure_6_8) | Optimization progress |
+| [6.5](../data/figures/chapter06/skin_stress_comparison) | Skin von Mises stress at the largest analysed angle: independent raw surface reconstruction |
+| [6.6](../data/figures/chapter06/figure_6_3) | Pairwise design-space views |
+| [6.7](../data/figures/chapter06/figure_6_4) | Representative static-response decomposition |
+| [6.8](../data/figures/chapter06/figure_6_5) | Representative dynamic-response decomposition |
+| [6.9](../data/figures/chapter06/figure_6_6) | Parallel-coordinate design comparison |
+| [6.10](../data/figures/chapter06/figure_6_7) | Mass and compliance |
+| [6.11](../data/figures/chapter06/figure_6_8) | Optimization progress |
 
 ## Appendix C
 

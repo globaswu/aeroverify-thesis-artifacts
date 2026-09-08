@@ -31,15 +31,23 @@ class FigureRegistryTests(unittest.TestCase):
         self.assertEqual(actual["scripts"], ("plot.py", "plot_material_distribution.m"))
         self.assertEqual(actual["inputs"], ("selected_material_distribution.csv",))
         for key, invalid in (("csv", "../private.csv"), ("csv", "data.json"),
-                             ("matlab", "../plot.m"), ("matlab", "plot.m")):
+                             ("matlab", "../plot.m"), ("matlab", "plot.m"),
+                             ("extra_csv", ["../private.csv"]), ("extra_csv", "nodes.csv"),
+                             ("extra_csv", ["nodes.csv", "nodes.csv"]),
+                             ("extra_csv", ["selected_material_distribution.csv"])):
             fake_path.read_text.return_value = json.dumps(dict(schema_version=1, figures=[{**record, key: invalid}]))
             with self.subTest(key=key, invalid=invalid), patch.object(packages, "REGISTRY_PATH", fake_path):
                 with self.assertRaises(ValueError):
                     packages.load_registry()
+        fake_path.read_text.return_value = json.dumps(dict(schema_version=1,
+            figures=[{**record, "extra_csv": ["nodes.csv", "elements.csv"]}]))
+        with patch.object(packages, "REGISTRY_PATH", fake_path):
+            actual = packages.load_registry()["6.3"]
+        self.assertEqual(actual["inputs"], ("selected_material_distribution.csv", "nodes.csv", "elements.csv"))
 
     def test_registry_counts_and_kinds(self):
         self.assertEqual(len(packages.LEGACY_PACKAGES), 63)
-        self.assertEqual(len(packages.CURRENT_PACKAGES), 67)
+        self.assertEqual(len(packages.CURRENT_PACKAGES), 68)
         shots = {key for key, value in packages.CURRENT_PACKAGES.items()
                  if value["kind"] == "screenshot_composition"}
         self.assertEqual(shots, {"5.2", "5.17", "6.2"})
@@ -47,7 +55,7 @@ class FigureRegistryTests(unittest.TestCase):
     def test_insertion_boundaries(self):
         expected = {"5.1": "5.1", "5.3": "5.2", "5.16": "5.15",
                     "5.18": "5.16", "5.19": "5.17", "6.1": "6.1",
-                    "6.4": "6.2", "6.10": "6.8"}
+                    "6.4": "6.2", "6.11": "6.8"}
         for current, stable in expected.items():
             with self.subTest(current=current):
                 self.assertEqual(packages.CURRENT_PACKAGES[current]["legacy_id"], stable)

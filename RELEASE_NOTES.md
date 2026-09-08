@@ -1,15 +1,17 @@
 # Thesis reproducibility package
 
 This update aligns the companion data with the revised thesis structure. The
-stable `thesis` release provides the current manuscript and the per-figure
-source data linked from its captions.
+stable `thesis` release provides the per-figure source material linked from
+the manuscript's captions. The provisional thesis PDF and narration remain private.
 
 ## Updated content
 
-- 63 self-contained figure folders follow the current numbering in Chapters
-  2–6 and Appendices C–D. Each contains CSV data and independent Python and
-  MATLAB plotting scripts. Figure 2.5 uses three adjacent CSV tables; the
-  other packages use one.
+- Existing paths and contents of 63 numerical figure packages are preserved.
+  `figure_registry.json` maps them to current printed numbers and adds three
+  nTop screenshot-composition packages. Use `--current` in the dispatcher for
+  printed numbers; old bare-ID commands retain their package meanings.
+- Screenshot packages provide actual PNG crops and layout/composition scripts.
+  They rebuild the montage, not the nTop geometry or original viewport render.
 - The FCC case-67 reduced-frequency and mode-shape diagnostics are now in
   Chapter 2. Figure 2.10 displays nTop screenshots; the public reconstruction
   shows the mode shape as a point cloud.
@@ -53,8 +55,9 @@ front is a higher-budget reference rather than an equal-budget competitor.
 
 ## Attached documents
 
-`main.pdf` is the current revised thesis. Previously attached Paper 2 and
-Paper 3 PDFs remain separate manuscripts; this thesis revision does not imply
+The thesis PDF (`main.pdf`) and narration are private and are not attached to
+this public data release. Previously attached Paper 2 and Paper 3 PDFs remain
+separate manuscripts; this thesis revision does not imply
 that their content was revised in parallel. The reference-verification report
 is a separate earlier audit and is not a certification of every sentence in
 the revised thesis.

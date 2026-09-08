@@ -40,6 +40,9 @@ checkpoints/
 *.png
 *.svg
 !docs/figures/*.png
+!data/figures/chapter05/representative_topologies/*_native.png
+!data/figures/chapter05/representative_planforms/*_native.png
+!data/figures/chapter06/representative_lattices/*_native.png
 
 # Platform files
 .DS_Store

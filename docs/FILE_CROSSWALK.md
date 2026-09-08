@@ -20,4 +20,6 @@ All thesis-artifact links below resolve through the stable `thesis` tag.
 
 The thesis captions and appendices link to the corresponding public data and
 scripts. The [figure index](FIGURE_DATA_MAP.md) is the numbering crosswalk for
-all 63 packages in the revised manuscript.
+66 entries in the revised manuscript (63 numerical packages and three
+screenshot compositions). Existing package paths are stable even when their
+current printed numbers change; see [figure_registry.json](../figure_registry.json).

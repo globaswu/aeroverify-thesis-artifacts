@@ -68,12 +68,14 @@ Source folders, transformations, and limitations are recorded in
 ## Figure-level exports
 
 `figures/chapter02` through `figures/chapter06`, plus `figures/chapterC` and
-`figures/chapterD`, contain 63 figure packages under the current thesis
-numbering. Every folder contains a primary CSV, one independent Python plotting
-script, and one independent MATLAB plotting script. Figure 2.5 also includes
-`chunk_beams.csv` and `chunk_shell_vertices.csv` for connectivity and surface
-geometry. Scripts read only their adjacent CSV data; all other packages use
-one CSV. The complete index is
+`figures/chapterD`, contain 63 stable numerical packages plus three screenshot
+composition packages. Existing numeric folder names are stable identifiers,
+not necessarily current printed figure numbers. Numerical packages retain their
+CSV/Python/MATLAB files; Figure 2.5 also uses `chunk_beams.csv` and
+`chunk_shell_vertices.csv`. The screenshot packages supply actual PNG crops,
+layout metadata, and independent composers, without claiming CSV-only nTop
+rendering regeneration. Every script reads only inputs in its own folder.
+The complete current-number crosswalk is
 [`docs/FIGURE_DATA_MAP.md`](../docs/FIGURE_DATA_MAP.md).
 
 Figure 2.10 displays nTop screenshots in the thesis; its CSV and scripts

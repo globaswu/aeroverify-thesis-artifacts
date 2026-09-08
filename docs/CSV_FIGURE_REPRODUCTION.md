@@ -1,6 +1,6 @@
 # Self-contained thesis figure packages
 
-Every data-based thesis figure has its own folder. For example:
+The 63 numerical figure packages retain stable folders, for example:
 
 ```text
 data/figures/chapter05/figure_5_1/
@@ -13,13 +13,22 @@ The Python and MATLAB scripts resolve their own folder and read only the CSV
 data beside them. Figure 2.5 is the sole three-table exception: its primary
 `figure_2_5.csv` contains nodes, `chunk_beams.csv` contains connectivity, and
 `chunk_shell_vertices.csv` contains skin geometry. Keep all three beside its
-scripts. Every other package uses one CSV. Scripts do not read MAT files,
+scripts. Every other numerical package uses one CSV. Scripts do not read MAT files,
 Nastran decks or results, nTop projects, data outside their figure folder,
 network locations, or private paths.
 
 ## Reproduce one figure
 
-Run either script inside the desired folder:
+For a current printed number, use:
+
+```powershell
+python scripts/reproduce_thesis_figure.py --current 5.2
+```
+
+The [registry](../figure_registry.json) maps current numbers to stable paths.
+Folder names, embedded script help, and default filenames may retain earlier
+package numbers. This preserves existing URLs and direct-script commands.
+For a numerical package, either script can still be invoked directly:
 
 ```powershell
 python data/figures/chapter05/figure_5_1/plot_5_1.py
@@ -34,9 +43,9 @@ Each script accepts an optional output path. The Python scripts use
 The optional dispatcher delegates to the same per-figure Python scripts:
 
 ```powershell
-python scripts/reproduce_thesis_figure.py 5.1
-python scripts/reproduce_thesis_figure.py 5.1 5.9 6.5 --format pdf
-python scripts/reproduce_thesis_figure.py --all
+python scripts/reproduce_thesis_figure.py --current 5.1
+python scripts/reproduce_thesis_figure.py --current 5.1 5.9 6.5 --format pdf
+python scripts/reproduce_thesis_figure.py --current --all
 ```
 
 Install the lightweight Python dependencies with:
@@ -44,6 +53,20 @@ Install the lightweight Python dependencies with:
 ```powershell
 python -m pip install -r requirements-figures.txt
 ```
+
+Without `--current`, arguments retain their legacy package meanings. For
+example, bare `5.2` still selects the FCC Pareto package; `--current 5.2`
+selects the newly inserted topology screenshot montage.
+
+## Screenshot compositions
+
+The three descriptive montage folders use `layout.csv`, declared local PNG
+crops, `compose.py`, and `compose_figure.m`. Their CSV records panel placement and
+annotations, not the numerical geometry needed to regenerate an nTop view.
+Scripts recompose the supplied genuine screenshots, optionally stacking
+multiple panel groups into one atlas. They do not open nTop, rebuild its model,
+rerun a solver, or retrieve outside data. The README in each package explains
+the depicted views, scale conventions, and any interpretation limitations.
 
 ## X, Y, and C convention
 
@@ -57,8 +80,9 @@ where a figure requires more than one data grain.
 
 ## Scope
 
-The [figure index](FIGURE_DATA_MAP.md) lists all 63 packages under the current
-thesis numbering, including the supplementary figures in Appendices C and D.
+The [figure index](FIGURE_DATA_MAP.md) maps 66 packages to current thesis
+numbering: 63 CSV plots/reconstructions and three screenshot compositions,
+including the supplementary numerical figures in Appendices C and D.
 Figure 2.10 contains all 531,682 recovered mode-shape nodes in one CSV. The
 thesis image consists of nTop screenshots; its scripts provide a portable
 point-cloud reconstruction from the reference coordinates and mode-3

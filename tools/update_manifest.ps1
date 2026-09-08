@@ -77,7 +77,7 @@ $manifest = [ordered]@{
     schema_version = 2
     release_tag = 'thesis'
     scope = 'curated solver-free thesis reproduction package'
-    files = @($entries | Sort-Object path)
+    files = @($entries | Sort-Object { [string]$_['path'] })
 }
 $json = ($manifest | ConvertTo-Json -Depth 6) -replace "`r`n", "`n"
 [System.IO.File]::WriteAllText(

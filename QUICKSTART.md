@@ -60,22 +60,34 @@ Expected filenames and numerical postconditions are listed in
 
 ## 5. Reproduce one thesis figure
 
-Each data-based figure has a self-contained CSV/Python/MATLAB folder. For
-example:
+Use the printed number with `--current`:
+
+```powershell
+python -m pip install -r requirements-figures.txt
+python scripts/reproduce_thesis_figure.py --current 5.2
+```
+
+That example composes a supplied nTop screenshot montage; it does not regenerate
+geometry. The index distinguishes these packages from numerical CSV plots.
+Existing numerical package paths still work directly, for example:
 
 ```powershell
 python data/figures/chapter05/figure_5_1/plot_5_1.py
 matlab -batch "addpath('data/figures/chapter05/figure_5_1'); plot_5_1"
 ```
 
-To use the optional Python dispatcher:
+The dispatcher also preserves old commands as **legacy package IDs**:
 
 ```powershell
 python -m pip install -r requirements-figures.txt
 python scripts/reproduce_thesis_figure.py 5.1
 ```
 
-See [docs/FIGURE_DATA_MAP.md](docs/FIGURE_DATA_MAP.md) for all 63 folders,
+Here a bare number is not necessarily the current printed figure number.
+Use `--current --list` to inspect the current crosswalk, or `--current --all`
+to reproduce all 66 packages (63 CSV plots and three screenshot compositions).
+
+See [docs/FIGURE_DATA_MAP.md](docs/FIGURE_DATA_MAP.md) for all folders,
 including supplementary figures in Appendices C and D. Figure 2.10 is a special
 case: the thesis displays nTop screenshots, whereas the scripts reconstruct
 the same modal node field as a point cloud.

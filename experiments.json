@@ -6,7 +6,7 @@
     {
       "id": "lattice-sizing-fcc-bcc-sc",
       "thesis_refs": [
-        "Chapter 5, Figures 5.1-5.13",
+        "Chapter 5, Figures 5.1-5.14",
         "Appendix D, Figures D.1-D.2"
       ],
       "reproduction_level": "solver-free post-processing",
@@ -39,7 +39,7 @@
     {
       "id": "fixed-area-planform",
       "thesis_refs": [
-        "Chapter 5, Figures 5.14-5.17"
+        "Chapter 5, Figures 5.15-5.19"
       ],
       "reproduction_level": "solver-free post-processing",
       "entrypoint": "matlab/reproduce_planform.m",
@@ -59,7 +59,7 @@
     {
       "id": "four-input-aerostructural",
       "thesis_refs": [
-        "Chapter 6, Figures 6.1-6.8",
+        "Chapter 6, Figures 6.1-6.9",
         "Appendix D, Figures D.3-D.6"
       ],
       "reproduction_level": "solver-free post-processing",

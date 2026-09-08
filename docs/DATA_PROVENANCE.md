@@ -19,7 +19,8 @@ Public filenames are timestamp-free and stable.
 | `data/flutter/harmonized_sol145_results.csv` | guarded final SOL 145 rerun ledger and archived success receipts | selected path-free fields projected; local and network archive addresses removed |
 | `data/representative_physics/` | `artifacts/thesis_representative_physics/` | four path-free final tables copied and renamed |
 | `data/benchmarks/seven_solver_comparison/` | completed seven-problem, seven-solver analytical comparison | evaluated X/Y/C records, observed fronts, empirical GA references, and reconstructed metrics exported to CSV |
-| `data/figures/` | thesis figure data and associated plot scripts | current chapter/appendix numbering; scripts read only adjacent CSV data (three tables for Figure 2.5, one for every other package) |
+| `data/figures/` numerical packages | thesis figure data and associated plot scripts | stable paths mapped to current numbers; scripts read adjacent CSV data (three tables for Figure 2.5, one for the other numerical packages) |
+| `data/figures/` screenshot compositions | genuine nTop viewport crops and recorded composition layout | supplied PNG inputs plus layout CSV; compose the montage without regenerating geometry or simulation results |
 
 `manifest.json` stores a SHA-256 digest and byte count for every release file
 except itself. `experiments.json` records the entry point, inputs, expected

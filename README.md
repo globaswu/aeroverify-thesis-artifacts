@@ -7,6 +7,19 @@ This repository is the curated public companion to Sen Wu's doctoral thesis,
 Lattice-Structured Wings*. It contains evaluated data, portable plotting
 scripts, and MATLAB analysis code for inspecting the reported results.
 
+To reproduce a **current printed figure number**, use the explicit current-number
+lookup, for example:
+
+```powershell
+python -m pip install -r requirements-figures.txt
+python scripts/reproduce_thesis_figure.py --current 5.2
+```
+
+The [figure index](docs/FIGURE_DATA_MAP.md) identifies the required package and
+whether it replots numerical CSV data or composes supplied nTop screenshots.
+Existing file URLs remain stable; without `--current`, bare numeric arguments
+keep their older package meanings.
+
 - Stable release: [thesis](https://github.com/globaswu/aeroverify-thesis-artifacts/releases/tag/thesis)
 - The provisional thesis PDF and audio recordings are private and are not included in this public package.
 - Paper 2 manuscript: [AIAA-format PDF](https://github.com/globaswu/aeroverify-thesis-artifacts/releases/download/thesis/paper2_lattice_topology_aiaa.pdf)
@@ -19,12 +32,14 @@ scripts, and MATLAB analysis code for inspecting the reported results.
 - View or plot FCC/BCC/SC data: [step-by-step lattice-sizing guide](experiments/lattice_sizing/README.md)
 - Machine-readable experiment register: [experiments.json](experiments.json)
 
-The [figure index](docs/FIGURE_DATA_MAP.md) follows the revised thesis
-numbering and covers 63 data-based figures in Chapters 2–6 and Appendices C–D.
-Each figure folder contains a primary CSV and independent Python and MATLAB
-scripts. Figure 2.5 also includes two adjacent CSVs for beam connectivity and
-skin vertices; all other packages use one CSV. No script needs data outside
-its figure folder. Figure 2.10 displays nTop screenshots in the thesis;
+The index maps current numbering to 63 unchanged CSV plot/reconstruction
+packages and three screenshot-composition packages. The machine-readable
+crosswalk is [figure_registry.json](figure_registry.json). Numerical packages
+use one CSV, except Figure 2.5's three geometry tables. Screenshot packages
+contain the actual cropped PNG inputs, layout CSV, and independent Python/MATLAB
+composers; they reconstruct the montage, not the nTop model or its original
+viewport rendering. No script needs data outside its own package.
+Figure 2.10 displays nTop screenshots in the thesis;
 its scripts reconstruct the mode shape as a point cloud rather than duplicating
 the nTop rendering.
 

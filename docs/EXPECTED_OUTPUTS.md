@@ -30,12 +30,16 @@ The tests fail if any expected output is missing or empty.
 
 ## Per-figure packages
 
-Every folder indexed in `docs/FIGURE_DATA_MAP.md` contains `figure_C_N.csv`,
-`plot_C_N.py`, and `plot_C_N.m`. Figure 2.5 also requires the adjacent
-`chunk_beams.csv` and `chunk_shell_vertices.csv`. Running either script produces one PNG by
-default; an explicit PDF or SVG output path may also be supplied. The optional
-Python dispatcher can reproduce one requested figure or all 63 packages listed
-in the [figure index](FIGURE_DATA_MAP.md), including Appendix C and D figures.
+The 63 numerical folders retain their `figure_C_N.csv`, `plot_C_N.py`, and
+`plot_C_N.m` names, where C/N identify the stable package rather than necessarily
+the current caption. Figure 2.5 also uses its two adjacent geometry CSVs.
+Three screenshot packages instead contain `layout.csv`, declared PNG inputs,
+`compose.py`, and `compose_figure.m`. Their result is image composition, not geometry
+or numerical-simulation regeneration. All scripts support one chosen PNG/PDF/SVG
+output. `--current --all` runs the 66 current-number entries in the
+[figure index](FIGURE_DATA_MAP.md); legacy `--all` runs only the 63 old packages.
+Current-number outputs use `thesis_current_figure_C_N`, keeping them distinct
+from legacy `thesis_figure_C_N` outputs.
 Figure 2.10 produces a modal point cloud corresponding to the nTop screenshots
 shown in the thesis. The rendered appearance is not an exact screenshot copy.
 

@@ -1,10 +1,18 @@
 # Thesis figure-data index
 
-This index follows the revised thesis numbering. Each of the 63 linked folders
-contains a primary CSV, one independent Python plotting script, and one
-independent MATLAB plotting script. Figure 2.5 additionally includes two CSVs
-for beam connectivity and skin vertices. Either script reads only the CSV
-data in its own folder; all other packages require one CSV.
+This index uses current printed figure numbers. Its 66 packages comprise 63
+CSV plots/reconstructions and three nTop screenshot compositions. Stable package
+paths are retained even when printed numbers change: the number in an older
+folder or script is a package identifier, not necessarily the current caption.
+The exact crosswalk is [figure_registry.json](../figure_registry.json).
+
+Use `python scripts/reproduce_thesis_figure.py --current 5.2` to select a current
+printed figure. Without `--current`, numeric arguments retain their legacy
+package meanings. CSV packages require only their adjacent numerical data
+(three CSV tables for Figure 2.5, one for the others). Screenshot packages use
+supplied PNG crops and `layout.csv`; they reconstruct the montage, not the nTop
+geometry or the original viewport rendering. Both kinds provide independent
+Python/MATLAB scripts.
 
 ## Chapter 2
 
@@ -55,35 +63,38 @@ measured data points.
 | Figure | Content |
 |---|---|
 | [5.1](../data/figures/chapter05/figure_5_1) | Completed 213-design topology comparison |
-| [5.2](../data/figures/chapter05/figure_5_2) | FCC observed Pareto front |
-| [5.3](../data/figures/chapter05/figure_5_3) | FCC feasibility field |
-| [5.4](../data/figures/chapter05/figure_5_4) | FCC failure mechanisms |
-| [5.5](../data/figures/chapter05/figure_5_5) | BCC observed Pareto front |
-| [5.6](../data/figures/chapter05/figure_5_6) | BCC feasibility field |
-| [5.7](../data/figures/chapter05/figure_5_7) | BCC failure mechanisms |
-| [5.8](../data/figures/chapter05/figure_5_8) | SC observed Pareto front |
-| [5.9](../data/figures/chapter05/figure_5_9) | SC feasibility field |
-| [5.10](../data/figures/chapter05/figure_5_10) | SC failure mechanisms |
-| [5.11](../data/figures/chapter05/figure_5_11) | BCC stress-tail comparison |
-| [5.12](../data/figures/chapter05/figure_5_12) | BCC root stress concentrations |
-| [5.13](../data/figures/chapter05/figure_5_13) | Topology material and stress comparison |
-| [5.14](../data/figures/chapter05/figure_5_14) | Planform feasibility field |
-| [5.15](../data/figures/chapter05/figure_5_15) | Planform observed Pareto front |
-| [5.16](../data/figures/chapter05/figure_5_16) | Planform structural and objective trends |
-| [5.17](../data/figures/chapter05/figure_5_17) | Taper-ratio interpretation |
+| [5.2](../data/figures/chapter05/representative_topologies) | Representative topology lattice wings — nTop screenshots and composition recipe |
+| [5.3](../data/figures/chapter05/figure_5_2) | FCC observed Pareto front |
+| [5.4](../data/figures/chapter05/figure_5_3) | FCC feasibility field |
+| [5.5](../data/figures/chapter05/figure_5_4) | FCC failure mechanisms |
+| [5.6](../data/figures/chapter05/figure_5_5) | BCC observed Pareto front |
+| [5.7](../data/figures/chapter05/figure_5_6) | BCC feasibility field |
+| [5.8](../data/figures/chapter05/figure_5_7) | BCC failure mechanisms |
+| [5.9](../data/figures/chapter05/figure_5_8) | SC observed Pareto front |
+| [5.10](../data/figures/chapter05/figure_5_9) | SC feasibility field |
+| [5.11](../data/figures/chapter05/figure_5_10) | SC failure mechanisms |
+| [5.12](../data/figures/chapter05/figure_5_11) | BCC stress-tail comparison |
+| [5.13](../data/figures/chapter05/figure_5_12) | BCC root stress concentrations |
+| [5.14](../data/figures/chapter05/figure_5_13) | Topology material and stress comparison |
+| [5.15](../data/figures/chapter05/figure_5_14) | Planform feasibility field |
+| [5.16](../data/figures/chapter05/figure_5_15) | Planform observed Pareto front |
+| [5.17](../data/figures/chapter05/representative_planforms) | Representative planform lattice wings — nTop screenshots and composition recipe |
+| [5.18](../data/figures/chapter05/figure_5_16) | Planform structural and objective trends |
+| [5.19](../data/figures/chapter05/figure_5_17) | Taper-ratio interpretation |
 
 ## Chapter 6
 
 | Figure | Content |
 |---|---|
 | [6.1](../data/figures/chapter06/figure_6_1) | Four-input observed Pareto front |
-| [6.2](../data/figures/chapter06/figure_6_2) | Four-input feasibility mechanisms |
-| [6.3](../data/figures/chapter06/figure_6_3) | Pairwise design-space views |
-| [6.4](../data/figures/chapter06/figure_6_4) | Representative static-response decomposition |
-| [6.5](../data/figures/chapter06/figure_6_5) | Representative dynamic-response decomposition |
-| [6.6](../data/figures/chapter06/figure_6_6) | Parallel-coordinate design comparison |
-| [6.7](../data/figures/chapter06/figure_6_7) | Mass and compliance |
-| [6.8](../data/figures/chapter06/figure_6_8) | Optimization progress |
+| [6.2](../data/figures/chapter06/representative_lattices) | Representative four-input lattice wings — nTop screenshots and composition recipe |
+| [6.3](../data/figures/chapter06/figure_6_2) | Four-input feasibility mechanisms |
+| [6.4](../data/figures/chapter06/figure_6_3) | Pairwise design-space views |
+| [6.5](../data/figures/chapter06/figure_6_4) | Representative static-response decomposition |
+| [6.6](../data/figures/chapter06/figure_6_5) | Representative dynamic-response decomposition |
+| [6.7](../data/figures/chapter06/figure_6_6) | Parallel-coordinate design comparison |
+| [6.8](../data/figures/chapter06/figure_6_7) | Mass and compliance |
+| [6.9](../data/figures/chapter06/figure_6_8) | Optimization progress |
 
 ## Appendix C
 

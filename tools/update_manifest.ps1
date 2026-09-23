@@ -41,10 +41,13 @@ function Get-SourceDescription {
         '^data/multiinput/' { return 'aeroverify/artifacts/thesis_chapter6_cases001_100_meshprovenance_20260819' }
         '^data/mesh_convergence/' { return 'aeroverify/artifacts/mesh_convergence path-free projection' }
         '^data/diagnostics/fcc_case067/' { return 'aeroverify/artifacts/case067_sol145_mkaero_diagnostic_20260805' }
+        '^data/diagnostics/chapter03_ecdf_20260921/' { return 'retained analytical benchmark diagnostics; numerical tables and plot-ready class-conditioned ECDFs' }
         '^data/flutter/' { return 'sanitized projection of the guarded final SOL 145 rerun ledger' }
         '^data/representative_physics/' { return 'aeroverify/artifacts/thesis_representative_physics' }
+        '^data/structural_outcomes/case004_mass_profiles_20260918/' { return 'Case 4 raw integrated squared-error calibration profiles and unchanged Slice Body area samples' }
         '^data/structural_outcomes/' { return 'selected evaluated wing records and reproducible component, geometry and load calculations' }
         '^data/benchmarks/seven_solver_comparison/' { return 'completed seven-problem seven-solver comparison, 150 observations per trajectory' }
+        '^data/benchmarks/discovery_policy_20260921/' { return '30 matched six-dimensional discovery-policy trials with 150 evaluated observations each' }
         '^data/figures/' { return 'standalone figure data and scripts indexed by the current thesis figure number' }
         '^data/tables/chapter05/' { return 'completed topology comparison and selected localized stress observations' }
         '^matlab/\+ctsemo/' { return 'globaswu/cTSEMO v0.2.1 modular package' }

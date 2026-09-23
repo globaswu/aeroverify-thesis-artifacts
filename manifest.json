@@ -58,6 +58,66 @@
       "source": "finalized BCC public export"
     },
     {
+      "path": "data/benchmarks/discovery_policy_20260921/archive_replay_checks.csv",
+      "size_bytes": 530,
+      "sha256": "238d534abf4fb96d25694f7caa7eb6fab137d21562fffd556d73fe393b120614",
+      "source": "30 matched six-dimensional discovery-policy trials with 150 evaluated observations each"
+    },
+    {
+      "path": "data/benchmarks/discovery_policy_20260921/evaluations.csv",
+      "size_bytes": 969313,
+      "sha256": "7702bcc4eba53cbf63cdb0405c59880f2d5ebf5bedbcd6bb2d13ea73c27b3584",
+      "source": "30 matched six-dimensional discovery-policy trials with 150 evaluated observations each"
+    },
+    {
+      "path": "data/benchmarks/discovery_policy_20260921/paired_checks.csv",
+      "size_bytes": 1251,
+      "sha256": "8c26db164c8d92e9890dc2cd2739740a892461f894eb11650421a24ba86a4901",
+      "source": "30 matched six-dimensional discovery-policy trials with 150 evaluated observations each"
+    },
+    {
+      "path": "data/benchmarks/discovery_policy_20260921/policy_summary.csv",
+      "size_bytes": 680,
+      "sha256": "e9b1f0f66aac257e53424ffad06f2977cf5d2a7ab8bd85ca5bb5e12876ba4eb1",
+      "source": "30 matched six-dimensional discovery-policy trials with 150 evaluated observations each"
+    },
+    {
+      "path": "data/benchmarks/discovery_policy_20260921/README.md",
+      "size_bytes": 9722,
+      "sha256": "c1678ec4506ec2b9144a401d4d754f32c98aea60139dced1e03d330ad07dd32d",
+      "source": "30 matched six-dimensional discovery-policy trials with 150 evaluated observations each"
+    },
+    {
+      "path": "data/benchmarks/discovery_policy_20260921/reproduce.py",
+      "size_bytes": 19975,
+      "sha256": "6178c17ceaebd1de4d0fd06ba436f51325475dfa8b5e3d6329260547e2662b0c",
+      "source": "30 matched six-dimensional discovery-policy trials with 150 evaluated observations each"
+    },
+    {
+      "path": "data/benchmarks/discovery_policy_20260921/run_summary.csv",
+      "size_bytes": 3957,
+      "sha256": "4784705a79186b439f4cbfe65486de54d11f304f4dbd217d94baeee9bde7848d",
+      "source": "30 matched six-dimensional discovery-policy trials with 150 evaluated observations each"
+    },
+    {
+      "path": "data/benchmarks/discovery_policy_20260921/source_manifest.csv",
+      "size_bytes": 46296,
+      "sha256": "1cad8179cae41e14dc07f2236b68e9f0a9091cb867c07fa2b565e315df0e54aa",
+      "source": "30 matched six-dimensional discovery-policy trials with 150 evaluated observations each"
+    },
+    {
+      "path": "data/benchmarks/discovery_policy_20260921/source_provenance.csv",
+      "size_bytes": 1539,
+      "sha256": "49929ad594cacb8ac5fe0013b03cb2b3ec5facb1f812285d40d8ea28e0856016",
+      "source": "30 matched six-dimensional discovery-policy trials with 150 evaluated observations each"
+    },
+    {
+      "path": "data/benchmarks/discovery_policy_20260921/trial_source_manifest.csv",
+      "size_bytes": 5277,
+      "sha256": "ac78bc2f996fa72e2826e46a9aeb66b83c01aa0cab26dd8d21d48ebb2de5bfbf",
+      "source": "30 matched six-dimensional discovery-policy trials with 150 evaluated observations each"
+    },
+    {
       "path": "data/benchmarks/seven_solver_comparison/empirical_ga_fronts.csv",
       "size_bytes": 1166031,
       "sha256": "9da8fddc197b0aab5ca38f1d9c529082abf04c0a4768bf058bffa3dcc0c7c8d1",
@@ -104,6 +164,138 @@
       "size_bytes": 4497,
       "sha256": "aff9fa9b3196f856b184374311d8285862b01520b3cae7e9e63d254faa88ca22",
       "source": "completed seven-problem seven-solver comparison, 150 observations per trajectory"
+    },
+    {
+      "path": "data/diagnostics/chapter03_ecdf_20260921/curves/BNH_draw_curves.csv",
+      "size_bytes": 210481,
+      "sha256": "0cadaad332cb8189a993e77492cfccd11fed5d533a2ca908c2c6a3d01374b47a",
+      "source": "retained analytical benchmark diagnostics; numerical tables and plot-ready class-conditioned ECDFs"
+    },
+    {
+      "path": "data/diagnostics/chapter03_ecdf_20260921/curves/C2DTLZ2_D3_R05_draw_curves.csv",
+      "size_bytes": 285338,
+      "sha256": "a293a04042a5848e0ba0c66e03809230da1ed3d1b35f80c6954d4d22e2a8e2f5",
+      "source": "retained analytical benchmark diagnostics; numerical tables and plot-ready class-conditioned ECDFs"
+    },
+    {
+      "path": "data/diagnostics/chapter03_ecdf_20260921/curves/C2DTLZ2_D4_R02_draw_curves.csv",
+      "size_bytes": 4701229,
+      "sha256": "162ec595c8a78782327d6a13d24786be4a3db72a32a461a822c8bc5157a00f9b",
+      "source": "retained analytical benchmark diagnostics; numerical tables and plot-ready class-conditioned ECDFs"
+    },
+    {
+      "path": "data/diagnostics/chapter03_ecdf_20260921/curves/C2DTLZ2_D6_R02_draw_curves.csv",
+      "size_bytes": 973168,
+      "sha256": "e09702d4d74f01cd51b4d8b1e0a50bf639428534ef044f5f0e0c3d6eeb2f72c4",
+      "source": "retained analytical benchmark diagnostics; numerical tables and plot-ready class-conditioned ECDFs"
+    },
+    {
+      "path": "data/diagnostics/chapter03_ecdf_20260921/curves/CF1_D10_draw_curves.csv",
+      "size_bytes": 2908457,
+      "sha256": "c2de009b54bbc4aa5cdc18b53cbc7d2765ea849cdc719c13e19b127f2b95ae8e",
+      "source": "retained analytical benchmark diagnostics; numerical tables and plot-ready class-conditioned ECDFs"
+    },
+    {
+      "path": "data/diagnostics/chapter03_ecdf_20260921/curves/CF1_D4_draw_curves.csv",
+      "size_bytes": 3968947,
+      "sha256": "82194605aa242278ebb914752586f2bd96a68b810dcce4057579f0add8951d88",
+      "source": "retained analytical benchmark diagnostics; numerical tables and plot-ready class-conditioned ECDFs"
+    },
+    {
+      "path": "data/diagnostics/chapter03_ecdf_20260921/curves/COSSIN1_draw_curves.csv",
+      "size_bytes": 298169,
+      "sha256": "7a722dcfc0154532ba0809ba9d46cdacd1c9d3f4cf591f77ad78f39898dcf9cc",
+      "source": "retained analytical benchmark diagnostics; numerical tables and plot-ready class-conditioned ECDFs"
+    },
+    {
+      "path": "data/diagnostics/chapter03_ecdf_20260921/curves/COSSIN2_draw_curves.csv",
+      "size_bytes": 396320,
+      "sha256": "cd7df6f771c54ede1e6589fb749e83ff345b8e307928f82edaeeefb9fa2fa00d",
+      "source": "retained analytical benchmark diagnostics; numerical tables and plot-ready class-conditioned ECDFs"
+    },
+    {
+      "path": "data/diagnostics/chapter03_ecdf_20260921/curves/MW7_D4_draw_curves.csv",
+      "size_bytes": 3678329,
+      "sha256": "78b40c2e777fab67aea7687c6eefed50436fa1b048202d0f852cb19b4a5305b6",
+      "source": "retained analytical benchmark diagnostics; numerical tables and plot-ready class-conditioned ECDFs"
+    },
+    {
+      "path": "data/diagnostics/chapter03_ecdf_20260921/curves/MW7_D6_draw_curves.csv",
+      "size_bytes": 1501563,
+      "sha256": "c876900a9155356b859db85c88b48b5375b0e6cc183af59592477a29cffb1443",
+      "source": "retained analytical benchmark diagnostics; numerical tables and plot-ready class-conditioned ECDFs"
+    },
+    {
+      "path": "data/diagnostics/chapter03_ecdf_20260921/curves/SRN_draw_curves.csv",
+      "size_bytes": 694864,
+      "sha256": "a4dd3ba571f37400e0e23a72b8f54fec2dddc19c63e1191310fec1e35f936cc6",
+      "source": "retained analytical benchmark diagnostics; numerical tables and plot-ready class-conditioned ECDFs"
+    },
+    {
+      "path": "data/diagnostics/chapter03_ecdf_20260921/curves/WELDEDBEAM_draw_curves.csv",
+      "size_bytes": 3182894,
+      "sha256": "e4ff4cb90fe033b27ed6bbba05172eaf9b464d350608a9dd008c4fba5e3dae58",
+      "source": "retained analytical benchmark diagnostics; numerical tables and plot-ready class-conditioned ECDFs"
+    },
+    {
+      "path": "data/diagnostics/chapter03_ecdf_20260921/extreme_case_reconstruction_audit.csv",
+      "size_bytes": 586,
+      "sha256": "6a67dd3d1e65b0a7b8d3aa621ac1d108a83e4a7eea5065f2004020131b9323d2",
+      "source": "retained analytical benchmark diagnostics; numerical tables and plot-ready class-conditioned ECDFs"
+    },
+    {
+      "path": "data/diagnostics/chapter03_ecdf_20260921/metrics.csv",
+      "size_bytes": 8808,
+      "sha256": "f42d744d9d4ac972b3db253f0d90bcd3d77ac5015cb6227f769f05916297e035",
+      "source": "retained analytical benchmark diagnostics; numerical tables and plot-ready class-conditioned ECDFs"
+    },
+    {
+      "path": "data/diagnostics/chapter03_ecdf_20260921/problem_feasibility_summary.csv",
+      "size_bytes": 1162,
+      "sha256": "cb0671f61a6b1113ff33456ae79359d1680bc453a8907bb71583fb57380c1628",
+      "source": "retained analytical benchmark diagnostics; numerical tables and plot-ready class-conditioned ECDFs"
+    },
+    {
+      "path": "data/diagnostics/chapter03_ecdf_20260921/provenance/source_manifest.csv",
+      "size_bytes": 9153,
+      "sha256": "2b1fa4f5fd4867ce111e037a9c96a929f6c5713865216613e8b60a72bd815427",
+      "source": "retained analytical benchmark diagnostics; numerical tables and plot-ready class-conditioned ECDFs"
+    },
+    {
+      "path": "data/diagnostics/chapter03_ecdf_20260921/provenance/trial_source_manifest.csv",
+      "size_bytes": 5641,
+      "sha256": "022885351e1101813ddd39d2e2b0834e8e304bee51595d74cf009a3f4c6d7dd6",
+      "source": "retained analytical benchmark diagnostics; numerical tables and plot-ready class-conditioned ECDFs"
+    },
+    {
+      "path": "data/diagnostics/chapter03_ecdf_20260921/README.md",
+      "size_bytes": 7452,
+      "sha256": "cc4a355b3b14ac42c0d01b29d82530245429e8e29f8cf7caff3b662edbc50297",
+      "source": "retained analytical benchmark diagnostics; numerical tables and plot-ready class-conditioned ECDFs"
+    },
+    {
+      "path": "data/diagnostics/chapter03_ecdf_20260921/reproduce.py",
+      "size_bytes": 16316,
+      "sha256": "bba3c7e77f0abbef4e6d92cf2a97dd335f43eeeb528bac0abed5520e6509f109",
+      "source": "retained analytical benchmark diagnostics; numerical tables and plot-ready class-conditioned ECDFs"
+    },
+    {
+      "path": "data/diagnostics/chapter03_ecdf_20260921/source_provenance.csv",
+      "size_bytes": 5993,
+      "sha256": "8fc2f80d6520498ef67b58a7811774ead12c046176213fd3cda236655693c4ad",
+      "source": "retained analytical benchmark diagnostics; numerical tables and plot-ready class-conditioned ECDFs"
+    },
+    {
+      "path": "data/diagnostics/chapter03_ecdf_20260921/trial_feasibility_summary.csv",
+      "size_bytes": 15022,
+      "sha256": "3f29e31a190410b5b419878744b91ecccfd95b581b767c3cb47174e15417f2ec",
+      "source": "retained analytical benchmark diagnostics; numerical tables and plot-ready class-conditioned ECDFs"
+    },
+    {
+      "path": "data/diagnostics/chapter03_ecdf_20260921/validation.csv",
+      "size_bytes": 6961,
+      "sha256": "a19874b86655e85af14de1179cb0cc564759b8eee353b5d728a5a935e1ce7fab",
+      "source": "retained analytical benchmark diagnostics; numerical tables and plot-ready class-conditioned ECDFs"
     },
     {
       "path": "data/diagnostics/fcc_case067/old_vs_18_point_all20.csv",
@@ -1654,6 +1846,54 @@
       "source": "finalized SC public export"
     },
     {
+      "path": "data/structural_outcomes/case004_mass_profiles_20260918/calibration_summary.json",
+      "size_bytes": 2137,
+      "sha256": "cc5626804c537ca82f6cf080ff0001ba211963ec1cad204b1dea2d78a1e5d5f3",
+      "source": "Case 4 raw integrated squared-error calibration profiles and unchanged Slice Body area samples"
+    },
+    {
+      "path": "data/structural_outcomes/case004_mass_profiles_20260918/chord_before_after.csv",
+      "size_bytes": 71886,
+      "sha256": "f7c5a736037757d7afcd3778e830c9d3c64e0dd99cd5d3c5718e58b343f1ff00",
+      "source": "Case 4 raw integrated squared-error calibration profiles and unchanged Slice Body area samples"
+    },
+    {
+      "path": "data/structural_outcomes/case004_mass_profiles_20260918/csa_slice_body_original.csv",
+      "size_bytes": 35278,
+      "sha256": "9491d9bafc2234763981b558e828b37b3498c044517605c4a5ad622821069f6b",
+      "source": "Case 4 raw integrated squared-error calibration profiles and unchanged Slice Body area samples"
+    },
+    {
+      "path": "data/structural_outcomes/case004_mass_profiles_20260918/csay_original.csv",
+      "size_bytes": 19540,
+      "sha256": "ca9d84f950793f31160ad918d3aa467a749efc42a8bae94450ac2429cdf06ffd",
+      "source": "Case 4 raw integrated squared-error calibration profiles and unchanged Slice Body area samples"
+    },
+    {
+      "path": "data/structural_outcomes/case004_mass_profiles_20260918/README.md",
+      "size_bytes": 9702,
+      "sha256": "92251409db919d0fd17ac28cf28ddc976bdb5ea7298e664a6b247c71e9baed8a",
+      "source": "Case 4 raw integrated squared-error calibration profiles and unchanged Slice Body area samples"
+    },
+    {
+      "path": "data/structural_outcomes/case004_mass_profiles_20260918/reproduce.py",
+      "size_bytes": 9276,
+      "sha256": "3f533774677c29487662ae1881c3337ccc396c365d262893b2de182fca4fdd04",
+      "source": "Case 4 raw integrated squared-error calibration profiles and unchanged Slice Body area samples"
+    },
+    {
+      "path": "data/structural_outcomes/case004_mass_profiles_20260918/source_provenance.csv",
+      "size_bytes": 1649,
+      "sha256": "0bb007299262fa4149ae91a6b13311248ceb879c9721898b06edf8698d94e0b7",
+      "source": "Case 4 raw integrated squared-error calibration profiles and unchanged Slice Body area samples"
+    },
+    {
+      "path": "data/structural_outcomes/case004_mass_profiles_20260918/span_before_after.csv",
+      "size_bytes": 129802,
+      "sha256": "4cde51a873ca1ac3052062615eb3bda0f7e940d9fb94fcdc81d0cb697156a11e",
+      "source": "Case 4 raw integrated squared-error calibration profiles and unchanged Slice Body area samples"
+    },
+    {
       "path": "data/structural_outcomes/chapter05_planform_outcomes.csv",
       "size_bytes": 1843,
       "sha256": "6eea30679cdfc318a599b2b8186d1c296b0d41194a21f88c227df5e11dfe7103",
@@ -2195,8 +2435,8 @@
     },
     {
       "path": "README.md",
-      "size_bytes": 10073,
-      "sha256": "4eb528082f954a9b5c8052986925b9c0954886eb4471cfdc2036f44789806c06",
+      "size_bytes": 11183,
+      "sha256": "a127574bedd5ff204cab3eb62e3c442a8d3d33bcc578f629b2d71df9e2a65bec",
       "source": "authored for the curated public release"
     },
     {
@@ -2261,8 +2501,8 @@
     },
     {
       "path": "tools/update_manifest.ps1",
-      "size_bytes": 4456,
-      "sha256": "6be39ea3ebf9713e11d413c5a57ca413e32d4e3e4e58613803c5377d5e7c829c",
+      "size_bytes": 4952,
+      "sha256": "c0923de7c828dc81b31de2811699cdc41b311d0b2c07a0661ce3612c38195bde",
       "source": "authored for the curated public release"
     },
     {

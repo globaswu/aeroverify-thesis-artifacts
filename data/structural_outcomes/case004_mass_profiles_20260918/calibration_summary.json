@@ -1,0 +1,61 @@
+{
+  "case": 4,
+  "method": "Pure unnormalized integrated squared error, one uniform original-beam radius",
+  "objective_definition": "J_span + J_chord; J = sum((w1-w3).^2 .* interval_width)",
+  "objective_units": "kg^2/m",
+  "per_axis_normalization": false,
+  "regularization": false,
+  "mass_before_kg": 48.196732841931812,
+  "mass_after_kg": 36.274500000000046,
+  "mass_target_kg": 36.2745,
+  "original_beam_count": 34304,
+  "final_beam_count": 34304,
+  "eligible_beams": 30381,
+  "frozen_beams": 3923,
+  "new_grid_count": 0,
+  "new_beam_count": 0,
+  "minimum_length_m": 0.00043848049549574165,
+  "original": {
+    "span": 284.9032318865099,
+    "chord": 238.95866412215517,
+    "total": 523.8618960086651
+  },
+  "warm_start": {
+    "span": 22.172012591880215,
+    "chord": 0.88673795403161759,
+    "total": 23.058750545911831,
+    "units": "kg^2/m"
+  },
+  "corrected": {
+    "span": 22.089343475582336,
+    "chord": 0.74825181230052151,
+    "total": 22.837595287882856,
+    "units": "kg^2/m"
+  },
+  "span_reduction_fraction": 0.92246720639384838,
+  "chord_reduction_fraction": 0.9968686977095,
+  "combined_reduction_fraction": 0.9564053131905873,
+  "span_after_relative_L2": 0.13063947450583169,
+  "chord_after_relative_L2": 0.018533837122107957,
+  "root_first10mm_squared_error": 21.098972773495337,
+  "span_target_integral_kg": 36.622349604132594,
+  "chord_target_integral_kg": 37.024719502392813,
+  "minimum_area_ratio": 0.0500142287544344,
+  "median_eligible_area_ratio": 0.80438557534199129,
+  "minimum_radius_ratio": 0.22363861194890833,
+  "minimum_local_bending_ratio": 0.0025014230779008923,
+  "solver_exitflag": 0,
+  "solver_iterations": 200,
+  "solver_firstorderopt": 0.00054162243886361153,
+  "solver_constraint_violation": 9.1593399531575415E-16,
+  "objective": 22.837595287882856,
+  "elapsed_seconds": 377.5371253,
+  "solver_options": {
+    "MaxIterations": 200,
+    "MaxFunctionEvaluations": 350,
+    "OptimalityTolerance": 1E-6,
+    "ConstraintTolerance": 1E-10,
+    "StepTolerance": 1E-9
+  },
+  "limitations": "Local fit, not global/unique or stiffness/flutter validation. Raw targets not rescaled. No Nastran run."
+}

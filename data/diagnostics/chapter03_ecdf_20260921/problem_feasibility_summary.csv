@@ -1,0 +1,13 @@
+ProblemId,Dimension,Trials,EvaluationsPerTrial,DomainProbeFeasible,DomainProbeTotal,DomainFeasiblePercent,ZeroFeasibleTrials,ProbeDesign
+COSSIN1,2,1,50,13544,40401,33.5239226751813,0,Retained 201 x 201 cell-centred grid
+COSSIN2,2,1,80,12411,40401,30.7195366451325,0,Retained 201 x 201 cell-centred grid
+BNH,2,1,40,37828,40401,93.6313457587683,0,Retained 201 x 201 cell-centred grid
+SRN,2,1,40,6539,40401,16.1852429395312,0,Retained 201 x 201 cell-centred grid
+C2DTLZ2_D3_R05,3,1,60,253081,262144,96.5427398681641,0,New independent randomized LHS; seed2026092103
+WELDEDBEAM,4,5,150,87209,262144,33.2675933837891,0,Retained independent randomized LHS
+CF1_D4,4,5,150,130171,262144,49.6562957763672,0,Retained independent randomized LHS
+CF1_D10,10,5,150,137352,262144,52.3956298828125,0,Retained independent randomized LHS
+C2DTLZ2_D4_R02,4,5,150,34193,262144,13.0435943603516,0,Retained independent randomized LHS
+C2DTLZ2_D6_R02,6,5,150,7360,262144,2.8076171875,2,Retained independent randomized LHS
+MW7_D4,4,5,150,11454,262144,4.36935424804688,0,Retained independent randomized LHS
+MW7_D6,6,5,150,1670,262144,0.637054443359375,0,Retained independent randomized LHS

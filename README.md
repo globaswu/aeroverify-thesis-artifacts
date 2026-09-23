@@ -57,6 +57,24 @@ the other five methods use continuous constraint margins. These differing
 information conditions and single trajectories limit comparisons. See the
 [benchmark guide](experiments/seven_solver_comparison/README.md).
 
+The September 2026 source-data additions accompany the final diagnostic and
+mass-profile discussions:
+
+- [Feasibility-score diagnostics](data/diagnostics/chapter03_ecdf_20260921/README.md):
+  12 configurations, 40 final-model summaries, 80 class-conditioned ECDFs,
+  intermediate-band outcome tables, and reconstruction checks.
+- [Matched discovery-policy records](data/benchmarks/discovery_policy_20260921/README.md):
+  all 4,500 evaluated designs from 30 trials, retained paired/archive checks,
+  and portable numerical replay of the reported outcomes.
+- [Case 4 mass-profile comparison](data/structural_outcomes/case004_mass_profiles_20260918/README.md):
+  original and adjusted beam profiles, original Slice Body area samples, and
+  integrated squared-error checks with explicit coordinates and units.
+
+Each package contains a standalone Python reproduction script and source hashes.
+These are additive records on the current branch; they do not move or replace
+the existing `thesis` tag. Their public data exclude private thesis PDFs,
+recordings, native nTop projects, and solver-native output archives.
+
 ## What runs from this repository
 
 The single MATLAB command below reconstructs public figures, tables, and

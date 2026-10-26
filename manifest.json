@@ -2080,6 +2080,12 @@
       "source": "authored for the curated public release"
     },
     {
+      "path": "docs/MEMBER_PRUNING.md",
+      "size_bytes": 12418,
+      "sha256": "4056e5b1527960b3995f4d05e9134fecca966952986ddc49401c247a175bf026",
+      "source": "Implemented member-pruning selection and validation rules; documentation only, no new solver results"
+    },
+    {
       "path": "docs/REPRODUCIBILITY_SCOPE.md",
       "size_bytes": 2844,
       "sha256": "ba2b866b961b3f311ae0a02883a196fee5089b45b680d5a646bf662d2db7240d",
@@ -2435,8 +2441,8 @@
     },
     {
       "path": "README.md",
-      "size_bytes": 11183,
-      "sha256": "a127574bedd5ff204cab3eb62e3c442a8d3d33bcc578f629b2d71df9e2a65bec",
+      "size_bytes": 11300,
+      "sha256": "2b9b3bef27f59836444fa2e498850e986660711e2d96228a44b04957210e4c94",
       "source": "authored for the curated public release"
     },
     {

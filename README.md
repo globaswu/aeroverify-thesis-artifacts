@@ -31,6 +31,7 @@ keep their older package meanings.
 - Selected wing dimensions, component masses, and load-lever comparisons: [structural outcome calculations](data/structural_outcomes/README.md)
 - Reproduce every quantitative figure: [docs/CSV_FIGURE_REPRODUCTION.md](docs/CSV_FIGURE_REPRODUCTION.md)
 - View or plot FCC/BCC/SC data: [step-by-step lattice-sizing guide](experiments/lattice_sizing/README.md)
+- Member-level refinement of selected Pareto wings: [pruning algorithm and validation rules](docs/MEMBER_PRUNING.md)
 - Machine-readable experiment register: [experiments.json](experiments.json)
 
 The index maps current numbering to 63 unchanged CSV plot/reconstruction

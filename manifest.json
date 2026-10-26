@@ -2081,8 +2081,8 @@
     },
     {
       "path": "docs/MEMBER_PRUNING.md",
-      "size_bytes": 12418,
-      "sha256": "4056e5b1527960b3995f4d05e9134fecca966952986ddc49401c247a175bf026",
+      "size_bytes": 16401,
+      "sha256": "276a0e9debe186ec8d9c4cf9d6701477ead2bddbf60fdb07b92606b3872c1f82",
       "source": "Implemented member-pruning selection and validation rules; documentation only, no new solver results"
     },
     {

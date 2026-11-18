@@ -15,9 +15,10 @@ from pathlib import Path
 ROOT = Path(__file__).resolve().parents[1]
 # Verification must not add bytecode files to the publication bundle.
 sys.dont_write_bytecode = True
-from figure_packages import CURRENT_PACKAGES, FIGURE_ROOT
+from figure_packages import CURRENT_PACKAGES, OCTOBER_PACKAGES, FIGURE_ROOT
 
-EXPECTED = tuple(CURRENT_PACKAGES)
+ALL_PACKAGES = {s["package"]: s for s in (*OCTOBER_PACKAGES.values(), *CURRENT_PACKAGES.values())}
+EXPECTED = tuple(ALL_PACKAGES)
 PROHIBITED_TEXT = re.compile(
     r"https?://|[A-Za-z]:\\|\\\\(?:\d{1,3}\.){3}\d{1,3}\\|"
     r"\.(?:mat|op2|f04|f06|h5|ntop|bdf|dat)\b",
@@ -55,7 +56,7 @@ def layout_number(row: dict, key: str, default=None) -> float:
 
 
 def package(figure_id: str) -> tuple[Path, set[str]]:
-    spec = CURRENT_PACKAGES[figure_id]
+    spec = ALL_PACKAGES[figure_id]
     return spec["folder"], set((*spec["inputs"], *spec["scripts"]))
 
 
@@ -158,7 +159,7 @@ def main() -> int:
     if actual_folders != expected_folders:
         failures.append("Unexpected or missing figure directories")
     for figure_id in EXPECTED:
-        spec = CURRENT_PACKAGES[figure_id]
+        spec = ALL_PACKAGES[figure_id]
         folder, required = package(figure_id)
         if not folder.is_dir():
             failures.append(f"{figure_id}: missing folder {folder.relative_to(ROOT)}")

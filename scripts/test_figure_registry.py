@@ -47,15 +47,16 @@ class FigureRegistryTests(unittest.TestCase):
 
     def test_registry_counts_and_kinds(self):
         self.assertEqual(len(packages.LEGACY_PACKAGES), 63)
-        self.assertEqual(len(packages.CURRENT_PACKAGES), 68)
+        self.assertEqual(len(packages.OCTOBER_PACKAGES), 68)
+        self.assertEqual(len(packages.CURRENT_PACKAGES), 56)
         shots = {key for key, value in packages.CURRENT_PACKAGES.items()
                  if value["kind"] == "screenshot_composition"}
-        self.assertEqual(shots, {"5.2", "5.17", "6.2"})
+        self.assertEqual(shots, {"5.2", "5.19", "6.2"})
 
     def test_insertion_boundaries(self):
-        expected = {"5.1": "5.1", "5.3": "5.2", "5.16": "5.15",
-                    "5.18": "5.16", "5.19": "5.17", "6.1": "6.1",
-                    "6.4": "6.2", "6.11": "6.8"}
+        expected = {"5.1": "5.1", "5.3": "5.2", "5.16": "5.13",
+                    "5.20": "5.16", "5.21": "5.17", "6.1": "6.1",
+                    "6.4": "6.2", "6.10": "6.8"}
         for current, stable in expected.items():
             with self.subTest(current=current):
                 self.assertEqual(packages.CURRENT_PACKAGES[current]["legacy_id"], stable)
@@ -78,14 +79,16 @@ class FigureRegistryTests(unittest.TestCase):
         self.assertEqual(current[0].name, "layout.csv")
         self.assertEqual(current[1].name, "compose.py")
 
-    def test_unaffected_chapters_retain_numbers(self):
-        for key, value in packages.CURRENT_PACKAGES.items():
+    def test_october_numbers_remain_accessible(self):
+        for key, value in packages.OCTOBER_PACKAGES.items():
             if key.split(".")[0] not in {"5", "6"}:
                 self.assertEqual(key, value["legacy_id"])
+        self.assertEqual(packages.CURRENT_PACKAGES["2.4"]["legacy_id"], "2.6")
+        self.assertEqual(packages.CURRENT_PACKAGES["2.10"]["legacy_id"], "2.14")
 
     def test_reader_index_matches_registry(self):
         content = (packages.ROOT / "docs" / "FIGURE_DATA_MAP.md").read_text(encoding="utf-8")
-        linked = dict(re.findall(r"\| \[([^\]]+)\]\(\.\./data/figures/([^)]+)\)", content))
+        linked = dict(re.findall(r"\| ([A-Z0-9]+\.[0-9]+) \| \[[^\]]+\]\(\.\./data/figures/([^)]+)\)", content))
         self.assertEqual(linked, {key: spec["package"] for key, spec in packages.CURRENT_PACKAGES.items()})
 
     def test_duplicate_or_unsafe_registry_rejected(self):

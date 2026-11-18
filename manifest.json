@@ -2513,8 +2513,8 @@
     },
     {
       "path": "scripts/figure_packages.py",
-      "size_bytes": 4663,
-      "sha256": "19817c4273cf5f764f682b900fd2ff0bd7a2a42de17886a1df6d260721ff39cc",
+      "size_bytes": 4731,
+      "sha256": "b00386bd44f0bf641dcd176416d5d91868bbdbd35e4995cd5f0e7d66dc3f27d3",
       "source": "authored for the curated public release"
     },
     {
@@ -2525,8 +2525,8 @@
     },
     {
       "path": "scripts/test_figure_registry.py",
-      "size_bytes": 9112,
-      "sha256": "fde8f0a9c64a4737af7228f700ff5663f1af02905c803975500752aa6c6665b7",
+      "size_bytes": 9353,
+      "sha256": "62ef67b36d6eddf2c8ef6b837200e1ad009af0a266475b3c91923c365dd98711",
       "source": "authored for the curated public release"
     },
     {
@@ -2537,8 +2537,8 @@
     },
     {
       "path": "scripts/verify_figure_packages.py",
-      "size_bytes": 10344,
-      "sha256": "6a6e5991ceaaae1867ddd77293eeb9a69eae27c84c882bd38e23114076483270",
+      "size_bytes": 10449,
+      "sha256": "35d0339932664c9fa00fcad82355cc8ee1ebcb3265fbda36e0a0d147a35fbaf1",
       "source": "authored for the curated public release"
     },
     {

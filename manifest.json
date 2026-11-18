@@ -17,8 +17,8 @@
     },
     {
       "path": ".gitignore",
-      "size_bytes": 742,
-      "sha256": "f6087ee0e57e67f39ce194c1059c51ba52a68678b7a468a07c2dccb8ed619d28",
+      "size_bytes": 790,
+      "sha256": "db07ed20e7ac73482d59ab9629dad32ef7237522198d752f253b17088f905c65",
       "source": "authored for the curated public release"
     },
     {
@@ -2032,9 +2032,21 @@
       "source": "authored for the curated public release"
     },
     {
-      "path": "docs/FIGURE_DATA_MAP.md",
+      "path": "docs/FIGURE_DATA_MAP_oct2026.md",
       "size_bytes": 8859,
       "sha256": "5913af03368304b00511e766288cc86762d4580cf36305246591a71d0201a23b",
+      "source": "authored for the curated public release"
+    },
+    {
+      "path": "docs/FIGURE_DATA_MAP.md",
+      "size_bytes": 5788,
+      "sha256": "74767b559f8f5022b6e2add85c0065817996c30aff9c3825d98db4cea894285f",
+      "source": "authored for the curated public release"
+    },
+    {
+      "path": "docs/figure_registry_oct2026.json",
+      "size_bytes": 6293,
+      "sha256": "f0f74261b00b0a290c61a5845f97a4d42fd11d221ef52fa42096265073fb1d83",
       "source": "authored for the curated public release"
     },
     {
@@ -2083,7 +2095,7 @@
       "path": "docs/MEMBER_PRUNING.md",
       "size_bytes": 16401,
       "sha256": "276a0e9debe186ec8d9c4cf9d6701477ead2bddbf60fdb07b92606b3872c1f82",
-      "source": "Implemented member-pruning selection and validation rules; documentation only, no new solver results"
+      "source": "authored for the curated public release"
     },
     {
       "path": "docs/REPRODUCIBILITY_SCOPE.md",
@@ -2159,8 +2171,50 @@
     },
     {
       "path": "figure_registry.json",
-      "size_bytes": 6293,
-      "sha256": "f0f74261b00b0a290c61a5845f97a4d42fd11d221ef52fa42096265073fb1d83",
+      "size_bytes": 7324,
+      "sha256": "b8376535d01946f2b7dc574ee3685d413ef27833b6d694b1784479929f28c2e6",
+      "source": "authored for the curated public release"
+    },
+    {
+      "path": "generated/structural-verification-20261118/fcc070_attachment.csv",
+      "size_bytes": 2174,
+      "sha256": "9d1c5e8179162e92236b43ef2eb7ccf20ada3216f35bbd673695805ba686e7c9",
+      "source": "authored for the curated public release"
+    },
+    {
+      "path": "generated/structural-verification-20261118/fcc070_ecdf.csv",
+      "size_bytes": 4700934,
+      "sha256": "4872d9cc8380f85b8249e0b545cfaf2b7cdc63ac48c8190f35b904b7f4943f79",
+      "source": "authored for the curated public release"
+    },
+    {
+      "path": "generated/structural-verification-20261118/fullwing.csv",
+      "size_bytes": 313,
+      "sha256": "74662816e00c7ae06944ba4821a9f4cf6d66e29a69781685346c52951569bcfa",
+      "source": "authored for the curated public release"
+    },
+    {
+      "path": "generated/structural-verification-20261118/README.md",
+      "size_bytes": 1627,
+      "sha256": "76c687f8c9fdb6a5c5531c9e9bae161c3d7f539be5ecd412e57902c989e79941",
+      "source": "authored for the curated public release"
+    },
+    {
+      "path": "generated/structural-verification-20261118/root_edge.csv",
+      "size_bytes": 1253,
+      "sha256": "13975a217795b143dfe827a7fdf3276a2122524f666979e4236d6a480991af3f",
+      "source": "authored for the curated public release"
+    },
+    {
+      "path": "generated/structural-verification-20261118/sc053_shell.csv",
+      "size_bytes": 218,
+      "sha256": "0db554e41db17dc8ab8ecf93a45ff47e3821c26ddd858ca8cd9506c4426d1a84",
+      "source": "authored for the curated public release"
+    },
+    {
+      "path": "generated/structural-verification-20261118/tapered_member.csv",
+      "size_bytes": 221,
+      "sha256": "04e8535b48f5fd771edd3592a77dca45c8dd78a7574ff680f3122184c516381f",
       "source": "authored for the curated public release"
     },
     {
@@ -2441,8 +2495,8 @@
     },
     {
       "path": "README.md",
-      "size_bytes": 11300,
-      "sha256": "2b9b3bef27f59836444fa2e498850e986660711e2d96228a44b04957210e4c94",
+      "size_bytes": 11520,
+      "sha256": "0e114d03b542c3e2d94a7e079dea52c74057164cfcb4e9e4f47e8387de2bf05b",
       "source": "authored for the curated public release"
     },
     {
@@ -2459,8 +2513,8 @@
     },
     {
       "path": "scripts/figure_packages.py",
-      "size_bytes": 4613,
-      "sha256": "983c664eafc99d0c93b77560f1e1b8a611481b8055b5e170b96229d3af76ad93",
+      "size_bytes": 4663,
+      "sha256": "19817c4273cf5f764f682b900fd2ff0bd7a2a42de17886a1df6d260721ff39cc",
       "source": "authored for the curated public release"
     },
     {
@@ -2507,8 +2561,8 @@
     },
     {
       "path": "tools/update_manifest.ps1",
-      "size_bytes": 4952,
-      "sha256": "c0923de7c828dc81b31de2811699cdc41b311d0b2c07a0661ce3612c38195bde",
+      "size_bytes": 5078,
+      "sha256": "7c65b8d89f470d454be663cbd49ff5c662c00b5adccde412fe8430a56b691fc4",
       "source": "authored for the curated public release"
     },
     {
@@ -2519,8 +2573,8 @@
     },
     {
       "path": "tools/verify_manifest.ps1",
-      "size_bytes": 6232,
-      "sha256": "c7c50d086610d04200f86a43d050be18f0344bdd1581dad673e43b28e462269a",
+      "size_bytes": 6484,
+      "sha256": "f94e407ac49132fb7247da922aea168cebbeb206838bf439ee02efecd37cb101",
       "source": "authored for the curated public release"
     }
   ]

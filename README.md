@@ -7,6 +7,8 @@ This repository is the curated public companion to Sen Wu's doctoral thesis,
 Lattice-Structured Wings*. It contains evaluated data, portable plotting
 scripts, and MATLAB analysis code for inspecting the reported results.
 
+The [Chapter 2 stress-verification tables](generated/structural-verification-20261118) contain the tapered-member, root-edge, shell-resolution and full-wing comparisons, with the data for the FCC70 stress distribution.
+
 To reproduce a **current printed figure number**, use the explicit current-number
 lookup, for example:
 

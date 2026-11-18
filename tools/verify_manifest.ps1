@@ -84,7 +84,7 @@ foreach ($file in Get-ChildItem -LiteralPath $packageRoot -Recurse -File) {
     $relative = $file.FullName.Substring($packageRoot.Length + 1).Replace('\', '/')
     if ($relative -eq '.git' -or
             $relative.StartsWith('.git/', [System.StringComparison]::OrdinalIgnoreCase) -or
-            $relative.StartsWith('generated/', [System.StringComparison]::OrdinalIgnoreCase) -or
+            ($relative.StartsWith('generated/', [System.StringComparison]::OrdinalIgnoreCase) -and -not $relative.StartsWith('generated/structural-verification-20261118/', [System.StringComparison]::OrdinalIgnoreCase)) -or
             $relative.StartsWith('test-output/', [System.StringComparison]::OrdinalIgnoreCase) -or
             $relative.StartsWith('tmp/', [System.StringComparison]::OrdinalIgnoreCase)) {
         continue
@@ -118,7 +118,7 @@ foreach ($file in Get-ChildItem -LiteralPath $packageRoot -Recurse -File) {
     $relative = $file.FullName.Substring($packageRoot.Length + 1).Replace('\', '/')
     if ($relative -eq '.git' -or
             $relative.StartsWith('.git/', [System.StringComparison]::OrdinalIgnoreCase) -or
-            $relative.StartsWith('generated/', [System.StringComparison]::OrdinalIgnoreCase) -or
+            ($relative.StartsWith('generated/', [System.StringComparison]::OrdinalIgnoreCase) -and -not $relative.StartsWith('generated/structural-verification-20261118/', [System.StringComparison]::OrdinalIgnoreCase)) -or
             $relative.StartsWith('test-output/', [System.StringComparison]::OrdinalIgnoreCase) -or
             $relative.StartsWith('tmp/', [System.StringComparison]::OrdinalIgnoreCase) -or
             $file.FullName -eq $PSCommandPath -or

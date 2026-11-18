@@ -11,8 +11,8 @@ FIGURE_ROOT = ROOT / "data" / "figures"
 REGISTRY_PATH = ROOT / "figure_registry.json"
 
 
-def load_registry() -> dict[str, dict]:
-    source = json.loads(REGISTRY_PATH.read_text(encoding="utf-8"))
+def load_registry(path=REGISTRY_PATH) -> dict[str, dict]:
+    source = json.loads(path.read_text(encoding="utf-8"))
     if source.get("schema_version") != 1:
         raise ValueError("Unsupported figure registry schema")
     result: dict[str, dict] = {}
@@ -81,7 +81,7 @@ def load_registry() -> dict[str, dict]:
 
 
 CURRENT_PACKAGES = load_registry()
-LEGACY_PACKAGES = {spec["legacy_id"]: spec for spec in CURRENT_PACKAGES.values()
+LEGACY_PACKAGES = {spec["legacy_id"]: spec for spec in load_registry(ROOT / "docs/figure_registry_oct2026.json").values()
                    if spec["legacy_id"] is not None}
 
 

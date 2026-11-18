@@ -1,5 +1,6 @@
 # Reproduction outputs
-generated/
+/generated/*
+!/generated/structural-verification-20261118/
 test-output/
 tmp/
 

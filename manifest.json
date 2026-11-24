@@ -2622,7 +2622,7 @@
     {
       "path": "data/stress_reevaluation_20261124/checksums.sha256",
       "size_bytes": 5726,
-      "sha256": "eba4845ce3868c690bf7b837274f6a17c420918b089c205fc1dc6bbf285a62a2",
+      "sha256": "ddcf747b240b0c2c91ca5e4ba6f94d361b5be120951ca96779642537da80a64c",
       "source": "Author-verified Figure 6.8 contact-refined beam stress and interpolation data"
     },
     {
@@ -2909,8 +2909,8 @@
     },
     {
       "path": "data/stress_reevaluation_20261124/figure_6_8/interpolation_outlier_screen.json",
-      "size_bytes": 456,
-      "sha256": "4c3fb794a52f9a719bf3977b6ca9ab0b861eebd20aadb1a9019d4ad1c46b2f6d",
+      "size_bytes": 437,
+      "sha256": "3135fe8b67e40465f2ad74cc6df89c1b76934d0d07283989a5722402a4bcfff6",
       "source": "Author-verified Figure 6.8 contact-refined beam stress and interpolation data"
     },
     {

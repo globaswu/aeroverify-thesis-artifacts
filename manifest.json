@@ -2579,9 +2579,9 @@
     },
     {
       "path": "data/stress_reevaluation_20261124/README.md",
-      "size_bytes": 3532,
-      "sha256": "e8c77a614f99a21155f07d63e7813f5642da338fa8d4f79d6fef27baf3e124bc",
-      "source": "author-verified Figure 6.7 stress reevaluation data"
+      "size_bytes": 3636,
+      "sha256": "c0f4736fc768280ff3b8c72d820157036d67f9c2a06b0e35c6e7c565d2ef04fc",
+      "source": "Verified rod–plate coupon meshes and exterior stress profiles"
     },
     {
       "path": "data/stress_reevaluation_20261124/casewise/bcc.csv",
@@ -2621,9 +2621,9 @@
     },
     {
       "path": "data/stress_reevaluation_20261124/checksums.sha256",
-      "size_bytes": 4500,
-      "sha256": "a8604a16864f83a7136c1ee1b6ef8fe4a7fa85dbc8bf45a69cabe4f98402f07f",
-      "source": "author-verified Figure 6.7 stress reevaluation data"
+      "size_bytes": 4915,
+      "sha256": "4275e50daf0377e2149d6e493327f0beaafee1dfe7d14ec5f5bafaba2b4f0b95",
+      "source": "Verified rod–plate coupon meshes and exterior stress profiles"
     },
     {
       "path": "data/stress_reevaluation_20261124/failure_mechanisms.csv",
@@ -2858,6 +2858,30 @@
       "size_bytes": 97971,
       "sha256": "1d5e0c1e4eef35debb172a8b9cfcffd8f26ee83348d42763015274d02da72a97",
       "source": "author-verified Figure 6.7 stress reevaluation data"
+    },
+    {
+      "path": "data/stress_reevaluation_20261124/model_checks/coupon/MESH_SEQUENCES.md",
+      "size_bytes": 1158,
+      "sha256": "6d166e0a1356db0ade48b318e1f137c5c8cc3a4e1033d32a854040dcd4249a5d",
+      "source": "Verified rod–plate coupon meshes and exterior stress profiles"
+    },
+    {
+      "path": "data/stress_reevaluation_20261124/model_checks/coupon/mesh_levels.csv",
+      "size_bytes": 720,
+      "sha256": "e34fda67acafb27606946c6fcdbff39a29f20b7f98f18b112270e791ae319c96",
+      "source": "Verified rod–plate coupon meshes and exterior stress profiles"
+    },
+    {
+      "path": "data/stress_reevaluation_20261124/model_checks/coupon/mesh_views.npz",
+      "size_bytes": 117601,
+      "sha256": "866d20200ec3121aaebdb877f02aae027fef452e77f61e647bba08683b04244b",
+      "source": "Verified rod–plate coupon meshes and exterior stress profiles"
+    },
+    {
+      "path": "data/stress_reevaluation_20261124/model_checks/coupon/plot_mesh_sequence.py",
+      "size_bytes": 2556,
+      "sha256": "65ce0bef0e1b54581cccb4832a01ad98bcd88ed102a348617cb2902157b21e0d",
+      "source": "Verified rod–plate coupon meshes and exterior stress profiles"
     }
   ]
 }

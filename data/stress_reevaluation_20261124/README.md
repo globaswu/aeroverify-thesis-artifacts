@@ -14,7 +14,8 @@ This release documents the 24 November 2026 thesis results. It contains 363 case
 | Figure 5.25 | [BCC 33 PK roots](refinement/BCC033_PK_roots.csv), [FCC 18 PK roots](refinement/FCC018_PK_roots.csv) |
 | Figure 6.5 | [Case 37 and Case 99 shell meshes, stress envelopes, and plotting code](figure_6_5) |
 | Figure 6.7 | [Spanwise 12° shell and CBEAM stress profiles, strain energy, and damping](figure_6_7) |
-| Figures 2.8 and 2.10 and Table 2.7 | [Full-wing attachment comparisons and bonded coupon data](model_checks) |
+| Figure 2.8 and Table 2.7 | [Full-wing attachment comparisons](model_checks) |
+| Bonded rod–plate mesh and convergence figures and table | [Mesh settings, planar meshes, and stress profiles](model_checks/coupon) |
 
 The initial optimization used an aggregate feasibility label covering trim, component stress, and applicable flutter checks. The stress reevaluation uses a refined shell mesh and distributed attachment loads at 12°. A design passes a stress limit when both the maximum absolute beam normal stress and maximum shell von Mises stress are at or below it. The Pareto comparisons use the evaluated objective coordinates from the initial optimization and apply each stated eligibility rule. The `comparison` column in the membership file distinguishes the pooled topology front from within-study fronts.
 

@@ -2579,9 +2579,9 @@
     },
     {
       "path": "data/stress_reevaluation_20261124/README.md",
-      "size_bytes": 3636,
-      "sha256": "c0f4736fc768280ff3b8c72d820157036d67f9c2a06b0e35c6e7c565d2ef04fc",
-      "source": "Verified rod–plate coupon meshes and exterior stress profiles"
+      "size_bytes": 3721,
+      "sha256": "e0f50dfbf64c6e714ed05dc40dbe4163af343eb2203ccf0d045893606ca54415",
+      "source": "Author-verified Figure 6.8 contact-refined beam stress and interpolation data"
     },
     {
       "path": "data/stress_reevaluation_20261124/casewise/bcc.csv",
@@ -2621,9 +2621,9 @@
     },
     {
       "path": "data/stress_reevaluation_20261124/checksums.sha256",
-      "size_bytes": 4915,
-      "sha256": "4275e50daf0377e2149d6e493327f0beaafee1dfe7d14ec5f5bafaba2b4f0b95",
-      "source": "Verified rod–plate coupon meshes and exterior stress profiles"
+      "size_bytes": 5726,
+      "sha256": "eba4845ce3868c690bf7b837274f6a17c420918b089c205fc1dc6bbf285a62a2",
+      "source": "Author-verified Figure 6.8 contact-refined beam stress and interpolation data"
     },
     {
       "path": "data/stress_reevaluation_20261124/failure_mechanisms.csv",
@@ -2882,6 +2882,54 @@
       "size_bytes": 2556,
       "sha256": "65ce0bef0e1b54581cccb4832a01ad98bcd88ed102a348617cb2902157b21e0d",
       "source": "Verified rod–plate coupon meshes and exterior stress profiles"
+    },
+    {
+      "path": "data/stress_reevaluation_20261124/figure_6_8/case_004_cbeam_planform.npz",
+      "size_bytes": 322888,
+      "sha256": "5579eec3d423bb4e7d496627db76078eaaa1f3c1a5d1d541331d08d6fb962093",
+      "source": "Author-verified Figure 6.8 contact-refined beam stress and interpolation data"
+    },
+    {
+      "path": "data/stress_reevaluation_20261124/figure_6_8/case_037_cbeam_planform.npz",
+      "size_bytes": 1097040,
+      "sha256": "17837809b8b2818955c9324b4fa7f7a6403c94aeb437673eb7e38b0fdcd1350b",
+      "source": "Author-verified Figure 6.8 contact-refined beam stress and interpolation data"
+    },
+    {
+      "path": "data/stress_reevaluation_20261124/figure_6_8/case_099_cbeam_planform.npz",
+      "size_bytes": 744521,
+      "sha256": "d1798328289bee34fbf2a4a65308345ff3a28d7cb096d529963cd45de0e68bcd",
+      "source": "Author-verified Figure 6.8 contact-refined beam stress and interpolation data"
+    },
+    {
+      "path": "data/stress_reevaluation_20261124/figure_6_8/interpolation_exclusions.csv",
+      "size_bytes": 194,
+      "sha256": "7f826558c512b9e4872f4ae57694b23e272c6caa2a6cee5a26e4bf3baeae8028",
+      "source": "Author-verified Figure 6.8 contact-refined beam stress and interpolation data"
+    },
+    {
+      "path": "data/stress_reevaluation_20261124/figure_6_8/interpolation_outlier_screen.json",
+      "size_bytes": 456,
+      "sha256": "4c3fb794a52f9a719bf3977b6ca9ab0b861eebd20aadb1a9019d4ad1c46b2f6d",
+      "source": "Author-verified Figure 6.8 contact-refined beam stress and interpolation data"
+    },
+    {
+      "path": "data/stress_reevaluation_20261124/figure_6_8/peak_locations.csv",
+      "size_bytes": 267,
+      "sha256": "a065f89f4eaaef688526fe27f97303cd463a54f66e251de6bf65973c17770b5e",
+      "source": "Author-verified Figure 6.8 contact-refined beam stress and interpolation data"
+    },
+    {
+      "path": "data/stress_reevaluation_20261124/figure_6_8/plot_figure_6_8.py",
+      "size_bytes": 8302,
+      "sha256": "7c97a9514f2431c73d914c85aee5a2d29803338696dc0840607cdba6f31769dd",
+      "source": "Author-verified Figure 6.8 contact-refined beam stress and interpolation data"
+    },
+    {
+      "path": "data/stress_reevaluation_20261124/figure_6_8/README.md",
+      "size_bytes": 1345,
+      "sha256": "3d18fa30ffaeefe2a6e91c9832a3b5a90863066f279575782a50d0e3bb4e2434",
+      "source": "Author-verified Figure 6.8 contact-refined beam stress and interpolation data"
     }
   ]
 }

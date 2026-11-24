@@ -14,6 +14,7 @@ This release documents the 24 November 2026 thesis results. It contains 363 case
 | Figure 5.25 | [BCC 33 PK roots](refinement/BCC033_PK_roots.csv), [FCC 18 PK roots](refinement/FCC018_PK_roots.csv) |
 | Figure 6.5 | [Case 37 and Case 99 shell meshes, stress envelopes, and plotting code](figure_6_5) |
 | Figure 6.7 | [Spanwise 12° shell and CBEAM stress profiles, strain energy, and damping](figure_6_7) |
+| Figure 6.8 | [Interpolated beam-stress fields and excluded tip peak](figure_6_8) |
 | Figure 2.8 and Table 2.7 | [Full-wing attachment comparisons](model_checks) |
 | Bonded rod–plate mesh and convergence figures and table | [Mesh settings, planar meshes, and stress profiles](model_checks/coupon) |
 

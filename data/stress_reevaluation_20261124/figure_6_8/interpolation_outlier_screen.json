@@ -1,0 +1,19 @@
+{
+  "nearest_3d_members": 24,
+  "case_percentile": 99,
+  "local_percentile": 90,
+  "minimum_ratio": 3,
+  "minimum_excess_MPa": 50,
+  "flagged": [
+    {
+      "case_id": 4,
+      "element_id": 712052,
+      "peak_MPa": 186.493488,
+      "length_mm": 14.22398248780753,
+      "local_90th_percentile_MPa": 8.9921397,
+      "local_median_length_mm": 14.280997917274341,
+      "span_m": 1.859369665,
+      "chord_m": 0.4112551506
+    }
+  ]
+}

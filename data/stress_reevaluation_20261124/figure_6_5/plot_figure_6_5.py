@@ -20,7 +20,7 @@ plt.rcParams.update({"font.family":"serif","font.serif":["Times New Roman","Deja
                      "font.size":11,"axes.labelcolor":"#182833","text.color":"#182833",
                      "axes.spines.top":False,"axes.spines.right":False})
 fig, axes = plt.subplots(2, 1, figsize=(6.6, 4.75), sharex=True, sharey=True)
-cmap = plt.colormaps["viridis"].with_extremes(bad="white")
+cmap = plt.colormaps["turbo"].with_extremes(bad="white")
 for ax, n, letter in zip(axes, (37, 99), ("a", "b"), strict=True):
     with np.load(here / f"case_{n:03}_plot.npz") as data:
         field = data["stress_MPa"]

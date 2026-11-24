@@ -10,8 +10,8 @@ This release documents the 24 November 2026 thesis results. It contains 363 case
 | Observed Pareto plots in Chapters 5 and 6 | [Pareto membership](pareto_membership.csv) |
 | Lattice stress-failure maps in Chapter 5 | [Component stresses and failure classifications](failure_mechanisms.csv) |
 | Feasibility fields in Chapters 5 and 6 and Appendix D | [Paired score grids and 184 MPa grids](feasibility) |
-| Figure 5.25 and Table D.16 | [Joint refinements and trim samples](refinement) |
-| Figure 5.26 | [BCC 33 PK roots](refinement/BCC033_PK_roots.csv), [FCC 18 PK roots](refinement/FCC018_PK_roots.csv) |
+| Figure 5.24 and Table D.16 | [Joint refinements and trim samples](refinement) |
+| Figure 5.25 | [BCC 33 PK roots](refinement/BCC033_PK_roots.csv), [FCC 18 PK roots](refinement/FCC018_PK_roots.csv) |
 | Figure 6.5 | [Case 37 and Case 99 shell meshes, stress envelopes, and plotting code](figure_6_5) |
 | Figure 6.7 | [Spanwise 12° shell and CBEAM stress profiles, strain energy, and damping](figure_6_7) |
 | Figures 2.8 and 2.10 and Table 2.7 | [Full-wing attachment comparisons and bonded coupon data](model_checks) |

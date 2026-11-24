@@ -2580,7 +2580,7 @@
     {
       "path": "data/stress_reevaluation_20261124/README.md",
       "size_bytes": 3532,
-      "sha256": "72bedb139daf9fd37063b9ec048eccb2dafc779eb9eeffb9a45a6331b09e87af",
+      "sha256": "e8c77a614f99a21155f07d63e7813f5642da338fa8d4f79d6fef27baf3e124bc",
       "source": "author-verified Figure 6.7 stress reevaluation data"
     },
     {
@@ -2622,7 +2622,7 @@
     {
       "path": "data/stress_reevaluation_20261124/checksums.sha256",
       "size_bytes": 4500,
-      "sha256": "26053f3b1078cf26c7b697caa317011f2f18dfaa0ae27bbfb0c46a883c0d9ff6",
+      "sha256": "a8604a16864f83a7136c1ee1b6ef8fe4a7fa85dbc8bf45a69cabe4f98402f07f",
       "source": "author-verified Figure 6.7 stress reevaluation data"
     },
     {
@@ -2693,8 +2693,8 @@
     },
     {
       "path": "data/stress_reevaluation_20261124/figure_6_5/README.md",
-      "size_bytes": 1691,
-      "sha256": "1bc44c02b6c3382301824521123da00157e786f4a143355991fcb2b6ebdb0398",
+      "size_bytes": 1818,
+      "sha256": "4623166ab1d3b2a0859afdf0d1669ea34daa3ecf03b20a668520a6961af48e19",
       "source": "author-verified 24 November 2026 thesis data update"
     },
     {
@@ -2729,8 +2729,8 @@
     },
     {
       "path": "data/stress_reevaluation_20261124/figure_6_5/plot_figure_6_5.py",
-      "size_bytes": 2371,
-      "sha256": "7a409ac02b17ed0804fc90aa23d4dacf0d76c8b02aa2b886430d8890f8544136",
+      "size_bytes": 2369,
+      "sha256": "e3851413d5c529201b667108adf81d0479d8cfd80769aee6132157d78944d4c1",
       "source": "author-verified 24 November 2026 thesis data update"
     },
     {

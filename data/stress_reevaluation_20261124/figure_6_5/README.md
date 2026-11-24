@@ -9,7 +9,7 @@ The native results are from MSC Nastran SOL 144 subcase 9 at 12° incidence, usi
 | `peak_locations.csv` | Subcase, incidence, element count, governing element ID, stress, and centroid for each case. |
 | `plot_figure_6_5.py` | Reconstructs the thesis plot using the committed raster data. |
 
-The plot projects the undeformed shell triangles onto spanwise \(y\) and chordwise \(x\) coordinates. Each pixel retains the maximum unaveraged value from the sampled projected triangles. Samples include triangle–pixel-centre intersections and triangle centroids, so the representation retains small contact patches. When the two skins overlap in projection the larger value is shown. The native peaks are marked at the governing element centroids. This is a projected shell-stress envelope on a common physical scale and common colour scale.
+The plot projects the undeformed shell triangles onto spanwise \(y\) and chordwise \(x\) coordinates. Each pixel retains the maximum unaveraged value from the sampled projected triangles. Samples include triangle–pixel-centre intersections and triangle centroids, so the representation retains small contact patches. When the two skins overlap in projection the larger value is shown. The native peaks are marked at the governing element centroids. Both panels use the same physical scale and the same 0–160 MPa Turbo colour scale. Turbo is the [default nTop scalar-field colormap](https://support.ntop.com/hc/en-us/articles/360042931073-How-to-use-the-Field-Viewer).
 
 The mesh and element values can be read directly with NumPy. To reproduce the display, install NumPy and Matplotlib and run:
 

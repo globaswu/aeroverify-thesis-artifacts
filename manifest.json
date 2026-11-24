@@ -2495,9 +2495,9 @@
     },
     {
       "path": "README.md",
-      "size_bytes": 11881,
-      "sha256": "844b1029f0ff3a30f62fe878590a60b238b68e8fb9f0326269f37ec46445c3ad",
-      "source": "author-verified 24 November 2026 thesis data update"
+      "size_bytes": 11926,
+      "sha256": "ffdb80c77aca67c30076466ed1a7ab80ac9c85dde3662e8af910da1c5f0d2d89",
+      "source": "author-verified Figure 6.7 stress reevaluation data"
     },
     {
       "path": "RELEASE_NOTES.md",
@@ -2579,9 +2579,9 @@
     },
     {
       "path": "data/stress_reevaluation_20261124/README.md",
-      "size_bytes": 3427,
-      "sha256": "a0c44beb8e3a8f5253eade89af945fec1e4f3c7cb7f2a8ff423f252443e2bfbb",
-      "source": "author-verified 24 November 2026 thesis data update"
+      "size_bytes": 3532,
+      "sha256": "72bedb139daf9fd37063b9ec048eccb2dafc779eb9eeffb9a45a6331b09e87af",
+      "source": "author-verified Figure 6.7 stress reevaluation data"
     },
     {
       "path": "data/stress_reevaluation_20261124/casewise/bcc.csv",
@@ -2621,9 +2621,9 @@
     },
     {
       "path": "data/stress_reevaluation_20261124/checksums.sha256",
-      "size_bytes": 3882,
-      "sha256": "17be174e6ccf3e62b421660a7bc51a57c8b73c915215d4573d2831d1fa1f42db",
-      "source": "author-verified 24 November 2026 thesis data update"
+      "size_bytes": 4500,
+      "sha256": "26053f3b1078cf26c7b697caa317011f2f18dfaa0ae27bbfb0c46a883c0d9ff6",
+      "source": "author-verified Figure 6.7 stress reevaluation data"
     },
     {
       "path": "data/stress_reevaluation_20261124/failure_mechanisms.csv",
@@ -2822,6 +2822,42 @@
       "size_bytes": 2129,
       "sha256": "dc7eb5f5364554d2e2dd5375afde44d495b430e1a80ccd491d65118c1bf59e5a",
       "source": "author-verified 24 November 2026 thesis data update"
+    },
+    {
+      "path": "data/stress_reevaluation_20261124/figure_6_7/peaks_12deg.csv",
+      "size_bytes": 835,
+      "sha256": "40213750807606777d79c902eb1f3aad47956293bcd82aede97a070a10e83816",
+      "source": "author-verified Figure 6.7 stress reevaluation data"
+    },
+    {
+      "path": "data/stress_reevaluation_20261124/figure_6_7/plot_figure_6_7.py",
+      "size_bytes": 3720,
+      "sha256": "706b4afe3ae2d56a39903399b35ee0f736ffda958ff7ebec2d14e0c59bae3fc5",
+      "source": "author-verified Figure 6.7 stress reevaluation data"
+    },
+    {
+      "path": "data/stress_reevaluation_20261124/figure_6_7/README.md",
+      "size_bytes": 1297,
+      "sha256": "5dbb7e6ab0810e3ada957d6da284322d3677da2030af45d57a8cd31d39491ca3",
+      "source": "author-verified Figure 6.7 stress reevaluation data"
+    },
+    {
+      "path": "data/stress_reevaluation_20261124/figure_6_7/representative_flutter_envelope_curves.csv",
+      "size_bytes": 5704,
+      "sha256": "a059eb0baada714f073c0891525678d001dd374ef129925e0abb348128877eae",
+      "source": "author-verified Figure 6.7 stress reevaluation data"
+    },
+    {
+      "path": "data/stress_reevaluation_20261124/figure_6_7/representative_strain_energy_curves.csv",
+      "size_bytes": 705,
+      "sha256": "dfc02539fb6811546c8de9404bc782c6ac16685c29cee745df51909562fc3cd8",
+      "source": "author-verified Figure 6.7 stress reevaluation data"
+    },
+    {
+      "path": "data/stress_reevaluation_20261124/figure_6_7/spanwise_stresses_12deg.csv",
+      "size_bytes": 97971,
+      "sha256": "1d5e0c1e4eef35debb172a8b9cfcffd8f26ee83348d42763015274d02da72a97",
+      "source": "author-verified Figure 6.7 stress reevaluation data"
     }
   ]
 }

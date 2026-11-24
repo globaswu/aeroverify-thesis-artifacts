@@ -10,7 +10,7 @@ code for inspecting the reported results.
 The [24 November 2026 data package](data/stress_reevaluation_20261124)
 contains contact-refined stress results for all 363 wings, the matched
 Pareto and feasibility records, 26 joint refinements with trim responses,
-the two lightweight flutter evaluations, and the shell fields for Figure 6.5.
+the two lightweight flutter evaluations, the shell fields for Figure 6.5, and the spanwise stress profiles for Figure 6.7.
 The package README maps the updated thesis figures and tables to their data.
 
 The [Chapter 2 stress-verification tables](generated/structural-verification-20261118) contain the tapered-member, root-edge, shell-resolution and full-wing comparisons, with the data for the FCC70 stress distribution.

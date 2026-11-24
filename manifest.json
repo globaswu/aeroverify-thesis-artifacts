@@ -2579,9 +2579,9 @@
     },
     {
       "path": "data/stress_reevaluation_20261124/README.md",
-      "size_bytes": 3721,
-      "sha256": "e0f50dfbf64c6e714ed05dc40dbe4163af343eb2203ccf0d045893606ca54415",
-      "source": "Author-verified Figure 6.8 contact-refined beam stress and interpolation data"
+      "size_bytes": 3810,
+      "sha256": "2e604560636c05b084213e862c298cd2c15009d236191a77ac1c22064bc9c6a3",
+      "source": "Author-verified refined-wing beam fields at 12 degrees"
     },
     {
       "path": "data/stress_reevaluation_20261124/casewise/bcc.csv",
@@ -2621,9 +2621,9 @@
     },
     {
       "path": "data/stress_reevaluation_20261124/checksums.sha256",
-      "size_bytes": 5726,
-      "sha256": "ddcf747b240b0c2c91ca5e4ba6f94d361b5be120951ca96779642537da80a64c",
-      "source": "Author-verified Figure 6.8 contact-refined beam stress and interpolation data"
+      "size_bytes": 6545,
+      "sha256": "94282c075377d5363cd4952159a21783c879f0e9fada46d9c701ac313e45c0f5",
+      "source": "Author-verified refined-wing beam fields at 12 degrees"
     },
     {
       "path": "data/stress_reevaluation_20261124/failure_mechanisms.csv",
@@ -2930,6 +2930,54 @@
       "size_bytes": 1345,
       "sha256": "3d18fa30ffaeefe2a6e91c9832a3b5a90863066f279575782a50d0e3bb4e2434",
       "source": "Author-verified Figure 6.8 contact-refined beam stress and interpolation data"
+    },
+    {
+      "path": "data/stress_reevaluation_20261124/figure_5_25/case_018_cbeam_planform.npz",
+      "size_bytes": 694188,
+      "sha256": "a405d0c4912cba7cc4c49b267f49897d87a11b4d0aa7570e616fade91d759145",
+      "source": "Author-verified refined-wing beam fields at 12 degrees"
+    },
+    {
+      "path": "data/stress_reevaluation_20261124/figure_5_25/case_033_cbeam_planform.npz",
+      "size_bytes": 1113609,
+      "sha256": "ef31588432392b8193a27915e195a88fd128e28474534fe3e128def18112bbd6",
+      "source": "Author-verified refined-wing beam fields at 12 degrees"
+    },
+    {
+      "path": "data/stress_reevaluation_20261124/figure_5_25/case_066_cbeam_planform.npz",
+      "size_bytes": 372945,
+      "sha256": "8e27b1ba7dd3df85b3b2eec55ce0570a7b513ae387fee3ddaa337381a26b4733",
+      "source": "Author-verified refined-wing beam fields at 12 degrees"
+    },
+    {
+      "path": "data/stress_reevaluation_20261124/figure_5_25/interpolation_outlier_screen.json",
+      "size_bytes": 149,
+      "sha256": "07656f28e99c419979317c02c1b838cabc29d91b34515f442ed35f683335e889",
+      "source": "Author-verified refined-wing beam fields at 12 degrees"
+    },
+    {
+      "path": "data/stress_reevaluation_20261124/figure_5_25/peak_locations.csv",
+      "size_bytes": 536,
+      "sha256": "081e2e7847efc9b35fcf44b94d86c99f29fa59681a58744a193f8f630739ea61",
+      "source": "Author-verified refined-wing beam fields at 12 degrees"
+    },
+    {
+      "path": "data/stress_reevaluation_20261124/figure_5_25/plot_figure_5_25.py",
+      "size_bytes": 8237,
+      "sha256": "66288d6bd8c5b091cd11810a5cb120b76e9cd466cff49f40d2b69b5e2b03e871",
+      "source": "Author-verified refined-wing beam fields at 12 degrees"
+    },
+    {
+      "path": "data/stress_reevaluation_20261124/figure_5_25/README.md",
+      "size_bytes": 1108,
+      "sha256": "c14a5cc33253a57acf7bed2cb8545352e373672a495a5ab4a589bdb7f9ee178e",
+      "source": "Author-verified refined-wing beam fields at 12 degrees"
+    },
+    {
+      "path": "data/stress_reevaluation_20261124/figure_5_25/spanwise_stress_summary.csv",
+      "size_bytes": 774,
+      "sha256": "2799b994fb7109a834ff4b1e6162e08aa3145b78f1d752ed17f0d628c1387445",
+      "source": "Author-verified refined-wing beam fields at 12 degrees"
     }
   ]
 }

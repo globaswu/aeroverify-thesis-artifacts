@@ -1,0 +1,8 @@
+{
+  "nearest_3d_members": 24,
+  "case_percentile": 99,
+  "local_percentile": 90,
+  "minimum_ratio": 3,
+  "minimum_excess_MPa": 50,
+  "flagged": []
+}

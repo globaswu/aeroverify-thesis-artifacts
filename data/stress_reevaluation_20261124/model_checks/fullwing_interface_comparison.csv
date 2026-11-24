@@ -1,0 +1,5 @@
+case,alpha_deg,reference_beam_MPa,contact_resolved_beam_MPa,reference_skin_MPa,contact_resolved_skin_MPa,comparison_scope
+FCC070,12,247.550864,128.74744,148.549744,150.67392,Same prescribed tapered lattice; skin discretization and coupling change; not original optimization label data
+FCC034,12,227.21584,113.48348,146.94768,147.634672,Same prescribed tapered lattice; skin discretization and coupling change; not original optimization label data
+SC053,12,157.262752,157.089952,148.479328,150.043072,Same prescribed tapered lattice; skin discretization and coupling change; not original optimization label data
+BCC058,12,73.053264,69.682632,173.810896,168.137392,Same prescribed tapered lattice; skin discretization and coupling change; not original optimization label data

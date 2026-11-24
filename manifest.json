@@ -1,6 +1,6 @@
 {
   "schema_version": 2,
-  "release_tag": "thesis",
+  "release_tag": "thesis-20261124",
   "scope": "curated solver-free thesis reproduction package",
   "files": [
     {
@@ -2495,9 +2495,9 @@
     },
     {
       "path": "README.md",
-      "size_bytes": 11520,
-      "sha256": "0e114d03b542c3e2d94a7e079dea52c74057164cfcb4e9e4f47e8387de2bf05b",
-      "source": "authored for the curated public release"
+      "size_bytes": 11881,
+      "sha256": "844b1029f0ff3a30f62fe878590a60b238b68e8fb9f0326269f37ec46445c3ad",
+      "source": "author-verified 24 November 2026 thesis data update"
     },
     {
       "path": "RELEASE_NOTES.md",
@@ -2576,6 +2576,252 @@
       "size_bytes": 6484,
       "sha256": "f94e407ac49132fb7247da922aea168cebbeb206838bf439ee02efecd37cb101",
       "source": "authored for the curated public release"
+    },
+    {
+      "path": "data/stress_reevaluation_20261124/README.md",
+      "size_bytes": 3427,
+      "sha256": "a0c44beb8e3a8f5253eade89af945fec1e4f3c7cb7f2a8ff423f252443e2bfbb",
+      "source": "author-verified 24 November 2026 thesis data update"
+    },
+    {
+      "path": "data/stress_reevaluation_20261124/casewise/bcc.csv",
+      "size_bytes": 12938,
+      "sha256": "31220b6d414050d7dd9da0b61cee01ebb0af94d77e23bca772b60b621daba03d",
+      "source": "author-verified 24 November 2026 thesis data update"
+    },
+    {
+      "path": "data/stress_reevaluation_20261124/casewise/fcc.csv",
+      "size_bytes": 13028,
+      "sha256": "3d7460bc0a7d343d7e0808df42321853b90bc016c4458e2ec30c256088f9b6a0",
+      "source": "author-verified 24 November 2026 thesis data update"
+    },
+    {
+      "path": "data/stress_reevaluation_20261124/casewise/four_input.csv",
+      "size_bytes": 24620,
+      "sha256": "8d5c440d902045e3db3e30e1e2cb1b036c131392f3877eaed0a821ffbba285e8",
+      "source": "author-verified 24 November 2026 thesis data update"
+    },
+    {
+      "path": "data/stress_reevaluation_20261124/casewise/planform.csv",
+      "size_bytes": 9870,
+      "sha256": "a318e55e634e310f0ce4c63754ad62407720c57c670941836da14454da4687b4",
+      "source": "author-verified 24 November 2026 thesis data update"
+    },
+    {
+      "path": "data/stress_reevaluation_20261124/casewise/sc.csv",
+      "size_bytes": 13065,
+      "sha256": "bfbbe7c7bfbd94f99e435245d04a301597ec46a6fc665ddaceb7e9b497c12e5f",
+      "source": "author-verified 24 November 2026 thesis data update"
+    },
+    {
+      "path": "data/stress_reevaluation_20261124/casewise_stress.csv",
+      "size_bytes": 71729,
+      "sha256": "780e4cf645f2d9eaa139cf9b954391c323374790346047df9ab83e61aab2b76f",
+      "source": "author-verified 24 November 2026 thesis data update"
+    },
+    {
+      "path": "data/stress_reevaluation_20261124/checksums.sha256",
+      "size_bytes": 3882,
+      "sha256": "17be174e6ccf3e62b421660a7bc51a57c8b73c915215d4573d2831d1fa1f42db",
+      "source": "author-verified 24 November 2026 thesis data update"
+    },
+    {
+      "path": "data/stress_reevaluation_20261124/failure_mechanisms.csv",
+      "size_bytes": 23379,
+      "sha256": "84d6dee4327882641fd6726e103354b40f82665278dfd9a00f04045c6d69ebac",
+      "source": "author-verified 24 November 2026 thesis data update"
+    },
+    {
+      "path": "data/stress_reevaluation_20261124/feasibility/bcc_184_MPa_grid.npz",
+      "size_bytes": 23103,
+      "sha256": "230d4f44c2a179ced9a60f5656a23b1fe752db01530addc742faa7d7233e4006",
+      "source": "author-verified 24 November 2026 thesis data update"
+    },
+    {
+      "path": "data/stress_reevaluation_20261124/feasibility/bcc_score_grids.csv",
+      "size_bytes": 5451617,
+      "sha256": "0ed336582f88f95179d93952d4beefaf659c4c4803b91f9e93f619d4654f73ca",
+      "source": "author-verified 24 November 2026 thesis data update"
+    },
+    {
+      "path": "data/stress_reevaluation_20261124/feasibility/fcc_184_MPa_grid.npz",
+      "size_bytes": 91170,
+      "sha256": "0a79109fccae8bbcda1af1b9b2df9727a9eafc353e0852372e9e0d27951c4fa7",
+      "source": "author-verified 24 November 2026 thesis data update"
+    },
+    {
+      "path": "data/stress_reevaluation_20261124/feasibility/fcc_score_grids.csv",
+      "size_bytes": 5565688,
+      "sha256": "649642db856426551091f787bceb4c2106b9b0803c3bd6e34937008a92320a1d",
+      "source": "author-verified 24 November 2026 thesis data update"
+    },
+    {
+      "path": "data/stress_reevaluation_20261124/feasibility/four_input_score_grids.csv",
+      "size_bytes": 2092361,
+      "sha256": "f861aa4b35b78297f20263fab89ef9c278fc5ff4bf0e2d7dc30a0249f99a5e93",
+      "source": "author-verified 24 November 2026 thesis data update"
+    },
+    {
+      "path": "data/stress_reevaluation_20261124/feasibility/planform_184_MPa_grid.npz",
+      "size_bytes": 36768,
+      "sha256": "12e94c77c256a81211450676ea902093f0847085a9ccfc4a2946d1f94ccd7ad2",
+      "source": "author-verified 24 November 2026 thesis data update"
+    },
+    {
+      "path": "data/stress_reevaluation_20261124/feasibility/planform_initial_grid.csv",
+      "size_bytes": 2728422,
+      "sha256": "4485da1d8ba21dbc55f5f7283534e2ff0e3d28463894620bea361b98b553c5dc",
+      "source": "author-verified 24 November 2026 thesis data update"
+    },
+    {
+      "path": "data/stress_reevaluation_20261124/feasibility/planform_score_grids.csv",
+      "size_bytes": 2324585,
+      "sha256": "b803c7979ce4f79977462ce559708d8ba622247315db467dcdabe01e0f9004f6",
+      "source": "author-verified 24 November 2026 thesis data update"
+    },
+    {
+      "path": "data/stress_reevaluation_20261124/feasibility/sc_184_MPa_grid.npz",
+      "size_bytes": 89818,
+      "sha256": "ce8b266d8a8aafa21774f000c6e6f2e078641f43393b66779033c93742b4c375",
+      "source": "author-verified 24 November 2026 thesis data update"
+    },
+    {
+      "path": "data/stress_reevaluation_20261124/feasibility/sc_score_grids.csv",
+      "size_bytes": 5164935,
+      "sha256": "529343dd1f428152c8e0f3e6cbffe9158b6261aef205314cf5176976704899c4",
+      "source": "author-verified 24 November 2026 thesis data update"
+    },
+    {
+      "path": "data/stress_reevaluation_20261124/figure_6_5/README.md",
+      "size_bytes": 1691,
+      "sha256": "1bc44c02b6c3382301824521123da00157e786f4a143355991fcb2b6ebdb0398",
+      "source": "author-verified 24 November 2026 thesis data update"
+    },
+    {
+      "path": "data/stress_reevaluation_20261124/figure_6_5/case_037_plot.npz",
+      "size_bytes": 1206291,
+      "sha256": "359eb8ed86ff95b49743bab1ea7e9462956397b20157e93d0378cf768877ae92",
+      "source": "author-verified 24 November 2026 thesis data update"
+    },
+    {
+      "path": "data/stress_reevaluation_20261124/figure_6_5/case_037_shell.npz",
+      "size_bytes": 57493402,
+      "sha256": "98fc663e5a80f758b54a556e8ec1fcb1e20960a7a7070a2bfe7b83b012011130",
+      "source": "author-verified 24 November 2026 thesis data update"
+    },
+    {
+      "path": "data/stress_reevaluation_20261124/figure_6_5/case_099_plot.npz",
+      "size_bytes": 1205104,
+      "sha256": "8a7c8ccb4e076e4a55a9a107bb03db2682aeb91b944c7d1541129f60e1e0fdd2",
+      "source": "author-verified 24 November 2026 thesis data update"
+    },
+    {
+      "path": "data/stress_reevaluation_20261124/figure_6_5/case_099_shell.npz",
+      "size_bytes": 37109216,
+      "sha256": "ff83fa8839e51e72d146569bd8494eccb691dc1d2b91173d019f51b88e8b1b95",
+      "source": "author-verified 24 November 2026 thesis data update"
+    },
+    {
+      "path": "data/stress_reevaluation_20261124/figure_6_5/peak_locations.csv",
+      "size_bytes": 267,
+      "sha256": "621f1516b4069772d2ce3e3ef02d0ae74ed44e58fb166adb9411b24728caf830",
+      "source": "author-verified 24 November 2026 thesis data update"
+    },
+    {
+      "path": "data/stress_reevaluation_20261124/figure_6_5/plot_figure_6_5.py",
+      "size_bytes": 2371,
+      "sha256": "7a409ac02b17ed0804fc90aa23d4dacf0d76c8b02aa2b886430d8890f8544136",
+      "source": "author-verified 24 November 2026 thesis data update"
+    },
+    {
+      "path": "data/stress_reevaluation_20261124/model_checks/coupon/beam_axis_profiles.csv",
+      "size_bytes": 96219,
+      "sha256": "06f1f340ee49e047fe7fc8479460620cab4972b0798e0f8b7a9677d07d9afba4",
+      "source": "author-verified 24 November 2026 thesis data update"
+    },
+    {
+      "path": "data/stress_reevaluation_20261124/model_checks/coupon/global_comparison.csv",
+      "size_bytes": 1371,
+      "sha256": "515431cca95f924fabb47acf8277736afc2c7819069794607cae4e3047dca790",
+      "source": "author-verified 24 November 2026 thesis data update"
+    },
+    {
+      "path": "data/stress_reevaluation_20261124/model_checks/coupon/mixed_beam_native_and_resultants.csv",
+      "size_bytes": 2754,
+      "sha256": "3de3f87268ae5993932f62ef8a3fd83e346237bcfe277b07906c4544b205e75b",
+      "source": "author-verified 24 November 2026 thesis data update"
+    },
+    {
+      "path": "data/stress_reevaluation_20261124/model_checks/coupon/plate_profile_comparisons.csv",
+      "size_bytes": 3753,
+      "sha256": "8bba3a89002ac0ee2ea7c46194704b011b607caee315a41e741c22c69ba481bb",
+      "source": "author-verified 24 November 2026 thesis data update"
+    },
+    {
+      "path": "data/stress_reevaluation_20261124/model_checks/coupon/plate_profiles.csv",
+      "size_bytes": 96270,
+      "sha256": "f75700d808ab417828d16a8ace1b088020e0ff5959cc33701636b0488d9be7fd",
+      "source": "author-verified 24 November 2026 thesis data update"
+    },
+    {
+      "path": "data/stress_reevaluation_20261124/model_checks/coupon/raw_hotspots.csv",
+      "size_bytes": 981,
+      "sha256": "ed656e0950eb5ce25e6110acf87dcf82f0ec438b4832f250dcb0f6457cdd63d9",
+      "source": "author-verified 24 November 2026 thesis data update"
+    },
+    {
+      "path": "data/stress_reevaluation_20261124/model_checks/fcc070_beam_stress_distribution.csv",
+      "size_bytes": 4700934,
+      "sha256": "4872d9cc8380f85b8249e0b545cfaf2b7cdc63ac48c8190f35b904b7f4943f79",
+      "source": "author-verified 24 November 2026 thesis data update"
+    },
+    {
+      "path": "data/stress_reevaluation_20261124/model_checks/fullwing_interface_comparison.csv",
+      "size_bytes": 774,
+      "sha256": "ef589d0f9c22129624b8f00f6eccc20567a3bbcf00170bb6fd000ca17520b68d",
+      "source": "author-verified 24 November 2026 thesis data update"
+    },
+    {
+      "path": "data/stress_reevaluation_20261124/pareto_membership.csv",
+      "size_bytes": 47878,
+      "sha256": "b83cab2e3fd989d3de8a1ac89c6d6d634b5ae50caf806d11a43e078cc0dff14e",
+      "source": "author-verified 24 November 2026 thesis data update"
+    },
+    {
+      "path": "data/stress_reevaluation_20261124/refinement/BCC033_PK_roots.csv",
+      "size_bytes": 82674,
+      "sha256": "996bfdc155ee1689d44c4d8c4bdfce679599707337a8900ee618622fe3f55744",
+      "source": "author-verified 24 November 2026 thesis data update"
+    },
+    {
+      "path": "data/stress_reevaluation_20261124/refinement/FCC018_PK_roots.csv",
+      "size_bytes": 85106,
+      "sha256": "a18595f26b937639c7ea70eea5b3f74868e6a35c1afb95143203beeaabada60b",
+      "source": "author-verified 24 November 2026 thesis data update"
+    },
+    {
+      "path": "data/stress_reevaluation_20261124/refinement/joint_refinements.csv",
+      "size_bytes": 3733,
+      "sha256": "89459dd6df8c643285bd7bd03e60b1ac657c057623de773ac0d2ae769b36a8bd",
+      "source": "author-verified 24 November 2026 thesis data update"
+    },
+    {
+      "path": "data/stress_reevaluation_20261124/refinement/trim_response_samples.csv",
+      "size_bytes": 4477,
+      "sha256": "d43c65eac8d26324a3bb02f24b2aa09043e994c04bf9800cea03dc6c3af2bc25",
+      "source": "author-verified 24 November 2026 thesis data update"
+    },
+    {
+      "path": "data/stress_reevaluation_20261124/summary.json",
+      "size_bytes": 1486,
+      "sha256": "6556e8a275b6718fc46a3788559e951ef9add96d5e41e87ed626945abd25604a",
+      "source": "author-verified 24 November 2026 thesis data update"
+    },
+    {
+      "path": "data/stress_reevaluation_20261124/verify_release.py",
+      "size_bytes": 2129,
+      "sha256": "dc7eb5f5364554d2e2dd5375afde44d495b430e1a80ccd491d65118c1bf59e5a",
+      "source": "author-verified 24 November 2026 thesis data update"
     }
   ]
 }

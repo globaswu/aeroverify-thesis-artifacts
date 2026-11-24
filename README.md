@@ -3,14 +3,20 @@
 [![Verify release manifest](https://github.com/globaswu/aeroverify-thesis-artifacts/actions/workflows/verify.yml/badge.svg?branch=main)](https://github.com/globaswu/aeroverify-thesis-artifacts/actions/workflows/verify.yml)
 
 This repository is the curated public companion to Sen Wu's doctoral thesis,
-*Aeroelastic Bayesian Optimization of Additively Manufactured Multi-Layer
-Lattice-Structured Wings*. It contains evaluated data, portable plotting
-scripts, and MATLAB analysis code for inspecting the reported results.
+*Aeroelastic Bayesian Optimization of Multi-Layer Lattice-Structured Wings*.
+It contains evaluated data, portable plotting scripts, and MATLAB analysis
+code for inspecting the reported results.
+
+The [24 November 2026 data package](data/stress_reevaluation_20261124)
+contains contact-refined stress results for all 363 wings, the matched
+Pareto and feasibility records, 26 joint refinements with trim responses,
+the two lightweight flutter evaluations, and the shell fields for Figure 6.5.
+The package README maps the updated thesis figures and tables to their data.
 
 The [Chapter 2 stress-verification tables](generated/structural-verification-20261118) contain the tapered-member, root-edge, shell-resolution and full-wing comparisons, with the data for the FCC70 stress distribution.
 
-To reproduce a **current printed figure number**, use the explicit current-number
-lookup, for example:
+For figures in the earlier companion release, use its printed-number lookup,
+for example:
 
 ```powershell
 python -m pip install -r requirements-figures.txt
@@ -22,7 +28,7 @@ whether it replots numerical CSV data or composes supplied nTop screenshots.
 Existing file URLs remain stable; without `--current`, bare numeric arguments
 keep their older package meanings.
 
-- Stable release: [thesis](https://github.com/globaswu/aeroverify-thesis-artifacts/releases/tag/thesis)
+- Earlier companion release: [thesis](https://github.com/globaswu/aeroverify-thesis-artifacts/releases/tag/thesis)
 - The provisional thesis PDF and audio recordings are private and are not included in this public package.
 - Paper 2 manuscript: [AIAA-format PDF](https://github.com/globaswu/aeroverify-thesis-artifacts/releases/download/thesis/paper2_lattice_topology_aiaa.pdf)
 - Paper 3 manuscript: [AIAA-format PDF](https://github.com/globaswu/aeroverify-thesis-artifacts/releases/download/thesis/paper3_integrated_aerostructural_aiaa.pdf)
@@ -31,7 +37,7 @@ keep their older package meanings.
 - Thesis-to-file crosswalk: [docs/FILE_CROSSWALK.md](docs/FILE_CROSSWALK.md)
 - Figure-to-data index: [docs/FIGURE_DATA_MAP.md](docs/FIGURE_DATA_MAP.md)
 - Selected wing dimensions, component masses, and load-lever comparisons: [structural outcome calculations](data/structural_outcomes/README.md)
-- Reproduce every quantitative figure: [docs/CSV_FIGURE_REPRODUCTION.md](docs/CSV_FIGURE_REPRODUCTION.md)
+- Reproduction guide for the earlier figure packages: [docs/CSV_FIGURE_REPRODUCTION.md](docs/CSV_FIGURE_REPRODUCTION.md)
 - View or plot FCC/BCC/SC data: [step-by-step lattice-sizing guide](experiments/lattice_sizing/README.md)
 - Member-level refinement of selected Pareto wings: [pruning algorithm and validation rules](docs/MEMBER_PRUNING.md)
 - Machine-readable experiment register: [experiments.json](experiments.json)

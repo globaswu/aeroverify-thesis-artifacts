@@ -1,0 +1,82 @@
+{
+  "screen_counts": {
+    "FCC": {
+      "n": 71,
+      "original": 33,
+      "pass220": 66,
+      "pass184": 58,
+      "passing": 58,
+      "beam": 3,
+      "skin": 10
+    },
+    "BCC": {
+      "n": 71,
+      "original": 27,
+      "pass220": 71,
+      "pass184": 70,
+      "passing": 70,
+      "skin": 1
+    },
+    "SC": {
+      "n": 71,
+      "original": 32,
+      "pass220": 57,
+      "pass184": 50,
+      "beam": 19,
+      "passing": 50,
+      "skin": 1,
+      "both": 1
+    },
+    "Planform": {
+      "n": 50,
+      "original": 39,
+      "pass220": 46,
+      "pass184": 44,
+      "passing": 44,
+      "skin": 3,
+      "both": 3
+    },
+    "Four-input": {
+      "n": 100,
+      "original": 70,
+      "pass220": 87,
+      "pass184": 83,
+      "passing": 83,
+      "beam": 1,
+      "both": 8,
+      "skin": 8
+    }
+  },
+  "refined_count": 26,
+  "refined_unique_parents": 12,
+  "brackets": {
+    "(2.0, 4.0)": 25,
+    "(4.0, 6.0)": 1
+  },
+  "baseline_front_n": 51,
+  "combined_n": 62,
+  "combined_refined_n": 12,
+  "nominal_hv_change_percent": 9.54424951341666,
+  "flutter": {
+    "BCC033": {
+      "f1_Hz": 19.49038,
+      "positive": 0,
+      "maximum_g": -2.5723721e-05,
+      "maximum_g_speed_m_s": 125.0,
+      "coverage_k": [
+        0.2125,
+        34.3742
+      ]
+    },
+    "FCC018": {
+      "f1_Hz": 20.01806,
+      "positive": 9,
+      "maximum_g": 4.2320698e-07,
+      "maximum_g_speed_m_s": 87.5,
+      "coverage_k": [
+        0.2186,
+        22.7713
+      ]
+    }
+  }
+}
